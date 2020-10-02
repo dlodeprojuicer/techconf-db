@@ -10,28 +10,17 @@
     </ion-header>
     <ion-content class="ion-padding">
       <ion-item>
-        <ion-label>Name</ion-label>
-        <ion-input v-model="form.name"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label>Lastname</ion-label>
-        <ion-input v-model="form.lastname"></ion-input>
-      </ion-item>
-      <ion-item>
         <ion-label>Email</ion-label>
         <ion-input v-model="form.email"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label>Password</ion-label>
-        <ion-input v-model="form.password"></ion-input>
+        <ion-input v-model="form.password" type="password"></ion-input>
       </ion-item>
-      <ion-item>
-        <ion-label>Province</ion-label>
-        <ion-input v-model="form.address.province"></ion-input>
-      </ion-item>
+
 			<div class="form-buttons">
-				<ion-button size="small" color="danger" @click="cancel">Cancel</ion-button>
-				<ion-button size="small" color="success" @click="submit">Signup</ion-button>
+				<ion-button size="small" color="danger" @click="closeModal">Cancel</ion-button>
+				<ion-button size="small" color="success" @click="submit">Login</ion-button>
 			</div>
     </ion-content>
   </div>
@@ -87,11 +76,11 @@ export default defineComponent({
   },
   methods: {
     closeModal() {
-			
+			modalController.dismiss();
     },
     submit() {
       console.log(this.form.email)
-      authStore.dispatch("signUp", this.form)
+      authStore.dispatch("login", this.form)
         .then(data => {
           // eslint-disable-next-line
           console.log(data);

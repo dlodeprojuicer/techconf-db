@@ -1,7 +1,7 @@
 <template>
   <ion-header>
     <ion-toolbar>
-      <ion-buttons slot="secondary" v-if="loginToken" @click="signout">
+      <ion-buttons slot="secondary" v-if="loginToken" @click="logout">
         <ion-button> Logout </ion-button>
       </ion-buttons>
       <ion-title class="logo">{{ name }} </ion-title>
@@ -34,8 +34,8 @@ export default {
     };
   },
   methods: {
-    signout() {
-      this.$store.dispatch("signout");
+    logout() {
+      this.$store.dispatch("logout");
     }
   }
 };

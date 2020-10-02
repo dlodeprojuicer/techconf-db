@@ -6,9 +6,9 @@
           <ion-icon class="left-icons" :icon="micOutline"></ion-icon>
         </ion-text>
         <ion-label>
-          <h2 :style="`color: ${item.color}`">{{ item.name }}</h2>
+          <h2 :style="`color: ${item.color}`">{{ item.eventName }}</h2>
           <p>
-            {{ item.venue.place }}, {{ item.venue.town }}
+            {{ item.venue }}, {{ item.addressLineFour }}
           </p>
         </ion-label>
         <ion-text class="visit-website">

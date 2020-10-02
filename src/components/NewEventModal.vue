@@ -105,7 +105,7 @@ export default defineComponent({
   },
   methods: {
     closeModal() {
-			
+			modalController.dismiss();
     },
     submit() {
       this.$store.dispatch("createEvent", this.form)

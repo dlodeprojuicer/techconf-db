@@ -34,6 +34,18 @@ const store = createStore({
     },
   },
   actions: {
+    login(context, request) {
+      return new Promise((resolve, reject) => {
+        firebase.auth().signInWithEmailAndPassword(request.email, request.password)
+          .then(({ user }) => {
+            context.commit("loginToken", user.uid);
+            resolve(user.uid);
+            context.dispatch("getEvents")
+          }).catch(function(error) {
+          reject(error)
+        });
+      })
+    },
     signUp(context, request) {
       return new Promise((resolve, reject) => {
         firebase.auth().createUserWithEmailAndPassword(request.email, request.password)
@@ -45,13 +57,22 @@ const store = createStore({
         });
       })
     },
-    signout(context) {
+    logout(context) {
       return new Promise((reject) => {
         firebase.auth().signOut()
           .then(() => {
             context.commit("loginToken", null);
           }).catch(function(error) {
           reject(error)
+        });
+      })
+    },
+    getEvents() {
+      return new Promise((resolve) => {
+        let dataArray = [];
+        firebase.firestore().collection("events").get().then(({ docs }) => {
+          docs.map(a => dataArray.push(a.data()));
+          resolve(dataArray);
         });
       })
     },
