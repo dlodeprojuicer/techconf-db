@@ -1,11 +1,9 @@
 <template>
   <ion-header>
     <ion-toolbar>
-      <ion-buttons slot="secondary" v-if="loginToken" @click="gotoProfile">
-        <ion-button> Profile </ion-button>
-      </ion-buttons>
-      <ion-buttons slot="secondary" v-if="loginToken" @click="logout">
-        <ion-button> Logout </ion-button>
+      <ion-buttons slot="secondary" v-if="loginToken">
+        <ion-button @click="gotoProfile"> Profile </ion-button>
+        <ion-button @click="logout"> Logout </ion-button>
       </ion-buttons>
       <ion-title class="logo" @click="gotoHome">{{ name }} </ion-title>
     </ion-toolbar>
