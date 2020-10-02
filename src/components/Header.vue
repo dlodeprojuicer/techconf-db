@@ -1,32 +1,44 @@
 <template>
-    <ion-header>
-      <ion-toolbar>
-        <ion-title class="logo">{{ name }} </ion-title>
-      </ion-toolbar>
-    </ion-header>
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="secondary" v-if="loginToken" @click="signout">
+        <ion-button> Logout </ion-button>
+      </ion-buttons>
+      <ion-title class="logo">{{ name }} </ion-title>
+    </ion-toolbar>
+  </ion-header>
 </template>
 
 <script>
 import { IonToolbar, IonHeader, IonTitle } from "@ionic/vue";
 import { ellipsisVertical } from "ionicons/icons";
+import { mapGetters } from 'vuex';
 
 export default {
   name: "recent-list",
   props: {
-		data: {
-			type: Array,
-			required: true,
-			default: () => []
-		}
+    data: {
+      type: Array,
+      required: true,
+      default: () => [],
+    },
   },
   components: { IonToolbar, IonHeader, IonTitle },
+  computed: {
+    ...mapGetters(['loginToken']),
+  },
   setup() {
     return {
       ellipsisVertical,
-      name: "<TechConf-db />"
-    }
+      name: "<TechConf-db />",
+    };
   },
-}
+  methods: {
+    signout() {
+      this.$store.dispatch("signout");
+    }
+  }
+};
 </script>
 
 <style lang="scss" scoped>

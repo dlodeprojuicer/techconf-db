@@ -44,8 +44,8 @@
         <ion-input v-model="form.address.provice"></ion-input>
       </ion-item>
 			<div class="form-buttons">
-				<ion-button size="small" color="danger" @click="closeModal">Cancel</ion-button>
-				<ion-button size="small" color="success">Submit</ion-button>
+				<ion-button size="small" color="danger" @click="submit">Cancel</ion-button>
+				<ion-button size="small" color="success" @click="closeModal">Submit</ion-button>
 			</div>
     </ion-content>
   </div>
@@ -67,11 +67,11 @@ import { defineComponent } from "vue";
 import { micOutline } from "ionicons/icons";
 
 export default defineComponent({
-  name: "Modal",
+  name: "NewEvent",
   data() {
     return {
       form: {
-        name: "",
+        eventame: "",
         contactPerson: "",
         venue: {
 					place: "",
@@ -105,9 +105,23 @@ export default defineComponent({
   },
   methods: {
     closeModal() {
-			modalController.dismiss();
-		},
-  },
+			
+    },
+    submit() {
+      this.$store.dispatch("createEvent", this.form)
+        .then(data => {
+          // eslint-disable-next-line
+          console.log(data);
+        })
+        .catch(error => {
+        // eslint-disable-next-line
+          console.log(error);
+        })
+        .then(() => {
+          modalController.dismiss();
+        })
+    }
+  }
 });
 </script>
 

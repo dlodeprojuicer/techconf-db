@@ -28,7 +28,9 @@ import { defineComponent } from 'vue';
 import Header from "../components/Header";
 import ConfList from "../components/ConfList";
 import Tabs from "../components/Tabs";
-import Modal from "../components/Modal.vue";
+import UserSignUp from "../components/UserSignUp";
+import NewEvent from "../components/NewEvent";
+import { mapGetters } from 'vuex';
 
 export default defineComponent({
   name: "home",
@@ -48,6 +50,9 @@ export default defineComponent({
     return {
       add,
     };
+  },
+  computed: {
+    ...mapGetters(['loginToken']),
   },
   data() {
     return {
@@ -138,19 +143,20 @@ export default defineComponent({
     async openModal() {
       const modal = await modalController
         .create({
-          component: Modal,
+          component: this.loginToken ? NewEvent : UserSignUp,
           cssClass: 'my-custom-class',
           componentProps: {
             data: {
-              content: 'New Content',
+              content: 'Content from parent',
+              store: this.$store,
             },
             propsData: {
-              title: 'New title',
+              title: 'Title from parent',
             },
           },
         })
       return modal.present();
-    },
+    }
   },
 });
 </script>

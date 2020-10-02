@@ -1,6 +1,8 @@
-import { createApp } from 'vue'
-import App from './App.vue'
+import { createApp } from 'vue';
+// import { createStore } from 'vuex';
+import App from './App.vue';
 import router from './router';
+import store from './store';
 
 import { IonicVue } from '@ionic/vue';
 
@@ -23,9 +25,32 @@ import '@ionic/vue/css/display.css';
 /* Theme variables */
 import './theme/variables.scss';
 
+// import auth from "./store/modules/auth";
+// const store = createStore({
+//   modules: {
+//     auth,
+//     // events,
+//     // userProfile,
+//   },
+//   state: {
+//     httpLoader: false,
+//   },
+//   getters: {
+//     httpLoader({ httpLoader }) {
+//       return httpLoader;
+//     }
+//   },
+//   mutations: {
+//   },
+//   actions: {
+//   }
+// });
+
+
 const app = createApp(App)
   .use(IonicVue)
   .use(router)
+  .use(store)
   
 router.isReady().then(() => {
   app.mount('#app');
