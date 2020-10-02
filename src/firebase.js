@@ -8,19 +8,18 @@ import "firebase/storage";
 import "firebase/database";
 
 
-const firebaseConfig = {
-  apiKey: "AIzaSyCYVHk7Vk0lC7GQsWpiEb0nGrj8pxFLKl8",
-  authDomain: "oa-munchie.firebaseapp.com",
-  databaseURL: "https://oa-munchie.firebaseio.com",
-  projectId: "oa-munchie",
-  storageBucket: "oa-munchie.appspot.com",
-  messagingSenderId: "235160608103",
-  appId: "1:235160608103:web:b48a015c158e353846a3c2",
-  measurementId: "G-3M83Y8EL1Z"
+var firebaseConfig = {
+  apiKey: "AIzaSyA3LPByxDChFePmbkhK7EUIVr8o4b37U3s",
+  authDomain: "techconf-db.firebaseapp.com",
+  databaseURL: "https://techconf-db.firebaseio.com",
+  projectId: "techconf-db",
+  storageBucket: "techconf-db.appspot.com",
+  messagingSenderId: "85418644814",
+  appId: "1:85418644814:web:d135328d7a9dd4e1f67a1f",
+  measurementId: "G-P8TJKFVZF8"
 };
-
 // Initialize Firebase
-// firebase.initializeApp(firebaseConfigProd);
 firebase.initializeApp(firebaseConfig);
+firebase.analytics();
 
 export default firebase;
