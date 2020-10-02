@@ -2,7 +2,7 @@
   <ion-page>
     <Header />
     <ion-content class="ion-padding">
-      <ConfList :data="events" />
+      <ConfList :data="eventList" />
     </ion-content>
     <ion-fab vertical="bottom" horizontal="start">
       <ion-fab-button color="dark" @click="addEventModal">
@@ -29,6 +29,7 @@ import {
   IonPage,
   IonFab,
   IonFabButton,
+  IonFabList,
   IonIcon,
   modalController,
   IonContent
@@ -52,6 +53,7 @@ export default defineComponent({
     IonContent,
     IonPage,
     IonFab,
+    IonFabList,
     IonFabButton,
     IonIcon,
     Header,
@@ -71,6 +73,11 @@ export default defineComponent({
   },
   mounted() {
     this.fetchEvents()
+  },
+  data() {
+    return {
+      eventList: this.events
+    }
   },
   methods: {
     async signUpModal() {
@@ -128,8 +135,7 @@ export default defineComponent({
     },
     fetchEvents() {
       this.$store.dispatch("getEvents").then(data => {
-        console.log(data)
-        this.events = data;
+        this.eventList = data;
       })
     },
 

@@ -23,11 +23,15 @@
       </ion-item>
       <ion-item>
         <ion-label>Password</ion-label>
-        <ion-input v-model="form.password"></ion-input>
+        <ion-input v-model="form.password" type="password"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label>Province</ion-label>
         <ion-input v-model="form.address.province"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Organisation</ion-label>
+        <ion-input v-model="form.organisation"></ion-input>
       </ion-item>
 			<div class="form-buttons">
 				<ion-button size="small" color="danger" @click="closeModal">Cancel</ion-button>
@@ -64,6 +68,7 @@ export default defineComponent({
         lastname: "mafuxwana",
         email: "simod@simo.com",
         password: "120394949",
+        organisation: "Scale Conf",
         address: {
 					province: "Western Cape"
 				}

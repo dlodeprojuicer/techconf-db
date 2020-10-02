@@ -13,7 +13,8 @@ const store = createStore({
   state: {
     loginToken: null,
     httpLoader: false,
-    events: null
+    events: null,
+    userProfile: {}
   },
   getters: {
     httpLoader({ httpLoader }) {
@@ -25,6 +26,12 @@ const store = createStore({
     events({ events }) {
       return events || JSON.parse(localStorage.getItem("tcdbEvents"));
     },
+    userEvents({ events }) {
+      return events || JSON.parse(localStorage.getItem("tcdbUserEvents"));
+    },
+    userProfile({ events }) {
+      return events || JSON.parse(localStorage.getItem("tcdbUserProfile"));
+    }
   },
   mutations: {
     loginToken(state, token) {
@@ -39,6 +46,14 @@ const store = createStore({
     events(state, data) {
       state.events = data;
       localStorage.setItem("tcdbEvents", JSON.stringify(data));
+    },
+    userEvents(state, data) {
+      state.events = data;
+      localStorage.setItem("tcdbUserEvents", JSON.stringify(data));
+    },
+    userProfile(state, data) {
+      state.events = data;
+      localStorage.setItem("tcdbuserProfile", JSON.stringify(data));
     },
   },
   actions: {
@@ -59,7 +74,10 @@ const store = createStore({
         firebase.auth().createUserWithEmailAndPassword(request.email, request.password)
           .then(({ user }) => {
             context.commit("loginToken", user.uid);
-            resolve(user.uid);
+            request.uid = user.uid;
+            context.dispatch("createUser", request).then(() => {
+              resolve(user.uid);
+            });
           }).catch(function(error) {
           reject(error)
         });
@@ -77,18 +95,58 @@ const store = createStore({
     },
     getEvents(context) {
       return new Promise((resolve) => {
-        firebase.firestore().collection("events").get().then(({ docs }) => {
-          context.commit("events", docs.map(a => a.data()));
-          resolve(docs.map(a => a.data()));
-        });
+        firebase.firestore().collection("events")
+          .orderBy("eventName")
+          .where("verified", "==", true)
+          .get()
+          .then(({ docs }) => {
+            context.commit("events", docs.map(a => a.data()));
+            resolve(docs.map(a => a.data()));
+          });
+      })
+    },
+    getUserEvents(context) {
+      return new Promise((resolve) => {
+        firebase.firestore().collection("events")
+          .orderBy("eventName")
+          .where("createdBy", "==", context.getters.loginToken)
+          .get()
+          .then(({ docs }) => {
+            context.commit("userEvents", docs.map(a => a.data()));
+            resolve(docs.map(a => a.data()));
+          });
       })
     },
     createEvent(context, request) {
+      request.createdBy = context.getters.loginToken;
       return new Promise((resolve) => {
         firebase.firestore().collection("events").add(request).then(() => {
           context.dispatch("getEvents");
           resolve();
         });
+      })
+    },
+    createUser(context, request) {
+      return new Promise((resolve) => {
+        firebase.firestore().collection("users")
+          .doc(request.uid)
+          .set({...request})
+          .then(() => {
+            console.log("Create callback")
+            resolve();
+          });
+      })
+    },
+    getUserProfile(context, request) {
+      return new Promise((resolve) => {
+        firebase.firestore().collection("users")
+          .doc(request)
+          .get()
+          .then(doc => {
+            console.log(doc.data())
+            context.commit("userProfile", doc.data());
+            resolve(doc.data());
+          });
       })
     },
   }

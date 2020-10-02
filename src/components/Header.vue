@@ -1,16 +1,19 @@
 <template>
   <ion-header>
     <ion-toolbar>
+      <ion-buttons slot="secondary" v-if="loginToken" @click="gotoProfile">
+        <ion-button> Profile </ion-button>
+      </ion-buttons>
       <ion-buttons slot="secondary" v-if="loginToken" @click="logout">
         <ion-button> Logout </ion-button>
       </ion-buttons>
-      <ion-title class="logo">{{ name }} </ion-title>
+      <ion-title class="logo" @click="gotoHome">{{ name }} </ion-title>
     </ion-toolbar>
   </ion-header>
 </template>
 
 <script>
-import { IonToolbar, IonHeader, IonTitle } from "@ionic/vue";
+import { IonToolbar, IonHeader, IonTitle, IonButtons, IonButton } from "@ionic/vue";
 import { ellipsisVertical } from "ionicons/icons";
 import { mapGetters } from 'vuex';
 
@@ -23,7 +26,7 @@ export default {
       default: () => [],
     },
   },
-  components: { IonToolbar, IonHeader, IonTitle },
+  components: { IonToolbar, IonHeader, IonTitle, IonButtons, IonButton },
   computed: {
     ...mapGetters(['loginToken']),
   },
@@ -34,8 +37,15 @@ export default {
     };
   },
   methods: {
+    gotoHome() {
+      this.$router.push("/");
+    },
+    gotoProfile() {
+      this.$router.push("/profile");
+    },
     logout() {
       this.$store.dispatch("logout");
+      this.$router.push("/");
     }
   }
 };
