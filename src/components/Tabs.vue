@@ -2,8 +2,7 @@
   <ion-page>
     <ion-tabs>
       <ion-tab-bar slot="bottom">
-       
-        made with <ion-icon :icon="logoIonic" /> + <ion-icon :icon="logoVue" /> by <a href="https://twitter.com/dlodeprojuicer">@dlodexprojuicer</a>
+        made with <ion-icon :icon="logoIonic" /> + <ion-icon :icon="logoVue" /> & <ion-icon :icon="logoFirebase" /> by <a href="https://twitter.com/dlodeprojuicer">@dlodexprojuicer</a>
       </ion-tab-bar>
     </ion-tabs>
   </ion-page>
@@ -11,7 +10,7 @@
 
 <script lang="ts">
 import { IonTabBar, IonTabs, IonIcon, IonPage } from "@ionic/vue";
-import { logoIonic, logoVue } from "ionicons/icons";
+import { logoIonic, logoVue, logoFirebase } from "ionicons/icons";
 
 export default {
   name: "Tabs",
@@ -19,7 +18,8 @@ export default {
   setup() {
     return {
       logoIonic,
-      logoVue
+      logoVue,
+      logoFirebase
     };
   },
 };
@@ -30,6 +30,7 @@ ion-tab-bar {
   height: 50px;
   font-size: 14px;
   font-style: italic;
+  float: right;
 }
 
 ion-icon, a {

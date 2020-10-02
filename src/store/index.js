@@ -13,6 +13,7 @@ const store = createStore({
   state: {
     loginToken: null,
     httpLoader: false,
+    events: null
   },
   getters: {
     httpLoader({ httpLoader }) {
@@ -20,6 +21,9 @@ const store = createStore({
     },
     loginToken({ loginToken }) {
       return loginToken || localStorage.getItem("tcdbLoginToken");
+    },
+    events({ events }) {
+      return events || JSON.parse(localStorage.getItem("tcdbEvents"));
     },
   },
   mutations: {
@@ -31,6 +35,10 @@ const store = createStore({
         state.loginToken = null;
         localStorage.removeItem("tcdbLoginToken");
       }
+    },
+    events(state, data) {
+      state.events = data;
+      localStorage.setItem("tcdbEvents", JSON.stringify(data));
     },
   },
   actions: {
@@ -67,12 +75,19 @@ const store = createStore({
         });
       })
     },
-    getEvents() {
+    getEvents(context) {
       return new Promise((resolve) => {
-        let dataArray = [];
         firebase.firestore().collection("events").get().then(({ docs }) => {
-          docs.map(a => dataArray.push(a.data()));
-          resolve(dataArray);
+          context.commit("events", docs.map(a => a.data()));
+          resolve(docs.map(a => a.data()));
+        });
+      })
+    },
+    createEvent(context, request) {
+      return new Promise((resolve) => {
+        firebase.firestore().collection("events").add(request).then(() => {
+          context.dispatch("getEvents");
+          resolve();
         });
       })
     },

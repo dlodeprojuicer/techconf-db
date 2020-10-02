@@ -8,11 +8,13 @@
         <ion-label>
           <h2 :style="`color: ${item.color}`">{{ item.eventName }}</h2>
           <p>
-            {{ item.venue }}, {{ item.addressLineFour }}
+            {{ item.venue }}, {{ item.address ? item.address.town : '' }}
           </p>
         </ion-label>
         <ion-text class="visit-website">
-          Website <ion-icon :icon="openOutline"></ion-icon>
+          <a :href="item.website" target="_blank">
+            Website <ion-icon :icon="openOutline"></ion-icon>
+          </a>
         </ion-text>
       </ion-item>
       <ion-item class="dates">
@@ -103,6 +105,10 @@ ion-text.left {
 ion-text.visit-website {
   // font-size: 13px;
   color: #626262;
+
+  a {
+    text-decoration: none;
+  }
 }
 
 ion-icon.right-icons {

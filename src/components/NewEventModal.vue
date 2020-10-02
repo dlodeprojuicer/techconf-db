@@ -11,7 +11,7 @@
     <ion-content class="ion-padding">
       <ion-item>
         <ion-label>Name</ion-label>
-        <ion-input v-model="form.name"></ion-input>
+        <ion-input v-model="form.eventName"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label>Website</ion-label>
@@ -25,27 +25,27 @@
 			<!-- <h5>Address</h5> -->
       <ion-item>
         <ion-label>Venue</ion-label>
-        <ion-input v-model="form.venue.place"></ion-input>
+        <ion-input v-model="form.venue"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label>Street</ion-label>
         <ion-input v-model="form.address.street"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label>Town</ion-label>
-        <ion-input v-model="form.address.street"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label>Area</ion-label>
+        <ion-label>Area / Suburb</ion-label>
         <ion-input v-model="form.address.area"></ion-input>
       </ion-item>
       <ion-item>
+        <ion-label>Town</ion-label>
+        <ion-input v-model="form.address.town"></ion-input>
+      </ion-item>
+      <ion-item>
         <ion-label>Province</ion-label>
-        <ion-input v-model="form.address.provice"></ion-input>
+        <ion-input v-model="form.address.province"></ion-input>
       </ion-item>
 			<div class="form-buttons">
-				<ion-button size="small" color="danger" @click="submit">Cancel</ion-button>
-				<ion-button size="small" color="success" @click="closeModal">Submit</ion-button>
+				<ion-button size="small" color="danger" @click="closeModal">Cancel</ion-button>
+				<ion-button size="small" color="success" @click="submit">Submit</ion-button>
 			</div>
     </ion-content>
   </div>
@@ -66,25 +66,32 @@ import {
 import { defineComponent } from "vue";
 import { micOutline } from "ionicons/icons";
 
+import authStore from "../store";
+
 export default defineComponent({
   name: "NewEvent",
   data() {
     return {
       form: {
-        eventame: "",
-        contactPerson: "",
-        venue: {
-					place: "",
-				},
+        eventName: "DevConf",
+        contactPerson: "Contact Person",
+        venue: "CTICC",
         address: {
-					street: "",
-					area: "",
-					town: "",
-					province: ""
+					street: "123 Street Name",
+					area: "CBD",
+					town: "Cape Town",
+					province: "Western Cape"
 				},
-        price: "",
-        website: "",
-        dates: [],
+        price: "500",
+        website: "www.DevConf.com",
+        dates: [
+          {
+            startDate: "06/10/2020",
+            startTime: "09:00",
+            endDate: "06/10/2020",
+            endTime: "16:00",
+          }
+        ]
       },
     };
 	},
@@ -108,18 +115,14 @@ export default defineComponent({
 			modalController.dismiss();
     },
     submit() {
-      this.$store.dispatch("createEvent", this.form)
-        .then(data => {
-          // eslint-disable-next-line
-          console.log(data);
+      authStore.dispatch("createEvent", this.form)
+        .then(() => {
+          modalController.dismiss();
         })
         .catch(error => {
         // eslint-disable-next-line
           console.log(error);
-        })
-        .then(() => {
-          modalController.dismiss();
-        })
+        });
     }
   }
 });

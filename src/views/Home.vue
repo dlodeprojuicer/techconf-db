@@ -2,10 +2,10 @@
   <ion-page>
     <Header />
     <ion-content class="ion-padding">
-      <ConfList :data="confList" />
+      <ConfList :data="events" />
     </ion-content>
     <ion-fab vertical="bottom" horizontal="start">
-      <ion-fab-button color="dark">
+      <ion-fab-button color="dark" @click="addEventModal">
         <ion-icon :icon="add"></ion-icon>
       </ion-fab-button>
       <ion-fab-list side="top" v-if="!loginToken">
@@ -67,96 +67,10 @@ export default defineComponent({
     };
   },
   computed: {
-    ...mapGetters(['loginToken']),
+    ...mapGetters(['loginToken', 'events']),
   },
   mounted() {
     this.fetchEvents()
-  },
-  data() {
-    return {
-      confList: [],
-      confList2: [
-        {
-          name: "DevConf",
-          contactPerson: "Name Lastname",
-          venue: {
-            place: "CTICC",
-            town: "Cape Town",
-          },
-          address: "123 Street Name, Area, Town, Province",
-          dates: [
-            {
-              date: "06/10/2020",
-              startTime: "09:00",
-              endTime: "16:00",
-            },
-            {
-              date: "06/10/2020",
-              startTime: "09:00",
-              endTime: "16:00",
-            },
-          ],
-          price: "R3 400",
-          website: "http://example.com",
-        },
-        {
-          name: "Coderetreat",
-          contactPerson: "Name Lastname",
-          venue: {
-            place: "CTICC",
-            town: "Cape Town",
-          },
-          address: "123 Street Name, Area, Town, Province",
-          dates: [
-            {
-              date: "06/10/2020",
-              startTime: "09:00",
-              endTime: "16:00",
-            },
-          ],
-          price: "R7 350",
-          website: "http://example.com",
-        },
-        {
-          name: "Open Source Week",
-          contactPerson: "Name Lastname",
-          venue: {
-            place: "CTICC",
-            town: "Cape Town",
-          },
-          address: "123 Street Name, Area, Town, Province",
-          price: "R12 340",
-          website: "http://example.com",
-        },
-        {
-          name: "ScaleConf",
-          contactPerson: "Name Lastname",
-          venue: {
-            place: "CTICC",
-            town: "Cape Town",
-          },
-          dates: [
-            {
-              date: "06/10/2020",
-              startTime: "09:00",
-              endTime: "16:00",
-            },
-            {
-              date: "06/10/2020",
-              startTime: "09:00",
-              endTime: "16:00",
-            },
-            {
-              date: "06/10/2020",
-              startTime: "09:00",
-              endTime: "16:00",
-            },
-          ],
-          price: "R8 800",
-          website: "http://example.com",
-        },
-      ],
-    };
   },
   methods: {
     async signUpModal() {
@@ -194,26 +108,28 @@ export default defineComponent({
       return modal.present();
     },
     async addEventModal() {
-      const modal = await modalController
-        .create({
-          component: NewEventModal,
-          cssClass: 'my-custom-class',
-          componentProps: {
-            data: {
-              content: 'Content from parent',
-              store: this.$store,
+      if(this.loginToken) {
+        const modal = await modalController
+          .create({
+            component: NewEventModal,
+            cssClass: 'my-custom-class',
+            componentProps: {
+              data: {
+                content: 'Content from parent',
+                store: this.$store,
+              },
+              propsData: {
+                title: 'Title from parent',
+              },
             },
-            propsData: {
-              title: 'Title from parent',
-            },
-          },
-        })
-      return modal.present();
+          })
+        return modal.present();
+      }
     },
     fetchEvents() {
       this.$store.dispatch("getEvents").then(data => {
         console.log(data)
-        this.confList = data;
+        this.events = data;
       })
     },
 
