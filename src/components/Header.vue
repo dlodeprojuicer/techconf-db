@@ -1,25 +1,13 @@
 <template>
     <ion-header>
       <ion-toolbar>
-        <ion-buttons slot="start">
-          <ion-button class="sign-out">
-            Sign Out
-          </ion-button>
-        </ion-buttons>
-
-        <ion-buttons slot="end">
-          <ion-button>
-            <ion-icon class="ellipsis" :icon="ellipsisVertical"></ion-icon>
-          </ion-button>
-        </ion-buttons>
-
-        <ion-title class="logo">GlobalOne</ion-title>
+        <ion-title class="logo">{{ name }} </ion-title>
       </ion-toolbar>
     </ion-header>
 </template>
 
 <script>
-import { IonToolbar, IonHeader, IonButtons, IonButton, IonIcon } from "@ionic/vue";
+import { IonToolbar, IonHeader, IonTitle } from "@ionic/vue";
 import { ellipsisVertical } from "ionicons/icons";
 
 export default {
@@ -31,10 +19,11 @@ export default {
 			default: () => []
 		}
   },
-  components: { IonToolbar, IonHeader, IonButtons, IonButton, IonIcon },
+  components: { IonToolbar, IonHeader, IonTitle },
   setup() {
     return {
-      ellipsisVertical
+      ellipsisVertical,
+      name: "<TechConf-db />"
     }
   },
 }
