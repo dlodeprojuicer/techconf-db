@@ -5,7 +5,7 @@
       <ConfList :data="eventList" />
     </ion-content>
     <Fab />
-    <Tabs />
+    <!-- <Tabs /> -->
   </ion-page>
 </template>
 
@@ -19,7 +19,7 @@ import { defineComponent } from 'vue';
 
 import Header from "../components/Header";
 import ConfList from "../components/ConfList";
-import Tabs from "../components/Tabs";
+// import Tabs from "../components/Tabs";
 import Fab from "../components/Fab";
 
 import { mapGetters } from 'vuex';
@@ -33,7 +33,7 @@ export default defineComponent({
     IonPage,
     Header,
     ConfList,
-    Tabs,
+    // Tabs,
     Fab
   },
   computed: {

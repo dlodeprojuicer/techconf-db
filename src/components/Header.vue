@@ -39,7 +39,7 @@ export default {
       this.$router.push("/");
     },
     gotoProfile() {
-      this.$router.push("/profile");
+      this.$router.push("/tabs/profile");
     },
     logout() {
       this.$store.dispatch("logout");

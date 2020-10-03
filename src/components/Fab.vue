@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import { modalController, IonIcon } from "@ionic/vue";
+import { modalController, IonIcon, IonFabButton, IonFabList, IonFab } from "@ionic/vue";
 import {
   add,
   logInOutline,
@@ -33,7 +33,7 @@ import { mapGetters } from "vuex";
 
 export default {
   name: "fab",
-  components: { IonIcon },
+  components: { IonIcon, IonFabButton, IonFabList, IonFab },
   setup() {
     return {
       add,
