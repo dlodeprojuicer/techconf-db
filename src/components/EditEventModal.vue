@@ -3,9 +3,9 @@
     <ion-header>
       <ion-toolbar>
         <ion-title>
-					<ion-icon class="left-icons" :icon="micOutline"></ion-icon> 
-					Add Conference
-				</ion-title>
+          <ion-icon class="left-icons" :icon="micOutline"></ion-icon>
+          Add Conference
+        </ion-title>
       </ion-toolbar>
     </ion-header>
     <ion-content class="ion-padding">
@@ -17,12 +17,6 @@
         <ion-label>Website</ion-label>
         <ion-input v-model="form.website"></ion-input>
       </ion-item>
-      <!-- <ion-item>
-        <ion-label>Price</ion-label>
-        <ion-input v-model="form.price"></ion-input>
-      </ion-item> -->
-
-			<!-- <h5>Address</h5> -->
       <ion-item>
         <ion-label>Venue</ion-label>
         <ion-input v-model="form.venue"></ion-input>
@@ -43,10 +37,14 @@
         <ion-label>Province</ion-label>
         <ion-input v-model="form.address.province"></ion-input>
       </ion-item>
-			<div class="form-buttons">
-				<ion-button size="small" color="danger" @click="closeModal">Cancel</ion-button>
-				<ion-button size="small" color="success" @click="submit">Submit</ion-button>
-			</div>
+      <div class="form-buttons">
+        <ion-button size="small" color="danger" @click="closeModal"
+          >Cancel</ion-button
+        >
+        <ion-button size="small" color="success" @click="submit"
+          >Submit</ion-button
+        >
+      </div>
     </ion-content>
   </div>
 </template>
@@ -60,8 +58,8 @@ import {
   IonItem,
   IonLabel,
   IonInput,
-	IonButton,
-	modalController
+  IonButton,
+  modalController,
 } from "@ionic/vue";
 import { defineComponent } from "vue";
 import { micOutline } from "ionicons/icons";
@@ -72,37 +70,17 @@ export default defineComponent({
   name: "NewEvent",
   data() {
     return {
-      form: {
-        eventName: "DevConf",
-        contactPerson: "Contact Person",
-        venue: "CTICC",
-        address: {
-					street: "123 Street Name",
-					area: "CBD",
-					town: "Cape Town",
-					province: "Western Cape"
-				},
-        price: "500",
-        website: "www.DevConf.com",
-        dates: [
-          {
-            startDate: "06/10/2020",
-            startTime: "09:00",
-            endDate: "06/10/2020",
-            endTime: "16:00",
-          }
-        ]
-      },
+      form: JSON.parse(localStorage.getItem("updateEvent")) || {},
     };
-	},
+  },
   setup() {
     return {
-      micOutline
-    }
+      micOutline,
+    };
   },
   components: {
-		IonHeader,
-		IonContent,
+    IonHeader,
+    IonContent,
     IonTitle,
     IonToolbar,
     IonItem,
@@ -111,41 +89,32 @@ export default defineComponent({
     IonButton,
   },
   methods: {
-    autoIdFn(){
-      // Alphanumeric characters
-      const chars =
-        'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-      let autoId = '';
-      for (let i = 0; i < 20; i++) {
-        autoId += chars.charAt(Math.floor(Math.random() * chars.length));
-      }
-      return autoId;
-    },
     closeModal() {
-			modalController.dismiss();
+      modalController.dismiss();
     },
     submit() {
-      authStore.dispatch("createEvent",this.form)
+      authStore
+        .dispatch("updateEvent", this.form)
         .then(() => {
           modalController.dismiss();
         })
-        .catch(error => {
-        // eslint-disable-next-line
+        .catch((error) => {
+          // eslint-disable-next-line
           console.log(error);
         });
-    }
-  }
+    },
+  },
 });
 </script>
 
 <style lang="scss" scoped>
 ion-content {
-	height: 100vh;
+  height: 100vh;
 }
 
 .form-buttons {
-	margin-top: 25px;
-	float: right;
-	overflow-y: scroll;
+  margin-top: 25px;
+  float: right;
+  overflow-y: scroll;
 }
 </style>

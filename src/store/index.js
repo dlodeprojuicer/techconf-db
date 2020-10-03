@@ -100,8 +100,15 @@ const store = createStore({
           .where("verified", "==", true)
           .get()
           .then(({ docs }) => {
-            context.commit("events", docs.map(a => a.data()));
-            resolve(docs.map(a => a.data()));
+            const eventData = [];
+            for (let x =0; docs.length > x; x++) {
+              eventData.push({
+                id: docs[x].id,
+                ...docs[x].data()
+              });
+            }
+            context.commit("events", eventData);
+            resolve(eventData);
           });
       })
     },
@@ -120,10 +127,24 @@ const store = createStore({
     createEvent(context, request) {
       request.createdBy = context.getters.loginToken;
       return new Promise((resolve) => {
-        firebase.firestore().collection("events").add(request).then(() => {
-          context.dispatch("getEvents");
+        firebase.firestore().collection("events")
+          .add(request)
+          .then(() => {
+            context.dispatch("getEvents");
           resolve();
         });
+      })
+    },
+    updateEvent(context, request) {
+      request.updatedBy = context.getters.loginToken;
+      return new Promise((resolve) => {
+        firebase.firestore().collection("events")
+          .doc(request.id)
+          .update(request)
+          .then(() => {
+            context.dispatch("getEvents");
+            resolve();
+          });
       })
     },
     createUser(context, request) {
@@ -132,7 +153,6 @@ const store = createStore({
           .doc(request.uid)
           .set({...request})
           .then(() => {
-            console.log("Create callback")
             resolve();
           });
       })
@@ -143,7 +163,6 @@ const store = createStore({
           .doc(request)
           .get()
           .then(doc => {
-            console.log(doc.data())
             context.commit("userProfile", doc.data());
             resolve(doc.data());
           });

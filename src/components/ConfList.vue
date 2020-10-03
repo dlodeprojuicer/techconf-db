@@ -27,14 +27,23 @@
           </p>
           <p v-if="!item.dates" class="no-date">New dates TBA</p>
         </ion-label>
+        <ion-text class="actions" v-if="profilePage">
+          <ion-button color="dark" @click="editEvent(item)">
+            Edit
+          </ion-button>
+          <ion-button color="dark" @click="deleteEvent(item)">
+            Delete
+          </ion-button>
+        </ion-text>
       </ion-item>
     </div>
   </ion-list>
 </template>
 
 <script>
-import { IonList, IonItem, IonLabel, IonText, IonIcon } from "@ionic/vue";
+import { IonList, IonItem, IonLabel, IonText, IonIcon, IonButton, modalController } from "@ionic/vue";
 import { chevronForward, micOutline, openOutline } from "ionicons/icons";
+import EditEventModal from "./EditEventModal";
 
 export default {
   name: "recent-list",
@@ -45,7 +54,7 @@ export default {
 			default: () => []
 		}
   },
-  components: { IonList, IonItem, IonLabel, IonText, IonIcon },
+  components: { IonList, IonItem, IonLabel, IonText, IonIcon, IonButton },
   setup() {
     return {
       chevronForward,
@@ -53,6 +62,29 @@ export default {
       openOutline
     }
   },
+  data() {
+    return {
+      profilePage: window.location.pathname === "/tabs/profile" ? true : false
+    }
+  },
+  methods: {
+    async editEvent(event) {
+      localStorage.setItem("updateEvent", JSON.stringify(event));
+    
+      const modal = await modalController.create({
+        component: EditEventModal,
+        componentProps: {
+          data: event,
+          propsData: {
+            title: "Title from parent",
+          },
+        },
+      });
+      return modal.present();
+    },
+    deleteEvent() {
+    }
+  }
 }
 </script>
 
