@@ -53,8 +53,8 @@ export default defineComponent({
     return {
       loading: false,
       form: {
-        email: "simodms@gmail.com",
-        password: "1234567890",
+        email: "",
+        password: "",
       },
     };
 	},
