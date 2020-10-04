@@ -4,9 +4,8 @@
     <ion-content class="ion-padding">
       <SkeletonText v-if="loading" />
       <ConfList :data="eventList" v-if="eventList.length > 0 "/>
-      <div class="no-events-img" v-if="!loading && eventList.length < 1">
-        <img src="/assets/img/no-events.png" />
-      </div>
+      <NoEvents v-if="!loading && eventList.length < 1" />
+      <!-- <Stats /> -->
     </ion-content>
     <Fab />
   </ion-page>
@@ -24,6 +23,8 @@ import Header from "../components/Header";
 import ConfList from "../components/ConfList";
 import Fab from "../components/Fab";
 import SkeletonText from "../components/SkeletonText";
+import NoEvents from "../components/NoEvents";
+// import Stats from "../components/Stats";
 
 import { mapGetters } from 'vuex';
 
@@ -37,7 +38,9 @@ export default defineComponent({
     Header,
     ConfList,
     SkeletonText,
-    Fab
+    Fab,
+    NoEvents
+    // Stats
   },
   computed: {
     ...mapGetters(['loginToken', 'events']),
@@ -56,23 +59,13 @@ export default defineComponent({
       this.$store.dispatch("getEvents").then(data => {
         this.eventList = data;
         this.loading = false;
-      })
+      }).catch(error => {
+          this.loading = false;
+        // eslint-disable-next-line
+        console.log(error);
+      });
     },
 
   },
 });
 </script>
-
-<style lang="scss" scoped>
-
-.no-events-img {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 600px;
-  border-radius: 50%;
-  filter: grayscale(10%);
-  opacity: 0.7;
-}
-
-</style>

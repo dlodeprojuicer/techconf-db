@@ -99,7 +99,7 @@ const store = createStore({
       })
     },
     getEvents(context) {
-      return new Promise((resolve) => {
+      return new Promise((resolve, reject) => {
         firebase.firestore().collection("events")
           .orderBy("eventName")
           .where("verified", "==", true)
@@ -117,6 +117,8 @@ const store = createStore({
             }
             context.commit("events", eventData);
             resolve(eventData);
+          }).catch( error => {
+            reject(error)
           });
       })
     },
@@ -129,12 +131,14 @@ const store = createStore({
           .then(({ docs }) => {
             const eventData = [];
             for (let x =0; docs.length > x; x++) {
+              const docData = docs[x].data();
               eventData.push({
                 id: docs[x].id,
-                ...docs[x].data()
+                ...docData,
+                start: moment(docData.start).format("DD/MM/YYYY"),
+                end: moment(docData.end).format("DD/MM/YYYY"),
               });
             }
-
             context.commit("userEvents", eventData);
             resolve(eventData);
           });
@@ -142,26 +146,29 @@ const store = createStore({
     },
     createEvent(context, request) {
       request.createdBy = context.getters.loginToken;
-
-      const createEventFn = r => {
-        firebase.firestore().collection("events")
-          .add(r)
-          .then(() => {
-            context.dispatch("getEvents");
-        });
-      }
-
-      firebase.firestore().collection("users")
-        .doc(context.getters.loginToken)
-        .get()
-        .then(user => {
-          if (user.data().verified) {
-            request.verified = true;
-            createEventFn(request)
-          } else {
-            createEventFn(request)
-          }
-        });
+      return new Promise((resolve) => {
+        const createEventFn = r => {
+          firebase.firestore().collection("events")
+            .add(r)
+            .then(() => {
+              context.dispatch("getEvents").then(() => {
+                resolve()
+              });
+          });
+        }
+  
+        firebase.firestore().collection("users")
+          .doc(context.getters.loginToken)
+          .get()
+          .then(user => {
+            if (user.data().verified) {
+              request.verified = true;
+              createEventFn(request);
+            } else {
+              createEventFn(request)
+            }
+          });
+      });
     },
     updateEvent(context, request) {
       request.updatedBy = context.getters.loginToken;
@@ -193,13 +200,15 @@ const store = createStore({
       })
     },
     getUserProfile(context, request) {
-      return new Promise((resolve) => {
+      return new Promise((resolve, reject) => {
         firebase.firestore().collection("users")
           .doc(request)
           .get()
           .then(doc => {
             context.commit("userProfile", doc.data());
-            resolve();
+            resolve(doc.data());
+          }).catch(error => {
+            reject(error);
           });
       })
     },

@@ -4,10 +4,11 @@
       <ion-toolbar class="modal-header">
         <ion-title>
           <ion-icon class="left-icons" :icon="micOutline"></ion-icon>
-          Add Conference
+          Edit Conference
         </ion-title>
       </ion-toolbar>
     </ion-header>
+    <ion-progress-bar type="indeterminate" color="dark" v-if="loading"></ion-progress-bar>
     <ion-content class="ion-padding">
       <ion-item>
         <ion-label>Name</ion-label>
@@ -59,6 +60,7 @@ import {
   IonLabel,
   IonInput,
   IonButton,
+  IonProgressBar,
   modalController,
 } from "@ionic/vue";
 import { defineComponent } from "vue";
@@ -70,6 +72,7 @@ export default defineComponent({
   name: "NewEvent",
   data() {
     return {
+      loading: false,
       form: JSON.parse(localStorage.getItem("updateEvent")) || {},
     };
   },
@@ -85,6 +88,7 @@ export default defineComponent({
     IonToolbar,
     IonItem,
     IonLabel,
+    IonProgressBar,
     IonInput,
     IonButton,
   },
@@ -93,13 +97,16 @@ export default defineComponent({
       modalController.dismiss();
     },
     submit() {
+      this.loading = true;
       authStore
         .dispatch("updateEvent", this.form)
         .then(() => {
+          this.loading = false;
           modalController.dismiss();
         })
         .catch((error) => {
           // eslint-disable-next-line
+          this.loading = false;
           console.log(error);
         });
     },
@@ -110,6 +117,10 @@ export default defineComponent({
 <style lang="scss" scoped>
 ion-content {
   height: 100vh;
+}
+
+ion-item > ion-label {
+  font-weight: bold;
 }
 
 .form-buttons {

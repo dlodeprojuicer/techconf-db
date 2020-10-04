@@ -1,14 +1,17 @@
 <template>
   <ion-page>
     <Header />
-    <ion-content class="ion-padding" v-if="profile">
-      <ion-icon class="left-icons" :icon="personCircleOutline"></ion-icon> 
-      <br />
-      {{ profile }} {{ profile.lastname }}
-      <ConfList :data="eventList" />
+    <ion-content class="ion-padding">
+      <div class="person">
+          <ion-icon class="left-icons" :icon="personCircleOutline"></ion-icon> 
+          <br />
+          {{ profile.name }} {{ profile.lastname }}
+      </div>
+      <SkeletonText v-if="loading" />
+      <ConfList :data="eventList" v-if="eventList.length > 0 " />
+      <NoEvents v-if="!loading && eventList.length < 1" />
     </ion-content>
     <Fab />
-    <!-- <Tabs /> -->
   </ion-page>
 </template>
 
@@ -16,7 +19,6 @@
 import {
   IonPage,
   IonIcon,
-  // modalController,
   IonContent
 } from "@ionic/vue";
 import { personCircleOutline } from "ionicons/icons";
@@ -24,8 +26,9 @@ import { defineComponent } from 'vue';
 
 import Header from "../components/Header";
 import ConfList from "../components/ConfList";
-// import Tabs from "../components/Tabs";
+import SkeletonText from "../components/SkeletonText";
 import Fab from "../components/Fab";
+import NoEvents from "../components/NoEvents";
 
 import { mapGetters } from 'vuex';
 
@@ -37,9 +40,10 @@ export default defineComponent({
     IonContent,
     IonPage,
     IonIcon,
+    SkeletonText,
+    NoEvents,
     Header,
     ConfList,
-    // Tabs,
     Fab
   },
   setup() {
@@ -48,7 +52,7 @@ export default defineComponent({
     };
   },
   computed: {
-    ...mapGetters(['loginToken', 'events', 'userProfile']),
+    ...mapGetters(['loginToken']),
   },
   mounted() {
     this.fetchEvents();
@@ -56,37 +60,43 @@ export default defineComponent({
   },
   data() {
     return {
-      profile: this.userProfile
+      loading: true,
+      profile: {},
+      eventList: []
     }
   },
   methods: {
     fetchEvents() {
       this.$store.dispatch("getUserEvents").then(data => {
-        console.log(data)
         this.eventList = data;
-      })
+        this.loading = false;
+      }).catch(error => {
+        // eslint-disable-next-line
+        console.log(error);
+        this.loading = false;
+      });
     },
     fetchProfile() {
       this.$store.dispatch("getUserProfile", this.loginToken).then(data => {
         this.profile = data;
-      })
+      }).catch(error => {
+        // eslint-disable-next-line
+        console.log(error);
+      });
     }
   },
 });
 </script>
 
 <style lang="scss" scoped>
-ion-fab-button[data-desc]::after {
-  position: fixed;
-  content: attr(data-desc);
-  z-index: 1;
-  bottom: 8px;
-  left: 52px;
-  background-color: #fff;
-  color: #000;
-  padding: 6px 10px;
-  border-radius: 5px;
-  box-shadow: var(--box-shadow);
+.person {
+  width: 50%;
+  margin: auto 25%;
+  text-align: center;
+  font-size: 20px;
+}
+ion-icon {
+  font-size: 60px;
 }
 
 </style>

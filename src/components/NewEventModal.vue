@@ -7,6 +7,7 @@
       </ion-title>
     </ion-toolbar>
   </ion-header>
+  <ion-progress-bar type="indeterminate" color="dark" v-if="loading"></ion-progress-bar>
   <ion-content class="ion-padding">
     <ion-item>
       <ion-label>Name</ion-label>
@@ -85,6 +86,7 @@ import {
   IonLabel,
   IonInput,
   IonButton,
+  IonProgressBar,
   IonDatetime,
 	modalController
 } from "@ionic/vue";
@@ -100,6 +102,7 @@ export default defineComponent({
 		IonContent,
     IonTitle,
     IonToolbar,
+    IonProgressBar,
     IonItem,
     IonLabel,
     IonInput,
@@ -108,18 +111,19 @@ export default defineComponent({
   },
   data() {
     return {
+      loading: false,
       form: {
-        eventName: "DevConf",
-        contactPerson: "Contact Person",
-        venue: "CTICC",
+        eventName: "",
+        contactPerson: "",
+        venue: "",
         address: {
-					street: "123 Street Name",
-					area: "CBD",
-					town: "Cape Town",
-					province: "Western Cape"
+					street: "",
+					area: "",
+					town: "",
+					province: ""
 				},
-        price: "500",
-        website: "www.DevConf.com",
+        price: "",
+        website: "",
         start: "2020-10-05",
         end: "2020-10-30",
         dates: [
@@ -170,13 +174,16 @@ export default defineComponent({
 			modalController.dismiss();
     },
     submit() {
+      this.loading = true;
       authStore.dispatch("createEvent",this.form)
         .then(() => {
+          this.loading = false;
           modalController.dismiss();
         })
         .catch(error => {
         // eslint-disable-next-line
           console.log(error);
+          this.loading = false;
         });
     }
   }

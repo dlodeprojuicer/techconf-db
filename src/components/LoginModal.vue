@@ -3,11 +3,12 @@
     <ion-header>
       <ion-toolbar class="modal-header">
         <ion-title>
-					<ion-icon class="left-icons" :icon="person"></ion-icon> 
-					Register
-				</ion-title>
+          <ion-icon class="left-icons" :icon="personOutline"></ion-icon> 
+          Login
+        </ion-title>
       </ion-toolbar>
     </ion-header>
+    <ion-progress-bar type="indeterminate" color="dark" v-if="loading"></ion-progress-bar>
     <ion-content class="ion-padding">
       <ion-item>
         <ion-label>Email</ion-label>
@@ -18,10 +19,10 @@
         <ion-input v-model="form.password" type="password"></ion-input>
       </ion-item>
 
-			<div class="form-buttons">
-				<ion-button size="small" color="danger" @click="closeModal">Cancel</ion-button>
-				<ion-button size="small" color="success" @click="submit">Login</ion-button>
-			</div>
+      <div class="form-buttons">
+        <ion-button size="small" color="danger" @click="closeModal">Cancel</ion-button>
+        <ion-button size="small" color="success" @click="submit">Login</ion-button>
+      </div>
     </ion-content>
   </div>
 </template>
@@ -35,11 +36,13 @@ import {
   IonItem,
   IonLabel,
   IonInput,
-	IonButton,
+  IonButton,
+  IonIcon,
+  IonProgressBar,
 	modalController
 } from "@ionic/vue";
 import { defineComponent } from "vue";
-import { person } from "ionicons/icons";
+import { personOutline } from "ionicons/icons";
 
 import authStore from "../store";
 
@@ -48,29 +51,27 @@ export default defineComponent({
   props: ["store","content", "title"],
   data() {
     return {
+      loading: false,
       form: {
-        name: "Simo",
-        lastname: "Mafuxwana",
         email: "simodms@gmail.com",
         password: "1234567890",
-        address: {
-					province: "Western Cape"
-				}
       },
     };
 	},
   setup() {
     return {
-      person
+      personOutline
     }
   },
   components: {
 		IonHeader,
 		IonContent,
     IonTitle,
+    IonProgressBar,
     IonToolbar,
     IonItem,
     IonLabel,
+    IonIcon,
     IonInput,
     IonButton,
   },
@@ -79,14 +80,16 @@ export default defineComponent({
 			modalController.dismiss();
     },
     submit() {
-      console.log(this.form.email)
+      this.loading = true;
       authStore.dispatch("login", this.form)
-        .then(data => {
+        .then(() => {
           // eslint-disable-next-line
-          console.log(data);
+          console.log("done");
+          this.loading = false;
           modalController.dismiss();
         })
         .catch(error => {
+          this.loading = false;
         // eslint-disable-next-line
           console.log(error);
         });

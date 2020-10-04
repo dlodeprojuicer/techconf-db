@@ -72,11 +72,11 @@ export default defineComponent({
   data() {
     return {
       form: {
-        name: "Simo",
-        lastname: "Mafuxwana",
-        email: "simodms@gmail.com",
-        password: "1234567890",
-        organisation: "DMS Ventures",
+        name: "",
+        lastname: "",
+        email: "",
+        password: "",
+        organisation: "",
         address: {
           province: "Select One",
         },
