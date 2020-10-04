@@ -3,6 +3,7 @@ import * as auth from "./modules/auth";
 // import * as events from "./modules/events";
 // import * as userProfile from "./modules/userProfile";
 import firebase from "./../firebase";
+import moment from "moment";
 
 const store = createStore({
   modules: {
@@ -106,9 +107,12 @@ const store = createStore({
           .then(({ docs }) => {
             const eventData = [];
             for (let x =0; docs.length > x; x++) {
+              const docData = docs[x].data();
               eventData.push({
                 id: docs[x].id,
-                ...docs[x].data()
+                ...docData,
+                start: moment(docData.start).format("DD/MM/YYYY"),
+                end: moment(docData.end).format("DD/MM/YYYY"),
               });
             }
             context.commit("events", eventData);

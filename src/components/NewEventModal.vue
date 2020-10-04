@@ -1,54 +1,78 @@
 <template>
-  <div>
-    <ion-header>
-      <ion-toolbar class="modal-header">
-        <ion-title>
-					<ion-icon class="left-icons" :icon="micOutline"></ion-icon> 
-					Add Conference
-				</ion-title>
-      </ion-toolbar>
-    </ion-header>
-    <ion-content class="ion-padding">
-      <ion-item>
-        <ion-label>Name</ion-label>
-        <ion-input v-model="form.eventName"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label>Website</ion-label>
-        <ion-input v-model="form.website"></ion-input>
-      </ion-item>
-      <!-- <ion-item>
-        <ion-label>Price</ion-label>
-        <ion-input v-model="form.price"></ion-input>
-      </ion-item> -->
+  <ion-header>
+    <ion-toolbar class="modal-header">
+      <ion-title>
+        <ion-icon class="left-icons" :icon="micOutline"></ion-icon> 
+        Add Conference
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content class="ion-padding">
+    <ion-item>
+      <ion-label>Name</ion-label>
+      <ion-input v-model="form.eventName"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Website</ion-label>
+      <ion-input v-model="form.website"></ion-input>
+    </ion-item>
+    <!-- <ion-item>
+      <ion-label>Price</ion-label>
+      <ion-input v-model="form.price"></ion-input>
+    </ion-item> -->
 
-			<!-- <h5>Address</h5> -->
-      <ion-item>
-        <ion-label>Venue</ion-label>
-        <ion-input v-model="form.venue"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label>Street</ion-label>
-        <ion-input v-model="form.address.street"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label>Area / Suburb</ion-label>
-        <ion-input v-model="form.address.area"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label>Town</ion-label>
-        <ion-input v-model="form.address.town"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label>Province</ion-label>
-        <ion-input v-model="form.address.province"></ion-input>
-      </ion-item>
-			<div class="form-buttons">
-				<ion-button size="small" color="danger" @click="closeModal">Cancel</ion-button>
-				<ion-button size="small" color="success" @click="submit">Submit</ion-button>
-			</div>
-    </ion-content>
-  </div>
+    <!-- <h5>Address</h5> -->
+    <ion-item>
+      <ion-label>Venue</ion-label>
+      <ion-input v-model="form.venue"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Street</ion-label>
+      <ion-input v-model="form.address.street"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Area / Suburb</ion-label>
+      <ion-input v-model="form.address.area"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Town</ion-label>
+      <ion-input v-model="form.address.town"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Province</ion-label>
+      <select v-model="form.address.province" placeholder="Select One">
+        <option :value="item" v-for="(item, index) in provinces" :key="index">
+          {{ item }}
+        </option>
+      </select>
+    </ion-item>
+    <ion-item>
+      <ion-label>Start</ion-label>
+      <ion-datetime 
+        display-format="DD-MMM-YYYY" 
+        picker-format="DD-MMM-YYYY" 
+        :value="form.start" 
+        @ionChange="startChange($event)"
+        min="2020-10-15"
+        max="2021-10-15"
+      ></ion-datetime>
+    </ion-item>
+    <ion-item>
+      <ion-label>End</ion-label>
+      <ion-datetime 
+        display-format="DD-MMM-YYYY" 
+        picker-format="DD-MMM-YYYY" 
+        :value="form.end" 
+        @ionChange="endChange($event)"
+        min="2020-10-15"
+        max="2021-10-15"
+      ></ion-datetime>
+    </ion-item>
+    <div class="form-buttons">
+      <ion-button size="small" color="danger" @click="closeModal">Cancel</ion-button>
+      <ion-button size="small" color="success" @click="submit">Submit</ion-button>
+    </div>
+  </ion-content>
 </template>
 
 <script>
@@ -60,7 +84,8 @@ import {
   IonItem,
   IonLabel,
   IonInput,
-	IonButton,
+  IonButton,
+  IonDatetime,
 	modalController
 } from "@ionic/vue";
 import { defineComponent } from "vue";
@@ -70,6 +95,17 @@ import authStore from "../store";
 
 export default defineComponent({
   name: "NewEvent",
+  components: {
+		IonHeader,
+		IonContent,
+    IonTitle,
+    IonToolbar,
+    IonItem,
+    IonLabel,
+    IonInput,
+    IonDatetime,
+    IonButton,
+  },
   data() {
     return {
       form: {
@@ -84,6 +120,8 @@ export default defineComponent({
 				},
         price: "500",
         website: "www.DevConf.com",
+        start: "2020-10-05",
+        end: "2020-10-30",
         dates: [
           {
             startDate: "06/10/2020",
@@ -93,6 +131,17 @@ export default defineComponent({
           }
         ]
       },
+      provinces: [
+        "Western Cape",
+        "Eastern Cape",
+        "Northern Cape",
+        "Free State",
+        "Mpumalanga",
+        "Limpompo",
+        "North West",
+        "Kwa-Zulu Natal",
+        "Gauteng",
+      ]
     };
 	},
   setup() {
@@ -100,17 +149,13 @@ export default defineComponent({
       micOutline
     }
   },
-  components: {
-		IonHeader,
-		IonContent,
-    IonTitle,
-    IonToolbar,
-    IonItem,
-    IonLabel,
-    IonInput,
-    IonButton,
-  },
   methods: {
+    startChange({ detail }) {
+      this.form.start = detail.value;
+    },
+    endChange({ detail }) {
+      this.form.end = detail.value;
+    },
     autoIdFn(){
       // Alphanumeric characters
       const chars =
@@ -141,6 +186,10 @@ export default defineComponent({
 <style lang="scss" scoped>
 ion-content {
 	height: 100vh;
+}
+
+ion-item > ion-label {
+  font-weight: bold;
 }
 
 .form-buttons {

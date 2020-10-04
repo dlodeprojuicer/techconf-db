@@ -96,9 +96,12 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-
 ion-content {
 	height: 100vh;
+}
+
+ion-item > ion-label {
+  font-weight: bold;
 }
 
 .form-buttons {

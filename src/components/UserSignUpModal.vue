@@ -46,6 +46,7 @@ import {
   IonItem,
   IonLabel,
   IonInput,
+  IonIcon,
   IonButton,
   modalController,
 } from "@ionic/vue";
@@ -65,6 +66,7 @@ export default defineComponent({
     IonItem,
     IonLabel,
     IonInput,
+    IonIcon,
     IonButton,
   },
   data() {
@@ -178,6 +180,10 @@ export default defineComponent({
 <style lang="scss" scoped>
 ion-content {
   height: 100vh;
+}
+
+ion-item > ion-label {
+  font-weight: bold;
 }
 
 .form-buttons {

@@ -47,7 +47,7 @@ export default {
     ...mapGetters(["loginToken"]),
   },
   mounted() {
-    // this.signUpModal();
+    // this.addEventModal();
   },
   methods: {
     async signUpModal() {
