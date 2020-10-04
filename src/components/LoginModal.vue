@@ -19,6 +19,10 @@
         <ion-input v-model="form.password" type="password"></ion-input>
       </ion-item>
 
+      <p class="error-message">
+        {{ endpointError.message }}
+      </p>
+
       <div class="form-buttons">
         <ion-button size="small" color="danger" @click="closeModal">Cancel</ion-button>
         <ion-button size="small" color="success" @click="submit">Login</ion-button>
@@ -39,7 +43,7 @@ import {
   IonButton,
   IonIcon,
   IonProgressBar,
-	modalController
+  modalController
 } from "@ionic/vue";
 import { defineComponent } from "vue";
 import { personOutline } from "ionicons/icons";
@@ -49,20 +53,6 @@ import authStore from "../store";
 export default defineComponent({
   name: "Modal",
   props: ["store","content", "title"],
-  data() {
-    return {
-      loading: false,
-      form: {
-        email: "",
-        password: "",
-      },
-    };
-	},
-  setup() {
-    return {
-      personOutline
-    }
-  },
   components: {
 		IonHeader,
 		IonContent,
@@ -74,6 +64,21 @@ export default defineComponent({
     IonIcon,
     IonInput,
     IonButton,
+  },
+  data() {
+    return {
+      loading: false,
+      endpointError: "",
+      form: {
+        email: "",
+        password: "",
+      },
+    };
+	},
+  setup() {
+    return {
+      personOutline
+    }
   },
   methods: {
     closeModal() {
@@ -91,7 +96,16 @@ export default defineComponent({
         .catch(error => {
           this.loading = false;
         // eslint-disable-next-line
-          console.log(error);
+          this.endpointError = error;
+          switch(error.code) {
+            case "auth/invalid-email":
+            case "auth/wrong-password":
+              error.message = "Invalid email or password.";
+            break;
+            case "auth/user-not-found":
+              error.message = "No user with corresponding login credentials";
+            break;
+          }
         });
     }
   }
@@ -105,6 +119,11 @@ ion-content {
 
 ion-item > ion-label {
   font-weight: bold;
+}
+
+.error-message {
+  color: #ff0000;
+  text-align: center;
 }
 
 .form-buttons {

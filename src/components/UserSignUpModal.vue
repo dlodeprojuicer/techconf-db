@@ -2,7 +2,7 @@
   <ion-header>
     <ion-toolbar class="modal-header">
       <ion-title>
-        <ion-icon class="left-icons" :icon="person"></ion-icon>
+        <ion-icon class="left-icons" :icon="personOutline"></ion-icon>
         Register
       </ion-title>
     </ion-toolbar>
@@ -26,10 +26,13 @@
         </option>
       </select>
     </ion-item>
+
+    <p class="error-message">
+      {{ endpointError.message }}
+    </p>
+
     <div class="form-buttons">
-      <ion-button size="small" color="danger" @click="closeModal"
-        >Cancel</ion-button
-      >
+      <ion-button size="small" color="danger" @click="closeModal">Cancel</ion-button>
       <ion-button size="small" color="success" @click="submit"
         >Signup</ion-button
       >
@@ -51,7 +54,7 @@ import {
   modalController,
 } from "@ionic/vue";
 import { defineComponent } from "vue";
-import { person } from "ionicons/icons";
+import { personOutline } from "ionicons/icons";
 
 import authStore from "../store";
 
@@ -71,6 +74,7 @@ export default defineComponent({
   },
   data() {
     return {
+      endpointError: "",
       form: {
         name: "",
         lastname: "",
@@ -138,7 +142,7 @@ export default defineComponent({
       },
     ];
     return {
-      person,
+      personOutline,
       formFields,
     };
   },
@@ -170,7 +174,17 @@ export default defineComponent({
         })
         .catch(error => {
         // eslint-disable-next-line
-          console.log(error);
+        console.log("dsfsd", error);
+          this.endpointError = error;
+          switch(error.code) {
+            case "auth/invalid-email":
+            case "auth/wrong-password":
+              error.message = "Invalid email or password.";
+            break;
+            case "auth/user-not-found":
+              error.message = "No user with corresponding login credentials";
+            break;
+          }
         });
     },
   },
@@ -184,6 +198,11 @@ ion-content {
 
 ion-item > ion-label {
   font-weight: bold;
+}
+
+.error-message {
+  color: #ff0000;
+  text-align: center;
 }
 
 .form-buttons {
