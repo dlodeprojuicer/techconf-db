@@ -3,8 +3,11 @@
     <Header />
     <ion-content class="ion-padding">
       <SkeletonText v-if="loading" />
-      <ConfList :data="eventList" v-if="eventList.length > 0 "/>
-      <NoEvents v-if="!loading && eventList.length < 1" />
+      <h2 class="heading-h2" v-if="events.length > 0 ">
+        A  concise list of tech conferences in ZA
+      </h2>
+      <ConfList :data="events" v-if="events.length > 0 " />
+      <NoEvents v-if="!loading && events.length < 1" />
       <!-- <Stats /> -->
     </ion-content>
     <Fab />
@@ -50,14 +53,15 @@ export default defineComponent({
   },
   data() {
     return {
-      eventList: [],
+      // events: [],
       loading: true
     }
   },
   methods: {
     fetchEvents() {
       this.$store.dispatch("getEvents").then(data => {
-        this.eventList = data;
+        console.log("eee", data);
+        this.events = data;
         this.loading = false;
       }).catch(error => {
           this.loading = false;
@@ -69,3 +73,12 @@ export default defineComponent({
   },
 });
 </script>
+
+
+<style lang="scss">
+.heading-h2 {
+  font-size: 20px;
+  text-align: center;
+  color: #000;
+}
+</style>

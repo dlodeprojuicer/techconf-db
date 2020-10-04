@@ -151,8 +151,10 @@ const store = createStore({
           firebase.firestore().collection("events")
             .add(r)
             .then(() => {
-              context.dispatch("getEvents").then(() => {
-                resolve()
+              context.dispatch("getEvents").then(events => {
+                console.log("events", events)
+                context.commit("events", events);
+                resolve(events)
               });
           });
         }
