@@ -2,7 +2,7 @@
   <div class="no-events-img">
     <h2>A  concise list of tech conferences in ZA</h2>
     <img src="/assets/img/no-events.png" />
-    <ion-button expand="block" color="dark" @click="addEventModal">Add conference</ion-button>
+    <ion-button expand="block" color="dark" @click="addEventModal" v-if="loginToken">Add conference</ion-button>
   </div>
 </template>
 
@@ -44,16 +44,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.no-events-img {
-  width: 25%;
-  margin: 3% 39%;
-  text-align: center;
-  img {
-    filter: grayscale(20%);
-    opacity: 0.7;
-  }
-  ion-button {
-    opacity: 0.9;
-  }
-}
+// .no-events-img {
+//   width: 25%;
+//   margin: 3% 39%;
+//   text-align: center;
+//   img {
+//     filter: grayscale(20%);
+//     opacity: 0.7;
+//   }
+//   ion-button {
+//     opacity: 0.9;
+//   }
+// }
 </style>

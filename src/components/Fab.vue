@@ -117,4 +117,8 @@ ion-fab-button[data-desc]::after {
   border-radius: 5px;
   box-shadow: var(--box-shadow);
 }
+
+ion-icon {
+  font-size: 25px;
+}
 </style>

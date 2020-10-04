@@ -19,6 +19,19 @@
       width: 50%;
       text-align: center;
     }
+
+    .no-events-img {
+      width: 25%;
+      margin: 5% 38%;
+      text-align: center;
+      img {
+        filter: grayscale(20%);
+        opacity: 0.7;
+      }
+      ion-button {
+        opacity: 0.9;
+      }
+    }
     
   }
   
@@ -32,6 +45,7 @@
     .not-mobile {
       display: block;
       width: 50%;
+      margin: 5% 38%;
       text-align: center;
       margin: 0 auto;
       z-index: 9999999999;
@@ -43,6 +57,19 @@
       width: 50%;
       text-align: center;
     }
+
+    .no-events-img {
+      width: 25%;
+      margin: 8% 38%;
+      text-align: center;
+      img {
+        filter: grayscale(20%);
+        opacity: 0.7;
+      }
+      ion-button {
+        opacity: 0.9;
+      }
+    }
     
   }
   
@@ -51,8 +78,7 @@
     ##Screen = B/w 801px to 1024px
   */
   
-  @media (min-width: 801px) and (max-width: 1024px) {
-    
+  @media (min-width: 801px) and (max-width: 1024px) {    
     .not-mobile {
       display: block;
       width: 50%;
@@ -67,20 +93,45 @@
       width: 50%;
       text-align: center;
     }
+
+    .no-events-img {
+      width: 25%;
+      margin: 8% 30%;
+      text-align: center;
+      img {
+        filter: grayscale(20%);
+        opacity: 0.7;
+      }
+      ion-button {
+        opacity: 0.9;
+      }
+    }
     
   }
   
   /* 
     ##Device = Tablets, Ipads (landscape)
-    ##Screen = B/w 768px to 1024px
+    ##Screen = B/w 767px to 1024px
   */
   
-  @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+  @media (min-width: 767px) and (max-width: 1024px) and (orientation: landscape) {
     
     .not-mobile {
         display: none;
     }
     
+    .no-events-img {
+      width: 35%;
+      margin: 8% 30%;
+      text-align: center;
+      img {
+        filter: grayscale(20%);
+        opacity: 0.7;
+      }
+      ion-button {
+        opacity: 0.9;
+      }
+    }
   }
   
   /* 
@@ -92,6 +143,19 @@
     
     .not-mobile {
         display: none;
+    }
+
+    .no-events-img {
+      width: 45%;
+      margin: 6% 30%;
+      text-align: center;
+      img {
+        filter: grayscale(20%);
+        opacity: 0.7;
+      }
+      ion-button {
+        opacity: 0.9;
+      }
     }
     
   }
@@ -105,6 +169,19 @@
     
     .not-mobile {
         display: none;
+    }
+
+    .no-events-img {
+      width: 80%;
+      margin: 20% 12%;
+      text-align: center;
+      img {
+        filter: grayscale(20%);
+        opacity: 0.7;
+      }
+      ion-button {
+        opacity: 0.9;
+      }
     }
     
   }
