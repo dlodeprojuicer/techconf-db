@@ -46,6 +46,9 @@ export default {
   computed: {
     ...mapGetters(["loginToken"]),
   },
+  mounted() {
+    // this.signUpModal();
+  },
   methods: {
     async signUpModal() {
       const modal = await modalController.create({

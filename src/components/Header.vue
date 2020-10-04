@@ -2,9 +2,9 @@
   <ion-header>
     <ion-toolbar>
       <ion-buttons slot="secondary" v-if="loginToken">
-        <ion-button @click="gotoDashboard"> Dashboard </ion-button>
-        <ion-button @click="gotoProfile"> Profile </ion-button>
-        <ion-button @click="logout"> Logout</ion-button>
+        <ion-button v-if="userProfile.admin" @click="gotoDashboard">Dashboard</ion-button>
+        <ion-button @click="gotoProfile">Profile</ion-button>
+        <ion-button @click="logout">Logout</ion-button>
       </ion-buttons>
       <ion-title class="logo" @click="gotoHome">{{ name }} </ion-title>
     </ion-toolbar>
@@ -34,6 +34,10 @@ export default {
       ellipsisVertical,
       name: "<TechConf-db />",
     };
+  },
+  data() {
+    return {
+    }
   },
   methods: {
     gotoHome() {

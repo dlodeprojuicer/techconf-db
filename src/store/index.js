@@ -53,7 +53,7 @@ const store = createStore({
     },
     userProfile(state, data) {
       state.events = data;
-      localStorage.setItem("tcdbuserProfile", JSON.stringify(data));
+      localStorage.setItem("tcdbUserProfile", JSON.stringify(data));
     },
   },
   actions: {
@@ -61,10 +61,12 @@ const store = createStore({
       return new Promise((resolve, reject) => {
         firebase.auth().signInWithEmailAndPassword(request.email, request.password)
           .then(({ user }) => {
-            context.commit("loginToken", user.uid);
-            resolve(user.uid);
-            context.dispatch("getEvents")
-            context.dispatch("getUserProfile", context.getters.loginToken);
+            context.dispatch("getEvents").then(() => {
+              context.dispatch("getUserProfile", user.uid).then(() => {
+                context.commit("loginToken", user.uid);
+                resolve(user.uid);
+              });
+            });
           }).catch(function(error) {
           reject(error)
         });
@@ -170,8 +172,6 @@ const store = createStore({
       })
     },
     deleteEvent(context, request) {
-      // request.updatedBy = context.getters.loginToken;
-      console.log("request",request)
       return new Promise(() => {
         firebase.firestore().collection("events")
           .doc(request)
@@ -195,7 +195,7 @@ const store = createStore({
           .get()
           .then(doc => {
             context.commit("userProfile", doc.data());
-            resolve(doc.data());
+            resolve();
           });
       })
     },
