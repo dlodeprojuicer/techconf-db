@@ -31,7 +31,7 @@
           <ion-button color="dark" @click="editEvent(item)">
             Edit
           </ion-button>
-          <ion-button color="dark" @click="deleteEvent(item)">
+          <ion-button color="dark" @click="deleteEvent(item.id)">
             Delete
           </ion-button>
         </ion-text>
@@ -82,7 +82,15 @@ export default {
       });
       return modal.present();
     },
-    deleteEvent() {
+    deleteEvent(id) {
+      this.$store.dispatch("deleteEvent",id)
+        .then(() => {
+          modalController.dismiss();
+        })
+        .catch(error => {
+        // eslint-disable-next-line
+          console.log(error);
+        });
     }
   }
 }

@@ -2,8 +2,11 @@
   <ion-page>
     <Header />
     <ion-content class="ion-padding">
-      <SkeletonText v-if="eventList.length < 1 " />
+      <SkeletonText v-if="loading" />
       <ConfList :data="eventList" v-if="eventList.length > 0 "/>
+      <div class="no-events-img" v-if="!loading && eventList.length < 1">
+        <img src="/assets/img/no-events.png" />
+      </div>
     </ion-content>
     <Fab />
   </ion-page>
@@ -44,13 +47,15 @@ export default defineComponent({
   },
   data() {
     return {
-      eventList: []
+      eventList: [],
+      loading: true
     }
   },
   methods: {
     fetchEvents() {
       this.$store.dispatch("getEvents").then(data => {
         this.eventList = data;
+        this.loading = false;
       })
     },
 
@@ -58,3 +63,16 @@ export default defineComponent({
 });
 </script>
 
+<style lang="scss" scoped>
+
+.no-events-img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 600px;
+  border-radius: 50%;
+  filter: grayscale(10%);
+  opacity: 0.7;
+}
+
+</style>

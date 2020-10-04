@@ -62,6 +62,7 @@ export default defineComponent({
   methods: {
     fetchEvents() {
       this.$store.dispatch("getUserEvents").then(data => {
+        console.log(data)
         this.eventList = data;
       })
     },

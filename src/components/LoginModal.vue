@@ -1,7 +1,7 @@
 <template>
   <div>
     <ion-header>
-      <ion-toolbar>
+      <ion-toolbar class="modal-header">
         <ion-title>
 					<ion-icon class="left-icons" :icon="person"></ion-icon> 
 					Register
@@ -96,6 +96,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+
 ion-content {
 	height: 100vh;
 }

@@ -1,7 +1,8 @@
 <template>
   <ion-fab vertical="bottom" horizontal="start">
     <ion-fab-button color="dark" @click="addEventModal">
-      <ion-icon :icon="add"></ion-icon>
+      <ion-icon :icon="add" v-if="loginToken"></ion-icon>
+      <ion-icon :icon="logInOutline" v-if="!loginToken"></ion-icon>
     </ion-fab-button>
     <ion-fab-list side="top" v-if="!loginToken">
       <ion-fab-button data-desc="Please login or sign-up to add an event">

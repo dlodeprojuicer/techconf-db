@@ -2,7 +2,7 @@
   <ion-page>
     <ion-tabs>
       <ion-tab-bar slot="bottom">
-        made with <ion-icon :icon="logoIonic" /> + <ion-icon :icon="logoVue" /> & <ion-icon :icon="logoFirebase" /> by <a href="https://twitter.com/dlodeprojuicer">@dlodexprojuicer</a>
+        made with <ion-icon :icon="logoIonic" /> + <ion-icon :icon="logoVue" /> & <ion-icon :icon="logoFirebase" /> by <a href="https://twitter.com/dlodeprojuicer">@dlodeprojuicer</a>
       </ion-tab-bar>
     </ion-tabs>
   </ion-page>
