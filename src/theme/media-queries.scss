@@ -172,8 +172,8 @@
     }
 
     .no-events-img {
-      width: 80%;
-      margin: 20% 12%;
+      width: 60%;
+      margin: 20% 20%;
       text-align: center;
       img {
         filter: grayscale(20%);
@@ -181,6 +181,9 @@
       }
       ion-button {
         opacity: 0.9;
+      }
+      h2 {
+        font-size: 20px;
       }
     }
     
