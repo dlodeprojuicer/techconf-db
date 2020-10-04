@@ -2,8 +2,9 @@
   <ion-header>
     <ion-toolbar>
       <ion-buttons slot="secondary" v-if="loginToken">
+        <ion-button @click="gotoDashboard"> Dashboard </ion-button>
         <ion-button @click="gotoProfile"> Profile </ion-button>
-        <ion-button @click="logout"> Logout </ion-button>
+        <ion-button @click="logout"> Logout</ion-button>
       </ion-buttons>
       <ion-title class="logo" @click="gotoHome">{{ name }} </ion-title>
     </ion-toolbar>
@@ -26,7 +27,7 @@ export default {
   },
   components: { IonToolbar, IonHeader, IonTitle, IonButtons, IonButton },
   computed: {
-    ...mapGetters(['loginToken']),
+    ...mapGetters(['loginToken', 'userProfile']),
   },
   setup() {
     return {
@@ -37,6 +38,9 @@ export default {
   methods: {
     gotoHome() {
       this.$router.push("/");
+    },
+    gotoDashboard() {
+      this.$router.push("/tabs/dashboard");
     },
     gotoProfile() {
       this.$router.push("/tabs/profile");

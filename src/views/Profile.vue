@@ -4,7 +4,7 @@
     <ion-content class="ion-padding" v-if="profile">
       <ion-icon class="left-icons" :icon="personCircleOutline"></ion-icon> 
       <br />
-      {{ profile.name }} {{ profile.lastname }}
+      {{ profile }} {{ profile.lastname }}
       <ConfList :data="eventList" />
     </ion-content>
     <Fab />

@@ -64,11 +64,11 @@ export default defineComponent({
   data() {
     return {
       form: {
-        name: "simo",
-        lastname: "mafuxwana",
-        email: "simod@simo.com",
-        password: "120394949",
-        organisation: "Scale Conf",
+        name: "Simo",
+        lastname: "Mafuxwana",
+        email: "simodms@gmail.com",
+        password: "1234567890",
+        organisation: "DMS Ventures",
         address: {
 					province: "Western Cape"
 				}

@@ -2,10 +2,10 @@
   <ion-page>
     <Header />
     <ion-content class="ion-padding">
-      <ConfList :data="eventList" />
+      <SkeletonText v-if="eventList.length < 1 " />
+      <ConfList :data="eventList" v-if="eventList.length > 0 "/>
     </ion-content>
     <Fab />
-    <!-- <Tabs /> -->
   </ion-page>
 </template>
 
@@ -19,8 +19,8 @@ import { defineComponent } from 'vue';
 
 import Header from "../components/Header";
 import ConfList from "../components/ConfList";
-// import Tabs from "../components/Tabs";
 import Fab from "../components/Fab";
+import SkeletonText from "../components/SkeletonText";
 
 import { mapGetters } from 'vuex';
 
@@ -33,7 +33,7 @@ export default defineComponent({
     IonPage,
     Header,
     ConfList,
-    // Tabs,
+    SkeletonText,
     Fab
   },
   computed: {
@@ -44,7 +44,7 @@ export default defineComponent({
   },
   data() {
     return {
-      eventList: this.events
+      eventList: []
     }
   },
   methods: {

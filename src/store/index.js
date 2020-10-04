@@ -13,7 +13,7 @@ const store = createStore({
   state: {
     loginToken: null,
     httpLoader: false,
-    events: null,
+    events: [],
     userProfile: {}
   },
   getters: {
@@ -26,11 +26,11 @@ const store = createStore({
     events({ events }) {
       return events || JSON.parse(localStorage.getItem("tcdbEvents"));
     },
-    userEvents({ events }) {
-      return events || JSON.parse(localStorage.getItem("tcdbUserEvents"));
+    userEvents({ userEvents }) {
+      return userEvents || JSON.parse(localStorage.getItem("tcdbUserEvents"));
     },
-    userProfile({ events }) {
-      return events || JSON.parse(localStorage.getItem("tcdbUserProfile"));
+    userProfile({ userProfile }) {
+      return userProfile || JSON.parse(localStorage.getItem("tcdbUserProfile"));
     }
   },
   mutations: {
@@ -40,7 +40,7 @@ const store = createStore({
         localStorage.setItem("tcdbLoginToken", token);
       } else {
         state.loginToken = null;
-        localStorage.removeItem("tcdbLoginToken");
+        localStorage.clear();
       }
     },
     events(state, data) {
@@ -64,6 +64,7 @@ const store = createStore({
             context.commit("loginToken", user.uid);
             resolve(user.uid);
             context.dispatch("getEvents")
+            context.dispatch("getUserProfile", context.getters.loginToken);
           }).catch(function(error) {
           reject(error)
         });
@@ -75,6 +76,7 @@ const store = createStore({
           .then(({ user }) => {
             context.commit("loginToken", user.uid);
             request.uid = user.uid;
+            delete request.password;
             context.dispatch("createUser", request).then(() => {
               resolve(user.uid);
             });
@@ -126,14 +128,26 @@ const store = createStore({
     },
     createEvent(context, request) {
       request.createdBy = context.getters.loginToken;
-      return new Promise((resolve) => {
+
+      const createEventFn = r => {
         firebase.firestore().collection("events")
-          .add(request)
+          .add(r)
           .then(() => {
             context.dispatch("getEvents");
-          resolve();
         });
-      })
+      }
+
+      firebase.firestore().collection("users")
+        .doc(context.getters.loginToken)
+        .get()
+        .then(user => {
+          if (user.data().verified) {
+            request.verified = true;
+            createEventFn(request)
+          } else {
+            createEventFn(request)
+          }
+        });
     },
     updateEvent(context, request) {
       request.updatedBy = context.getters.loginToken;
@@ -168,6 +182,26 @@ const store = createStore({
           });
       })
     },
+    getUsers() {
+      return new Promise((resolve) => {
+        firebase.firestore().collection("users")
+          .get()
+          .then(({ docs }) => {
+            resolve(docs.map(a => a.data()));
+          });
+      })
+    },
+    updateUser(context, request) {
+      request.updatedBy = context.getters.loginToken;
+      return new Promise((resolve) => {
+        firebase.firestore().collection("users")
+          .doc(request.uid)
+          .update(request)
+          .then(() => {
+            resolve();
+          });
+      })
+    }
   }
 });
 
