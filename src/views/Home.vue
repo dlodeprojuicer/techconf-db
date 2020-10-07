@@ -10,7 +10,7 @@
       <NoEvents v-if="!loading && events.length < 1" />
       <!-- <Stats /> -->
     </ion-content>
-    <Fab />
+    <!-- <Fab /> -->
   </ion-page>
 </template>
 
@@ -24,7 +24,7 @@ import { defineComponent } from 'vue';
 
 import Header from "../components/Header";
 import ConfList from "../components/ConfList";
-import Fab from "../components/Fab";
+// import Fab from "../components/Fab";
 import SkeletonText from "../components/SkeletonText";
 import NoEvents from "../components/NoEvents";
 // import Stats from "../components/Stats";
@@ -41,7 +41,7 @@ export default defineComponent({
     Header,
     ConfList,
     SkeletonText,
-    Fab,
+    // Fab,
     NoEvents
     // Stats
   },

@@ -2,8 +2,8 @@
   <ion-header>
     <ion-toolbar>
       <ion-buttons slot="secondary" v-if="loginToken">
-        <ion-button v-if="userProfile.admin" @click="gotoDashboard">Dashboard</ion-button>
-        <ion-button @click="gotoProfile">Profile</ion-button>
+        <!-- <ion-button v-if="userProfile.admin" @click="gotoDashboard">Dashboard</ion-button> -->
+        <!-- <ion-button @click="gotoProfile">Profile</ion-button> -->
         <ion-button @click="logout">Logout</ion-button>
       </ion-buttons>
       <ion-title class="logo" @click="gotoHome">{{ name }} </ion-title>
@@ -43,12 +43,12 @@ export default {
     gotoHome() {
       this.$router.push("/");
     },
-    gotoDashboard() {
-      this.$router.push("/tabs/dashboard");
-    },
-    gotoProfile() {
-      this.$router.push("/tabs/profile");
-    },
+    // gotoDashboard() {
+    //   this.$router.push("/tabs/dashboard");
+    // },
+    // gotoProfile() {
+    //   this.$router.push("/tabs/profile");
+    // },
     logout() {
       this.$store.dispatch("logout");
       this.$router.push("/");

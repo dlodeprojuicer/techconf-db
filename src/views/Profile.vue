@@ -11,7 +11,7 @@
       <ConfList :data="eventList" v-if="eventList.length > 0 " />
       <NoEvents v-if="!loading && eventList.length < 1" />
     </ion-content>
-    <Fab />
+    <!-- <Fab /> -->
   </ion-page>
 </template>
 
