@@ -24,7 +24,7 @@
           <b v-if="item.start && item.end">
             {{`${item.start} - ${item.end}`}}
           </b>
-          <p v-if="!item.start && !item.end" style="font-style: italics;">
+          <p v-if="!item.start && !item.end" class="no-date">
             New dates TBA
           </p>
           <!-- <p v-if="item.dates">
