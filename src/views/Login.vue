@@ -91,7 +91,7 @@ export default defineComponent({
       authStore.dispatch("login", this.form)
         .then(() => {
           this.loading = false;
-          this.$router.push("/list");
+          this.fetchEvents();
         })
         .catch(error => {
           this.loading = false;
@@ -106,7 +106,18 @@ export default defineComponent({
             break;
           }
         });
-    }
+    },
+    fetchEvents() {
+      this.$store.dispatch("getEvents").then(() => {
+        // this.filteredEvents = data;
+        this.loading = false;
+        this.$router.push("/list");
+      }).catch(error => {
+          this.loading = false;
+        // eslint-disable-next-line
+        console.log(error);
+      });
+    },
   }
 });
 </script>

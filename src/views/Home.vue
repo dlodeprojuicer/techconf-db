@@ -1,14 +1,20 @@
 <template>
   <ion-page>
-    <Header />
+    <Header @searchFn="searchFn" />
     <ion-content class="ion-padding">
-      <SkeletonText v-if="loading" />
-      <h2 class="heading-h2" v-if="events.length > 0 ">
+      <h2 class="heading-h2" v-if="filteredEvents.length > 0 ">
         A  concise list of tech conferences in ZA
       </h2>
-      <ConfList :data="events" v-if="events.length > 0 " />
-      <NoEvents v-if="!loading && events.length < 1" />
-      <!-- <Stats /> -->
+      <div class="home-content">
+        <div class="home-content-left">
+          <SkeletonText v-if="loading" />
+          <ConfList :data="filteredEvents" v-if="filteredEvents.length > 0 " />
+          <NoEvents v-if="!loading && filteredEvents.length < 1" />
+        </div>
+        <div class="home-content-right">
+          <Stats :data="monthEventCount.length" />
+        </div>
+      </div>
     </ion-content>
     <Fab />
   </ion-page>
@@ -27,7 +33,7 @@ import ConfList from "../components/ConfList";
 import Fab from "../components/Fab";
 import SkeletonText from "../components/SkeletonText";
 import NoEvents from "../components/NoEvents";
-// import Stats from "../components/Stats";
+import Stats from "../components/Stats";
 
 import { mapGetters } from 'vuex';
 
@@ -42,25 +48,37 @@ export default defineComponent({
     ConfList,
     SkeletonText,
     Fab,
-    NoEvents
-    // Stats
+    NoEvents,
+    Stats
   },
   computed: {
-    ...mapGetters(['loginToken', 'events']),
+    ...mapGetters(['loginToken', 'events', 'filteredEvents']),
+    monthEventCount() {
+      const date = new Date();
+      const month = date.getMonth();
+      const monthPlus = month + 1;
+      return this.events.filter(event => {
+        if(event.start) {
+          return event.start.split("/")[1] == monthPlus
+        }
+      });
+    }
   },
   mounted() {
     this.fetchEvents()
   },
   data() {
     return {
-      // events: [],
       loading: true
     }
   },
   methods: {
+    searchFn(searchString) {
+      this.$store.commit("updateSearchString", searchString);
+    },
     fetchEvents() {
-      this.$store.dispatch("getEvents").then(data => {
-        this.events = data;
+      this.$store.dispatch("getEvents").then(() => {
+        // this.filteredEvents = data;
         this.loading = false;
       }).catch(error => {
           this.loading = false;

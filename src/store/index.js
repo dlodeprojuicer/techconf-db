@@ -15,7 +15,9 @@ const store = createStore({
     loginToken: null,
     httpLoader: false,
     events: [],
-    userProfile: {}
+    userProfile: {},
+    searchString: null,
+    filteredEvents: []
   },
   getters: {
     httpLoader({ httpLoader }) {
@@ -24,7 +26,7 @@ const store = createStore({
     loginToken({ loginToken }) {
       return loginToken || localStorage.getItem("tcdbLoginToken");
     },
-    events({ events }) {
+    events({ events = [] }) {
       return events || JSON.parse(localStorage.getItem("tcdbEvents"));
     },
     userEvents({ userEvents }) {
@@ -32,6 +34,13 @@ const store = createStore({
     },
     userProfile({ userProfile }) {
       return userProfile || JSON.parse(localStorage.getItem("tcdbUserProfile"));
+    },
+    filteredEvents({ events = [], searchString = ""}) {
+      if (!searchString || searchString === "") {
+        return events;
+      } else {
+        return events.filter(event => event.eventName.toLowerCase().includes(searchString.toLowerCase()));
+      }
     }
   },
   mutations: {
@@ -56,17 +65,18 @@ const store = createStore({
       state.events = data;
       localStorage.setItem("tcdbUserProfile", JSON.stringify(data));
     },
+    updateSearchString(state, data) {
+      state.searchString = data;
+    }
   },
   actions: {
     login(context, request) {
       return new Promise((resolve, reject) => {
         firebase.auth().signInWithEmailAndPassword(request.email, request.password)
           .then(({ user }) => {
-            context.dispatch("getEvents").then(() => {
-              context.dispatch("getUserProfile", user.uid).then(() => {
-                context.commit("loginToken", user.uid);
-                resolve(user.uid);
-              });
+            context.dispatch("getUserProfile", user.uid).then(() => {
+              context.commit("loginToken", user.uid);
+              resolve(user.uid);
             });
           }).catch(function(error) {
           reject(error)
@@ -152,7 +162,6 @@ const store = createStore({
             .add(r)
             .then(() => {
               context.dispatch("getEvents").then(events => {
-                console.log("events", events)
                 context.commit("events", events);
                 resolve(events)
               })
