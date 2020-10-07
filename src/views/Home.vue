@@ -60,7 +60,6 @@ export default defineComponent({
   methods: {
     fetchEvents() {
       this.$store.dispatch("getEvents").then(data => {
-        console.log("eee", data);
         this.events = data;
         this.loading = false;
       }).catch(error => {
@@ -69,7 +68,6 @@ export default defineComponent({
         console.log(error);
       });
     },
-
   },
 });
 </script>

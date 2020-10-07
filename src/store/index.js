@@ -146,15 +146,18 @@ const store = createStore({
     },
     createEvent(context, request) {
       request.createdBy = context.getters.loginToken;
-      return new Promise((resolve) => {
+      return new Promise((resolve, reject) => {
         const createEventFn = r => {
-          firebase.firestore().collection("events")
+          firebase.firestore().collection("events-dev")
             .add(r)
             .then(() => {
               context.dispatch("getEvents").then(events => {
                 console.log("events", events)
                 context.commit("events", events);
                 resolve(events)
+              })
+              .catch(error => {
+                reject(error);
               });
           });
         }

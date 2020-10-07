@@ -16,10 +16,10 @@ const routes = [
   // },
   {
     path: '/',
-    redirect: '/tabs'
+    redirect: '/list'
   },
   {
-    path: '/tabs/',
+    path: '/list/',
     component: Tabs,
     children: [
       {
@@ -27,12 +27,48 @@ const routes = [
         component: () => import('@/views/Home.vue')
       },
       {
-        path: 'profile',
-        component: () => import('@/views/Profile.vue')
-      },
-      {
         path: 'dashboard',
         component: () => import('@/views/Dashboard.vue')
+      }
+    ]
+  },
+  {
+    path: '/profile',
+    component: Tabs,
+    children: [
+      {
+        path: '',
+        component: () => import('@/views/Profile.vue')
+      }
+    ]
+  },
+  {
+    path: '/create-event/',
+    component: Tabs,
+    children: [
+      {
+        path: '',
+        component: () => import('@/views/CreateEvent.vue')
+      }
+    ]
+  },
+  {
+    path: '/login',
+    component: Tabs,
+    children: [
+      {
+        path: '',
+        component: () => import('@/views/Login.vue')
+      }
+    ]
+  },
+  {
+    path: '/register',
+    component: Tabs,
+    children: [
+      {
+        path: '',
+        component: () => import('@/views/Register.vue')
       }
     ]
   }

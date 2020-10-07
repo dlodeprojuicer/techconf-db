@@ -67,7 +67,7 @@ export default {
   },
   data() {
     return {
-      profilePage: window.location.pathname === "/tabs/profile" ? true : false
+      profilePage: window.location.pathname === "/profile" ? true : false
     }
   },
   methods: {

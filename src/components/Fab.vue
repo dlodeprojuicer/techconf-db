@@ -1,10 +1,10 @@
 <template>
   <ion-fab vertical="bottom" horizontal="start">
-    <ion-fab-button color="dark" @click="addEventModal">
+    <ion-fab-button color="dark" @click="loginModal">
       <ion-icon :icon="add" v-if="loginToken"></ion-icon>
       <ion-icon :icon="logInOutline" v-if="!loginToken"></ion-icon>
     </ion-fab-button>
-    <ion-fab-list side="top" v-if="!loginToken">
+    <!-- <ion-fab-list side="top" v-if="!loginToken">
       <ion-fab-button data-desc="Please login or sign-up to add an event">
         <ion-icon :icon="informationCircleOutline"></ion-icon>
       </ion-fab-button>
@@ -14,12 +14,12 @@
       <ion-fab-button data-desc="Login" @click="loginModal">
         <ion-icon :icon="logInOutline"></ion-icon>
       </ion-fab-button>
-    </ion-fab-list>
+    </ion-fab-list> -->
   </ion-fab>
 </template>
 
 <script>
-import { modalController, IonIcon, IonFabButton, IonFabList, IonFab } from "@ionic/vue";
+import { modalController, IonIcon, IonFabButton, IonFab } from "@ionic/vue";
 import {
   add,
   logInOutline,
@@ -28,13 +28,13 @@ import {
 } from "ionicons/icons";
 import UserSignUpModal from "./UserSignUpModal";
 import NewEventModal from "./NewEventModal";
-import LoginModal from "./LoginModal";
+// import LoginModal from "./LoginModal";
 
 import { mapGetters } from "vuex";
 
 export default {
   name: "fab",
-  components: { IonIcon, IonFabButton, IonFabList, IonFab },
+  components: { IonIcon, IonFabButton, IonFab },
   setup() {
     return {
       add,
@@ -66,21 +66,22 @@ export default {
       });
       return modal.present();
     },
-    async loginModal() {
-      const modal = await modalController.create({
-        component: LoginModal,
-        cssClass: "my-custom-class",
-        componentProps: {
-          data: {
-            content: "Content from parent",
-            store: this.$store,
-          },
-          propsData: {
-            title: "Title from parent",
-          },
-        },
-      });
-      return modal.present();
+    loginModal() {
+      this.loginToken ? this.$router.push("/create-event") : this.$router.push("/login");
+      // const modal = await modalController.create({
+      //   component: LoginModal,
+      //   cssClass: "my-custom-class",
+      //   componentProps: {
+      //     data: {
+      //       content: "Content from parent",
+      //       store: this.$store,
+      //     },
+      //     propsData: {
+      //       title: "Title from parent",
+      //     },
+      //   },
+      // });
+      // return modal.present();
     },
     async addEventModal() {
       if (this.loginToken) {
