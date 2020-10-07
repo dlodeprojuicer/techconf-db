@@ -91,9 +91,9 @@ export default defineComponent({
         "Northern Cape",
         "Free State",
         "Mpumalanga",
-        "Limpompo",
+        "Limpopo",
         "North West",
-        "Kwa-Zulu Natal",
+        "KwaZulu-Natal",
         "Gauteng",
       ],
     };
@@ -134,7 +134,7 @@ export default defineComponent({
       },
       {
         key: "organisation",
-        label: "Oganisation",
+        label: "Organisation",
         type: "text",
         required: true,
         error: false,

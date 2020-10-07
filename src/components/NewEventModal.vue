@@ -54,8 +54,8 @@
         picker-format="DD-MMM-YYYY" 
         :value="form.start" 
         @ionChange="startChange($event)"
-        min="2020-10-15"
-        max="2021-10-15"
+        min="2015-01-01"
+        max="2022-01-02"
       ></ion-datetime>
     </ion-item>
     <ion-item>
@@ -65,8 +65,8 @@
         picker-format="DD-MMM-YYYY" 
         :value="form.end" 
         @ionChange="endChange($event)"
-        min="2020-10-15"
-        max="2021-10-15"
+        min="2015-01-01"
+        max="2022-01-02"
       ></ion-datetime>
     </ion-item>
     <div class="form-buttons">
@@ -124,8 +124,8 @@ export default defineComponent({
 				},
         price: "",
         website: "",
-        start: "2020-10-05",
-        end: "2020-10-30",
+        // start: "2015-01-01",
+        // end: "2015-01-02",
         dates: [
           {
             startDate: "06/10/2020",
@@ -141,9 +141,9 @@ export default defineComponent({
         "Northern Cape",
         "Free State",
         "Mpumalanga",
-        "Limpompo",
+        "Limpopo",
         "North West",
-        "Kwa-Zulu Natal",
+        "KwaZulu-Natal",
         "Gauteng",
       ]
     };

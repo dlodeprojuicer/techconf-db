@@ -33,7 +33,6 @@
               <ion-icon :icon="chevronForward"></ion-icon>
             </span>
           </p> -->
-          <!-- <p v-if="!item.dates" class="no-date">New dates TBA</p> -->
         </ion-label>
         <ion-text class="actions" v-if="profilePage">
           <ion-button color="dark" @click="editEvent(item)">

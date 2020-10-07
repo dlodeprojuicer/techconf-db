@@ -111,8 +111,8 @@ const store = createStore({
               eventData.push({
                 id: docs[x].id,
                 ...docData,
-                start: moment(docData.start).format("DD/MM/YYYY"),
-                end: moment(docData.end).format("DD/MM/YYYY"),
+                start: docData.start ? moment(docData.start).format("DD/MM/YYYY") : null,
+                end: docData.end ? moment(docData.end).format("DD/MM/YYYY") : null,
               });
             }
             context.commit("events", eventData);
@@ -135,8 +135,8 @@ const store = createStore({
               eventData.push({
                 id: docs[x].id,
                 ...docData,
-                start: moment(docData.start).format("DD/MM/YYYY"),
-                end: moment(docData.end).format("DD/MM/YYYY"),
+                start: docData.start ? moment(docData.start).format("DD/MM/YYYY") : null,
+                end: docData.end ? moment(docData.end).format("DD/MM/YYYY") : null,
               });
             }
             context.commit("userEvents", eventData);
