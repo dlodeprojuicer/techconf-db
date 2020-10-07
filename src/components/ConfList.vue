@@ -2,9 +2,11 @@
   <ion-list>
     <div v-for="(item,index) in data" :key="index">
       <ion-item>
-        <ion-text slot="start" :class="item.status === 'canceled' ? `left event-canceled` : 'left'">
-          <ion-icon class="left-icons" :icon="micOutline"></ion-icon>
-        </ion-text>
+        <!-- <template v-slot:start> -->
+          <ion-text slot="start" :class="item.status === 'canceled' ? `left event-canceled` : 'left'">
+            <ion-icon class="left-icons" :icon="micOutline"></ion-icon>
+          </ion-text>
+        <!-- </template> -->
         <ion-label>
           <h2 :style="`color: ${item.color}`">{{ item.eventName }}</h2>
           <p>
@@ -19,16 +21,19 @@
       </ion-item>
       <ion-item class="dates">
         <ion-label>
-          <b>
+          <b v-if="item.start && item.end">
             {{`${item.start} - ${item.end}`}}
           </b>
+          <p v-if="!item.start && !item.end" style="font-style: italics;">
+            New dates TBA
+          </p>
           <!-- <p v-if="item.dates">
             <span v-for="(date, idx) in item.dates" :key="idx">
               <b>{{ date.date }}</b> {{`${date.startTime}-${date.endTime}`}}
               <ion-icon :icon="chevronForward"></ion-icon>
             </span>
           </p> -->
-          <p v-if="!item.dates" class="no-date">New dates TBA</p>
+          <!-- <p v-if="!item.dates" class="no-date">New dates TBA</p> -->
         </ion-label>
         <ion-text class="actions" v-if="profilePage">
           <ion-button color="dark" @click="editEvent(item)">
