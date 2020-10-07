@@ -2,7 +2,7 @@
   <ion-header>
     <ion-toolbar>
       <ion-buttons slot="secondary" v-if="loginToken">
-        <ion-button v-if="userProfile.admin" @click="gotoDashboard">Dashboard</ion-button>
+        <!-- <ion-button v-if="userProfile.admin" @click="gotoDashboard">Dashboard</ion-button> -->
         <ion-button @click="gotoProfile">Profile</ion-button>
         <ion-button @click="logout">Logout</ion-button>
       </ion-buttons>
@@ -44,7 +44,7 @@ export default {
       this.$router.push("/");
     },
     gotoDashboard() {
-      this.$router.push("/tabs/dashboard");
+      this.$router.push("/dashboard");
     },
     gotoProfile() {
       this.$router.push("/profile");

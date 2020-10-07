@@ -148,7 +148,7 @@ const store = createStore({
       request.createdBy = context.getters.loginToken;
       return new Promise((resolve, reject) => {
         const createEventFn = r => {
-          firebase.firestore().collection("events-dev")
+          firebase.firestore().collection("events")
             .add(r)
             .then(() => {
               context.dispatch("getEvents").then(events => {

@@ -26,10 +26,14 @@ const routes = [
         path: '',
         component: () => import('@/views/Home.vue')
       },
-      {
-        path: 'dashboard',
-        component: () => import('@/views/Dashboard.vue')
-      }
+      // {
+      //   path: 'profile',
+      //   component: () => import('@/views/Profile.vue')
+      // },
+      // {
+      //   path: 'dashboard',
+      //   component: () => import('@/views/Dashboard.vue')
+      // }
     ]
   },
   {
