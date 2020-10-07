@@ -19,7 +19,7 @@
       </ion-item>
       <ion-item class="dates">
         <ion-label>
-          <b>
+          <b v-if="item.start && item.end">
             {{`${item.start} - ${item.end}`}}
           </b>
           <!-- <p v-if="item.dates">
@@ -28,7 +28,7 @@
               <ion-icon :icon="chevronForward"></ion-icon>
             </span>
           </p> -->
-          <p v-if="!item.dates" class="no-date">New dates TBA</p>
+          <p v-if="!item.start && !item.end" class="no-date">New dates TBA</p>
         </ion-label>
         <ion-text class="actions" v-if="profilePage">
           <ion-button color="dark" @click="editEvent(item)">
