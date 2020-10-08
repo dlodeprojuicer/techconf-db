@@ -45,9 +45,11 @@ export default {
 <style lang="scss" scoped>
 .current-month {
   position: fixed;
-  left: 75%;
-  top: 40%;
-  padding: 20px;
+  left: 91%;
+  top: 10%;
+  padding: 7px;
+  width: 136px;
+  text-align: center;
   border-radius: 5px;
   background: #fff;
 }

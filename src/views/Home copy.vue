@@ -13,7 +13,9 @@
           <NoEvents v-if="!loading && events.length < 1" />
           <h1 v-if="filteredEvents.length < 1">No search results for "{{ searchString }}"</h1>
         </div>
+        <div class="home-content-right">
           <Stats :data="monthEventCount.length" />
+        </div>
       </div>
     </ion-content>
     <Fab />

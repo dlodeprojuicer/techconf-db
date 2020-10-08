@@ -1,13 +1,9 @@
 <template>
   <ion-header>
     <ion-toolbar>
-      <ion-buttons slot="secondary" v-if="!loginToken">
-        <ion-input v-model="searchString" placeholder="Search" @keyup="searchFn"></ion-input>
-      </ion-buttons>
       <ion-buttons slot="secondary" v-if="loginToken">
         <!-- <ion-button v-if="userProfile.admin" @click="gotoDashboard">Dashboard</ion-button> -->
         <!-- <ion-searchbar @keyup="searchFn" v-model="searchString" placeholder="Search"></ion-searchbar> -->
-        <ion-input v-model="searchString" placeholder="Search" @keyup="searchFn"></ion-input>
         <ion-button @click="gotoProfile">Profile</ion-button>
         <ion-button @click="logout">Logout</ion-button>
       </ion-buttons>
@@ -19,7 +15,7 @@
 </template>
 
 <script>
-import { IonToolbar, IonHeader, IonTitle, IonButtons, IonButton, IonInput } from "@ionic/vue";
+import { IonToolbar, IonHeader, IonTitle, IonButtons, IonButton } from "@ionic/vue";
 import { ellipsisVertical } from "ionicons/icons";
 import { mapGetters } from 'vuex';
 
@@ -32,7 +28,7 @@ export default {
       default: () => [],
     },
   },
-  components: { IonToolbar, IonHeader, IonTitle, IonButtons, IonButton, IonInput },
+  components: { IonToolbar, IonHeader, IonTitle, IonButtons, IonButton },
   computed: {
     ...mapGetters(['loginToken', 'userProfile']),
   },

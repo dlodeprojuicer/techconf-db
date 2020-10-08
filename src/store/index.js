@@ -18,7 +18,8 @@ const store = createStore({
     userProfile: {},
     searchString: null,
     filteredEvents: [],
-    monthEventCount: 0
+    monthEventCount: 0,
+    updateSearchObject: {}
   },
   getters: {
     httpLoader({ httpLoader }) {
@@ -39,11 +40,25 @@ const store = createStore({
     searchString({ searchString }) {
       return searchString;
     },
-    filteredEvents({ events = [], searchString = ""}) {
-      if (!searchString || searchString === "") {
+    // filteredEvents({ events = [], searchString = ""}) {
+    //   if (!searchString || searchString === "") {
+    //     return events;
+    //   } else {
+    //     console.log("DD", searchString)
+    //     return events.filter(event => event.eventName.toLowerCase().includes(searchString.toLowerCase()));
+    //   }
+    // },
+    filteredEvents({ events = [], updateSearchObject }) {
+      if (!updateSearchObject.field || updateSearchObject.field === "") {
         return events;
       } else {
-        return events.filter(event => event.eventName.toLowerCase().includes(searchString.toLowerCase()));
+        console.log("DD", updateSearchObject)
+
+        if (updateSearchObject.field === "Province") { // Dirty one this IF statement. Drity!!!
+          return events.filter(event => event.province.address.toLowerCase().includes(updateSearchObject.value.toLowerCase()));
+        } else {
+          return events.filter(event => event[updateSearchObject.field].toLowerCase().includes(updateSearchObject.value.toLowerCase()));
+        }
       }
     },
     monthEventCount({ events = [] }) {
@@ -81,6 +96,9 @@ const store = createStore({
     },
     updateSearchString(state, data) {
       state.searchString = data;
+    },
+    updateSearch(state, data) {
+      state.updateSearchObject = data;
     }
   },
   actions: {
