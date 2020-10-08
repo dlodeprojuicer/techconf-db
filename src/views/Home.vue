@@ -2,14 +2,15 @@
   <ion-page>
     <Header @searchFn="searchFn" />
     <ion-content class="ion-padding">
-      <h2 class="heading-h2" v-if="filteredEvents.length > 0 ">
+      <h2 class="heading-h2" v-if="filteredEvents.length > 0">
         A  concise list of tech conferences in ZA
       </h2>
       <div class="home-content">
         <div class="home-content-left">
           <SkeletonText v-if="loading" />
-          <ConfList :data="filteredEvents" v-if="filteredEvents.length > 0 " />
-          <NoEvents v-if="!loading && filteredEvents.length < 1" />
+          <ConfList :data="filteredEvents" v-if="filteredEvents.length > 0" />
+          <NoEvents v-if="!loading && events.length < 1" />
+          <h1 v-if="filteredEvents.length < 1">No search results for "{{ searchString }}"</h1>
         </div>
         <div class="home-content-right">
           <Stats :data="monthEventCount.length" />
@@ -52,17 +53,7 @@ export default defineComponent({
     Stats
   },
   computed: {
-    ...mapGetters(['loginToken', 'events', 'filteredEvents']),
-    monthEventCount() {
-      const date = new Date();
-      const month = date.getMonth();
-      const monthPlus = month + 1;
-      return this.events.filter(event => {
-        if(event.start) {
-          return event.start.split("/")[1] == monthPlus
-        }
-      });
-    }
+    ...mapGetters(['loginToken', 'events', 'filteredEvents', 'monthEventCount', 'searchString']),
   },
   mounted() {
     this.fetchEvents()

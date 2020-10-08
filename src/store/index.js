@@ -17,7 +17,8 @@ const store = createStore({
     events: [],
     userProfile: {},
     searchString: null,
-    filteredEvents: []
+    filteredEvents: [],
+    monthEventCount: 0
   },
   getters: {
     httpLoader({ httpLoader }) {
@@ -35,12 +36,25 @@ const store = createStore({
     userProfile({ userProfile }) {
       return userProfile || JSON.parse(localStorage.getItem("tcdbUserProfile"));
     },
+    searchString({ searchString }) {
+      return searchString;
+    },
     filteredEvents({ events = [], searchString = ""}) {
       if (!searchString || searchString === "") {
         return events;
       } else {
         return events.filter(event => event.eventName.toLowerCase().includes(searchString.toLowerCase()));
       }
+    },
+    monthEventCount({ events = [] }) {
+      const date = new Date();
+      const month = date.getMonth();
+      const monthPlus = month + 1;
+      return events.filter(event => {
+        if(event.start) {
+          return event.start.split("/")[1] == monthPlus
+        }
+      });
     }
   },
   mutations: {
