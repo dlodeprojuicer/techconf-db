@@ -46,7 +46,7 @@ export default {
 .current-month {
   position: fixed;
   left: 91%;
-  top: 10%;
+  top: 28%;
   padding: 7px;
   width: 136px;
   text-align: center;
