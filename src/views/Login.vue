@@ -2,29 +2,31 @@
   <Header />
   <ion-page>
     <ion-content class="ion-padding">
-      <ion-progress-bar type="indeterminate" color="dark" v-if="loading"></ion-progress-bar>
-      <ion-title class="form-title">
-        <ion-icon class="left-icons" :icon="personOutline"></ion-icon> 
-        Login
-      </ion-title>
-      <ion-item>
-        <ion-label>Email</ion-label>
-        <ion-input v-model="form.email"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label>Password</ion-label>
-        <ion-input v-model="form.password" type="password"></ion-input>
-      </ion-item>
+      <div class="lg-content-center">
+        <ion-progress-bar type="indeterminate" color="dark" v-if="loading"></ion-progress-bar>
+        <ion-title class="form-title">
+          <ion-icon class="left-icons" :icon="personOutline"></ion-icon> 
+          Login
+        </ion-title>
+        <ion-item>
+          <ion-label>Email</ion-label>
+          <ion-input v-model="form.email"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>Password</ion-label>
+          <ion-input v-model="form.password" type="password"></ion-input>
+        </ion-item>
 
-      <p @click="register">Don't have an account? <u>Register</u></p>
+        <p class="error-message">
+          {{ endpointError.message }}
+        </p>
 
-      <p class="error-message">
-        {{ endpointError.message }}
-      </p>
-
-      <div class="form-buttons">
-        <ion-button size="small" color="danger" @click="goHome">Cancel</ion-button>
-        <ion-button size="small" color="success" @click="submit">Login</ion-button>
+        <div class="form-buttons">
+          <p @click="register">Don't have an account? <u>Register</u></p>
+          <br /><br />
+          <ion-button size="small" color="danger" @click="goHome">Cancel</ion-button>
+          <ion-button size="small" color="success" @click="submit">Login</ion-button>
+        </div>
       </div>
     </ion-content>
   </ion-page>
@@ -138,11 +140,5 @@ ion-item > ion-label {
 .error-message {
   color: #ff0000;
   text-align: center;
-}
-
-.form-buttons {
-	margin-top: 25px;
-	float: right;
-	overflow-y: scroll;
 }
 </style>

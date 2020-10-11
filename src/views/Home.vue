@@ -6,7 +6,7 @@
         A  concise list of tech conferences in ZA
       </h2>
       <div class="home-content">
-        <div class="home-content-left">
+        <div class="lg-content-center">
           <SearchFilters />
           <SkeletonText v-if="loading" />
           <ConfList :data="filteredEvents" v-if="filteredEvents.length > 0" />

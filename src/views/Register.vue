@@ -2,39 +2,43 @@
   <Header />
   <ion-page>
     <ion-content class="ion-padding">
-      <ion-progress-bar type="indeterminate" color="dark" v-if="loading"></ion-progress-bar>
-      <ion-title class="form-title">
-        <ion-icon class="left-icons" :icon="personOutline"></ion-icon> 
-        Login
-      </ion-title>
-      <ion-item v-for="(f, i) in formFields" :key="i">
-        <ion-label>{{ f.label }}</ion-label>
-        <ion-input
-          v-model="form[f.key]"
-          :type="f.type"
-          :required="f.required"
-          @keyup="validate(f.key, i)"
-        ></ion-input>
-        <p v-if="i.error">{{ f.errMsg }}</p>
-      </ion-item>
-      <ion-item>
-        <ion-label>Province</ion-label>
-        <select v-model="form.address.province" placeholder="Select One">
-          <option :value="item" v-for="(item, index) in provinces" :key="index">
-            {{ item }}
-          </option>
-        </select>
-      </ion-item>
+      <div class="lg-content-center">
+        <ion-progress-bar type="indeterminate" color="dark" v-if="loading"></ion-progress-bar>
+        <ion-title class="form-title">
+          <ion-icon class="left-icons" :icon="personOutline"></ion-icon> 
+          Register
+        </ion-title>
+        <ion-item v-for="(f, i) in formFields" :key="i">
+          <ion-label>{{ f.label }}</ion-label>
+          <ion-input
+            v-model="form[f.key]"
+            :type="f.type"
+            :required="f.required"
+            @keyup="validate(f.key, i)"
+          ></ion-input>
+          <p v-if="i.error">{{ f.errMsg }}</p>
+        </ion-item>
+        <ion-item>
+          <ion-label>Province</ion-label>
+          <select v-model="form.address.province" placeholder="Select One">
+            <option :value="item" v-for="(item, index) in provinces" :key="index">
+              {{ item }}
+            </option>
+          </select>
+        </ion-item>
 
-      <p class="error-message">
-        {{ endpointError.message }}
-      </p>
+        <p class="error-message">
+          {{ endpointError.message }}
+        </p>
 
-      <div class="form-buttons">
-        <ion-button size="small" color="danger" @click="goHome">Cancel</ion-button>
-        <ion-button size="small" color="success" @click="submit"
-          >Signup</ion-button
-        >
+        <div class="form-buttons">
+          <p @click="gotoLoginPage">Have an account? <u>Login</u></p>
+          <br /><br />
+          <ion-button size="small" color="danger" @click="goHome">Cancel</ion-button>
+          <ion-button size="small" color="success" @click="submit"
+            >Signup</ion-button
+          >
+        </div>
       </div>
     </ion-content>
   </ion-page>
@@ -153,6 +157,9 @@ export default defineComponent({
     goHome() {
       this.$router.push("/list");
     },
+    gotoLoginPage() {
+      this.$router.push("/login");
+    },
     validate(key, index) {
       if(this.formFields[index].required && !this.form[key]) {
         this.formFields[index].error = true;
@@ -212,9 +219,4 @@ ion-item > ion-label {
   text-align: center;
 }
 
-.form-buttons {
-  margin-top: 25px;
-  float: right;
-  overflow-y: scroll;
-}
 </style>
