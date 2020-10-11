@@ -155,7 +155,7 @@ export default defineComponent({
   },
   methods: {
     goHome() {
-      this.$router.push("/list");
+      this.$router.push("/");
     },
     gotoLoginPage() {
       this.$router.push("/login");
@@ -180,7 +180,7 @@ export default defineComponent({
       authStore.dispatch("signUp", this.form)
         .then(() => {
           // eslint-disable-next-line
-          this.$router.push("/list");
+          this.$router.push("/");
           this.loading = false;
         })
         .catch(error => {

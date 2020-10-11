@@ -86,7 +86,7 @@ export default defineComponent({
       this.$router.push("/register");
     },    
     goHome() {
-      this.$router.push("/list");
+      this.$router.push("/");
     },
     submit() {
       this.loading = true;
@@ -113,7 +113,7 @@ export default defineComponent({
       this.$store.dispatch("getEvents").then(() => {
         // this.filteredEvents = data;
         this.loading = false;
-        this.$router.push("/list");
+        this.$router.push("/");
       }).catch(error => {
           this.loading = false;
         // eslint-disable-next-line

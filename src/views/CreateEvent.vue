@@ -164,14 +164,14 @@ export default defineComponent({
       return autoId;
     },
     goHome() {
-      this.$router.push("/list");
+      this.$router.push("/");
     },
     submit() {
       this.loading = true;
       authStore.dispatch("createEvent",this.form)
         .then(() => {
           this.loading = false;
-          this.$router.push("/list");
+          this.$router.push("/");
         })
         .catch(error => {
         // eslint-disable-next-line

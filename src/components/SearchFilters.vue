@@ -73,11 +73,13 @@ export default {
       venues: [
         "Venue",
         "Virtual Conference",
-        "Kristenboach",
+        "Kirstenbosch",
         "University of Stellenbosch",
         "Microsoft Campus",
         "Lagoon Beach Hotel",
-        "Bandwith Barn"
+        "Bandwidth Barn",
+        "Melrose Arch",
+        "Gallagher Convention Centre"
       ],
     };
   },
