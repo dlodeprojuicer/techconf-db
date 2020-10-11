@@ -16,10 +16,6 @@ const routes = [
   // },
   {
     path: '/',
-    redirect: '/list'
-  },
-  {
-    path: '/list/',
     component: Tabs,
     children: [
       {
