@@ -40,25 +40,18 @@ const store = createStore({
     searchString({ searchString }) {
       return searchString;
     },
-    // filteredEvents({ events = [], searchString = ""}) {
-    //   if (!searchString || searchString === "") {
-    //     return events;
-    //   } else {
-    //     console.log("DD", searchString)
-    //     return events.filter(event => event.eventName.toLowerCase().includes(searchString.toLowerCase()));
-    //   }
-    // },
     filteredEvents({ events = [], updateSearchObject }) {
       if (!updateSearchObject.field || updateSearchObject.field === "") {
         return events;
       } else {
-        console.log("DD", updateSearchObject)
-
-        if (updateSearchObject.field === "Province") { // Dirty one this IF statement. Drity!!!
-          return events.filter(event => event.province.address.toLowerCase().includes(updateSearchObject.value.toLowerCase()));
+        let evts = [];
+        if (updateSearchObject.field === "province") { // Dirty one this IF statement. Drity!!!
+          evts = events.filter(event => event.address.province.toLowerCase().includes(updateSearchObject.value.toLowerCase()));
         } else {
-          return events.filter(event => event[updateSearchObject.field].toLowerCase().includes(updateSearchObject.value.toLowerCase()));
+          evts = events.filter(event => event[updateSearchObject.field].toLowerCase().includes(updateSearchObject.value.toLowerCase()));
         }
+
+        return evts;
       }
     },
     monthEventCount({ events = [] }) {

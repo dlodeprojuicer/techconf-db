@@ -11,7 +11,7 @@
           <SkeletonText v-if="loading" />
           <ConfList :data="filteredEvents" v-if="filteredEvents.length > 0" />
           <NoEvents v-if="!loading && events.length < 1" />
-          <h1 v-if="filteredEvents.length < 1">No search results for "{{ searchString }}"</h1>
+          <h1 v-if="filteredEvents.length < 1">No search results</h1>
         </div>
         <Stats :data="monthEventCount.length" />
       </div>

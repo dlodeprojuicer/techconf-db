@@ -86,7 +86,7 @@ export default {
       this.$store.commit("updateSearch", {field: "eventName", value: this.searchString});
     },
     locationFilterFn({ detail }) {
-      this.$store.commit("updateSearch", {field: "end", value: detail.value === "Province" ? "" : "2020-08-13"});
+      this.$store.commit("updateSearch", {field: "province", value: detail.value === "Province" ? "" : detail.value});
     },
     venueFilterFn({ detail }) {
       this.$store.commit("updateSearch", {field: "venue", value: detail.value === "Venue" ? "" : detail.value });
