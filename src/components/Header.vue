@@ -84,5 +84,6 @@ ion-button.sign-out {
 ion-title.logo {
   font-weight: 900;
   font-size: 25px;
+  text-align: center;
 }
 </style>
