@@ -67,7 +67,16 @@ export default {
       return modal.present();
     },
     loginModal() {
-      this.loginToken ? this.$router.push("/create-event") : this.$router.push("/login");
+      if (this.loginToken) {
+        if (window.location.pathname === "/venues") {
+          this.$router.push("/create-venue")
+        } else {
+          this.$router.push("/create-event")
+        }
+      } else {
+        this.$router.push("/login");
+      }
+
       // const modal = await modalController.create({
       //   component: LoginModal,
       //   cssClass: "my-custom-class",

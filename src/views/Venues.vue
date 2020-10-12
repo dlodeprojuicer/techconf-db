@@ -9,7 +9,7 @@
         <div class="lg-content-center">
           <SearchFilters />
           <SkeletonText v-if="loading" />
-          <VenueList :data="filteredEvents" v-if="filteredEvents.length > 0" />
+          <ConfList :data="filteredEvents" v-if="filteredEvents.length > 0" />
           <NoEvents v-if="!loading && events.length < 1" />
           <h1 v-if="filteredEvents.length < 1">No search results</h1>
         </div>
@@ -28,7 +28,7 @@ import {
 import { defineComponent } from 'vue';
 
 import Header from "../components/Header";
-import VenueList from "../components/VenueList";
+import ConfList from "../components/ConfList";
 import Fab from "../components/Fab";
 import SkeletonText from "../components/SkeletonText";
 import NoEvents from "../components/NoEvents";
@@ -44,11 +44,11 @@ export default defineComponent({
     IonContent,
     IonPage,
     Header,
-    VenueList,
+    ConfList,
     SkeletonText,
     SearchFilters,
     Fab,
-    NoEvents,
+    NoEvents
   },
   computed: {
     ...mapGetters(['loginToken', 'events', 'filteredEvents', 'monthEventCount', 'searchString']),

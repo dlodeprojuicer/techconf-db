@@ -4,6 +4,7 @@
       <ion-buttons slot="secondary" v-if="loginToken">
         <!-- <ion-button v-if="userProfile.admin" @click="gotoDashboard">Dashboard</ion-button> -->
         <!-- <ion-searchbar @keyup="searchFn" v-model="searchString" placeholder="Search"></ion-searchbar> -->
+        <ion-button @click="gotoVenues">Venues</ion-button>
         <ion-button @click="gotoProfile">Profile</ion-button>
         <ion-button @click="logout">Logout</ion-button>
       </ion-buttons>
@@ -52,6 +53,9 @@ export default {
     },
     gotoDashboard() {
       this.$router.push("/dashboard");
+    },
+    gotoVenues() {
+      this.$router.push("/venues");
     },
     gotoProfile() {
       this.$router.push("/profile");

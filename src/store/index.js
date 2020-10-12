@@ -270,7 +270,37 @@ const store = createStore({
             resolve();
           });
       })
-    }
+    },
+    createVenue(context, request) {
+      request.createdBy = context.getters.loginToken;
+      return new Promise((resolve, reject) => {
+        const createVenueFn = r => {
+          firebase.firestore().collection("venues")
+            .add(r)
+            .then(() => {
+              context.dispatch("getVenues").then(venues => {
+                context.commit("venues", venues);
+                resolve(venues)
+              })
+              .catch(error => {
+                reject(error);
+              });
+          });
+        }
+  
+        firebase.firestore().collection("users")
+          .doc(context.getters.loginToken)
+          .get()
+          .then(user => {
+            if (user.data().verified) {
+              request.verified = true;
+              createVenueFn(request);
+            } else {
+              createVenueFn(request)
+            }
+          });
+      });
+    },
   }
 });
 

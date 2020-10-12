@@ -33,6 +33,26 @@ const routes = [
     ]
   },
   {
+    path: '/venues',
+    component: Tabs,
+    children: [
+      {
+        path: '',
+        component: () => import('@/views/Venues.vue')
+      }
+    ]
+  },
+  {
+    path: '/create-venue/',
+    component: Tabs,
+    children: [
+      {
+        path: '',
+        component: () => import('@/views/CreateVenue.vue')
+      }
+    ]
+  },
+  {
     path: '/profile',
     component: Tabs,
     children: [
