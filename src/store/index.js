@@ -15,9 +15,11 @@ const store = createStore({
     loginToken: null,
     httpLoader: false,
     events: [],
+    venues: [],
     userProfile: {},
     searchString: null,
     filteredEvents: [],
+    filteredVenues: [],
     monthEventCount: 0,
     updateSearchObject: {}
   },
@@ -30,6 +32,9 @@ const store = createStore({
     },
     events({ events = [] }) {
       return events || JSON.parse(localStorage.getItem("tcdbEvents"));
+    },
+    venues({ venues = [] }) {
+      return venues || JSON.parse(localStorage.getItem("tcdbVenues"));
     },
     userEvents({ userEvents }) {
       return userEvents || JSON.parse(localStorage.getItem("tcdbUserEvents"));
@@ -63,7 +68,20 @@ const store = createStore({
           return event.start.split("/")[1] == monthPlus
         }
       });
-    }
+    },
+    filteredVenues({ venues = [], updateSearchObject }) {
+      if (!updateSearchObject.field || updateSearchObject.field === "") {
+        return venues;
+      } else {
+        let evts = [];
+        if (updateSearchObject.field === "province") { // Dirty one this IF statement. Drity!!!
+          evts = venues.filter(venue => venue.address.province.toLowerCase().includes(updateSearchObject.value.toLowerCase()));
+        } else {
+          evts = venues.filter(venue => venue[updateSearchObject.field].toLowerCase().includes(updateSearchObject.value.toLowerCase()));
+        }
+        return evts;
+      }
+    },
   },
   mutations: {
     loginToken(state, token) {
@@ -78,6 +96,10 @@ const store = createStore({
     events(state, data) {
       state.events = data;
       localStorage.setItem("tcdbEvents", JSON.stringify(data));
+    },
+    venues(state, data) {
+      state.venues = data;
+      localStorage.setItem("tcdbVenues", JSON.stringify(data));
     },
     userEvents(state, data) {
       state.events = data;
@@ -95,6 +117,7 @@ const store = createStore({
     }
   },
   actions: {
+    // Auth
     login(context, request) {
       return new Promise((resolve, reject) => {
         firebase.auth().signInWithEmailAndPassword(request.email, request.password)
@@ -133,6 +156,8 @@ const store = createStore({
         });
       })
     },
+
+    // Events
     getEvents(context) {
       return new Promise((resolve, reject) => {
         firebase.firestore().collection("events")
@@ -228,6 +253,8 @@ const store = createStore({
           .delete();
       })
     },
+
+    // User
     createUser(context, request) {
       return new Promise((resolve) => {
         firebase.firestore().collection("users")
@@ -271,6 +298,8 @@ const store = createStore({
           });
       })
     },
+
+    // Venues
     createVenue(context, request) {
       request.createdBy = context.getters.loginToken;
       return new Promise((resolve, reject) => {
@@ -300,6 +329,20 @@ const store = createStore({
             }
           });
       });
+    },
+    getVenues(context) {
+      return new Promise((resolve, reject) => {
+        firebase.firestore().collection("venues")
+          .orderBy("venueName")
+          .where("verified", "==", true)
+          .get()
+          .then(({ docs }) => {
+            context.commit("venues", docs.map(a => a.data()));
+            resolve(docs.map(a => a.data()));
+          }).catch( error => {
+            reject(error)
+          });
+      })
     },
   }
 });

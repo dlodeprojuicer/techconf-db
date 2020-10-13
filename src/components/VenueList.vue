@@ -2,17 +2,15 @@
   <ion-list>
     <div v-for="(item, index) in data" :key="index">
       <ion-item>
-        <!-- <template v-slot:start> -->
         <ion-text
           slot="start"
           :class="item.status === 'canceled' ? `left event-canceled` : 'left'"
         >
           <ion-icon class="left-icons" :icon="micOutline"></ion-icon>
         </ion-text>
-        <!-- </template> -->
         <ion-label>
-          <h2 :style="`color: ${item.color}`">{{ item.eventName }}</h2>
-          <p>{{ item.venue }}, {{ item.address ? item.address.town : "" }}</p>
+          <h2 :style="`color: ${item.color}`">{{ item.venueName }}</h2>
+          <p>{{ item.area }}</p>
         </ion-label>
         <ion-text class="visit-website">
           <a :href="item.website" target="_blank">
@@ -22,16 +20,41 @@
       </ion-item>
       <ion-item class="dates">
         <ion-label>
-          <b v-if="item.start && item.end">
-            {{ `${item.start} - ${item.end}` }}
-          </b>
-          <p v-if="!item.start && !item.end" class="no-date">New dates TBA</p>
-          <!-- <p v-if="item.dates">
-            <span v-for="(date, idx) in item.dates" :key="idx">
-              <b>{{ date.date }}</b> {{`${date.startTime}-${date.endTime}`}}
-              <ion-icon :icon="chevronForward"></ion-icon>
-            </span>
-          </p> -->
+          <p>Email: {{ item.email }}</p>
+          <p>Phone: {{ item.phone }}</p>
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                <h5>Size</h5>
+                <p>
+                  <b>Area:</b> {{ item.squareMeter }} m²
+                </p>
+                <p>
+                  <b>Length:</b> {{ item.length }} m
+                </p>
+                <p>
+                  <b>Width:</b> {{ item.width }} m
+                </p>
+                <p>
+                  <b>Height:</b> {{ item.height }} m
+                </p>
+              </ion-col>
+              <ion-col>
+                <h5>Equipment</h5>
+                <p v-for="(e, idx) in item.equipment" :key="idx">{{ e }}</p>
+              </ion-col>
+              <ion-col>
+                <h5>Other</h5>
+                <p>
+                  <b>Disable Friendly:</b> {{ item.disabilityFriendly ? 'Yes' : 'No' }}
+                </p>
+                <p>
+                  <b>WiFi:</b> {{ item.wifi ? 'Yes' : 'No' }} 
+                </p>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+
         </ion-label>
         <ion-text class="actions" v-if="profilePage">
           <ion-button color="dark" @click="editEvent(item)"> Edit </ion-button>
@@ -52,9 +75,12 @@ import {
   IonText,
   IonIcon,
   IonButton,
-  modalController
+  modalController,
+  IonGrid,
+  IonCol,
+  IonRow
 } from "@ionic/vue";
-import { chevronForward, micOutline, openOutline } from "ionicons/icons";
+import { chevronForward, micOutline, openOutline, tabletLandscapeOutline, tabletPortraitOutline } from "ionicons/icons";
 import EditEventModal from "./EditEventModal";
 
 export default {
@@ -72,13 +98,18 @@ export default {
     IonLabel,
     IonText,
     IonIcon,
-    IonButton
+    IonButton,
+    IonGrid,
+    IonCol,
+    IonRow
   },
   setup() {
     return {
       chevronForward,
       micOutline,
       openOutline,
+      tabletLandscapeOutline,
+      tabletPortraitOutline
     };
   },
   data() {
@@ -149,7 +180,7 @@ ion-item {
 
 ion-item.dates {
   --background: #ffffff;
-  margin: -15px 0 0 auto;
+  margin: -5px 0 0 auto;
   border-radius: 0 0 5px 5px;
   line-height: 20px;
   padding: 0 0 0 44px;

@@ -3,19 +3,19 @@
     <Header @searchFn="searchFn" />
     <ion-content class="ion-padding">
       <h2 class="heading-h2">
-        A  concise list of tech conferences in ZA
+        A  concise list of tech conference venues in ZA
       </h2>
       <div class="home-content">
         <div class="lg-content-center">
-          <SearchFilters />
+          <!-- <SearchFilters /> -->
           <SkeletonText v-if="loading" />
-          <ConfList :data="filteredEvents" v-if="filteredEvents.length > 0" />
-          <NoEvents v-if="!loading && events.length < 1" />
-          <h1 v-if="filteredEvents.length < 1">No search results</h1>
+          <VenueList :data="filteredVenues" v-if="filteredVenues.length > 0" />
+          <NoEvents v-if="!loading && venues.length < 1" />
+          <h1 v-if="filteredVenues.length < 1">No search results</h1>
         </div>
       </div>
     </ion-content>
-    <Fab />
+    <!-- <Fab /> -->
   </ion-page>
 </template>
 
@@ -28,11 +28,11 @@ import {
 import { defineComponent } from 'vue';
 
 import Header from "../components/Header";
-import ConfList from "../components/ConfList";
-import Fab from "../components/Fab";
+import VenueList from "../components/VenueList";
+// import Fab from "../components/Fab";
 import SkeletonText from "../components/SkeletonText";
 import NoEvents from "../components/NoEvents";
-import SearchFilters from "../components/SearchFilters";
+// import SearchFilters from "../components/SearchFilters";
 
 import { mapGetters } from 'vuex';
 
@@ -44,17 +44,17 @@ export default defineComponent({
     IonContent,
     IonPage,
     Header,
-    ConfList,
+    VenueList,
     SkeletonText,
-    SearchFilters,
-    Fab,
+    // SearchFilters,
+    // Fab,
     NoEvents
   },
   computed: {
-    ...mapGetters(['loginToken', 'events', 'filteredEvents', 'monthEventCount', 'searchString']),
+    ...mapGetters(['loginToken', 'venues', 'filteredVenues', 'searchString']),
   },
   mounted() {
-    this.fetchEvents()
+    this.fetchVenues();
   },
   data() {
     return {
@@ -65,9 +65,8 @@ export default defineComponent({
     searchFn(searchString) {
       this.$store.commit("updateSearchString", searchString);
     },
-    fetchEvents() {
-      this.$store.dispatch("getEvents").then(() => {
-        // this.filteredEvents = data;
+    fetchVenues() {
+      this.$store.dispatch("getVenues").then(() => {
         this.loading = false;
       }).catch(error => {
           this.loading = false;
