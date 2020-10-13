@@ -1,6 +1,6 @@
 <template>
   <ion-page>
-    <Header @searchFn="searchFn" />
+    <Header />
     <ion-content class="ion-padding">
       <h2 class="heading-h2">
         A  concise list of tech conference venues in ZA
@@ -64,9 +64,6 @@ export default defineComponent({
     }
   },
   methods: {
-    searchFn(searchString) {
-      this.$store.commit("updateSearchString", searchString);
-    },
     fetchVenues() {
       this.$store.dispatch("getVenues").then(() => {
         this.loading = false;

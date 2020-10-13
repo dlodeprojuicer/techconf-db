@@ -85,13 +85,25 @@ export default {
   },
   methods: {
     searchStringFn() {
-      this.$store.commit("updateSearch", {field: "eventName", value: this.searchString});
+      this.$store.commit("updateSearch", {
+        field: this.venue ? "eventName" : "venueName", 
+        value: this.searchString,
+        stateObject: this.venue ? "updateEventSearchObject" : "updateVenueSearchObject"
+      });
     },
     locationFilterFn({ detail }) {
-      this.$store.commit("updateSearch", {field: "province", value: detail.value === "Province" ? "" : detail.value});
+      this.$store.commit("updateSearch", {
+        field: "province", 
+        value: detail.value === "Province" ? "" : detail.value,
+        stateObject: this.venue ? "updateEventSearchObject" : "updateVenueSearchObject"
+      });
     },
     venueFilterFn({ detail }) {
-      this.$store.commit("updateSearch", {field: "venue", value: detail.value === "Venue" ? "" : detail.value });
+      this.$store.commit("updateSearch", {
+        field: "venue", 
+        value: detail.value === "Venue" ? "" : detail.value,
+        stateObject: this.venue ? "updateEventSearchObject" : "updateVenueSearchObject"
+      });
     }
   },
 };

@@ -21,10 +21,8 @@ const store = createStore({
     filteredEvents: [],
     filteredVenues: [],
     monthEventCount: 0,
-    updateSearchObject: {
-      field: "",
-      value: ""
-    }
+    updateEventSearchObject: {},
+    updateVenueSearchObject: {}
   },
   getters: {
     httpLoader({ httpLoader }) {
@@ -48,11 +46,12 @@ const store = createStore({
     searchString({ searchString }) {
       return searchString;
     },
-    filteredEvents({ events = [], updateSearchObject }) {
-      if (!updateSearchObject.field || updateSearchObject.field === "") {
+    filteredEvents({ events = [], updateEventSearchObject }) {
+      console.log("filteredEvents");
+      if (!updateEventSearchObject.field || updateEventSearchObject.field === "") {
         return events;
       } else {
-        return events.filter(event => event[updateSearchObject.field].toLowerCase().includes(updateSearchObject.value.toLowerCase()));
+        return events.filter(event => event[updateEventSearchObject.field].toLowerCase().includes(updateEventSearchObject.value.toLowerCase()));
       }
     },
     monthEventCount({ events = [] }) {
@@ -65,11 +64,12 @@ const store = createStore({
         }
       });
     },
-    filteredVenues({ venues = [], updateSearchObject }) {
-      if (!updateSearchObject.field || updateSearchObject.field === "") {
+    filteredVenues({ venues = [], updateVenueSearchObject }) {
+      console.log("filteredVenues", updateVenueSearchObject);
+      if (!updateVenueSearchObject.field || updateVenueSearchObject.field === "") {
         return venues;
       } else {
-        return venues.filter(venue => venue[updateSearchObject.field].toLowerCase().includes(updateSearchObject.value.toLowerCase()));
+        return venues.filter(venue => venue[updateVenueSearchObject.field].toLowerCase().includes(updateVenueSearchObject.value.toLowerCase()));
       }
     },
   },
@@ -99,11 +99,8 @@ const store = createStore({
       state.events = data;
       localStorage.setItem("tcdbUserProfile", JSON.stringify(data));
     },
-    updateSearchString(state, data) {
-      state.searchString = data;
-    },
     updateSearch(state, data) {
-      state.updateSearchObject = data;
+      state[data.stateObject] = data;
     }
   },
   actions: {
