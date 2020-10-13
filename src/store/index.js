@@ -47,7 +47,6 @@ const store = createStore({
       return searchString;
     },
     filteredEvents({ events = [], updateEventSearchObject }) {
-      console.log("filteredEvents");
       if (!updateEventSearchObject.field || updateEventSearchObject.field === "") {
         return events;
       } else {
@@ -65,7 +64,6 @@ const store = createStore({
       });
     },
     filteredVenues({ venues = [], updateVenueSearchObject }) {
-      console.log("filteredVenues", updateVenueSearchObject);
       if (!updateVenueSearchObject.field || updateVenueSearchObject.field === "") {
         return venues;
       } else {
