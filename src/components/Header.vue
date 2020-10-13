@@ -2,6 +2,7 @@
   <ion-header>
     <ion-toolbar>
       <ion-buttons slot="secondary">
+        <ion-button @click="gotoHome">Conferences</ion-button>
         <ion-button @click="gotoVenues">Venues</ion-button>
       </ion-buttons>
       <ion-buttons slot="secondary" v-if="loginToken">
@@ -90,6 +91,6 @@ ion-button.sign-out {
 ion-title.logo {
   font-weight: 900;
   font-size: 25px;
-  text-align: center;
+  // text-align: center;
 }
 </style>
