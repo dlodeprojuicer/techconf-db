@@ -28,14 +28,11 @@
                 <h5>Size</h5>
                 <p>
                   <b>Area:</b> {{ item.squareMeter }} m²
-                </p>
-                <p>
+                  <br />
                   <b>Length:</b> {{ item.length }} m
-                </p>
-                <p>
+                  <br />
                   <b>Width:</b> {{ item.width }} m
-                </p>
-                <p>
+                  <br />
                   <b>Height:</b> {{ item.height }} m
                 </p>
               </ion-col>
@@ -46,10 +43,13 @@
               <ion-col>
                 <h5>Other</h5>
                 <p>
-                  <b>Disable Friendly:</b> {{ item.disabilityFriendly ? 'Yes' : 'No' }}
-                </p>
-                <p>
+                  <b>Wheelchair Friendly:</b> {{ item.wheelchairFriendly ? 'Yes' : 'No' }}
+                  <br />
                   <b>WiFi:</b> {{ item.wifi ? 'Yes' : 'No' }} 
+                  <br />
+                  <b>Min. Capacity:</b> {{ item.capacityMin }} 
+                  <br />
+                  <b>Max. Capacity:</b> {{ item.capacityMax }} 
                 </p>
               </ion-col>
             </ion-row>

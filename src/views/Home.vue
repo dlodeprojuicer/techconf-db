@@ -12,6 +12,7 @@
           <ConfList :data="filteredEvents" v-if="filteredEvents.length > 0" />
           <NoEvents v-if="!loading && events.length < 1" />
           <h1 v-if="filteredEvents.length < 1">No search results</h1>
+          Contact me by email simodms@gmail.com if you wish to add a conference
         </div>
       </div>
     </ion-content>

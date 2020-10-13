@@ -71,8 +71,8 @@ export default defineComponent({
       loading: false,
       endpointError: "",
       form: {
-        email: "simodms@gmail.com",
-        password: "1234567890",
+        email: "",
+        password: "",
       },
     };
 	},

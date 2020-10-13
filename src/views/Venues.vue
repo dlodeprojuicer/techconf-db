@@ -12,7 +12,7 @@
           <VenueList :data="filteredVenues" v-if="filteredVenues.length > 0" />
           <NoEvents v-if="!loading && venues.length < 1" />
           <h1 v-if="filteredVenues.length < 1">No search results</h1>
-          Contact me by email simodms@gmail.com if you wish to add your venue
+          Contact me by email simodms@gmail.com if you wish to add a venue
         </div>
       </div>
     </ion-content>
@@ -56,6 +56,7 @@ export default defineComponent({
   },
   mounted() {
     this.fetchVenues();
+    // this.seedEvents();
   },
   data() {
     return {
@@ -75,6 +76,126 @@ export default defineComponent({
         console.log(error);
       });
     },
+    seedEvents() {
+      const list = [
+        {
+          "area": "Cape Town",
+          "phone": "021 528 2000",
+          "venueName": "Lagoon Beach Hotel - Rainbow Room",
+          "width": 7.27,
+          "equipment": [
+            "Projector",
+            "Overhead Projector",
+            "PA System"
+          ],
+          "aircon": true,
+          "createdBy": "JE3Bh37hpOch095fAEAcNbwrQWI3",
+          "email": "confer1@lagoonbeachhotel.co.za",
+          "squareMeter": "",
+          "wheelchairFriendly": true,
+          "website": "https://www.lagoonbeachhotel.co.za/conferencing/",
+          "capacityMax": 16,
+          "length": 5.36,
+          "wifi": true,
+          "height": "",
+          "verified": true,
+          "capacityMin": 5
+        },
+        {
+          "area": "Cape Town",
+          "phone": "021 528 2000",
+          "venueName": "Lagoon Beach Hotel - Atlantic Suite",
+          "width": 36.5,
+          "length": 11.8,
+          "height": "",
+          "equipment": [
+            "Overhead Projector",
+            "PA System"
+          ],
+          "aircon": true,
+          "createdBy": "JE3Bh37hpOch095fAEAcNbwrQWI3",
+          "email": "confer1@lagoonbeachhotel.co.za",
+          "squareMeter": "",
+          "wheelchairFriendly": true,
+          "website": "https://www.lagoonbeachhotel.co.za/conferencing/",
+          "capacityMax": 600,
+          "wifi": true,
+          "verified": true,
+          "capacityMin": 150
+        },
+        {
+          "area": "Cape Town",
+          "phone": "021 528 2000",
+          "venueName": "Lagoon Beach Hotel - Avoca Suite",
+          "width": 10,
+          "length": 7,
+          "height": "",
+          "equipment": [
+            "Projector",
+            "Overhead Projector",
+            "PA System"
+          ],
+          "aircon": true,
+          "createdBy": "JE3Bh37hpOch095fAEAcNbwrQWI3",
+          "email": "confer1@lagoonbeachhotel.co.za",
+          "squareMeter": "",
+          "wheelchairFriendly": true,
+          "website": "https://www.lagoonbeachhotel.co.za/conferencing/",
+          "capacityMax": 60,
+          "wifi": true,
+          "verified": true,
+          "capacityMin": 10
+        },
+        {
+          "area": "Cape Town",
+          "phone": "021 528 2000",
+          "venueName": "Lagoon Beach Hotel - The Boardroom",
+          "width": 10,
+          "length": 7,
+          "height": "",
+          "equipment": [
+            "Flat screen TV"
+          ],
+          "aircon": true,
+          "createdBy": "JE3Bh37hpOch095fAEAcNbwrQWI3",
+          "email": "confer1@lagoonbeachhotel.co.za",
+          "squareMeter": "",
+          "wheelchairFriendly": true,
+          "website": "https://www.lagoonbeachhotel.co.za/conferencing/",
+          "capacityMax": 12,
+          "wifi": true,
+          "verified": true,
+          "capacityMin": 5
+        },
+        {
+          "area": "Cape Town",
+          "phone": "021 528 2000",
+          "venueName": "Lagoon Beach Hotel - The Brasserie",
+          "width": 30,
+          "length": 10,
+          "height": "",
+          "equipment": [
+            "Projector",
+            "Overhead Projector",
+            "PA System"
+          ],
+          "aircon": true,
+          "createdBy": "JE3Bh37hpOch095fAEAcNbwrQWI3",
+          "email": "confer1@lagoonbeachhotel.co.za",
+          "squareMeter": "",
+          "wheelchairFriendly": true,
+          "website": "https://www.lagoonbeachhotel.co.za/conferencing/",
+          "capacityMax": 250,
+          "wifi": true,
+          "verified": true,
+          "capacityMin": 50
+        }
+      ]
+
+      for(let x = 0; list.length > x; x++) {
+        this.$store.dispatch("createVenue", list[x]);
+      }
+    }
   },
 });
 </script>
