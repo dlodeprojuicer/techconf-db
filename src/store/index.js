@@ -309,9 +309,11 @@ const store = createStore({
             .then(() => {
               context.dispatch("getVenues").then(venues => {
                 context.commit("venues", venues);
+                console.log("DOne", venues);
                 resolve(venues)
               })
               .catch(error => {
+                console.log("EE", error);
                 reject(error);
               });
           });
