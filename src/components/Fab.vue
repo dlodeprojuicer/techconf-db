@@ -1,5 +1,5 @@
 <template>
-  <ion-fab vertical="bottom" horizontal="start">
+  <ion-fab vertical="bottom" horizontal="start" v-if="urlCheck">
     <ion-fab-button color="dark" @click="loginModal">
       <ion-icon :icon="add" v-if="loginToken"></ion-icon>
       <ion-icon :icon="logInOutline" v-if="!loginToken"></ion-icon>
@@ -45,6 +45,11 @@ export default {
   },
   computed: {
     ...mapGetters(["loginToken"]),
+  },
+  data() {
+    return {
+      urlCheck: window.location.host.includes("-dev") || window.location.host.includes("localhost") ? true : false
+    }
   },
   mounted() {
     // this.addEventModal();

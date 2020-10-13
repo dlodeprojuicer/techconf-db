@@ -14,7 +14,7 @@
           >
         </ion-select>
       </ion-col>
-      <ion-col>
+      <ion-col v-if="venue">
         <ion-select interface="popover" value="Venue" @ionChange="venueFilterFn">
           <ion-select-option
             :value="item"
@@ -40,13 +40,13 @@ import {
 
 export default {
   name: "searchFilter",
-  // props: {
-  //   data: {
-  //     type: Array,
-  //     required: true,
-  //     default: () => [],
-  //   },
-  // },
+  props: {
+    venue: {
+      type: Boolean,
+      required: true,
+      default: false,
+    },
+  },
   components: {
     IonGrid,
     IonCol,

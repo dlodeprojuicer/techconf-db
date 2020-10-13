@@ -21,7 +21,10 @@ const store = createStore({
     filteredEvents: [],
     filteredVenues: [],
     monthEventCount: 0,
-    updateSearchObject: {}
+    updateSearchObject: {
+      field: "",
+      value: ""
+    }
   },
   getters: {
     httpLoader({ httpLoader }) {
@@ -49,14 +52,7 @@ const store = createStore({
       if (!updateSearchObject.field || updateSearchObject.field === "") {
         return events;
       } else {
-        let evts = [];
-        if (updateSearchObject.field === "province") { // Dirty one this IF statement. Drity!!!
-          evts = events.filter(event => event.address.province.toLowerCase().includes(updateSearchObject.value.toLowerCase()));
-        } else {
-          evts = events.filter(event => event[updateSearchObject.field].toLowerCase().includes(updateSearchObject.value.toLowerCase()));
-        }
-
-        return evts;
+        return events.filter(event => event[updateSearchObject.field].toLowerCase().includes(updateSearchObject.value.toLowerCase()));
       }
     },
     monthEventCount({ events = [] }) {
@@ -73,13 +69,7 @@ const store = createStore({
       if (!updateSearchObject.field || updateSearchObject.field === "") {
         return venues;
       } else {
-        let evts = [];
-        if (updateSearchObject.field === "province") { // Dirty one this IF statement. Drity!!!
-          evts = venues.filter(venue => venue.address.province.toLowerCase().includes(updateSearchObject.value.toLowerCase()));
-        } else {
-          evts = venues.filter(venue => venue[updateSearchObject.field].toLowerCase().includes(updateSearchObject.value.toLowerCase()));
-        }
-        return evts;
+        return venues.filter(venue => venue[updateSearchObject.field].toLowerCase().includes(updateSearchObject.value.toLowerCase()));
       }
     },
   },
@@ -309,11 +299,9 @@ const store = createStore({
             .then(() => {
               context.dispatch("getVenues").then(venues => {
                 context.commit("venues", venues);
-                console.log("DOne", venues);
                 resolve(venues)
               })
               .catch(error => {
-                console.log("EE", error);
                 reject(error);
               });
           });

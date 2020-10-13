@@ -7,12 +7,12 @@
       </h2>
       <div class="home-content">
         <div class="lg-content-center">
-          <!-- <SearchFilters /> -->
+          <SearchFilters />
           <SkeletonText v-if="loading" />
           <VenueList :data="filteredVenues" v-if="filteredVenues.length > 0" />
           <NoEvents v-if="!loading && venues.length < 1" />
           <h1 v-if="filteredVenues.length < 1">No search results</h1>
-          Contact me by email simodms@gmail.com if you wish to add a venue
+          If you wish to add a venue please email simodms@gmail.com
         </div>
       </div>
     </ion-content>
@@ -33,7 +33,7 @@ import VenueList from "../components/VenueList";
 import Fab from "../components/Fab";
 import SkeletonText from "../components/SkeletonText";
 import NoEvents from "../components/NoEvents";
-// import SearchFilters from "../components/SearchFilters";
+import SearchFilters from "../components/SearchFilters";
 
 import { mapGetters } from 'vuex';
 
@@ -47,7 +47,7 @@ export default defineComponent({
     Header,
     VenueList,
     SkeletonText,
-    // SearchFilters,
+    SearchFilters,
     Fab,
     NoEvents
   },
@@ -79,116 +79,114 @@ export default defineComponent({
     seedEvents() {
       const list = [
         {
-          "area": "Cape Town",
-          "phone": "021 528 2000",
-          "venueName": "Lagoon Beach Hotel - Rainbow Room",
-          "width": 7.27,
-          "equipment": [
-            "Projector",
-            "Overhead Projector",
-            "PA System"
-          ],
-          "aircon": true,
-          "createdBy": "JE3Bh37hpOch095fAEAcNbwrQWI3",
-          "email": "confer1@lagoonbeachhotel.co.za",
-          "squareMeter": "",
-          "wheelchairFriendly": true,
-          "website": "https://www.lagoonbeachhotel.co.za/conferencing/",
-          "capacityMax": 16,
-          "length": 5.36,
-          "wifi": true,
-          "height": "",
-          "verified": true,
-          "capacityMin": 5
-        },
-        {
-          "area": "Cape Town",
-          "phone": "021 528 2000",
-          "venueName": "Lagoon Beach Hotel - Atlantic Suite",
-          "width": 36.5,
-          "length": 11.8,
-          "height": "",
+          "area": "Midrand, Johannesburg",
+          "phone": "011 266 3000",
+          "venueName": "Hall 1 - Gallagher Converntion Center",
+          "width": 80.6,
+          "length": 50.2,
+          "height": 5.63,
           "equipment": [
             "Overhead Projector",
             "PA System"
           ],
           "aircon": true,
           "createdBy": "JE3Bh37hpOch095fAEAcNbwrQWI3",
-          "email": "confer1@lagoonbeachhotel.co.za",
-          "squareMeter": "",
+          "email": "gallagher@gallagher.co.za",
+          "squareMeter": 27000,
           "wheelchairFriendly": true,
-          "website": "https://www.lagoonbeachhotel.co.za/conferencing/",
-          "capacityMax": 600,
+          "website": "https://gallagher.co.za/hall2",
+          "capacityMax": 2500,
+          "capacityMin": 20,
           "wifi": true,
-          "verified": true,
-          "capacityMin": 150
+          "verified": true
         },
         {
-          "area": "Cape Town",
-          "phone": "021 528 2000",
-          "venueName": "Lagoon Beach Hotel - Avoca Suite",
-          "width": 10,
-          "length": 7,
-          "height": "",
+          "area": "Midrand, Johannesburg",
+          "phone": "011 266 3000",
+          "venueName": "Hall 2 - Gallagher Converntion Center",
+          "width": 107.9,
+          "length": 61.5,
+          "height": 9.83,
           "equipment": [
-            "Projector",
             "Overhead Projector",
             "PA System"
           ],
           "aircon": true,
           "createdBy": "JE3Bh37hpOch095fAEAcNbwrQWI3",
-          "email": "confer1@lagoonbeachhotel.co.za",
-          "squareMeter": "",
+          "email": "gallagher@gallagher.co.za",
+          "squareMeter": 27000,
           "wheelchairFriendly": true,
-          "website": "https://www.lagoonbeachhotel.co.za/conferencing/",
-          "capacityMax": 60,
+          "website": "https://gallagher.co.za/hall2",
+          "capacityMax": 7000,
+          "capacityMin": 20,
           "wifi": true,
-          "verified": true,
-          "capacityMin": 10
+          "verified": true
         },
         {
-          "area": "Cape Town",
-          "phone": "021 528 2000",
-          "venueName": "Lagoon Beach Hotel - The Boardroom",
-          "width": 10,
-          "length": 7,
-          "height": "",
+          "area": "Midrand, Johannesburg",
+          "phone": "011 266 3000",
+          "venueName": "Hall 3 - Gallagher Converntion Center",
+          "width": 105.5,
+          "length": 53,
+          "height": 10.4,
           "equipment": [
-            "Flat screen TV"
-          ],
-          "aircon": true,
-          "createdBy": "JE3Bh37hpOch095fAEAcNbwrQWI3",
-          "email": "confer1@lagoonbeachhotel.co.za",
-          "squareMeter": "",
-          "wheelchairFriendly": true,
-          "website": "https://www.lagoonbeachhotel.co.za/conferencing/",
-          "capacityMax": 12,
-          "wifi": true,
-          "verified": true,
-          "capacityMin": 5
-        },
-        {
-          "area": "Cape Town",
-          "phone": "021 528 2000",
-          "venueName": "Lagoon Beach Hotel - The Brasserie",
-          "width": 30,
-          "length": 10,
-          "height": "",
-          "equipment": [
-            "Projector",
             "Overhead Projector",
             "PA System"
           ],
           "aircon": true,
           "createdBy": "JE3Bh37hpOch095fAEAcNbwrQWI3",
-          "email": "confer1@lagoonbeachhotel.co.za",
-          "squareMeter": "",
+          "email": "gallagher@gallagher.co.za",
+          "squareMeter": 27000,
           "wheelchairFriendly": true,
-          "website": "https://www.lagoonbeachhotel.co.za/conferencing/",
-          "capacityMax": 250,
+          "website": "https://gallagher.co.za/hall3",
+          "capacityMax": 5500,
+          "capacityMin": 20,
           "wifi": true,
-          "verified": true,
-          "capacityMin": 50
+          "verified": true
+        },
+        {
+          "area": "Midrand, Johannesburg",
+          "phone": "011 266 3000",
+          "venueName": "Hall 4 - Gallagher Converntion Center",
+          "width": 105.5,
+          "length": 53,
+          "height": 10.4,
+          "equipment": [
+            "Overhead Projector",
+            "PA System"
+          ],
+          "aircon": true,
+          "createdBy": "JE3Bh37hpOch095fAEAcNbwrQWI3",
+          "email": "gallagher@gallagher.co.za",
+          "squareMeter": 2520,
+          "wheelchairFriendly": true,
+          "website": "https://gallagher.co.za/hall4-3",
+          "capacityMax": 4000,
+          "capacityMin": 20,
+          "wifi": true,
+          "verified": true
+        },
+        {
+          "area": "Midrand, Johannesburg",
+          "phone": "011 266 3000",
+          "venueName": "Hall 5 - Gallagher Converntion Center",
+          "width": 105.5,
+          "length": 53,
+          "height": 10.4,
+          "equipment": [
+            "Overhead Projector",
+            "PA System"
+          ],
+          "aircon": true,
+          "createdBy": "JE3Bh37hpOch095fAEAcNbwrQWI3",
+          "email": "gallagher@gallagher.co.za",
+          "squareMeter": 27000,
+          "wheelchairFriendly": true,
+          "website": "https://gallagher.co.za/hall5",
+          "capacityMax": 7000,
+          "capacityMin": 20,
+          "wifi": true,
+          "verified": true
         }
       ]
 

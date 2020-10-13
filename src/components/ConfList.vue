@@ -12,7 +12,7 @@
         <!-- </template> -->
         <ion-label>
           <h2 :style="`color: ${item.color}`">{{ item.eventName }}</h2>
-          <p>{{ item.venue }}, {{ item.address ? item.address.town : "" }}</p>
+          <p>{{ item.venue }}, {{ item.town }}</p>
         </ion-label>
         <ion-text class="visit-website">
           <a :href="item.website" target="_blank">

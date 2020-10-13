@@ -1,18 +1,18 @@
 <template>
   <ion-page>
-    <Header @searchFn="searchFn" />
+    <Header />
     <ion-content class="ion-padding">
       <h2 class="heading-h2">
         A  concise list of tech conferences in ZA
       </h2>
       <div class="home-content">
         <div class="lg-content-center">
-          <SearchFilters />
+          <SearchFilters :venue="true" />
           <SkeletonText v-if="loading" />
           <ConfList :data="filteredEvents" v-if="filteredEvents.length > 0" />
           <NoEvents v-if="!loading && events.length < 1" />
           <h1 v-if="filteredEvents.length < 1">No search results</h1>
-          Contact me by email simodms@gmail.com if you wish to add a conference
+          If you wish to add a conference please email simodms@gmail.com
         </div>
       </div>
     </ion-content>
@@ -52,7 +52,7 @@ export default defineComponent({
     NoEvents,
   },
   computed: {
-    ...mapGetters(['loginToken', 'events', 'filteredEvents', 'monthEventCount', 'searchString']),
+    ...mapGetters(['loginToken', 'events', 'filteredEvents', 'monthEventCount']),
   },
   mounted() {
     this.fetchEvents()
@@ -63,9 +63,6 @@ export default defineComponent({
     }
   },
   methods: {
-    searchFn(searchString) {
-      this.$store.commit("updateSearchString", searchString);
-    },
     fetchEvents() {
       this.$store.dispatch("getEvents").then(() => {
         // this.filteredEvents = data;
