@@ -15,7 +15,7 @@
         </div>
       </div>
     </ion-content>
-    <!-- <Fab /> -->
+    <Fab />
   </ion-page>
 </template>
 
@@ -29,7 +29,7 @@ import { defineComponent } from 'vue';
 
 import Header from "../components/Header";
 import ConfList from "../components/ConfList";
-// import Fab from "../components/Fab";
+import Fab from "../components/Fab";
 import SkeletonText from "../components/SkeletonText";
 import NoEvents from "../components/NoEvents";
 import SearchFilters from "../components/SearchFilters";
@@ -47,7 +47,7 @@ export default defineComponent({
     ConfList,
     SkeletonText,
     SearchFilters,
-    // Fab,
+    Fab,
     NoEvents,
   },
   computed: {

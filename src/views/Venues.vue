@@ -12,10 +12,11 @@
           <VenueList :data="filteredVenues" v-if="filteredVenues.length > 0" />
           <NoEvents v-if="!loading && venues.length < 1" />
           <h1 v-if="filteredVenues.length < 1">No search results</h1>
+          Contact me by email simodms@gmail.com if you wish to add your venue
         </div>
       </div>
     </ion-content>
-    <!-- <Fab /> -->
+    <Fab />
   </ion-page>
 </template>
 
@@ -29,7 +30,7 @@ import { defineComponent } from 'vue';
 
 import Header from "../components/Header";
 import VenueList from "../components/VenueList";
-// import Fab from "../components/Fab";
+import Fab from "../components/Fab";
 import SkeletonText from "../components/SkeletonText";
 import NoEvents from "../components/NoEvents";
 // import SearchFilters from "../components/SearchFilters";
@@ -47,7 +48,7 @@ export default defineComponent({
     VenueList,
     SkeletonText,
     // SearchFilters,
-    // Fab,
+    Fab,
     NoEvents
   },
   computed: {
