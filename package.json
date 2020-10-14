@@ -13,8 +13,9 @@
   },
   "dependencies": {
     "@capacitor/core": "^2.4.1",
-    "@ionic/vue": "5.4.0-dev.202010121817.181d322",
-    "@ionic/vue-router": "5.4.0-dev.202010121817.181d322",
+    "@capacitor/ios": "^2.4.1",
+    "@ionic/vue": "5.4.0-rc.2",
+    "@ionic/vue-router": "5.4.0-rc.2",
     "@johmun/vue-tags-input": "^2.1.0",
     "chart.js": "^2.9.3",
     "core-js": "^3.6.5",
