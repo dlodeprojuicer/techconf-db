@@ -21,15 +21,7 @@ const routes = [
       {
         path: '',
         component: () => import('@/views/Home.vue')
-      },
-      // {
-      //   path: 'profile',
-      //   component: () => import('@/views/Profile.vue')
-      // },
-      // {
-      //   path: 'dashboard',
-      //   component: () => import('@/views/Dashboard.vue')
-      // }
+      }
     ]
   },
   {
@@ -69,6 +61,16 @@ const routes = [
       {
         path: '',
         component: () => import('@/views/CreateEvent.vue')
+      }
+    ]
+  },
+  {
+    path: '/speakers',
+    component: Tabs,
+    children: [
+      {
+        path: '',
+        component: () => import('@/views/Speakers.vue')
       }
     ]
   },

@@ -1,5 +1,5 @@
 import { createStore } from 'vuex';
-import * as auth from "./modules/auth";
+import auth from "./modules/auth";
 // import * as events from "./modules/events";
 // import * as userProfile from "./modules/userProfile";
 import firebase from "./../firebase";
@@ -12,7 +12,6 @@ const store = createStore({
     // userProfile,
   },
   state: {
-    loginToken: null,
     httpLoader: false,
     events: [],
     venues: [],
@@ -27,9 +26,6 @@ const store = createStore({
   getters: {
     httpLoader({ httpLoader }) {
       return httpLoader;
-    },
-    loginToken({ loginToken }) {
-      return loginToken || localStorage.getItem("tcdbLoginToken");
     },
     events({ events = [] }) {
       return events || JSON.parse(localStorage.getItem("tcdbEvents"));
@@ -72,15 +68,6 @@ const store = createStore({
     },
   },
   mutations: {
-    loginToken(state, token) {
-      if(token) {
-        state.loginToken = token;
-        localStorage.setItem("tcdbLoginToken", token);
-      } else {
-        state.loginToken = null;
-        localStorage.clear();
-      }
-    },
     events(state, data) {
       state.events = data;
       localStorage.setItem("tcdbEvents", JSON.stringify(data));
@@ -102,46 +89,6 @@ const store = createStore({
     }
   },
   actions: {
-    // Auth
-    login(context, request) {
-      return new Promise((resolve, reject) => {
-        firebase.auth().signInWithEmailAndPassword(request.email, request.password)
-          .then(({ user }) => {
-            context.dispatch("getUserProfile", user.uid).then(() => {
-              context.commit("loginToken", user.uid);
-              resolve(user.uid);
-            });
-          }).catch(function(error) {
-          reject(error)
-        });
-      })
-    },
-    signUp(context, request) {
-      return new Promise((resolve, reject) => {
-        firebase.auth().createUserWithEmailAndPassword(request.email, request.password)
-          .then(({ user }) => {
-            context.commit("loginToken", user.uid);
-            request.uid = user.uid;
-            delete request.password;
-            context.dispatch("createUser", request).then(() => {
-              resolve(user.uid);
-            });
-          }).catch(function(error) {
-          reject(error)
-        });
-      })
-    },
-    logout(context) {
-      return new Promise((reject) => {
-        firebase.auth().signOut()
-          .then(() => {
-            context.commit("loginToken", null);
-          }).catch(function(error) {
-          reject(error)
-        });
-      })
-    },
-
     // Events
     getEvents(context) {
       return new Promise((resolve, reject) => {
