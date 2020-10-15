@@ -2,18 +2,17 @@
   <ion-header>
     <ion-toolbar>
       <ion-buttons slot="secondary">
-        <ion-button @click="gotoHome">Conferences</ion-button>
-        <ion-button @click="gotoVenues">Venues</ion-button>
-      </ion-buttons>
-      <ion-buttons slot="secondary" v-if="loginToken">
         <!-- <ion-button v-if="userProfile.admin" @click="gotoDashboard">Dashboard</ion-button> -->
         <!-- <ion-searchbar @keyup="searchFn" v-model="searchString" placeholder="Search"></ion-searchbar> -->
-        <ion-button @click="gotoProfile">Profile</ion-button>
-        <ion-button @click="logout">Logout</ion-button>
+        <ion-button @click="gotoHome">Conferences</ion-button>
+        <ion-button @click="gotoVenues">Venues</ion-button>
+        <ion-button @click="gotoProfile" v-if="loginToken">Profile</ion-button>
+        <ion-button @click="logout" v-if="loginToken">Logout</ion-button>
       </ion-buttons>
       <ion-buttons>
       </ion-buttons>
       <ion-title class="logo" @click="gotoHome">{{ name }} </ion-title>
+      <ion-title class="logo2" @click="gotoHome">{{ name2 }} </ion-title>
     </ion-toolbar>
   </ion-header>
 </template>
@@ -40,6 +39,7 @@ export default {
     return {
       ellipsisVertical,
       name: "<TechConf-db />",
+      name2: "TC-db",
     };
   },
   data() {
@@ -93,4 +93,5 @@ ion-title.logo {
   font-size: 25px;
   // text-align: center;
 }
+
 </style>
