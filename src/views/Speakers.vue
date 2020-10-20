@@ -3,7 +3,7 @@
     <Header />
     <ion-content class="ion-padding">
       <h2 class="heading-h2">
-        Tech speakers
+        Tech speakers you can reach out to if you are looking for speakers
       </h2>
       <div class="home-content">
         <div class="lg-content-center">
