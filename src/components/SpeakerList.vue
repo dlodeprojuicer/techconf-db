@@ -1,56 +1,33 @@
 <template>
   <ion-list>
-    <div v-for="(item, index) in data" :key="index">
-      <!-- <ion-item>
-        <ion-text
-          slot="start"
-          :class="item.status === 'canceled' ? `left event-canceled` : 'left'"
-        >
-          <ion-icon class="left-icons" :icon="micOutline"></ion-icon>
-        </ion-text>
-        <ion-label>
-          <h2 :style="`color: ${item.color}`">{{ item.venueName }}</h2>
-          <p>{{ item.area }}</p>
-        </ion-label>
-        <ion-text class="visit-website">
-          <a :href="item.website" target="_blank">
-            Website <ion-icon :icon="openOutline"></ion-icon>
-          </a>
-        </ion-text>
-      </ion-item> -->
-
+    <div>
       <ion-item class="dates">
-        <div class="person-card">
+        <div class="person-card" v-for="(item, index) in data" :key="index">
           <ion-avatar>
-            <img src="https://ca.slack-edge.com/T03AJT6G5-UNRPKKADQ-fe590abd2cca-512">
+            <img
+              src="https://ca.slack-edge.com/T03AJT6G5-UNRPKKADQ-fe590abd2cca-512"
+            />
           </ion-avatar>
-          <ion-label>Simo Mafuxwana</ion-label>
-          <ion-label>Software Engineer</ion-label>
+          <ion-label>{{ item.name }} {{ item.lastname }}</ion-label>
+          <ion-label>{{ item.position }}</ion-label>
           <h5>Highlights</h5>
-          <ion-label>ScaleConf</ion-label>
-          <ion-label>VueConf</ion-label>
-          <ion-label>DevConf</ion-label>
-              <ion-tab-button>
-                <ion-icon :icon="logoTwitter" />
-                <span>Twitter</span>
-              </ion-tab-button>
-                
-              <ion-tab-button>
-                <ion-icon :icon="globeOutline" />
-                <span>Website</span>
-              </ion-tab-button>
+          <ion-label v-for="(itm, idx) in item.highlights" :key="idx">
+            {{ itm.name }} ({{ itm.year }})
+          </ion-label>
+          <br />
+          Contact:<br /> {{ item.contact }}
+          <br />
+          <br />
+          <ion-tab-button>
+            <ion-icon :icon="logoTwitter" />
+            <span>Twitter</span>
+          </ion-tab-button>
+
+          <ion-tab-button>
+            <ion-icon :icon="globeOutline" />
+            <span>Website</span>
+          </ion-tab-button>
         </div>
-
-
-          <ion-grid>
-            <ion-row>
-              <ion-col size="3"> 
-              </ion-col>
-              <ion-col> 
-                
-              </ion-col>
-            </ion-row>
-          </ion-grid>
 
         <ion-text class="actions" v-if="profilePage">
           <ion-button color="dark" @click="editEvent(item)"> Edit </ion-button>
@@ -71,14 +48,19 @@ import {
   IonText,
   IonButton,
   modalController,
-  IonGrid,
-  IonCol,
   IonTabButton,
   IonIcon,
   IonAvatar,
-  IonRow
 } from "@ionic/vue";
-import { chevronForward, logoTwitter, globeOutline, micOutline, openOutline, tabletLandscapeOutline, tabletPortraitOutline } from "ionicons/icons";
+import {
+  chevronForward,
+  logoTwitter,
+  globeOutline,
+  micOutline,
+  openOutline,
+  tabletLandscapeOutline,
+  tabletPortraitOutline,
+} from "ionicons/icons";
 import EditEventModal from "./EditEventModal";
 
 export default {
@@ -99,9 +81,6 @@ export default {
     IonTabButton,
     IonIcon,
     IonButton,
-    IonGrid,
-    IonCol,
-    IonRow
   },
   setup() {
     return {
@@ -111,7 +90,7 @@ export default {
       tabletLandscapeOutline,
       tabletPortraitOutline,
       logoTwitter,
-      globeOutline
+      globeOutline,
     };
   },
   data() {
@@ -135,9 +114,7 @@ export default {
     searchFn() {
       this.$emit("searchFn", this.searchString);
     },
-    locationFilter() {
-      
-    },
+    locationFilter() {},
     async editEvent(event) {
       localStorage.setItem("updateEvent", JSON.stringify(event));
 
@@ -169,8 +146,8 @@ export default {
 
 <style lang="scss" scoped>
 .person-card {
-  background: olive;
-  width: 500px; 
+  // background: olive;
+  width: 500px;
   text-align: center;
   align-items: center;
 }

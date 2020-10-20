@@ -7,12 +7,9 @@
       </h2>
       <div class="home-content">
         <div class="lg-content-center">
-          <SearchFilters :venue="true" />
           <SkeletonText v-if="loading" />
-          <SpeakerList :data="filteredEvents" v-if="filteredEvents.length > 0" />
-          <NoEvents v-if="!loading && events.length < 1" />
-          <h1 v-if="filteredEvents.length < 1">No search results</h1>
-          If you wish to add a conference please email simodms@gmail.com
+          <SpeakerList :data="speakers" />
+          If you wish to be enlisted as a conferenc speaker please email simodms@gmail.com
         </div>
       </div>
     </ion-content>
@@ -32,8 +29,6 @@ import Header from "../components/Header";
 import SpeakerList from "../components/SpeakerList";
 import Fab from "../components/Fab";
 import SkeletonText from "../components/SkeletonText";
-import NoEvents from "../components/NoEvents";
-import SearchFilters from "../components/SearchFilters";
 
 import { mapGetters } from 'vuex';
 
@@ -47,9 +42,7 @@ export default defineComponent({
     Header,
     SpeakerList,
     SkeletonText,
-    SearchFilters,
     Fab,
-    NoEvents,
   },
   computed: {
     ...mapGetters(['loginToken', 'events', 'filteredEvents', 'monthEventCount']),
@@ -59,7 +52,57 @@ export default defineComponent({
   },
   data() {
     return {
-      loading: true
+      loading: true,
+      speakers: [
+        {
+          name: "Simo",
+          lastname: "Mafuxwana",
+          position: "Software Developer",
+          contact: "simodms@gmail.com",
+          highlights: [
+            {
+              name: "ScaleConf",
+              year: "2018"
+            }, 
+            {
+              name: "VueConf",
+              year: "2019"
+            }, 
+            {
+              name: "DevConf",
+              year: "2019"
+            }, 
+          ],
+        },
+        {
+          name: "Simo",
+          lastname: "Mafuxwana",
+          position: "Software Developer",
+          contact: "email@gmail.com",
+          highlights: [
+            {
+              name: ".NET Conf",
+              year: "2019"
+            }, 
+            {
+              name: "DevConf",
+              year: "2019"
+            }, 
+          ]
+        },
+        {
+          name: "Simo",
+          lastname: "Mafuxwana",
+          position: "Software Developer",
+          contact: "078 765 4321",
+          highlights: [
+            {
+              name: "Linux Conf",
+              year: "2019"
+            }
+          ]
+        },
+      ]
     }
   },
   methods: {
@@ -86,6 +129,12 @@ export default defineComponent({
   .activeTip {
     color: green;
   }
+
+.heading-h2 {
+  font-size: 20px;
+  text-align: center;
+  color: #000;
+}
 
 .content-wrapper {
   margin-top: -35px;
