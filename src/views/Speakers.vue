@@ -5,10 +5,12 @@
       <h2 class="heading-h2">
         Tech speakers you can reach out to if you are looking for speakers
       </h2>
+      <br />
       <div class="home-content">
         <div class="lg-content-center">
           <SkeletonText v-if="loading" />
           <SpeakerList :data="speakers" />
+          <br /><br />
           If you wish to be enlisted as a conferenc speaker please email simodms@gmail.com
         </div>
       </div>
@@ -59,6 +61,172 @@ export default defineComponent({
           lastname: "Mafuxwana",
           position: "Software Developer",
           contact: "simodms@gmail.com",
+          social: [
+            {
+              link: "http://example.com",
+              label: "Website"
+            }
+          ],
+          highlights: [
+            {
+              name: "ScaleConf",
+              year: "2018"
+            }, 
+            {
+              name: "VueConf",
+              year: "2019"
+            }, 
+            {
+              name: "DevConf",
+              year: "2019"
+            }, 
+          ],
+        },
+        {
+          name: "Simo",
+          lastname: "Mafuxwana",
+          position: "Software Developer",
+          contact: "simodms@gmail.com",
+          social: [
+            {
+              link: "http://example.com",
+              label: "Website"
+            }
+          ],
+          highlights: [
+            {
+              name: "ScaleConf",
+              year: "2018"
+            }, 
+            {
+              name: "VueConf",
+              year: "2019"
+            }, 
+            {
+              name: "DevConf",
+              year: "2019"
+            }, 
+          ],
+        },
+        {
+          name: "Simo",
+          lastname: "Mafuxwana",
+          position: "Software Developer",
+          contact: "simodms@gmail.com",
+          social: [
+            {
+              link: "http://example.com",
+              label: "Website"
+            }
+          ],
+          highlights: [
+            {
+              name: "ScaleConf",
+              year: "2018"
+            }, 
+            {
+              name: "VueConf",
+              year: "2019"
+            }, 
+            {
+              name: "DevConf",
+              year: "2019"
+            }, 
+          ],
+        },
+        {
+          name: "Simo",
+          lastname: "Mafuxwana",
+          position: "Software Developer",
+          contact: "simodms@gmail.com",
+          social: [
+            {
+              link: "http://example.com",
+              label: "Website"
+            }
+          ],
+          highlights: [
+            {
+              name: "ScaleConf",
+              year: "2018"
+            }, 
+            {
+              name: "VueConf",
+              year: "2019"
+            }, 
+            {
+              name: "DevConf",
+              year: "2019"
+            }, 
+          ],
+        },
+        {
+          name: "Simo",
+          lastname: "Mafuxwana",
+          position: "Software Developer",
+          contact: "simodms@gmail.com",
+          social: [
+            {
+              link: "http://example.com",
+              label: "Website"
+            }
+          ],
+          highlights: [
+            {
+              name: "ScaleConf",
+              year: "2018"
+            }, 
+            {
+              name: "VueConf",
+              year: "2019"
+            }, 
+            {
+              name: "DevConf",
+              year: "2019"
+            }, 
+          ],
+        },
+        {
+          name: "Simo",
+          lastname: "Mafuxwana",
+          position: "Software Developer",
+          contact: "simodms@gmail.com",
+          social: [
+            {
+              link: "http://example.com",
+              label: "Twittwer"
+            },
+            {
+              link: "http://example.com",
+              label: "Website"
+            }
+          ],
+          highlights: [
+            {
+              name: "ScaleConf",
+              year: "2018"
+            }, 
+            {
+              name: "VueConf",
+              year: "2019"
+            }, 
+            {
+              name: "DevConf",
+              year: "2019"
+            }, 
+          ],
+        },
+        {
+          name: "Simo",
+          lastname: "Mafuxwana",
+          position: "Software Developer",
+          contact: "simodms@gmail.com",
+          social: [
+            {
+              link: "http://example.com",
+              label: "Website"
+            }
+          ],
           highlights: [
             {
               name: "ScaleConf",
@@ -79,6 +247,12 @@ export default defineComponent({
           lastname: "Mafuxwana",
           position: "Software Developer",
           contact: "email@gmail.com",
+          social: [
+            {
+              link: "http://example.com",
+              label: "Website"
+            }
+          ],
           highlights: [
             {
               name: ".NET Conf",
@@ -95,6 +269,12 @@ export default defineComponent({
           lastname: "Mafuxwana",
           position: "Software Developer",
           contact: "078 765 4321",
+          social: [
+            {
+              link: "http://example.com",
+              label: "Website"
+            }
+          ],
           highlights: [
             {
               name: "Linux Conf",

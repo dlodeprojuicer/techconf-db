@@ -1,54 +1,39 @@
 <template>
-  <ion-list>
-    <div>
-      <ion-item class="dates">
-        <div class="person-card" v-for="(item, index) in data" :key="index">
-          <ion-avatar>
-            <img
-              src="https://ca.slack-edge.com/T03AJT6G5-UNRPKKADQ-fe590abd2cca-512"
-            />
-          </ion-avatar>
-          <ion-label>{{ item.name }} {{ item.lastname }}</ion-label>
-          <ion-label>{{ item.position }}</ion-label>
-          <h5>Highlights</h5>
-          <ion-label v-for="(itm, idx) in item.highlights" :key="idx">
-            {{ itm.name }} ({{ itm.year }})
-          </ion-label>
-          <br />
-          Contact:<br /> {{ item.contact }}
-          <br />
-          <br />
-          <ion-tab-button>
-            <ion-icon :icon="logoTwitter" />
-            <span>Twitter</span>
-          </ion-tab-button>
-
-          <ion-tab-button>
-            <ion-icon :icon="globeOutline" />
-            <span>Website</span>
-          </ion-tab-button>
-        </div>
-
-        <ion-text class="actions" v-if="profilePage">
-          <ion-button color="dark" @click="editEvent(item)"> Edit </ion-button>
-          <ion-button color="dark" @click="deleteEvent(item.id)">
-            Delete
-          </ion-button>
-        </ion-text>
-      </ion-item>
-    </div>
-  </ion-list>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="4" v-for="(item, index) in data" :key="index">
+        <ion-avatar>
+          <img
+            src="https://ca.slack-edge.com/T03AJT6G5-UNRPKKADQ-fe590abd2cca-512"
+          />
+        </ion-avatar>
+        <ion-label>{{ item.name }} {{ item.lastname }}</ion-label>
+        <br />
+        <ion-label>{{ item.position }}</ion-label>
+        <h5>Highlights</h5>
+        <p class="highlight" v-for="(itm, idx) in item.highlights" :key="idx">
+          {{ itm.name }} ({{ itm.year }})
+        </p>
+        <ion-label><b>Contact:</b><br /> {{ item.contact }}</ion-label>
+        <br />
+          <p v-for="(i, id) in item.social" :key="id">
+            <ion-icon :icon="i.label === 'Website' ? globeOutline : logoTwitter" />
+            {{ i.label }}
+          </p>
+        <!-- <ion-tab-button> -->
+          <!-- <ion-icon :icon="globeOutline" /> -->
+          <!-- <span>Website</span> -->
+        <!-- </ion-tab-button> -->
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </template>
 
 <script>
 import {
-  IonList,
-  IonItem,
   IonLabel,
-  IonText,
-  IonButton,
   modalController,
-  IonTabButton,
+  // IonTabButton,
   IonIcon,
   IonAvatar,
 } from "@ionic/vue";
@@ -73,14 +58,10 @@ export default {
     },
   },
   components: {
-    IonList,
-    IonItem,
     IonLabel,
     IonAvatar,
-    IonText,
-    IonTabButton,
+    // IonTabButton,
     IonIcon,
-    IonButton,
   },
   setup() {
     return {
@@ -145,72 +126,44 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.person-card {
-  // background: olive;
-  width: 500px;
-  text-align: center;
-  align-items: center;
+ion-avatar {
+  margin: 15px auto;
 }
 
-ion-tab-button {
-  display: inline-block;
-}
-h2 {
-  font-weight: 600;
-  color: #000000;
+ion-grid {
+  
 }
 
-ion-item {
-  --background: #ffffff;
-  margin: 5px 0 0 -15px;
-  line-height: 50px;
-  border-radius: 5px;
+ion-col {
+  // margin: 0 0 10px 0;
+  background: #fff;
+  border: 1px solid #efefef;
+  // border-right: 1px solid #efefef;
 }
 
-ion-item.dates {
-  --background: #ffffff;
-  margin: -5px 0 0 auto;
-  border-radius: 0 0 5px 5px;
-  line-height: 20px;
-  padding: 0 0 0 44px;
+ion-label {
+  line-height: 9px;
+  font-size: 15px;
 }
 
-.no-date {
-  font-style: italic;
+h5 {
+  font-size: 16px;
 }
 
-ion-text.left {
-  padding: 15px 10px 0px 10px;
+.highlight {
+  line-height: 10px;
+  font-size: 14px;
   color: #000;
-  border-radius: 5px 0 0 5px;
-  margin: 0 15px 0 -2px;
-  // background: #36AEEA;
-
-  &:nth-of-type(odd) {
-    background: #226391;
-  }
-
-  :nth-of-type(even) {
-    background: #36aeea;
-  }
-
-  ion-icon.left-icons {
-    color: #ffffff;
-    font-size: 25px;
-  }
 }
+// ion-tab-button {
+//   display: inline-block;
+// }
 
-ion-text.visit-website {
-  // font-size: 13px;
-  color: #626262;
 
-  a {
-    text-decoration: none;
-  }
-}
+// .dates {
+//   padding: 0 0 0 44px;
+//   text-align: center;
+//   align-items: center;
+// }
 
-ion-icon.right-icons {
-  color: #36aeea;
-  margin-left: 5px;
-}
 </style>
