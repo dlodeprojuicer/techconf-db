@@ -95,7 +95,6 @@ export default defineComponent({
           name: "Dane",
           lastname: "Rossenrode",
           position: "Entrepreneur",
-          
           image: "https://ca.slack-edge.com/T03A23LJR-U017JRHAAP9-g233eb5ecaad-512",
           social: [
             {
@@ -119,6 +118,7 @@ export default defineComponent({
           lastname: "Mafuxwana",
           position: "Software Developer",
           contact: "078 765 4321",
+          image: "https://ca.slack-edge.com/T03AJT6G5-UNRPKKADQ-fe590abd2cca-512",
           social: [
             {
               link: "http://example.com",
@@ -137,6 +137,7 @@ export default defineComponent({
           lastname: "Mafuxwana",
           position: "Software Developer",
           contact: "078 765 4321",
+          image: "https://ca.slack-edge.com/T03AJT6G5-UNRPKKADQ-fe590abd2cca-512",
           social: [
             {
               link: "http://example.com",

@@ -4,7 +4,7 @@
       <ion-col size="4" v-for="(item, index) in data" :key="index">
         <ion-avatar>
           <img
-            src="https://ca.slack-edge.com/T03AJT6G5-UNRPKKADQ-fe590abd2cca-512"
+            :src="item.image"
           />
         </ion-avatar>
         <ion-label>{{ item.name }} {{ item.lastname }}</ion-label>
