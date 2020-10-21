@@ -17,8 +17,12 @@
         <ion-label><b>Contact:</b><br /> {{ item.contact }}</ion-label>
         <br />
           <p v-for="(i, id) in item.social" :key="id">
-            <ion-icon :icon="i.label === 'Website' ? globeOutline : logoTwitter" />
-            {{ i.label }}
+            <a :href="i.link" target="_blank">
+              <ion-icon :icon="globeOutline" v-if="i.label === 'Website' || i.label === 'Blog'" />
+              <ion-icon :icon="logoTwitter" v-if="i.label === 'Twitter'" />
+              <ion-icon :icon="logoLinkedin" v-if="i.label === 'LinkedIn'" />
+              {{ i.label }}
+            </a>
           </p>
         <!-- <ion-tab-button> -->
           <!-- <ion-icon :icon="globeOutline" /> -->
@@ -35,6 +39,9 @@ import {
   modalController,
   // IonTabButton,
   IonIcon,
+  IonGrid,
+  IonCol,
+  IonRow,
   IonAvatar,
 } from "@ionic/vue";
 import {
@@ -43,6 +50,7 @@ import {
   globeOutline,
   micOutline,
   openOutline,
+  logoLinkedin,
   tabletLandscapeOutline,
   tabletPortraitOutline,
 } from "ionicons/icons";
@@ -61,12 +69,16 @@ export default {
     IonLabel,
     IonAvatar,
     // IonTabButton,
+    IonGrid,
+    IonCol,
+    IonRow,
     IonIcon,
   },
   setup() {
     return {
       chevronForward,
       micOutline,
+      logoLinkedin,
       openOutline,
       tabletLandscapeOutline,
       tabletPortraitOutline,
@@ -130,10 +142,6 @@ ion-avatar {
   margin: 15px auto;
 }
 
-ion-grid {
-  
-}
-
 ion-col {
   // margin: 0 0 10px 0;
   background: #fff;
@@ -154,6 +162,10 @@ h5 {
   line-height: 10px;
   font-size: 14px;
   color: #000;
+}
+
+a {
+  text-decoration: none;
 }
 // ion-tab-button {
 //   display: inline-block;

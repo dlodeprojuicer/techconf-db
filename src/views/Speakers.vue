@@ -57,170 +57,68 @@ export default defineComponent({
       loading: true,
       speakers: [
         {
-          name: "Simo",
-          lastname: "Mafuxwana",
-          position: "Software Developer",
-          contact: "simodms@gmail.com",
+          name: "Lukonde",
+          lastname: "Mwila",
+          position: "Senior Software Engineer",
+          contact: "lukemwila.tech@gmail.com",
+          image: "https://ca.slack-edge.com/T03A23LJR-UD428AL82-013093e4d8c0-512",
           social: [
             {
-              link: "http://example.com",
-              label: "Website"
-            }
-          ],
-          highlights: [
-            {
-              name: "ScaleConf",
-              year: "2018"
-            }, 
-            {
-              name: "VueConf",
-              year: "2019"
-            }, 
-            {
-              name: "DevConf",
-              year: "2019"
-            }, 
-          ],
-        },
-        {
-          name: "Simo",
-          lastname: "Mafuxwana",
-          position: "Software Developer",
-          contact: "simodms@gmail.com",
-          social: [
-            {
-              link: "http://example.com",
-              label: "Website"
-            }
-          ],
-          highlights: [
-            {
-              name: "ScaleConf",
-              year: "2018"
-            }, 
-            {
-              name: "VueConf",
-              year: "2019"
-            }, 
-            {
-              name: "DevConf",
-              year: "2019"
-            }, 
-          ],
-        },
-        {
-          name: "Simo",
-          lastname: "Mafuxwana",
-          position: "Software Developer",
-          contact: "simodms@gmail.com",
-          social: [
-            {
-              link: "http://example.com",
-              label: "Website"
-            }
-          ],
-          highlights: [
-            {
-              name: "ScaleConf",
-              year: "2018"
-            }, 
-            {
-              name: "VueConf",
-              year: "2019"
-            }, 
-            {
-              name: "DevConf",
-              year: "2019"
-            }, 
-          ],
-        },
-        {
-          name: "Simo",
-          lastname: "Mafuxwana",
-          position: "Software Developer",
-          contact: "simodms@gmail.com",
-          social: [
-            {
-              link: "http://example.com",
-              label: "Website"
-            }
-          ],
-          highlights: [
-            {
-              name: "ScaleConf",
-              year: "2018"
-            }, 
-            {
-              name: "VueConf",
-              year: "2019"
-            }, 
-            {
-              name: "DevConf",
-              year: "2019"
-            }, 
-          ],
-        },
-        {
-          name: "Simo",
-          lastname: "Mafuxwana",
-          position: "Software Developer",
-          contact: "simodms@gmail.com",
-          social: [
-            {
-              link: "http://example.com",
-              label: "Website"
-            }
-          ],
-          highlights: [
-            {
-              name: "ScaleConf",
-              year: "2018"
-            }, 
-            {
-              name: "VueConf",
-              year: "2019"
-            }, 
-            {
-              name: "DevConf",
-              year: "2019"
-            }, 
-          ],
-        },
-        {
-          name: "Simo",
-          lastname: "Mafuxwana",
-          position: "Software Developer",
-          contact: "simodms@gmail.com",
-          social: [
-            {
-              link: "http://example.com",
-              label: "Twittwer"
+              link: "https://medium.com/@outlier.developer",
+              label: "Blog"
             },
             {
-              link: "http://example.com",
+              link: "https://twitter.com/LuKE9ine",
+              label: "Twitter"
+            },
+            {
+              link: "https://za.linkedin.com/in/lukonde-mwila-25103345https://twitter.com/LuKE9ine",
+              label: "LinkedIn"
+            }
+          ],
+          highlights: [
+            {
+              name: "DockerCon",
+              year: "2020"
+            }, 
+            {
+              name: "React Europe",
+              year: "2020"
+            }, 
+            {
+              name: "GDG DevFest",
+              year: "2019"
+            }, 
+          ],
+        },
+        {
+          name: "Dane",
+          lastname: "Rossenrode",
+          position: "Entrepreneur",
+          
+          image: "https://ca.slack-edge.com/T03A23LJR-U017JRHAAP9-g233eb5ecaad-512",
+          social: [
+            {
+              link: "http://rossenrode.com",
               label: "Website"
             }
           ],
           highlights: [
             {
-              name: "ScaleConf",
-              year: "2018"
+              name: "Drupal Camp",
+              year: "2016"
             }, 
             {
-              name: "VueConf",
+              name: "CMS Africa Cape Town",
               year: "2019"
-            }, 
-            {
-              name: "DevConf",
-              year: "2019"
-            }, 
+            }
           ],
         },
         {
           name: "Simo",
           lastname: "Mafuxwana",
           position: "Software Developer",
-          contact: "simodms@gmail.com",
+          contact: "078 765 4321",
           social: [
             {
               link: "http://example.com",
@@ -229,39 +127,9 @@ export default defineComponent({
           ],
           highlights: [
             {
-              name: "ScaleConf",
-              year: "2018"
-            }, 
-            {
-              name: "VueConf",
+              name: "Linux Conf",
               year: "2019"
-            }, 
-            {
-              name: "DevConf",
-              year: "2019"
-            }, 
-          ],
-        },
-        {
-          name: "Simo",
-          lastname: "Mafuxwana",
-          position: "Software Developer",
-          contact: "email@gmail.com",
-          social: [
-            {
-              link: "http://example.com",
-              label: "Website"
             }
-          ],
-          highlights: [
-            {
-              name: ".NET Conf",
-              year: "2019"
-            }, 
-            {
-              name: "DevConf",
-              year: "2019"
-            }, 
           ]
         },
         {
