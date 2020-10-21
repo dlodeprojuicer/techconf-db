@@ -12,6 +12,7 @@
           <VenueList :data="filteredVenues" v-if="filteredVenues.length > 0" />
           <NoEvents v-if="!loading && venues.length < 1" />
           <h1 v-if="filteredVenues.length < 1">No search results</h1>
+          <br /><br />
           If you wish to add a venue please email simodms@gmail.com
         </div>
       </div>

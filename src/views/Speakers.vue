@@ -3,7 +3,7 @@
     <Header />
     <ion-content class="ion-padding">
       <h2 class="heading-h2">
-        Tech speakers you can reach out to if you are looking for speakers
+        Speakers you can reach out to if you are planning a conference
       </h2>
       <br />
       <div class="home-content">
@@ -11,7 +11,7 @@
           <SkeletonText v-if="loading" />
           <SpeakerList :data="speakers" />
           <br /><br />
-          If you wish to be enlisted as a conferenc speaker please email simodms@gmail.com
+          If you wish to be enlisted as a conference speaker please email simodms@gmail.com
         </div>
       </div>
     </ion-content>
