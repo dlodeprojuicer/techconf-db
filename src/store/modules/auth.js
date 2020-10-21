@@ -6,7 +6,7 @@ const state = {
 
 const getters = {
   loginToken({ loginToken }) {
-    return loginToken || localStorage.getItem("techconfdb");
+    return loginToken || localStorage.getItem("tcdbLoginToken");
   },
   authError(state) {
     return state.authError;

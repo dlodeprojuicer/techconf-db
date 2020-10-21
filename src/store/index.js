@@ -15,6 +15,7 @@ const store = createStore({
     httpLoader: false,
     events: [],
     venues: [],
+    speakers: [],
     userProfile: {},
     searchString: null,
     filteredEvents: [],
@@ -32,6 +33,9 @@ const store = createStore({
     },
     venues({ venues = [] }) {
       return venues || JSON.parse(localStorage.getItem("tcdbVenues"));
+    },
+    speakers({ speakers = [] }) {
+      return speakers || JSON.parse(localStorage.getItem("tcdbSpeakers"));
     },
     userEvents({ userEvents }) {
       return userEvents || JSON.parse(localStorage.getItem("tcdbUserEvents"));
@@ -75,6 +79,10 @@ const store = createStore({
     venues(state, data) {
       state.venues = data;
       localStorage.setItem("tcdbVenues", JSON.stringify(data));
+    },
+    speakers(state, data) {
+      state.speakers = data;
+      localStorage.setItem("tcdbSpeakers", JSON.stringify(data));
     },
     userEvents(state, data) {
       state.events = data;
@@ -270,6 +278,53 @@ const store = createStore({
           .get()
           .then(({ docs }) => {
             context.commit("venues", docs.map(a => a.data()));
+            resolve(docs.map(a => a.data()));
+          }).catch( error => {
+            reject(error)
+          });
+      })
+    },
+
+    // Speakers
+    createSpeaker(context, request) {
+      request.createdBy = context.getters.loginToken;
+      console.log(context.getters.loginToken)
+      return new Promise((resolve, reject) => {
+        const createVenueFn = r => {
+          firebase.firestore().collection("speakers")
+            .add(r)
+            .then(() => {
+              context.dispatch("getSpeakers").then(speakers => {
+                context.commit("speakers", speakers);
+                resolve(speakers)
+              })
+              .catch(error => {
+                reject(error);
+              });
+          });
+        }
+  
+        firebase.firestore().collection("users")
+          .doc(context.getters.loginToken)
+          .get()
+          .then(user => {
+            if (user.data().verified) {
+              request.verified = true;
+              createVenueFn(request);
+            } else {
+              createVenueFn(request)
+            }
+          });
+      });
+    },
+    getSpeakers(context) {
+      return new Promise((resolve, reject) => {
+        firebase.firestore().collection("speakers")
+          .orderBy("name")
+          .where("verified", "==", true)
+          .get()
+          .then(({ docs }) => {
+            context.commit("speakers", docs.map(a => a.data()));
             resolve(docs.map(a => a.data()));
           }).catch( error => {
             reject(error)

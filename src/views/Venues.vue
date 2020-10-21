@@ -52,7 +52,7 @@ export default defineComponent({
     NoEvents
   },
   computed: {
-    ...mapGetters(['loginToken', 'venues', 'filteredVenues', 'searchString']),
+    ...mapGetters(['venues', 'filteredVenues', 'searchString']),
   },
   mounted() {
     this.fetchVenues();
@@ -76,9 +76,9 @@ export default defineComponent({
     seedEvents() {
       const list = [
         {
-          "area": "Midrand, Johannesburg",
-          "phone": "011 266 3000",
-          "venueName": "Hall 1 - Gallagher Converntion Center",
+          "area": "Cape Town",
+          "phone": "021 412 9999",
+          "venueName": "The Wistin",
           "width": 80.6,
           "length": 50.2,
           "height": 5.63,

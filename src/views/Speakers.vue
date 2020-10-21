@@ -47,15 +47,29 @@ export default defineComponent({
     Fab,
   },
   computed: {
-    ...mapGetters(['loginToken', 'events', 'filteredEvents', 'monthEventCount']),
+    ...mapGetters(['speakers']),
   },
   mounted() {
-    this.fetchEvents()
+    this.fetchSpeakers();
+    // this.seedSpeakers();
   },
   data() {
     return {
       loading: true,
-      speakers: [
+    }
+  },
+  methods: {
+    fetchSpeakers() {
+      this.$store.dispatch("getSpeakers").then(() => {
+        this.loading = false;
+      }).catch(error => {
+          this.loading = false;
+        // eslint-disable-next-line
+        console.log(error);
+      });
+    },
+    seedSpeakers() {
+      const list = [
         {
           name: "Lukonde",
           lastname: "Mwila",
@@ -112,64 +126,16 @@ export default defineComponent({
               year: "2019"
             }
           ],
-        },
-        {
-          name: "Simo",
-          lastname: "Mafuxwana",
-          position: "Software Developer",
-          contact: "078 765 4321",
-          image: "https://ca.slack-edge.com/T03AJT6G5-UNRPKKADQ-fe590abd2cca-512",
-          social: [
-            {
-              link: "http://example.com",
-              label: "Website"
-            }
-          ],
-          highlights: [
-            {
-              name: "Linux Conf",
-              year: "2019"
-            }
-          ]
-        },
-        {
-          name: "Simo",
-          lastname: "Mafuxwana",
-          position: "Software Developer",
-          contact: "078 765 4321",
-          image: "https://ca.slack-edge.com/T03AJT6G5-UNRPKKADQ-fe590abd2cca-512",
-          social: [
-            {
-              link: "http://example.com",
-              label: "Website"
-            }
-          ],
-          highlights: [
-            {
-              name: "Linux Conf",
-              year: "2019"
-            }
-          ]
-        },
-      ]
+        }
+      ];
+
+      for(let x = 0; list.length > x; x++) {
+        this.$store.dispatch("createSpeaker", list[x]);
+      }
     }
-  },
-  methods: {
-    fetchEvents() {
-      this.$store.dispatch("getEvents").then(() => {
-        // this.filteredEvents = data;
-        this.loading = false;
-      }).catch(error => {
-          this.loading = false;
-        // eslint-disable-next-line
-        console.log(error);
-      });
-    },
   },
 });
 </script>
-
-
 
 <style lang="scss" scoped>
 // ion-content {
