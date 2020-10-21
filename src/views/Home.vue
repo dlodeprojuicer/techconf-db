@@ -53,7 +53,7 @@ export default defineComponent({
     NoEvents,
   },
   computed: {
-    ...mapGetters(['loginToken', 'events', 'filteredEvents', 'monthEventCount']),
+    ...mapGetters(['events', 'filteredEvents', 'monthEventCount']),
   },
   mounted() {
     this.fetchEvents()

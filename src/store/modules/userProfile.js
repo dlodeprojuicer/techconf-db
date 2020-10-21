@@ -1,39 +1,66 @@
-// import axios from "axios";
+import firebase from "../../firebase";
 
-// const state = {
-//   profile: null,
-// }
+const state = {
+	userProfile: {},
+}
 
-// const getters = {
-//   profile({ profile }) {
-//     return profile || JSON.parse(localStorage.getItem("RedDotMobile_profile")) || {};
-//   }
-// }
+const getters = {
+	userProfile({ userProfile }) {
+		return userProfile || JSON.parse(localStorage.getItem("tcdbUserProfile"));
+	},
+}
 
-// const mutations = {
-//   profile(state, data) {
-//     state.profile = data;
-//     localStorage.setItem("RedDotMobile_profile", JSON.stringify(data));
-//   },
-// }
+const mutations = {
+	userProfile(state, data) {
+		state.events = data;
+		localStorage.setItem("tcdbUserProfile", JSON.stringify(data));
+	},
+}
 
-// const actions = {
-//   profile(context) {
-//     return new Promise((resolve, reject) => {
-//       axios
-//         .post(`${context.getters.apiUrl}/profile_read`, {
-//           token: context.getters.loginToken,
-//           app_name: context.getters.app_name,
-//         })
-//         .then(({ data: { data } }) => {
-//           context.commit("profile", data);
-//           resolve();
-//         })
-//         .catch(error => {
-//           reject(error.response);
-//         });
-//     });
-//   },
-// }
+const actions = {
+	createUser(request) {
+		return new Promise((resolve) => {
+			firebase.firestore().collection("users")
+				.doc(request.uid)
+				.set({...request})
+				.then(() => {
+					resolve();
+				});
+		})
+	},
+	getUserProfile(context, request) {
+		return new Promise((resolve, reject) => {
+			firebase.firestore().collection("users")
+				.doc(request)
+				.get()
+				.then(doc => {
+					context.commit("userProfile", doc.data());
+					resolve(doc.data());
+				}).catch(error => {
+					reject(error);
+				});
+		})
+	},
+	getUsers() {
+		return new Promise((resolve) => {
+			firebase.firestore().collection("users")
+				.get()
+				.then(({ docs }) => {
+					resolve(docs.map(a => a.data()));
+				});
+		})
+	},
+	updateUser(context, request) {
+		request.updatedBy = context.getters.loginToken;
+		return new Promise((resolve) => {
+			firebase.firestore().collection("users")
+				.doc(request.uid)
+				.update(request)
+				.then(() => {
+					resolve();
+				});
+		})
+	}
+}
 
-// export { state, getters, mutations, actions }
+export { state, getters, mutations, actions }
