@@ -71,60 +71,38 @@ export default defineComponent({
     seedSpeakers() {
       const list = [
         {
-          name: "Lukonde",
-          lastname: "Mwila",
-          position: "Senior Software Engineer",
-          contact: "lukemwila.tech@gmail.com",
-          image: "https://ca.slack-edge.com/T03A23LJR-UD428AL82-013093e4d8c0-512",
+          name: "Tanaka",
+          lastname: "Mutakwa",
+          position: "VP of Engineering at Names & Faces",
+          contact: "trmutakwa@gmail.com",
+          image: "https://ca.slack-edge.com/T03A23LJR-U9MF12GAD-cedc1d67315b-512",
           social: [
             {
-              link: "https://medium.com/@outlier.developer",
-              label: "Blog"
+              link: "http://mutakwa.com",
+              label: "Website"
             },
             {
-              link: "https://twitter.com/LuKE9ine",
+              link: "https://twitter.com/GeneralMutakwa",
               label: "Twitter"
             },
             {
-              link: "https://za.linkedin.com/in/lukonde-mwila-25103345https://twitter.com/LuKE9ine",
+              link: "https://www.linkedin.com/in/trmutakwa/",
               label: "LinkedIn"
             }
           ],
           highlights: [
             {
-              name: "DockerCon",
+              name: "Tech4Africa",
+              year: "2014"
+            }, 
+            {
+              name: "RubyFuza",
+              year: "2014"
+            }, 
+            {
+              name: "ScaleConf",
               year: "2020"
             }, 
-            {
-              name: "React Europe",
-              year: "2020"
-            }, 
-            {
-              name: "GDG DevFest",
-              year: "2019"
-            }, 
-          ],
-        },
-        {
-          name: "Dane",
-          lastname: "Rossenrode",
-          position: "Entrepreneur",
-          image: "https://ca.slack-edge.com/T03A23LJR-U017JRHAAP9-g233eb5ecaad-512",
-          social: [
-            {
-              link: "http://rossenrode.com",
-              label: "Website"
-            }
-          ],
-          highlights: [
-            {
-              name: "Drupal Camp",
-              year: "2016"
-            }, 
-            {
-              name: "CMS Africa Cape Town",
-              year: "2019"
-            }
           ],
         }
       ];
