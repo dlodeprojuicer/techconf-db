@@ -1,7 +1,7 @@
 <template>
   <ion-grid>
     <ion-row>
-      <ion-col size="4" v-for="(item, index) in data" :key="index">
+      <ion-col v-for="(item, index) in data" :key="index">
         <ion-avatar>
           <img
             :src="item.image"
