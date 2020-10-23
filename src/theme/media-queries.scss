@@ -5,14 +5,21 @@
 */
 
 @media (min-width: 1281px) {  
+  .lg-content-center {
+    background: green;
+  }
+    .mobile-nav {
+      display: none;
+    }
+    
     .home-content {
       display: flex;
     }
 
     .lg-content-center {
-      width: 60%;
+      width: 70%;
       text-align: center;
-      margin: 0 0 0 20%;
+      margin: auto;
     }
 
     .home-content-right {
@@ -57,14 +64,21 @@
   */
   
   @media (min-width: 1025px) and (max-width: 1280px) {
+    .lg-content-center {
+      background: green;
+    }
+    .mobile-nav {
+      display: none;
+    }
+
     .current-month {
       left: 89% !important;
     }
 
     .lg-content-center {
-      width: 60%;
+      width: 80%;
       text-align: center;
-      margin: 0 0 0 20%;
+      margin: auto;
     }
 
     .not-mobile {
@@ -102,6 +116,41 @@
     ##Device = Tablets, Ipads (portrait)
     ##Screen = B/w 801px to 1024px
   */
+
+  @media (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
+    .desktop-nav {
+      display: none;
+    }
+
+    .mobile-nav {
+      display: inherit;
+    }
+
+    .current-month {
+      display: none;
+    }
+
+    .not-mobile {
+        display: none;
+    }
+    
+    .no-events-img {
+      width: 35%;
+      margin: 8% 30%;
+      text-align: center;
+      img {
+        filter: grayscale(20%);
+        opacity: 0.7;
+      }
+      ion-button {
+        opacity: 0.9;
+      }
+    }
+
+    ion-title.logo2 {
+      display: none;
+    }
+  }
   
   /* 
     ##Device = Tablets, Ipads (landscape)
@@ -109,6 +158,14 @@
   */
   
   @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+    .lg-content-center {
+      background: green;
+    }
+
+    .mobile-nav {
+      display: none;
+    }
+
     .current-month {
       display: none;
     }
@@ -141,6 +198,10 @@
   */
   
   @media (min-width: 481px) and (max-width: 767px) {
+    .mobile-nav {
+      display: none;
+    }
+
     .current-month {
       display: none;
     }
@@ -168,9 +229,8 @@
     
 
     ion-title.logo2 {
-      display: inherit;
+      // display: inherit;
       font-weight: 900;
-      margin-left: 10px;
     }
   }
   
@@ -180,6 +240,14 @@
   */
   
   @media (min-width: 320px) and (max-width: 480px) {
+    .desktop-nav {
+      display: none;
+    }
+
+    .mobile-nav {
+      display: inherit;
+    }
+
     .current-month {
       display: none;
     }
@@ -209,7 +277,6 @@
     }
 
     ion-title.logo2 {
-      display: inherit;
       font-weight: 900;
       margin-left: 10px;
     }

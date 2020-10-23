@@ -138,6 +138,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+ion-grid {
+  text-align: center;
+}
 ion-avatar {
   margin: 15px auto;
 }
