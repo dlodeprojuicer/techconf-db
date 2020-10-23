@@ -14,9 +14,9 @@
         <p class="highlight" v-for="(itm, idx) in item.highlights" :key="idx">
           {{ itm.name }} ({{ itm.year }})
         </p>
-        <ion-label><b>Contact:</b><br /> {{ item.contact }}</ion-label>
-        <br />
-          <p v-for="(i, id) in item.social" :key="id">
+        <ion-label v-if="item.contact"><b>Contact:</b><br /> {{ item.contact }}</ion-label>
+        <br /><br />
+          <p v-for="(i, id) in item.social" :key="id" class="social">
             <a :href="i.link" target="_blank">
               <ion-icon :icon="globeOutline" v-if="i.label === 'Website' || i.label === 'Blog'" />
               <ion-icon :icon="logoTwitter" v-if="i.label === 'Twitter'" />
@@ -166,6 +166,10 @@ h5 {
 
 a {
   text-decoration: none;
+}
+
+.social {
+  margin: 8px;
 }
 // ion-tab-button {
 //   display: inline-block;
