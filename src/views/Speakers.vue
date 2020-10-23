@@ -71,37 +71,29 @@ export default defineComponent({
     seedSpeakers() {
       const list = [
         {
-          name: "Cobus",
-          lastname: "Bernard",
-          position: "AWS DevRel",
-          contact: "me@cobus.io",
-          image: "https://ca.slack-edge.com/T03A23LJR-U045QSJAL-5753ea319b12-512",
+          name: "Niel",
+          lastname: "Zeeman",
+          position: "DevOps Consultant",
+          contact: "nielzeeman@hotmail.com",
+          image: "https://ca.slack-edge.com/T03A23LJR-UAP4W73K6-a1e4ef265d57-512",
           social: [
             {
-              link: "https://aws.amazon.com/developer/community/evangelists/cobus-bernard/",
-              label: "Website"
-            },
-            {
-              link: "https://twitter.com/cobusbernard",
-              label: "Twitter"
-            },
-            {
-              link: "https://linkedin.com/in/cobusbernard",
+              link: "https://www.linkedin.com/in/nielzeeman/",
               label: "LinkedIn"
             }
           ],
           highlights: [
             {
-              name: "AWS Summit Cape Town",
+              name: "Microsoft Ignite",
+              year: "2020"
+            }, 
+            {
+              name: "Microsoft Insiders Dev",
               year: "2019"
             }, 
             {
-              name: "DevConf",
-              year: "2020"
-            }, 
-            {
-              name: "RubyFuza",
-              year: "2020"
+              name: "Global DevOps Bootcamp",
+              year: "2019"
             }, 
           ],
         }
