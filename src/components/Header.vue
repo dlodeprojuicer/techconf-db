@@ -29,7 +29,7 @@
 	<ion-menu side="start" content-id="menuContent">
 		<ion-content>
 			<ion-list>
-				<ion-item >
+				<ion-item class="logo-item">
 					<ion-label>{{ name }}</ion-label>
 				</ion-item>
 				<ion-item @click="gotoHome">
@@ -87,20 +87,25 @@ export default {
     async openMenu() {
       await menuController.open("start");
     },
-    gotoHome() {
+    async gotoHome() {
       this.$router.push("/");
+      await menuController.close("start");
     },
-    gotoDashboard() {
+    async gotoDashboard() {
       this.$router.push("/dashboard");
+      await menuController.close("start");
     },
-    gotoSpeakers() {
+    async gotoSpeakers() {
       this.$router.push("/speakers");
+      await menuController.close("start");
     },
-    gotoVenues() {
+    async gotoVenues() {
       this.$router.push("/venues");
+      await menuController.close("start");
     },
-    gotoProfile() {
+    async gotoProfile() {
       this.$router.push("/profile");
+      await menuController.close("start");
     },
     logout() {
       this.$store.dispatch("logout");
@@ -136,6 +141,17 @@ ion-title.logo {
 
 ion-menu-button {
   color: #ffffff;
+}
+
+ion-list {
+  padding-top: 0;
+}
+
+ion-item.logo-item {
+  --background: #144d75;
+  color: #fff;
+  font-weight: bold;
+  line-height: 30px;
 }
 
 </style>

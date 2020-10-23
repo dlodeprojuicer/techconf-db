@@ -1,6 +1,5 @@
 <template>
   <ion-page>
-    <Header />
     <ion-content class="ion-padding">
       <h2 class="heading-h2">
         A  concise list of tech conference venues in ZA
@@ -29,7 +28,6 @@ import {
 
 import { defineComponent } from 'vue';
 
-import Header from "../components/Header";
 import VenueList from "../components/VenueList";
 import Fab from "../components/Fab";
 import SkeletonText from "../components/SkeletonText";
@@ -45,7 +43,6 @@ export default defineComponent({
   components: {
     IonContent,
     IonPage,
-    Header,
     VenueList,
     SkeletonText,
     SearchFilters,
