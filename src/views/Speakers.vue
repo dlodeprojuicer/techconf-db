@@ -71,36 +71,36 @@ export default defineComponent({
     seedSpeakers() {
       const list = [
         {
-          name: "Tanaka",
-          lastname: "Mutakwa",
-          position: "VP of Engineering at Names & Faces",
-          contact: "trmutakwa@gmail.com",
-          image: "https://ca.slack-edge.com/T03A23LJR-U9MF12GAD-cedc1d67315b-512",
+          name: "Cobus",
+          lastname: "Bernard",
+          position: "AWS DevRel",
+          contact: "me@cobus.io",
+          image: "https://ca.slack-edge.com/T03A23LJR-U045QSJAL-5753ea319b12-512",
           social: [
             {
-              link: "http://mutakwa.com",
+              link: "https://aws.amazon.com/developer/community/evangelists/cobus-bernard/",
               label: "Website"
             },
             {
-              link: "https://twitter.com/GeneralMutakwa",
+              link: "https://twitter.com/cobusbernard",
               label: "Twitter"
             },
             {
-              link: "https://www.linkedin.com/in/trmutakwa/",
+              link: "https://linkedin.com/in/cobusbernard",
               label: "LinkedIn"
             }
           ],
           highlights: [
             {
-              name: "Tech4Africa",
-              year: "2014"
+              name: "AWS Summit Cape Town",
+              year: "2019"
+            }, 
+            {
+              name: "DevConf",
+              year: "2020"
             }, 
             {
               name: "RubyFuza",
-              year: "2014"
-            }, 
-            {
-              name: "ScaleConf",
               year: "2020"
             }, 
           ],
