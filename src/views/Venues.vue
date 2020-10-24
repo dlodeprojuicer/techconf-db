@@ -4,15 +4,13 @@
       <h2 class="heading-h2">
         A  concise list of tech conference venues in ZA
       </h2>
-      <div class="home-content">
-        <div class="lg-content-center">
-          <SearchFilters />
-          <SkeletonText v-if="loading" />
-          <VenueList :data="filteredVenues" v-if="filteredVenues.length > 0" />
-          <h1 v-if="filteredVenues.length < 1">No search results</h1>
-          <br /><br />
-          If you wish to add a venue please email simodms@gmail.com
-        </div>
+      <div class="lg-content-center">
+        <SearchFilters />
+        <SkeletonText v-if="loading" />
+        <VenueList :data="filteredVenues" v-if="filteredVenues.length > 0" />
+        <h1 v-if="filteredVenues.length < 1">No search results</h1>
+        <br /><br />
+        If you wish to add a venue please email simodms@gmail.com
       </div>
     </ion-content>
     <Fab />

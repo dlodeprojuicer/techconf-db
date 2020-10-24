@@ -24,10 +24,6 @@
               {{ i.label }}
             </a>
           </p>
-        <!-- <ion-tab-button> -->
-          <!-- <ion-icon :icon="globeOutline" /> -->
-          <!-- <span>Website</span> -->
-        <!-- </ion-tab-button> -->
       </ion-col>
     </ion-row>
   </ion-grid>
@@ -141,16 +137,14 @@ export default {
 ion-grid {
   text-align: center;
 }
+
 ion-avatar {
   margin: 15px auto;
 }
 
 ion-col.speaker-column {
-  // margin: 0 0 10px 0;
   background: #fff;
   border: 1px solid #efefef;
-  // width: 280px !important;
-  // border-right: 1px solid #efefef;
 }
 
 ion-label {

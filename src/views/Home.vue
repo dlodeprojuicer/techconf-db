@@ -4,15 +4,13 @@
       <h2 class="heading-h2">
         A  concise list of tech conferences in ZA
       </h2>
-      <div class="home-content">
-        <div class="lg-content-center">
-          <SearchFilters :venue="true" />
-          <SkeletonText v-if="loading" />
-          <ConfList :data="filteredEvents" v-if="filteredEvents.length > 0" />
-          <h1 v-if="filteredEvents.length < 1">No search results</h1>
-          <br /><br />
-          If you wish to add a conference please email simodms@gmail.com
-        </div>
+      <div class="lg-content-center">
+        <SearchFilters :venue="true" />
+        <SkeletonText v-if="loading" />
+        <ConfList :data="filteredEvents" v-if="filteredEvents.length > 0" />
+        <h1 v-if="filteredEvents.length < 1">No search results</h1>
+        <br /><br />
+        If you wish to add a conference please email simodms@gmail.com
       </div>
     </ion-content>
     <Fab />

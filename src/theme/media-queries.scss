@@ -22,19 +22,12 @@
     }
     
     .lg-content-center {
-      width: 80%;
       margin: auto;
+      width: 60%;
     }
 
     ion-col.speaker-column {
-      width: 290px !important;
-    }
-
-
-    .home-content-right {
-      flex: 1;
-      width: 40%;
-      text-align: center;
+      width: 33.33% !important;
     }
 
     .not-mobile {
@@ -82,7 +75,7 @@
     }
 
     .lg-content-center {
-      width: 85%;
+      width: 80%;
       margin: auto;
     }
 
@@ -95,7 +88,7 @@
     }
 
     ion-col.speaker-column {
-      width: 280px !important;
+      width: 33.33% !important;
     }
 
     .not-mobile {
@@ -136,8 +129,9 @@
 
   @media (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
     .lg-content-center {
-      width: 95%;
+      width: 60%;
       margin: auto;
+      background: greenyellow;
     }
 
     .mobile-only {
@@ -149,7 +143,7 @@
     }
 
     ion-col.speaker-column {
-      width: 230px !important;
+      width: 33.33% !important;
     }
 
     .desktop-nav {
@@ -193,12 +187,12 @@
   
   @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
     .lg-content-center {
-      width: 95%;
+      width: 90%;
       margin: auto;
     }
 
     ion-col.speaker-column {
-      width: 275px !important;
+      width: 33.33% !important;
     }
 
     .mobile-only {
@@ -246,12 +240,12 @@
   
   @media (min-width: 481px) and (max-width: 767px) {
     .lg-content-center {
-      width: 95%;
+      width: 90%;
       margin: auto;
     }
 
     ion-col.speaker-column {
-      width: 220px !important;
+      width: 50% !important;
     }
 
     .mobile-only {
@@ -305,11 +299,12 @@
   
   @media (min-width: 320px) and (max-width: 480px) {
     // .lg-content-center {
-    //   background: black;
+      // background: rgb(5, 140, 178);
+      // width: 0%;
     // }
 
     ion-col.speaker-column {
-      width: 350px !important;
+      width: 100% !important;
     }
 
     .desktop-only {
