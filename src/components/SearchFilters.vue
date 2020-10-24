@@ -58,10 +58,10 @@ export default {
   data() {
     return {
       searchString: "",
-      searchProvince: "-- Select Province --",
-      searchVenue: "-- Select Venue --",
+      searchProvince: "- Province -",
+      searchVenue: "- Venue -",
       provinces: [
-        "-- Select Province --",
+        "- Province -",
         "Western Cape",
         "Eastern Cape",
         "Northern Cape",
@@ -73,7 +73,7 @@ export default {
         "Gauteng",
       ],
       venues: [
-        "-- Select Venue --",
+        "- Venue -",
         "Virtual Conference",
         "Kirstenbosch",
         "University of Stellenbosch",
@@ -87,7 +87,7 @@ export default {
   },
   methods: {
     searchStringFn() {
-      this.searchProvince = "-- Select Province --"
+      this.searchProvince = "- Province -"
       this.$store.commit("updateSearch", {
         field: this.venue ? "eventName" : "venueName", 
         value: this.searchString,
@@ -98,7 +98,7 @@ export default {
       this.searchString = "";
       this.$store.commit("updateSearch", {
         field: "province", 
-        value: detail.value === "-- Select Province --" ? "" : detail.value,
+        value: detail.value === "- Province -" ? "" : detail.value,
         stateObject: this.venue ? "updateEventSearchObject" : "updateVenueSearchObject"
       });
     },
@@ -106,7 +106,7 @@ export default {
       this.searchString = "";
       this.$store.commit("updateSearch", {
         field: "venue", 
-        value: detail.value === "-- Select Venue --" ? "" : detail.value,
+        value: detail.value === "- Venue -" ? "" : detail.value,
         stateObject: this.venue ? "updateEventSearchObject" : "updateVenueSearchObject"
       });
     }
