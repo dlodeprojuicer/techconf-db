@@ -1,7 +1,7 @@
 <template>
   <ion-grid>
     <ion-row>
-      <ion-col size="4" v-for="(item, index) in data" :key="index">
+      <ion-col size="auto" class="speaker-column" v-for="(item, index) in data" :key="index">
         <ion-avatar>
           <img
             :src="item.image"
@@ -145,10 +145,11 @@ ion-avatar {
   margin: 15px auto;
 }
 
-ion-col {
+ion-col.speaker-column {
   // margin: 0 0 10px 0;
   background: #fff;
   border: 1px solid #efefef;
+  // width: 280px !important;
   // border-right: 1px solid #efefef;
 }
 

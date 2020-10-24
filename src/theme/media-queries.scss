@@ -5,9 +5,6 @@
 */
 
 @media (min-width: 1281px) {  
-  // .lg-content-center {
-  //   background: green;
-  // }
     .mobile-nav {
       display: none;
     }
@@ -17,10 +14,14 @@
     }
 
     .lg-content-center {
-      width: 70%;
-      text-align: center;
+      width: 80%;
       margin: auto;
     }
+
+    ion-col.speaker-column {
+      width: 290px !important;
+    }
+
 
     .home-content-right {
       flex: 1;
@@ -64,9 +65,6 @@
   */
   
   @media (min-width: 1025px) and (max-width: 1280px) {
-    // .lg-content-center {
-    //   background: green;
-    // }
     .mobile-nav {
       display: none;
     }
@@ -76,9 +74,12 @@
     }
 
     .lg-content-center {
-      width: 80%;
-      text-align: center;
+      width: 85%;
       margin: auto;
+    }
+
+    ion-col.speaker-column {
+      width: 280px !important;
     }
 
     .not-mobile {
@@ -118,6 +119,15 @@
   */
 
   @media (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
+    .lg-content-center {
+      width: 95%;
+      margin: auto;
+    }
+
+    ion-col.speaker-column {
+      width: 230px !important;
+    }
+
     .desktop-nav {
       display: none;
     }
@@ -158,9 +168,14 @@
   */
   
   @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
-    // .lg-content-center {
-    //   background: green;
-    // }
+    .lg-content-center {
+      width: 95%;
+      margin: auto;
+    }
+
+    ion-col.speaker-column {
+      width: 275px !important;
+    }
 
     .mobile-nav {
       display: none;
@@ -198,6 +213,15 @@
   */
   
   @media (min-width: 481px) and (max-width: 767px) {
+    .lg-content-center {
+      width: 95%;
+      margin: auto;
+    }
+
+    ion-col.speaker-column {
+      width: 220px !important;
+    }
+
     .mobile-nav {
       display: none;
     }
@@ -240,6 +264,19 @@
   */
   
   @media (min-width: 320px) and (max-width: 480px) {
+    .lg-content-center {
+      width: 95%;
+      margin: auto;
+    }
+
+    ion-col.speaker-column {
+      width: 350px !important;
+    }
+
+    // .desktop-only {
+    //   display: none;
+    // }
+    
     .desktop-nav {
       display: none;
     }

@@ -5,7 +5,7 @@
         <!-- <template v-slot:start> -->
         <ion-text
           slot="start"
-          :class="item.status === 'canceled' ? `left event-canceled` : 'left'"
+          :class="item.status === 'canceled' ? `left event-canceled` : 'left desktop-only'"
         >
           <ion-icon class="left-icons" :icon="micOutline"></ion-icon>
         </ion-text>
