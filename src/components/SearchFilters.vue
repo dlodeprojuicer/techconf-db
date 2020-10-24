@@ -5,7 +5,7 @@
         <ion-input v-model="searchString" placeholder="Search" @keyup="searchStringFn"></ion-input>
       </ion-col>
       <ion-col>
-        <ion-select interface="popover" value="Province" @ionChange="locationFilterFn">
+        <ion-select interface="popover" :value="searchProvince" @ionChange="locationFilterFn">
           <ion-select-option
             :value="item"
             v-for="(item, index) in provinces"
@@ -15,7 +15,7 @@
         </ion-select>
       </ion-col>
       <ion-col v-if="venue">
-        <ion-select interface="popover" value="Venue" @ionChange="venueFilterFn">
+        <ion-select interface="popover" :value="searchVenue" @ionChange="venueFilterFn">
           <ion-select-option
             :value="item"
             v-for="(item, idx) in venues"
@@ -58,8 +58,10 @@ export default {
   data() {
     return {
       searchString: "",
+      searchProvince: "-- Select Province --",
+      searchVenue: "-- Select Venue --",
       provinces: [
-        "Province",
+        "-- Select Province --",
         "Western Cape",
         "Eastern Cape",
         "Northern Cape",
@@ -71,7 +73,7 @@ export default {
         "Gauteng",
       ],
       venues: [
-        "Venue",
+        "-- Select Venue --",
         "Virtual Conference",
         "Kirstenbosch",
         "University of Stellenbosch",
@@ -85,6 +87,7 @@ export default {
   },
   methods: {
     searchStringFn() {
+      this.searchProvince = "-- Select Province --"
       this.$store.commit("updateSearch", {
         field: this.venue ? "eventName" : "venueName", 
         value: this.searchString,
@@ -92,16 +95,18 @@ export default {
       });
     },
     locationFilterFn({ detail }) {
+      this.searchString = "";
       this.$store.commit("updateSearch", {
         field: "province", 
-        value: detail.value === "Province" ? "" : detail.value,
+        value: detail.value === "-- Select Province --" ? "" : detail.value,
         stateObject: this.venue ? "updateEventSearchObject" : "updateVenueSearchObject"
       });
     },
     venueFilterFn({ detail }) {
+      this.searchString = "";
       this.$store.commit("updateSearch", {
         field: "venue", 
-        value: detail.value === "Venue" ? "" : detail.value,
+        value: detail.value === "-- Select Venue --" ? "" : detail.value,
         stateObject: this.venue ? "updateEventSearchObject" : "updateVenueSearchObject"
       });
     }
