@@ -116,9 +116,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-ion-toolbar {
+ion-toolbar, ion-menu-button, ion-button {
   --background: #144d75;
-  color: #ffffff;
+  --color: #ffffff;
+  font-weight: 700;
 }
 
 ion-button.sign-out {
@@ -137,10 +138,6 @@ ion-title.logo {
   font-weight: 900;
   font-size: 25px;
   // text-align: center;
-}
-
-ion-menu-button {
-  color: #ffffff;
 }
 
 ion-list {

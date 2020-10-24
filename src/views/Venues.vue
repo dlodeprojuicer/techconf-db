@@ -9,7 +9,6 @@
           <SearchFilters />
           <SkeletonText v-if="loading" />
           <VenueList :data="filteredVenues" v-if="filteredVenues.length > 0" />
-          <NoEvents v-if="!loading && venues.length < 1" />
           <h1 v-if="filteredVenues.length < 1">No search results</h1>
           <br /><br />
           If you wish to add a venue please email simodms@gmail.com
@@ -31,7 +30,6 @@ import { defineComponent } from 'vue';
 import VenueList from "../components/VenueList";
 import Fab from "../components/Fab";
 import SkeletonText from "../components/SkeletonText";
-import NoEvents from "../components/NoEvents";
 import SearchFilters from "../components/SearchFilters";
 
 import { mapGetters } from 'vuex';
@@ -47,7 +45,6 @@ export default defineComponent({
     SkeletonText,
     SearchFilters,
     Fab,
-    NoEvents
   },
   computed: {
     ...mapGetters(['venues', 'filteredVenues', 'searchString']),
