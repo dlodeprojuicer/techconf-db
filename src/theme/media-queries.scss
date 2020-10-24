@@ -13,6 +13,14 @@
       display: flex;
     }
 
+    .desktop-only {
+      display: inherit;
+    }
+
+    .mobile-only {
+      display: none;
+    }
+    
     .lg-content-center {
       width: 80%;
       margin: auto;
@@ -76,6 +84,15 @@
     .lg-content-center {
       width: 85%;
       margin: auto;
+      background: yellow;
+    }
+
+    .mobile-only {
+      display: none;
+    }
+
+    .desktop-only {
+      display: inherit;
     }
 
     ion-col.speaker-column {
@@ -122,6 +139,15 @@
     .lg-content-center {
       width: 95%;
       margin: auto;
+      background: green;
+    }
+
+    .mobile-only {
+      display: inherit;
+    }
+
+    .desktop-only {
+      display: none;
     }
 
     ion-col.speaker-column {
@@ -178,6 +204,14 @@
       width: 275px !important;
     }
 
+    .mobile-only {
+      display: none;
+    }
+
+    .desktop-only {
+      display: inherit;
+    }
+
     .mobile-nav {
       display: none;
     }
@@ -217,10 +251,19 @@
     .lg-content-center {
       width: 95%;
       margin: auto;
+      background: orange;
     }
 
     ion-col.speaker-column {
       width: 220px !important;
+    }
+
+    .mobile-only {
+      display: inherit;
+    }
+
+    .desktop-only {
+      display: none;
     }
 
     .mobile-nav {
@@ -268,15 +311,20 @@
     .lg-content-center {
       width: 95%;
       margin: auto;
+      background: black;
     }
 
     ion-col.speaker-column {
       width: 350px !important;
     }
 
-    // .desktop-only {
-    //   display: none;
-    // }
+    .desktop-only {
+      display: none;
+    }
+
+    .mobile-only {
+      display: inherit;
+    }
     
     .desktop-nav {
       display: none;
