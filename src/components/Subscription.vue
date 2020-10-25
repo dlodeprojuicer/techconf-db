@@ -1,114 +1,50 @@
 <template>
-  <Header />
   <ion-page>
-    <ion-content class="ion-padding">
-      <div class="lg-content-center">
-        <ion-progress-bar type="indeterminate" color="dark" v-if="loading"></ion-progress-bar>
-        <ion-title class="form-title">
-          <ion-icon class="left-icons" :icon="personOutline"></ion-icon> 
-          Subscribe
-        </ion-title>
-        <ion-item>
-          <ion-label>Name</ion-label>
-          <ion-input v-model="form.name" type="text"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label>Lastname</ion-label>
-          <ion-input v-model="form.lastname" type="text"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label>Email</ion-label>
-          <ion-input v-model="form.email_address"></ion-input>
-        </ion-item>
-        <p class="error-message">
-          {{ endpointError.message }}
-        </p>
-        <div class="form-buttons">
-          <ion-button size="small" color="success" @click="submit">Subscribe</ion-button>
+    <div id="mc_embed_signup">
+    <form action="https://gmail.us2.list-manage.com/subscribe/post?u=3926ccdb6e7af06a6e9a9a5e2&amp;id=c72f027b89" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+        <div id="mc_embed_signup_scroll">
+      <h2>Subscribe</h2>
+    <div class="indicates-required"><span class="asterisk">*</span> indicates required</div>
+    <div class="mc-field-group">
+      <label for="mce-EMAIL">Email Address  <span class="asterisk">*</span>
+    </label>
+      <input type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL">
+    </div>
+      <div id="mce-responses" class="clear">
+        <div class="response" id="mce-error-response" style="display:none"></div>
+        <div class="response" id="mce-success-response" style="display:none"></div>
+      </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+        <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_3926ccdb6e7af06a6e9a9a5e2_c72f027b89" tabindex="-1" value=""></div>
+        <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
         </div>
-      </div>
-    </ion-content>
+    </form>
+    </div>
   </ion-page>
 </template>
 
 <script>
-import Header from "../components/Header";
 
 import {
-  IonContent,
-  IonTitle,
-  IonItem,
-  IonLabel,
   IonPage,
-  IonInput,
-  IonButton,
-  IonIcon,
-  IonProgressBar,
 } from "@ionic/vue";
 import { defineComponent } from "vue";
-import { personOutline } from "ionicons/icons";
-
-import authStore from "../store";
 
 export default defineComponent({
   name: "Modal",
   props: ["store","content", "title"],
   components: {
-		IonContent,
-    IonTitle,
-    IonProgressBar,
-    IonItem,
-    IonLabel,
-    IonPage,
-    IonIcon,
-    IonInput,
-    Header,
-    IonButton,
+    IonPage
   },
   data() {
     return {
       loading: false,
       endpointError: "",
       form: {
-        email_address: "",
+        email: "",
         password: "",
       },
     };
 	},
-  setup() {
-    return {
-      personOutline
-    }
-  },
-  methods: {
-    register() {
-      this.$router.push("/register");
-    },    
-    goHome() {
-      this.$router.push("/");
-    },
-    submit() {
-      this.loading = true;
-      authStore.dispatch("subscribe", this.form)
-        .then(() => {
-          this.loading = false;
-        })
-        .catch(error => {
-          console.log("Error");
-          this.loading = false;
-          this.endpointError = error;
-          switch(error.code) {
-            case "auth/invalid-email":
-            case "auth/wrong-password":
-              error.message = "Invalid email or password.";
-            break;
-            case "auth/user-not-found":
-              error.message = "No user with corresponding login credentials";
-            break;
-          }
-        });
-    }
-  }
 });
 </script>
 
