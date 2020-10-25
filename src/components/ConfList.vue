@@ -59,12 +59,12 @@ function googleCalandar() {
     })
   })
 
-  gapi.client.load("calendar", "v3", () => console.log("client init"));
+  // gapi.client.load("calendar", "v3", () => console.log("client init"));
 
-  gapi.auth2.getAuthInstace().signIn();
+  // gapi.auth2.getAuthInstace().signIn();
 }
 
-googleCalandar();
+
 export default {
   name: "recent-list",
   props: {
@@ -88,6 +88,9 @@ export default {
     };
   },
   mounted() {
+  },
+  beforeMount() {
+    googleCalandar();
   },
   data() {
     return {
