@@ -42,6 +42,9 @@
 				<ion-item @click="gotoSpeakers">
 					<ion-label>Speakers</ion-label>
 				</ion-item>
+				<ion-item @click="subscribe">
+					<ion-label>Subscribe</ion-label>
+				</ion-item>
 				<ion-item @click="gotoProfile" v-if="loginToken">
 					<ion-label>Profile</ion-label>
 				</ion-item>
