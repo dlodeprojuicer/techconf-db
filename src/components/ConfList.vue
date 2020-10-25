@@ -42,7 +42,7 @@ import EditEventModal from "./EditEventModal";
 
 var gapi = window.gapi;
 var CLIENT_ID = "031294018380-slmm46ia8pp5ccpprhb6jbflgr5cbdg5.apps.googleusercontent.com";
-var API_KEY = "AIzaSyBj7U_7kKbdtx7_laMPm5vI_VeFoVyMiTc";
+var API_KEY = "AIzaSyA3LPByxDChFePmbkhK7EUIVr8o4b37U3s";
 var DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"];
 var SCOPES = "https://www.googleapis.com/auth/calendar.readonly";
 
