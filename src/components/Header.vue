@@ -6,6 +6,7 @@
         <ion-button @click="gotoHome">Conferences</ion-button>
         <ion-button @click="gotoVenues">Venues</ion-button>
         <ion-button @click="gotoSpeakers">Speakers</ion-button>
+        <ion-button @click="subscribe">Subscribe</ion-button>
         <ion-button @click="gotoProfile" v-if="loginToken">Profile</ion-button>
         <ion-button @click="logout" v-if="loginToken">Logout</ion-button> 
       </ion-buttons>
@@ -53,9 +54,10 @@
 </template>
 
 <script>
-import { IonToolbar, IonMenuButton, IonLabel, IonItem, IonList, IonContent, IonMenu, IonHeader, IonTitle, IonIcon, IonButtons, IonButton, menuController } from "@ionic/vue";
+import { IonToolbar, IonMenuButton, IonLabel, IonItem, IonList, IonContent, IonMenu, IonHeader, IonTitle, IonIcon, IonButtons, IonButton, menuController, modalController } from "@ionic/vue";
 import { ellipsisVertical, menuOutline } from "ionicons/icons";
 import { mapGetters } from 'vuex';
+import Subscription from "./Subscription";
 
 export default {
   name: "recent-list",
@@ -106,6 +108,22 @@ export default {
     async gotoProfile() {
       this.$router.push("/profile");
       await menuController.close("start");
+    },
+    async subscribe() {
+      const modal = await modalController.create({
+        component: Subscription,
+        cssClass: "my-custom-class",
+        componentProps: {
+          data: {
+            content: "Content from parent",
+            store: this.$store,
+          },
+          propsData: {
+            title: "Title from parent",
+          },
+        },
+      });
+      return modal.present();
     },
     logout() {
       this.$store.dispatch("logout");
