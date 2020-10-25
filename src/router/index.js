@@ -14,6 +14,9 @@ const routes = [
   //   path: '/list',
   //   component: () => import('@/views/List.vue')
   // },
+
+  // add /privacy-policy route for google calendar api
+  // add /terms-of-service route for google calendar api
   {
     path: '/',
     component: Tabs,
