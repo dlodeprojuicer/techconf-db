@@ -40,7 +40,31 @@ import {
 import { chevronForward, micOutline, openOutline } from "ionicons/icons";
 import EditEventModal from "./EditEventModal";
 
+var gapi = window.gapi;
+var CLIENT_ID = "031294018380-slmm46ia8pp5ccpprhb6jbflgr5cbdg5.apps.googleusercontent.com";
+var API_KEY = "AIzaSyBj7U_7kKbdtx7_laMPm5vI_VeFoVyMiTc";
+var DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"];
+var SCOPES = "https://www.googleapis.com/auth/calendar.readonly";
 
+
+function googleCalandar() {
+  gapi.load("client:auth2", () => {
+    console.log("gapi loaded", gapi);
+
+    gapi.client.init({
+      apiKey: API_KEY,
+      clientId: CLIENT_ID,
+      discoveryDocs: DISCOVERY_DOCS,
+      scope: SCOPES
+    })
+  })
+
+  gapi.client.load("calendar", "v3", () => console.log("client init"));
+
+  gapi.auth2.getAuthInstace().signIn();
+}
+
+googleCalandar();
 export default {
   name: "recent-list",
   props: {
@@ -63,6 +87,8 @@ export default {
       openOutline,
     };
   },
+  mounted() {
+  },
   data() {
     return {
       searchString: "",
@@ -81,12 +107,6 @@ export default {
     };
   },
   methods: {
-    searchFn() {
-      this.$emit("searchFn", this.searchString);
-    },
-    locationFilter() {
-      
-    },
     async editEvent(event) {
       localStorage.setItem("updateEvent", JSON.stringify(event));
 

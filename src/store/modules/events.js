@@ -1,6 +1,10 @@
 import firebase from "../../firebase";
 import moment from "moment";
 
+// Client ID: 1031294018380-slmm46ia8pp5ccpprhb6jbflgr5cbdg5.apps.googleusercontent.com
+// Client Secret: Tos2JoUe6uuz68KU0fUOz6gG
+// Dev API Key: AIzaSyBj7U_7kKbdtx7_laMPm5vI_VeFoVyMiTc
+
 const state = {
   events: [],
   filteredEvents: [],
