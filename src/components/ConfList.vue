@@ -27,7 +27,7 @@
              <ion-icon :icon="openOutline"></ion-icon> Website
           </a>
         </p>
-        <p @click="addToCalendar(item)">
+        <p @click="addToCalendar(item)" class="desktop-only">
           <ion-icon :icon="calendarClearOutline"></ion-icon> Add to Calendar
         </p>
         <!-- <p>
@@ -142,44 +142,57 @@ export default {
           scope: SCOPES
         }).then(() => {
           console.log(event);
-          const gcEvent = {
-            "summary": event.eventName,
-            "location": event.venue,
-            "start": {
-              "dateTime": moment(event.start).utc().format("YYYY-MM-DDTHH:mm:ss.SSS[Z]"),
-              "timeZone": "Africa/Johannesburg"
-            },
-            "end": {
-              "dateTime": moment(event.end).utc().format("YYYY-MM-DDTHH:mm:ss.SSS[Z]"),
-              "timeZone": "Africa/Johannesburg"
-            },
-            "reminders": {
-              "useDefault": false,
-              "overrides": [
-                {"method": "email", "minutes": 24 * 60},
-                {"method": "popup", "minutes": 10}
-              ]
-            }
-          };
-
-          var request = gapi.client.calendar.events.insert({
-            'calendarId': 'primary',
-            'resource': gcEvent,
-          });
-
-          const rootWindow = window;
-
-          request.execute(gcEvent => {
-            console.log(gcEvent);
-            rootWindow.open(gcEvent.htmlLink);
-          })
+          console.log(gapi.auth2.getAuthInstance().isSignedIn.get())
+          if (gapi.auth2.getAuthInstance().isSignedIn.get()) {
+            this.gcCreateEvent(event);
+          } else {
+            gapi.auth2.getAuthInstance().signIn().then(() => {
+              this.gcCreateEvent(event);
+            })
+            .catch(err => {
+              console.log(err)
+              alert(`Error: ${err.error} | You need to signin to your Google account before you can add event to your calendar`)
+            });
+          }
         })
       })
-
 
       // gapi.client.load("calendar", "v3", () => console.log("client init"));
 
       // gapi.auth2.getAuthInstace().signIn();
+    },
+    gcCreateEvent(event) {
+      const gcEvent = {
+        "summary": event.eventName,
+        "location": event.venue,
+        "start": {
+          "dateTime": moment(event.start).utc().format("YYYY-MM-DDTHH:mm:ss.SSS[Z]"),
+          "timeZone": "Africa/Johannesburg"
+        },
+        "end": {
+          "dateTime": moment(event.end).utc().format("YYYY-MM-DDTHH:mm:ss.SSS[Z]"),
+          "timeZone": "Africa/Johannesburg"
+        },
+        "reminders": {
+          "useDefault": false,
+          "overrides": [
+            {"method": "email", "minutes": 24 * 60},
+            {"method": "popup", "minutes": 10}
+          ]
+        }
+      };
+
+      var request = gapi.client.calendar.events.insert({
+        'calendarId': 'primary',
+        'resource': gcEvent,
+      });
+
+      const rootWindow = window;
+
+      request.execute(gcEvent => {
+        console.log(gcEvent);
+        rootWindow.open(gcEvent.htmlLink);
+      })
     }
   },
 }
