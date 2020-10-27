@@ -27,7 +27,7 @@
              <ion-icon :icon="openOutline"></ion-icon> Website
           </a>
         </p>
-        <p @click="addToCalendar(item)" class="desktop-only">
+        <p @click="addToCalendar(item)" v-if="item.start && item.end" class="desktop-only">
           <ion-icon :icon="calendarClearOutline"></ion-icon> Add to Calendar
         </p>
         <!-- <p>
@@ -151,9 +151,12 @@ export default {
             })
             .catch(err => {
               console.log(err)
-              alert(`Error: ${err.error} | You need to signin to your Google account before you can add event to your calendar`)
+              alert(`You need to signin to your Google account before you can add event to your calendar`)
             });
           }
+        })
+        .catch(err => {
+          alert(err.details);
         })
       })
 
