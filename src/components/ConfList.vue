@@ -151,7 +151,7 @@ export default {
             })
             .catch(err => {
               console.log(err)
-              alert(`You need to signin to your Google account before you can add event to your calendar`)
+              alert(`You need to signin to your Google account before you can add event to your calendar`);
             });
           }
         })
