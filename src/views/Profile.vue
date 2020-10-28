@@ -1,6 +1,5 @@
 <template>
   <ion-page>
-    <Header />
     <ion-content class="ion-padding">
       <div class="person">
           <ion-icon class="left-icons" :icon="personCircleOutline"></ion-icon> 
@@ -24,7 +23,6 @@ import {
 import { personCircleOutline } from "ionicons/icons";
 import { defineComponent } from 'vue';
 
-import Header from "../components/Header";
 import ConfList from "../components/ConfList";
 import SkeletonText from "../components/SkeletonText";
 import Fab from "../components/Fab";
@@ -42,7 +40,6 @@ export default defineComponent({
     IonIcon,
     SkeletonText,
     NoEvents,
-    Header,
     ConfList,
     Fab
   },

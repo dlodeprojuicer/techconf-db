@@ -51,7 +51,24 @@ const app = createApp(App)
   .use(IonicVue)
   .use(router)
   .use(store)
-  
+
+  router.beforeEach((to, from, next) => {
+    store.dispatch("loginStatus");
+    
+    if (to.meta.requiresAuth && !store.getters.loginToken) {
+      next({ name:"conferences" });
+    } else {
+      next();
+    }
+    
+    // firebase.auth().onAuthStateChanged(function(user) {
+    //   if (user) {
+    //     // User is signed in.
+    //   } else {
+    //     // No user is signed in.
+    //   }
+    // });
+  })
 router.isReady().then(() => {
   app.mount('#app');
 });

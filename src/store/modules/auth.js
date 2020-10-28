@@ -7,12 +7,12 @@ import firebase from "./../../firebase";
 // });
 
 const state = {
-  loginToken: null,
+  loginToken: false,
 }
 
 const getters = {
   loginToken({ loginToken }) {
-    return loginToken || localStorage.getItem("tcdbLoginToken");
+    return loginToken;
   },
   authError(state) {
     return state.authError;
@@ -67,12 +67,24 @@ const actions = {
     return new Promise((reject) => {
       firebase.auth().signOut()
         .then(() => {
-          context.commit("loginToken", null);
+          context.commit("loginToken", false);
         }).catch(function(error) {
         reject(error)
       });
     })
   },
+  loginStatus(context) {
+    return new Promise(() => {
+      firebase.auth().onAuthStateChanged(user => {
+        if (user) {
+          // User is signed in.
+          context.commit("loginToken", user.uid);
+        } else {
+          context.commit("loginToken", false);
+        }
+      });
+    });
+  }
   // subscribe(context, request) {
   //   return new Promise((resolve, reject) => {
   //     mailchimp.post(`lists/c72f027b89/members`, {

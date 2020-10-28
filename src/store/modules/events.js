@@ -67,7 +67,6 @@ const actions = {
           const eventData = [];
           for (let x =0; docs.length > x; x++) {
             const docData = docs[x].data();
-            console.log(docData.start)
             eventData.push({
               id: docs[x].id,
               ...docData,

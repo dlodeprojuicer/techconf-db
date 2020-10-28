@@ -1,5 +1,4 @@
 <template>
-  <Header />
   <ion-page>
     <ion-content class="ion-padding">
       <div class="lg-content-center">
@@ -33,8 +32,6 @@
 </template>
 
 <script>
-import Header from "../components/Header";
-
 import {
   IonContent,
   IonTitle,
@@ -63,7 +60,6 @@ export default defineComponent({
     IonPage,
     IonIcon,
     IonInput,
-    Header,
     IonButton,
   },
   data() {
