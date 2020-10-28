@@ -21,7 +21,7 @@
       </ion-col>
       <ion-col offset="2" class="desktop-only">
       </ion-col>
-      <ion-col class="test" offset="2">
+      <ion-col offset="2">
         <p>
           <a :href="item.website" target="_blank">
              <ion-icon :icon="openOutline"></ion-icon> Website
@@ -50,11 +50,11 @@ import { chevronForward, micOutline, heartOutline, openOutline, calendarClearOut
 import EditEventModal from "./EditEventModal";
 import moment from "moment";
 
-var gapi = window.gapi;
-var CLIENT_ID = "85418644814-d23l8dcdabf5tdfb7a4g4sbb7u3firs1.apps.googleusercontent.com";
-var API_KEY = "AIzaSyA3LPByxDChFePmbkhK7EUIVr8o4b37U3s";
-var DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"];
-var SCOPES = "https://www.googleapis.com/auth/calendar";
+const gapi = window.gapi;
+const CLIENT_ID = "85418644814-d23l8dcdabf5tdfb7a4g4sbb7u3firs1.apps.googleusercontent.com";
+const API_KEY = "AIzaSyA3LPByxDChFePmbkhK7EUIVr8o4b37U3s";
+const DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"];
+const SCOPES = "https://www.googleapis.com/auth/calendar";
 
 export default {
   name: "recent-list",
@@ -128,10 +128,7 @@ export default {
         });
     },
     addToCalendar(event) {
-      // Timezones https://stackoverflow.com/questions/22526635/list-of-acceptable-google-calendar-api-time-zones/22597949#22597949
-      // Convert dates to ISO https://stackoverflow.com/questions/28277272/convert-system-date-to-iso-format-using-momentjs/28287209
-      // googleCalandar();
-      console.log("E", event.start, moment(event.start).utc().format("YYYY-MM-DDTHH:mm:ss.SSS[Z]"));
+      // this.$store.dispatch("gcEvent", event);
       gapi.load("client:auth2", () => {
         console.log("gapi loaded", gapi.client);
 
@@ -141,7 +138,6 @@ export default {
           discoveryDocs: DISCOVERY_DOCS,
           scope: SCOPES
         }).then(() => {
-          console.log(event);
           console.log(gapi.auth2.getAuthInstance().isSignedIn.get())
           if (gapi.auth2.getAuthInstance().isSignedIn.get()) {
             this.gcCreateEvent(event);
@@ -156,13 +152,10 @@ export default {
           }
         })
         .catch(err => {
+          console.log("Err", err);
           alert(err.details);
         })
       })
-
-      // gapi.client.load("calendar", "v3", () => console.log("client init"));
-
-      // gapi.auth2.getAuthInstace().signIn();
     },
     gcCreateEvent(event) {
       const gcEvent = {
