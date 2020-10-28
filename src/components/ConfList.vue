@@ -8,7 +8,7 @@
         <p>{{ item.venue }}, {{ item.town }}</p>
 
         <p v-if="item.start && item.end">
-          {{ `${item.start} - ${item.end}` }}
+          {{ `${item.startFormatted} - ${item.endFormatted}` }}
         </p>
 
         <p v-if="!item.start && !item.end" class="no-date">New dates TBA</p>
@@ -48,7 +48,6 @@ import {
 } from "@ionic/vue";
 import { chevronForward, micOutline, heartOutline, openOutline, calendarClearOutline } from "ionicons/icons";
 import EditEventModal from "./EditEventModal";
-import moment from "moment";
 
 const gapi = window.gapi;
 const CLIENT_ID = "85418644814-d23l8dcdabf5tdfb7a4g4sbb7u3firs1.apps.googleusercontent.com";
@@ -128,6 +127,7 @@ export default {
         });
     },
     addToCalendar(event) {
+      // So, gapi is undefined when I move this to vuex :(
       // this.$store.dispatch("gcEvent", event);
       gapi.load("client:auth2", () => {
         console.log("gapi loaded", gapi.client);
@@ -138,21 +138,21 @@ export default {
           discoveryDocs: DISCOVERY_DOCS,
           scope: SCOPES
         }).then(() => {
-          console.log(gapi.auth2.getAuthInstance().isSignedIn.get())
+          // console.log(gapi.auth2.getAuthInstance().isSignedIn.get())
           if (gapi.auth2.getAuthInstance().isSignedIn.get()) {
             this.gcCreateEvent(event);
           } else {
             gapi.auth2.getAuthInstance().signIn().then(() => {
               this.gcCreateEvent(event);
             })
-            .catch(err => {
-              console.log(err)
+            .catch(() => {
+              // console.log(err)
               alert(`You need to signin to your Google account before you can add event to your calendar`);
             });
           }
         })
-        .catch(err => {
-          console.log("Err", err);
+        .catch((err) => {
+          // console.log("Err", err);
           alert(err.details);
         })
       })
@@ -162,18 +162,18 @@ export default {
         "summary": event.eventName,
         "location": event.venue,
         "start": {
-          "dateTime": moment(event.start).utc().format("YYYY-MM-DDTHH:mm:ss.SSS[Z]"),
+          "dateTime": event.start,
           "timeZone": "Africa/Johannesburg"
         },
         "end": {
-          "dateTime": moment(event.end).utc().format("YYYY-MM-DDTHH:mm:ss.SSS[Z]"),
+          "dateTime": event.end,
           "timeZone": "Africa/Johannesburg"
         },
         "reminders": {
           "useDefault": false,
           "overrides": [
             {"method": "email", "minutes": 24 * 60},
-            {"method": "popup", "minutes": 10}
+            {"method": "popup", "minutes": 30}
           ]
         }
       };
@@ -186,7 +186,7 @@ export default {
       const rootWindow = window;
 
       request.execute(gcEvent => {
-        console.log(gcEvent);
+        // console.log(gcEvent);
         rootWindow.open(gcEvent.htmlLink);
       })
     }

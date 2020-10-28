@@ -67,11 +67,12 @@ const actions = {
           const eventData = [];
           for (let x =0; docs.length > x; x++) {
             const docData = docs[x].data();
+            console.log(docData.start)
             eventData.push({
               id: docs[x].id,
               ...docData,
-              start: docData.start ? moment(docData.start).format("DD/MM/YYYY") : null,
-              end: docData.end ? moment(docData.end).format("DD/MM/YYYY") : null,
+              startFormatted: docData.start ? moment(docData.start).format("DD/MM/YYYY") : null,
+              endFormatted: docData.end ? moment(docData.end).format("DD/MM/YYYY") : null,
             });
           }
           context.commit("events", eventData);
