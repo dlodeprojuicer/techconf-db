@@ -73,11 +73,12 @@ export default {
     },
     loginModal() {
       if (this.loginToken) {
-        if (window.location.pathname === "/venues") {
-          this.$router.push("/create-venue")
-        } else {
-          this.$router.push("/create-event")
-        }
+        this.$router.push("/create-event")
+        // if (window.location.pathname === "/venues") {
+        //   this.$router.push("/create-venue")
+        // } else {
+        //   this.$router.push("/create-event")
+        // }
       } else {
         this.$router.push("/login");
       }

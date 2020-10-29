@@ -41,13 +41,16 @@ const store = createStore({
     // }
   },
   actions: {
-    createUser(request) {
-      return new Promise((resolve) => {
+    createUser(context, request) {
+      return new Promise((resolve, reject) => {
         firebase.firestore().collection("users")
           .doc(request.uid)
           .set({...request})
           .then(() => {
             resolve();
+          })
+          .catch(err => {
+            reject(err);
           });
       })
     },

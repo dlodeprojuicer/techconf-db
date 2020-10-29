@@ -58,8 +58,6 @@ import {
 import { defineComponent } from "vue";
 import { personOutline } from "ionicons/icons";
 
-import authStore from "../store";
-
 export default defineComponent({
   name: "Modal",
   props: ["store", "content", "title"],
@@ -173,7 +171,7 @@ export default defineComponent({
       //   }
       // }
       this.loading = true;
-      authStore.dispatch("signUp", this.form)
+      this.$store.dispatch("signUp", this.form)
         .then(() => {
           // eslint-disable-next-line
           this.$router.push("/");

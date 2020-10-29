@@ -1,12 +1,19 @@
 import firebase from "../../firebase";
 import moment from "moment";
 
-// Will be used once I figure out why gapi is undefined when used in this module
-// const gapi = window.gapi;
-// const CLIENT_ID = "85418644814-d23l8dcdabf5tdfb7a4g4sbb7u3firs1.apps.googleusercontent.com";
-// const API_KEY = "AIzaSyA3LPByxDChFePmbkhK7EUIVr8o4b37U3s";
-// const DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"];
-// const SCOPES = "https://www.googleapis.com/auth/calendar";
+// const eventFormater = (docs) => {
+//   const eventData = [];
+//   for (let x =0; docs.length > x; x++) {
+//     const docData = docs[x].data();
+//     eventData.push({
+//       id: docs[x].id,
+//       ...docData,
+//       startFormatted: docData.start ? moment(docData.start).format("DD/MM/YYYY") : null,
+//       endFormatted: docData.end ? moment(docData.end).format("DD/MM/YYYY") : null,
+//     });
+//   }
+//   return eventData;
+// }
 
 const state = {
   events: [],
@@ -23,7 +30,7 @@ const getters = {
     if (!updateEventSearchObject?.field || updateEventSearchObject?.field === "") {
       return events;
     } else {
-      return events.filter(event => event[updateEventSearchObject?.field].toLowerCase().includes(updateEventSearchObject?.value.toLowerCase()));
+      return events.filter(event => event[updateEventSearchObject.field].toLowerCase().includes(updateEventSearchObject.value.toLowerCase()));
     }
   },
   userEvents({ userEvents }) {
@@ -64,6 +71,7 @@ const actions = {
         .where("verified", "==", true)
         .get()
         .then(({ docs }) => {
+          // const events = eventFormater(docs);
           const eventData = [];
           for (let x =0; docs.length > x; x++) {
             const docData = docs[x].data();
@@ -88,14 +96,15 @@ const actions = {
         .where("createdBy", "==", context.getters.loginToken)
         .get()
         .then(({ docs }) => {
+          // const events = eventFormater(docs);
           const eventData = [];
           for (let x =0; docs.length > x; x++) {
             const docData = docs[x].data();
             eventData.push({
               id: docs[x].id,
               ...docData,
-              start: docData.start ? moment(docData.start).format("DD/MM/YYYY") : null,
-              end: docData.end ? moment(docData.end).format("DD/MM/YYYY") : null,
+              startFormatted: docData.start ? moment(docData.start).format("DD/MM/YYYY") : null,
+              endFormatted: docData.end ? moment(docData.end).format("DD/MM/YYYY") : null,
             });
           }
           context.commit("userEvents", eventData);

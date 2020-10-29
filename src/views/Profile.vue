@@ -1,14 +1,18 @@
 <template>
   <ion-page>
     <ion-content class="ion-padding">
-      <div class="person">
+      <div class="lg-content-center">
+        <div class="person">
           <ion-icon class="left-icons" :icon="personCircleOutline"></ion-icon> 
           <br />
           {{ profile.name }} {{ profile.lastname }}
+        </div>
+        <br /><br /><br />
+        <h4>My Events</h4>
+        <SkeletonText v-if="loading" />
+        <ConfList :data="eventList" v-if="eventList.length > 0 " />
+        <NoEvents v-if="!loading && eventList.length < 1" />
       </div>
-      <SkeletonText v-if="loading" />
-      <ConfList :data="eventList" v-if="eventList.length > 0 " />
-      <NoEvents v-if="!loading && eventList.length < 1" />
     </ion-content>
     <Fab />
   </ion-page>
@@ -91,6 +95,7 @@ export default defineComponent({
   margin: auto 25%;
   text-align: center;
   font-size: 20px;
+  font-weight: bold;
 }
 ion-icon {
   font-size: 60px;

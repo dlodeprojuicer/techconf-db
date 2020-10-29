@@ -45,75 +45,50 @@ const routes = [
         meta: {
           requiresAuth: false,
         }
-      }
-    ]
-  },
-  {
-    path: '/create-venue',
-    name: "create-venue",
-    component: Tabs,
-    children: [
-      {
-        path: '/create-venue',
-        component: () => import('@/views/CreateVenue.vue'),
-        meta: {
-          requiresAuth: true,
-        }
-      }
-    ]
-  },
-  {
-    path: '/profile',
-    name: "profile",
-    component: Tabs,
-    children: [
-      {
-        path: '/profile',
-        component: () => import('@/views/Profile.vue'),
-        meta: {
-          requiresAuth: true,
-        }
-      }
-    ]
-  },
-  {
-    path: '/create-event',
-    name: "create-event",
-    component: Tabs,
-    children: [
-      {
-        path: '/create-event',
-        component: () => import('@/views/CreateEvent.vue'),
-        meta: {
-          requiresAuth: true,
-        }
-      }
-    ]
-  },
-  {
-    path: '/login',
-    name: "login",
-    component: Tabs,
-    children: [
+      },
+
+      // Maybe this must be its own top-level route?
       {
         path: '/login',
         component: () => import('@/views/Login.vue'),
         meta: {
           requiresAuth: false,
         }
-      }
-    ]
-  },
-  {
-    path: '/register',
-    name: "register",
-    component: Tabs,
-    children: [
+      },
+
+      // Maybe this must be its own top-level route?
       {
         path: '/register',
         component: () => import('@/views/Register.vue'),
         meta: {
           requiresAuth: false,
+        }
+      },
+
+      // Maybe this must be its own top-level route?
+      {
+        path: '/create-venue',
+        component: () => import('@/views/CreateVenue.vue'),
+        meta: {
+          requiresAuth: true,
+        }
+      },
+
+      // Maybe this must be its own top-level route?
+      {
+        path: '/profile',
+        component: () => import('@/views/Profile.vue'),
+        meta: {
+          requiresAuth: true,
+        }
+      },
+      
+      // Maybe this must be its own top-level route?
+      {
+        path: '/create-event',
+        component: () => import('@/views/CreateEvent.vue'),
+        meta: {
+          requiresAuth: true,
         }
       }
     ]

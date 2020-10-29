@@ -12,7 +12,7 @@ const state = {
 
 const getters = {
   loginToken({ loginToken }) {
-    return loginToken;
+    return loginToken || localStorage.getItem("tcdbLoginToken");
   },
   authError(state) {
     return state.authError;
@@ -54,9 +54,12 @@ const actions = {
         .then(({ user }) => {
           context.commit("loginToken", user.uid);
           request.uid = user.uid;
+          request.verified = true;
           delete request.password;
           context.dispatch("createUser", request).then(() => {
             resolve(user.uid);
+          }).catch(err => {
+            reject(err);
           });
         }).catch(error => {
         reject(error)
