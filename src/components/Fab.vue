@@ -1,5 +1,5 @@
 <template>
-  <ion-fab vertical="bottom" horizontal="start" v-if="urlCheck">
+  <ion-fab vertical="bottom" horizontal="start">
     <ion-fab-button color="dark" @click="loginModal">
       <ion-icon :icon="add" v-if="loginToken"></ion-icon>
       <ion-icon :icon="logInOutline" v-if="!loginToken"></ion-icon>
