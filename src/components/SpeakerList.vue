@@ -11,9 +11,11 @@
         <br />
         <ion-label>{{ item.position }}</ion-label>
         <h5>Highlights</h5>
-        <p class="highlight" v-for="(itm, idx) in item.highlights" :key="idx">
-          {{ itm.name }} ({{ itm.year }})
-        </p>
+        <div v-for="(itm, idx) in item.highlights" :key="idx">
+          <p class="highlight" v-if="itm.name">
+            {{ itm.name }} ({{ itm.year }})
+          </p>
+        </div>
         <ion-label v-if="item.contact"><b>Contact:</b><br /> {{ item.contact }}</ion-label>
         <br /><br />
           <p v-for="(i, id) in item.social" :key="id" class="social">

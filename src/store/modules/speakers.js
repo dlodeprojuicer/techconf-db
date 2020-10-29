@@ -20,7 +20,6 @@ const mutations = {
 const actions = {
   createSpeaker(context, request) {
     request.createdBy = context.getters.loginToken;
-    console.log(context.getters.loginToken)
     return new Promise((resolve, reject) => {
       const createVenueFn = r => {
         firebase.firestore().collection("speakers")
@@ -46,6 +45,8 @@ const actions = {
           } else {
             createVenueFn(request)
           }
+        }).catch(err => {
+          reject(err);
         });
     });
   },

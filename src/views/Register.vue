@@ -19,12 +19,43 @@
         </ion-item>
         <ion-item>
           <ion-label>Province</ion-label>
-          <select v-model="form.address.province" placeholder="Select One">
+          <select v-model="form.province" placeholder="Select One">
             <option :value="item" v-for="(item, index) in provinces" :key="index">
               {{ item }}
             </option>
           </select>
         </ion-item>
+        <ion-item>
+          <ion-label>Would you like to be added to the list of Speakers?</ion-label>
+          <ion-toggle
+            @ionChange="isSpeaker()"
+            v-model="form.isSpeaker"
+            :checked="form.isSpeaker">
+          </ion-toggle>
+        </ion-item>
+
+        <div v-if="form.isSpeaker">
+          <ion-item v-for="(f, i) in speakerFormFields" :key="i">
+            <ion-label>{{ f.label }}</ion-label>
+            <ion-input
+              v-model="form.speaker[f.key]"
+              :type="f.type"
+              :required="f.required"
+              :placeholder="f.placeholder"
+              @keyup="validateSpeaker(f.key, i)"
+            ></ion-input>
+            <p v-if="i.error">{{ f.errMsg }}</p>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>Is it okay if we display your contact details (email/contact number) in Speaker list?</ion-label>
+            <ion-toggle
+              @ionChange="contactInfoConsent()"
+              v-model="form.contactInfoConsent"
+              :checked="form.contactInfoConsent">
+            </ion-toggle>
+          </ion-item>
+        </div>
 
         <p class="error-message">
           {{ endpointError.message }}
@@ -53,6 +84,7 @@ import {
   IonLabel,
   IonInput,
   IonIcon,
+  IonToggle,
   IonButton
 } from "@ionic/vue";
 import { defineComponent } from "vue";
@@ -69,6 +101,7 @@ export default defineComponent({
     IonItem,
     IonLabel,
     IonInput,
+    IonToggle,
     IonIcon,
     IonButton
   },
@@ -77,14 +110,45 @@ export default defineComponent({
       loading: false,
       endpointError: "",
       form: {
+        isSpeaker: false,
         name: "",
         lastname: "",
         email: "",
         password: "",
         organisation: "",
-        address: {
-          province: "Select One",
+        province: "Select One",
+        speaker: {
+          role: "",
+          highlight1name: "",
+          highlight1year: "",
+          highlight2name: "",
+          highlight2year: "",
+          highlight3name: "",
+          highlight3year: "",
+          website: "",
+          twitter: "",
+          linkedin: "",
         },
+      // form: {
+      //   isSpeaker: false,
+      //   name: "Simo",
+      //   lastname: "Mafuxwana",
+      //   email: "speaker@gmail.com",
+      //   password: "1234567890",
+      //   organisation: "Own Appeal",
+      //   province: "Select One",
+      //   speaker: {
+      //     role: "Developer",
+      //     highlight1name: "DevConf",
+      //     highlight1year: "2020",
+      //     highlight2name: "ScaleConf",
+      //     highlight2year: "2017",
+      //     highlight3name: "AI Confenrence",
+      //     highlight3year: "2019",
+      //     website: "http://test.com",
+      //     twitter: "http://twtitter.com",
+      //     linkedin: "http://linkedin.com",
+      //   },
       },
       provinces: [
         "Western Cape",
@@ -142,9 +206,102 @@ export default defineComponent({
         errMsg: "Field required",
       },
     ];
+
+    const speakerFormFields = [
+      {
+        key: "role",
+        label: "What is your current role?",
+        type: "text",
+        required: true,
+        error: false,
+        errMsg: "Field required",
+      },
+      {
+        key: "highlight1name",
+        label: "Highlight 1: Conf. Name",
+        placeholder: "Conference Name",
+        type: "text",
+        required: true,
+        error: false,
+        errMsg: "Field required",
+      },
+      {
+        key: "highlight1year",
+        label: "Highlight 1: Year",
+        placeholder: "2020",
+        type: "text",
+        required: true,
+        error: false,
+        errMsg: "Field required",
+      },
+      {
+        key: "highlight2name",
+        label: "Highlight 2: Conf. Name",
+        placeholder: "Conference Name",
+        type: "text",
+        required: true,
+        error: false,
+        errMsg: "Field required",
+      },
+      {
+        key: "highlight2year",
+        label: "Highlight 2: Year",
+        placeholder: "2020",
+        type: "text",
+        required: true,
+        error: false,
+        errMsg: "Field required",
+      },
+      {
+        key: "highlight3name",
+        label: "Highlight 3: Conf. Name",
+        placeholder: "Conference Name",
+        type: "text",
+        required: true,
+        error: false,
+        errMsg: "Field required",
+      },
+      {
+        key: "highlight3year",
+        label: "Highlight 3: Year",
+        placeholder: "2018",
+        type: "text",
+        required: true,
+        error: false,
+        errMsg: "Field required",
+      },
+      {
+        key: "website",
+        label: "Website or Blog",
+        placeholder: "http://example.com",
+        type: "text",
+        required: true,
+        error: false,
+        errMsg: "Field required",
+      },
+      {
+        key: "twitter",
+        label: "Twitter",
+        placeholder: "http://twitter.com/username",
+        type: "text",
+        required: true,
+        error: false,
+        errMsg: "Field required",
+      },
+      {
+        key: "linkedin",
+        label: "LinkedIn",
+        placeholder: "http://linkedin.com/username",
+        type: "text",
+        required: true,
+        error: false,
+        errMsg: "Field required",
+      },
+    ];
     return {
       personOutline,
       formFields,
+      speakerFormFields
     };
   },
   methods: {
@@ -157,11 +314,18 @@ export default defineComponent({
     validate(key, index) {
       if(this.formFields[index].required && !this.form[key]) {
         this.formFields[index].error = true;
-        console.log("err", this.formFields[index].error);
       }
     },
-    selectProvice(q) {
-      console.log(q);
+    validateSpeaker(key, index) {
+      if(this.speakerFormFields[index].required && !this.form[key]) {
+        this.speakerFormFields[index].error = true;
+      }
+    },
+    isSpeaker() {
+      this.form.isSpeaker = !this.form.isSpeaker;
+    },
+    contactInfoConsent() {
+      this.form.speaker.contactInfoConsent = !this.form.speaker.contactInfoConsent;
     },
     submit() {
       // for(let x = 0; this.formFields.length > x; x++) {
@@ -171,6 +335,11 @@ export default defineComponent({
       //   }
       // }
       this.loading = true;
+      // console.log(this.form);
+      if (!this.form.isSpeaker) {
+        delete this.form.speaker;
+      }
+
       this.$store.dispatch("signUp", this.form)
         .then(() => {
           // eslint-disable-next-line

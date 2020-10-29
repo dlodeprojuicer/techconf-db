@@ -6,6 +6,45 @@ import firebase from "./../../firebase";
 //   server: "us2",
 // });
 
+const addToSpeakers = (speaker) => {
+  let speakerObj = {
+    name: speaker.name,
+    lastname: speaker.lastname,
+    position: speaker.role,
+    contact: speaker.contactInfoConsent ? speaker.contact : "",
+    image: "",
+    social: [
+      {
+        link: speaker.twitter,
+        label: "Twitter"
+      },
+      {
+        link: speaker.linkedin,
+        label: "LinkedIn"
+      },
+      {
+        link: speaker.website,
+        label: "Website"
+      }
+    ],
+    highlights: [
+      {
+        name: speaker.highlight1name,
+        year: speaker.highlight1year
+      }, 
+      {
+        name: speaker.highlight2name,
+        year: speaker.highlight2year
+      }, 
+      {
+        name: speaker.highlight3name,
+        year: speaker.highlight3year
+      }, 
+    ],
+  };
+  return speakerObj;
+};
+
 const state = {
   loginToken: false,
 }
@@ -57,13 +96,27 @@ const actions = {
           request.verified = true;
           delete request.password;
           context.dispatch("createUser", request).then(() => {
-            resolve(user.uid);
+            if (request.isSpeaker) {
+              let obj = {
+                ...request.speaker,
+                name: request.name,
+                lastname: request.lastname,
+                contact: request.email
+              }
+              context.dispatch("createSpeaker", addToSpeakers(obj)).then(() => {
+                resolve(user.uid);
+              }).catch(e => {
+                reject(e);
+              });
+            } else {
+              resolve(user.uid);
+            }
           }).catch(err => {
             reject(err);
           });
         }).catch(error => {
-        reject(error)
-      });
+          reject(error)
+        });
     })
   },
   logout(context) {
