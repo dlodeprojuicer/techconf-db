@@ -23,35 +23,38 @@ const routes = [
     component: Tabs,
     children: [
       {
-        path: '',
+        path: '/',
+        name: "conferences",
         component: () => import('@/views/Home.vue'),
         meta: {
           requiresAuth: false,
         }
       },
-    ]
-  },
-  {
-    path: '/venues',
-    name: "venues",
-    component: Tabs,
-    children: [
       {
-        path: '',
+        path: '/venues',
+        name: "venues",
         component: () => import('@/views/Venues.vue'),
         meta: {
           requiresAuth: false,
         }
       },
+      {
+        path: '/speakers',
+        name: "speakers",
+        component: () => import('@/views/Speakers.vue'),
+        meta: {
+          requiresAuth: false,
+        }
+      }
     ]
   },
   {
-    path: '/create-venue/',
+    path: '/create-venue',
     name: "create-venue",
     component: Tabs,
     children: [
       {
-        path: '',
+        path: '/create-venue',
         component: () => import('@/views/CreateVenue.vue'),
         meta: {
           requiresAuth: true,
@@ -65,7 +68,7 @@ const routes = [
     component: Tabs,
     children: [
       {
-        path: '',
+        path: '/profile',
         component: () => import('@/views/Profile.vue'),
         meta: {
           requiresAuth: true,
@@ -74,29 +77,15 @@ const routes = [
     ]
   },
   {
-    path: '/create-event/',
+    path: '/create-event',
     name: "create-event",
     component: Tabs,
     children: [
       {
-        path: '',
+        path: '/create-event',
         component: () => import('@/views/CreateEvent.vue'),
         meta: {
           requiresAuth: true,
-        }
-      }
-    ]
-  },
-  {
-    path: '/speakers',
-    name: "speakers",
-    component: Tabs,
-    children: [
-      {
-        path: '',
-        component: () => import('@/views/Speakers.vue'),
-        meta: {
-          requiresAuth: false,
         }
       }
     ]
@@ -107,7 +96,7 @@ const routes = [
     component: Tabs,
     children: [
       {
-        path: '',
+        path: '/login',
         component: () => import('@/views/Login.vue'),
         meta: {
           requiresAuth: false,
@@ -121,7 +110,7 @@ const routes = [
     component: Tabs,
     children: [
       {
-        path: '',
+        path: '/register',
         component: () => import('@/views/Register.vue'),
         meta: {
           requiresAuth: false,

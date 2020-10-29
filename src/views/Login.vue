@@ -22,7 +22,6 @@
 
         <div class="form-buttons">
           <p @click="register">Don't have an account? <u>Register</u></p>
-          <br /><br />
           <ion-button size="small" color="danger" @click="goHome">Cancel</ion-button>
           <ion-button size="small" color="success" @click="submit">Login</ion-button>
         </div>
