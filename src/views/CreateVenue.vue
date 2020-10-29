@@ -1,5 +1,4 @@
 <template>
-  <Header />
   <ion-page>
     <ion-content class="ion-padding">
       <ion-progress-bar type="indeterminate" color="dark" v-if="loading"></ion-progress-bar>
@@ -96,7 +95,6 @@
 </template>
 
 <script>
-import Header from "../components/Header";
 // import VueTagsInput from '@johmun/vue-tags-input';
 
 import {
@@ -119,7 +117,6 @@ import authStore from "../store";
 export default defineComponent({
   name: "NewEvent",
   components: {
-    Header,
     IonContent,
     IonPage,
     IonTitle,

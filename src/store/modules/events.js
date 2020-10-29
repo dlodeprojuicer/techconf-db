@@ -20,10 +20,10 @@ const getters = {
     return events || JSON.parse(localStorage.getItem("tcdbEvents"));
   },
   filteredEvents({ events = [], updateEventSearchObject }) {
-    if (!updateEventSearchObject.field || updateEventSearchObject.field === "") {
+    if (!updateEventSearchObject?.field || updateEventSearchObject?.field === "") {
       return events;
     } else {
-      return events.filter(event => event[updateEventSearchObject.field].toLowerCase().includes(updateEventSearchObject.value.toLowerCase()));
+      return events.filter(event => event[updateEventSearchObject?.field].toLowerCase().includes(updateEventSearchObject?.value.toLowerCase()));
     }
   },
   userEvents({ userEvents }) {

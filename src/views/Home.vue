@@ -47,19 +47,19 @@ export default defineComponent({
   computed: {
     ...mapGetters(['events', 'filteredEvents', 'monthEventCount']),
   },
-  mounted() {
-    this.fetchEvents();
-    if(this.$route.query.ref) {
-      console.log(this.$route.query.ref);
-      // save ref to analytics
-    }
-  },
   data() {
     return {
       loading: true
     }
   },
   methods: {
+    ionViewDidEnter() {
+      this.fetchEvents();
+      if(this.$route.query.ref) {
+        console.log(this.$route.query.ref);
+        // save ref to analytics
+      }
+    },
     fetchEvents() {
       this.$store.dispatch("getEvents").then(() => {
         // this.filteredEvents = data;

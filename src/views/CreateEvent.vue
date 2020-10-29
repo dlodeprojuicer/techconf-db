@@ -1,5 +1,4 @@
 <template>
-  <Header />
   <ion-page>
     <ion-progress-bar type="indeterminate" color="dark" v-if="loading"></ion-progress-bar>
     <ion-content class="ion-padding">
@@ -76,8 +75,6 @@
 </template>
 
 <script>
-import Header from "../components/Header";
-
 import {
   IonContent,
   IonTitle,
@@ -98,7 +95,6 @@ import authStore from "../store";
 export default defineComponent({
   name: "NewEvent",
   components: {
-    Header,
     IonContent,
     IonPage,
     IonTitle,

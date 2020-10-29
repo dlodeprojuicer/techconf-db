@@ -44,16 +44,15 @@ export default defineComponent({
   computed: {
     ...mapGetters(['speakers']),
   },
-  mounted() {
-    this.fetchSpeakers();
-    // this.seedSpeakers();
-  },
   data() {
     return {
       loading: true,
     }
   },
   methods: {
+    ionViewDidEnter() {
+      this.fetchSpeakers();
+    },
     fetchSpeakers() {
       this.$store.dispatch("getSpeakers").then(() => {
         this.loading = false;

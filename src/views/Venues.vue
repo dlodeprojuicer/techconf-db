@@ -47,16 +47,15 @@ export default defineComponent({
   computed: {
     ...mapGetters(['venues', 'filteredVenues', 'searchString']),
   },
-  mounted() {
-    this.fetchVenues();
-    // this.seedEvents();
-  },
   data() {
     return {
       loading: true
     }
   },
   methods: {
+    ionViewDidEnter() {
+      this.fetchVenues();
+    },
     fetchVenues() {
       this.$store.dispatch("getVenues").then(() => {
         this.loading = false;

@@ -58,17 +58,18 @@ const actions = {
           context.dispatch("createUser", request).then(() => {
             resolve(user.uid);
           });
-        }).catch(function(error) {
+        }).catch(error => {
         reject(error)
       });
     })
   },
   logout(context) {
-    return new Promise((reject) => {
+    return new Promise((resolve, reject) => {
       firebase.auth().signOut()
         .then(() => {
           context.commit("loginToken", false);
-        }).catch(function(error) {
+          resolve();
+        }).catch(error => {
         reject(error)
       });
     })

@@ -51,10 +51,6 @@ export default defineComponent({
   computed: {
     ...mapGetters(['loginToken']),
   },
-  mounted() {
-    this.fetchEvents();
-    this.fetchProfile();
-  },
   data() {
     return {
       loading: true,
@@ -63,6 +59,10 @@ export default defineComponent({
     }
   },
   methods: {
+    ionViewDidEnter() {
+      this.fetchEvents();
+      this.fetchProfile();
+    },
     fetchEvents() {
       this.$store.dispatch("getUserEvents").then(data => {
         this.eventList = data;

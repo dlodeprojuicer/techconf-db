@@ -129,8 +129,11 @@ export default {
       return modal.present();
     },
     logout() {
-      this.$store.dispatch("logout");
-      this.$router.push("/");
+      this.$store.dispatch("logout").then(() => {
+        this.$router.push("/");
+      }).catch(err => {
+        console.log(err);
+      });
     }
   }
 };
