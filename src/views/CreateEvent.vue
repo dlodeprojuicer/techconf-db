@@ -13,7 +13,7 @@
         </ion-item>
         <ion-item>
           <ion-label>Website</ion-label>
-          <ion-input v-model="form.website"></ion-input>
+          <ion-input v-model="form.website" placeholder="http://example.com"></ion-input>
         </ion-item>
         <!-- <ion-item>
           <ion-label>Price</ion-label>
@@ -27,19 +27,19 @@
         </ion-item>
         <ion-item>
           <ion-label>Street</ion-label>
-          <ion-input v-model="form.address.street"></ion-input>
+          <ion-input v-model="form.street"></ion-input>
         </ion-item>
         <ion-item>
           <ion-label>Area / Suburb</ion-label>
-          <ion-input v-model="form.address.area"></ion-input>
+          <ion-input v-model="form.area"></ion-input>
         </ion-item>
         <ion-item>
           <ion-label>Town</ion-label>
-          <ion-input v-model="form.address.town"></ion-input>
+          <ion-input v-model="form.town"></ion-input>
         </ion-item>
         <ion-item>
           <ion-label>Province</ion-label>
-          <select v-model="form.address.province" placeholder="Select One">
+          <select v-model="form.province" placeholder="Select One">
             <option :value="item" v-for="(item, index) in provinces" :key="index">
               {{ item }}
             </option>
@@ -92,8 +92,6 @@ import {
 import { defineComponent } from "vue";
 import { micOutline } from "ionicons/icons";
 
-import authStore from "../store";
-
 export default defineComponent({
   name: "NewEvent",
   components: {
@@ -115,12 +113,9 @@ export default defineComponent({
         eventName: "",
         contactPerson: "",
         venue: "",
-        address: {
-					street: "",
-					area: "",
-					town: "",
-					province: ""
-				},
+        area: "",
+        town: "",
+        province: "",
         price: "",
         website: "",
         // start: "2015-01-01",
@@ -166,7 +161,7 @@ export default defineComponent({
     },
     submit() {
       this.loading = true;
-      authStore.dispatch("createEvent",this.form)
+      this.$store.dispatch("createEvent",this.form)
         .then(() => {
           this.loading = false;
           this.$router.push("/");
