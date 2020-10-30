@@ -1,6 +1,5 @@
 <template>
   <div class="no-events-img">
-    <h2>A  concise list of tech conferences in ZA</h2>
     <img src="/assets/img/no-events.png" />
     <ion-button expand="block" color="dark" @click="addEventModal" v-if="loginToken">Add conference</ion-button>
   </div>

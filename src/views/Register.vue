@@ -8,7 +8,7 @@
           Register
         </ion-title>
         <ion-item v-for="(f, i) in formFields" :key="i">
-          <ion-label>{{ f.label }}</ion-label>
+          <ion-label position="stacked">{{ f.label }}</ion-label>
           <ion-input
             v-model="form[f.key]"
             :type="f.type"
@@ -18,7 +18,7 @@
           <p v-if="i.error">{{ f.errMsg }}</p>
         </ion-item>
         <ion-item>
-          <ion-label>Province</ion-label>
+          <ion-label position="stacked">Province</ion-label>
           <select v-model="form.province" placeholder="Select One">
             <option :value="item" v-for="(item, index) in provinces" :key="index">
               {{ item }}
@@ -26,7 +26,7 @@
           </select>
         </ion-item>
         <ion-item>
-          <ion-label>Would you like to be added to the list of Speakers?</ion-label>
+          <ion-label position="stacked">Would you like to be added to the list of Speakers?</ion-label>
           <ion-toggle
             @ionChange="isSpeaker()"
             v-model="form.isSpeaker"
@@ -36,7 +36,7 @@
 
         <div v-if="form.isSpeaker">
           <ion-item v-for="(f, i) in speakerFormFields" :key="i">
-            <ion-label>{{ f.label }}</ion-label>
+            <ion-label position="stacked">{{ f.label }}</ion-label>
             <ion-input
               v-model="form.speaker[f.key]"
               :type="f.type"
@@ -48,7 +48,7 @@
           </ion-item>
 
           <ion-item>
-            <ion-label>Is it okay if we display your contact details (email/contact number) in Speaker list?</ion-label>
+            <ion-label position="stacked">Is it okay if we display your contact details (email/number) on Speaker list?</ion-label>
             <ion-toggle
               @ionChange="contactInfoConsent()"
               v-model="form.contactInfoConsent"
@@ -371,6 +371,7 @@ ion-content {
 
 ion-item > ion-label {
   font-weight: bold;
+  font-size: 20px;
 }
 
 .form-title {
