@@ -9,8 +9,7 @@
         <SkeletonText v-if="loading" />
         <ConfList :data="filteredEvents" v-if="filteredEvents.length > 0" />
         <h2 v-if="filteredEvents.length < 1">No search results</h2>
-        <br /><br />
-        If you wish to add a conference please email simodms@gmail.com
+
       </div>
     </ion-content>
     <Fab />
@@ -55,10 +54,6 @@ export default defineComponent({
   methods: {
     ionViewDidEnter() {
       this.fetchEvents();
-      if(this.$route.query.ref) {
-        console.log(this.$route.query.ref);
-        // save ref to analytics
-      }
     },
     fetchEvents() {
       this.$store.dispatch("getEvents").then(() => {

@@ -8,8 +8,6 @@
       <div class="lg-content-center">
         <SkeletonText v-if="loading" />
         <SpeakerList :data="speakers" />
-        <br /><br />
-        If you wish to be enlisted as a conference speaker please email simodms@gmail.com
       </div>
     </ion-content>
     <Fab />

@@ -86,7 +86,36 @@ const store = createStore({
             resolve();
           });
       })
-    } 
+    },
+    refTracker(context, request) {
+      return new Promise((resolve, reject) => {
+        firebase.database().ref("refTracker")
+          .once("value")
+          .then((snapshot) => {
+            let tracker = snapshot.val();
+            context.dispatch("refTrackerUpdate", {[request]: ++tracker[request]})
+            .then(res => {
+              resolve("test", res);
+            })
+            .catch(err => {
+              reject(err);
+            });
+          }).catch(error => {
+            reject(error);
+          });
+      })
+    },
+    refTrackerUpdate(context, request) {
+      return new Promise((resolve, reject) => {
+        firebase.database().ref("refTracker").update(request)
+          .then(data => {
+            resolve(data);
+          })
+          .catch(err => {
+            reject(err);
+          })
+      })
+    }
   }
 });
 

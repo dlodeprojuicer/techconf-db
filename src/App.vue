@@ -16,6 +16,16 @@ export default defineComponent({
     IonApp,
     IonRouterOutlet,
     Header
+  },
+  mounted() {
+    console.log(this.$route.query.ref);
+    if (this.$route.query.ref) {
+      this.$store.dispatch("refTracker", this.$route.query.ref).then(() => {
+        console.log("refTracker updated");
+      }).catch(err => {
+        console.log("refTracker updated error: ", err);
+      });
+    }
   }
 });
 </script>
