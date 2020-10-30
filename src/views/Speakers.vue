@@ -1,9 +1,9 @@
 <template>
   <ion-page>
     <ion-content class="ion-padding">
-      <h2 class="heading-h2">
+      <h1 class="heading-h2">
         Speakers you can reach out to if you are planning a conference
-      </h2>
+      </h1>
       <br />
       <div class="lg-content-center">
         <SkeletonText v-if="loading" />

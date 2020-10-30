@@ -1,14 +1,14 @@
 <template>
   <ion-page>
     <ion-content class="ion-padding">
-      <h2 class="heading-h2">
+      <h1 class="heading-h2">
         A  concise list of tech conferences in ZA
-      </h2>
+      </h1>
       <div class="lg-content-center">
         <SearchFilters :venue="true" />
         <SkeletonText v-if="loading" />
         <ConfList :data="filteredEvents" v-if="filteredEvents.length > 0" />
-        <h1 v-if="filteredEvents.length < 1">No search results</h1>
+        <h2 v-if="filteredEvents.length < 1">No search results</h2>
         <br /><br />
         If you wish to add a conference please email simodms@gmail.com
       </div>

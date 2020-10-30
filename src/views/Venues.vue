@@ -1,9 +1,9 @@
 <template>
   <ion-page>
     <ion-content class="ion-padding">
-      <h2 class="heading-h2">
+      <h1 class="heading-h2">
         A  concise list of tech conference venues in ZA
-      </h2>
+      </h1>
       <div class="lg-content-center">
         <SearchFilters />
         <SkeletonText v-if="loading" />
