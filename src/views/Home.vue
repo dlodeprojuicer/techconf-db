@@ -57,7 +57,6 @@ export default defineComponent({
     },
     fetchEvents() {
       this.$store.dispatch("getEvents").then(() => {
-        // this.filteredEvents = data;
         this.loading = false;
       }).catch(error => {
           this.loading = false;

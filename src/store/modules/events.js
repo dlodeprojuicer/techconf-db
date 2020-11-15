@@ -82,6 +82,22 @@ const actions = {
               endFormatted: docData.end ? moment(docData.end).format("DD/MM/YYYY") : null,
             });
           }
+
+          // Ad
+          // const ad = {
+          //   "website": "https://example.com",
+          //   "province": "",
+          //   "createdBy": "JE3Bh37hpOch095fAEAcNbwrQWI3",
+          //   "name": "Your Project Name",
+          //   "ad": true,
+          //   "desc": "Short project description of no more than twenty (20) words. Short project description of no more than twenty words."
+          // };
+          
+          // Insert ad {ad}
+          // anywhere between 0 and the number of total number of events {Math.random()}
+          // without deleting items {0}
+          // eventData.splice(Math.floor(Math.random() * docs.length), 0, ad);
+
           context.commit("events", eventData);
           resolve(eventData);
         }).catch( error => {

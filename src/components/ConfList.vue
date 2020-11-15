@@ -1,40 +1,72 @@
 <template>
   <ion-grid>
-    <ion-row v-for="(item, index) in data" :key="index">
-      <ion-col>
-        <p class="conf-name">
-          <b>{{ item.eventName }}</b>
-        </p>
-        <p>{{ item.venue }}, {{ item.town }}</p>
+    <div v-for="(item, index) in data" :key="index">
+      <ion-row v-if="!item.ad">
+        <ion-col>
+          <p class="conf-name">
+            <b>{{ item.eventName }}</b>
+          </p>
+          <p>{{ item.venue }}, {{ item.town }}</p>
 
-        <p v-if="item.start && item.end">
-          {{ `${item.startFormatted} - ${item.endFormatted}` }}
-        </p>
+          <p v-if="item.start && item.end">
+            {{ `${item.startFormatted} - ${item.endFormatted}` }}
+          </p>
 
-        <p v-if="!item.start && !item.end" class="no-date">New dates TBA</p>
+          <p v-if="!item.start && !item.end" class="no-date">New dates TBA</p>
 
-        <!-- <p class="mobile-only">
-          <a :href="item.website" target="_blank">
-             <ion-icon :icon="openOutline"></ion-icon> Website
-          </a
-        ></p> -->
-      </ion-col>
-      <ion-col offset="2" class="desktop-only">
-      </ion-col>
-      <ion-col offset="2">
-        <p>
-          <a :href="item.website" target="_blank">
-             <ion-icon :icon="openOutline"></ion-icon> Website
-          </a>
-        </p>
-        <p @click="addToCalendar(item)" v-if="item.start && item.end" class="desktop-only">
-          <ion-icon :icon="calendarClearOutline"></ion-icon> Add to Calendar
-        </p>
-        <!-- <p>
-          <ion-icon :icon="heartOutline"></ion-icon> Spread love
-        </p> -->
-      </ion-col>
-    </ion-row>
+          <!-- <p class="mobile-only">
+            <a :href="item.website" target="_blank">
+              <ion-icon :icon="openOutline"></ion-icon> Website
+            </a
+          ></p> -->
+        </ion-col>
+        <ion-col offset="2" class="desktop-only">
+        </ion-col>
+        <ion-col offset="2">
+          <p>
+            <a :href="item.website" target="_blank">
+              <ion-icon :icon="openOutline"></ion-icon> Website
+            </a>
+          </p>
+          <p @click="addToCalendar(item)" v-if="item.start && item.end" class="desktop-only">
+            <ion-icon :icon="calendarClearOutline"></ion-icon> Add to Calendar
+          </p>
+          <!-- <p>
+            <ion-icon :icon="heartOutline"></ion-icon> Spread love
+          </p> -->
+        </ion-col>
+      </ion-row>
+
+      <ion-row v-if="item.ad">
+        <ion-col>
+          <p class="conf-name">
+            <b>{{ item.name }}</b> <small>ad</small>
+          </p>
+          
+          <p>
+            {{ item.desc }}
+          </p>
+
+          <!-- <p class="mobile-only">
+            <a :href="item.website" target="_blank">
+              <ion-icon :icon="openOutline"></ion-icon> Website
+            </a
+          ></p> -->
+        </ion-col>
+        <ion-col offset="2" class="desktop-only">
+        </ion-col>
+        <ion-col offset="2">
+          <p>
+            <a :href="item.website" target="_blank">
+              <ion-icon :icon="openOutline"></ion-icon> Website
+            </a>
+          </p>
+          <!-- <p>
+            <ion-icon :icon="heartOutline"></ion-icon> Spread love
+          </p> -->
+        </ion-col>
+      </ion-row>
+    </div>
   </ion-grid>
 </template>
 
