@@ -35,5 +35,6 @@ ion-tab-bar {
 
 ion-icon, a {
   margin: 0 5px;
+  color: #777777;
 }
 </style>

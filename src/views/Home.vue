@@ -1,9 +1,10 @@
 <template>
   <ion-page>
     <ion-content class="ion-padding">
-      <h1 class="heading-h2">
-        A  concise list of tech conferences in ZA
-      </h1>
+      <Highlights :data="monthEventCount" class="desktop-only"/>
+      <!-- <h1 class="heading-h2">
+        A concise list of tech conferences in ZA
+      </h1> -->
       <div class="lg-content-center">
         <SearchFilters :venue="true" />
         <SkeletonText v-if="loading" />
@@ -28,6 +29,7 @@ import ConfList from "../components/ConfList";
 import Fab from "../components/Fab";
 import SkeletonText from "../components/SkeletonText";
 import SearchFilters from "../components/SearchFilters";
+import Highlights from "../components/Highlights";
 
 import { mapGetters } from 'vuex';
 
@@ -40,6 +42,7 @@ export default defineComponent({
     IonPage,
     ConfList,
     SkeletonText,
+    Highlights,
     SearchFilters,
     Fab,
   },

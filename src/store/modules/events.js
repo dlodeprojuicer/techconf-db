@@ -41,8 +41,8 @@ const getters = {
     const month = date.getMonth();
     const monthPlus = month + 1;
     return events.filter(event => {
-      if(event.start) {
-        return event.start.split("/")[1] == monthPlus
+      if(event.startFormatted) {
+        return event.startFormatted.split("/")[1] == monthPlus
       }
     });
   },

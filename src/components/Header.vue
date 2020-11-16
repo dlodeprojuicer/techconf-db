@@ -141,7 +141,7 @@ export default {
 
 <style lang="scss" scoped>
 ion-toolbar, ion-menu-button, ion-button {
-  --background: #144d75;
+  --background: var(--ion-color-primary);
   --color: #ffffff;
   font-weight: 700;
 }
@@ -169,7 +169,7 @@ ion-list {
 }
 
 ion-item.logo-item {
-  --background: #144d75;
+  --background: var(--ion-color-primary);
   color: #fff;
   font-weight: bold;
   line-height: 30px;
