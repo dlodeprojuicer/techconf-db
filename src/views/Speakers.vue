@@ -3,7 +3,12 @@
     <ion-content class="ion-padding">
       <h1 class="heading-h2">
         Speakers you can reach out to if you are planning a conference
+        <span v-if="!loginToken">
+          <br /><br />
+          <ion-button size="medium" @click="speakerReg">Register as a speaker</ion-button>
+        </span>
       </h1>
+      
       <br />
       <div class="lg-content-center">
         <SkeletonText v-if="loading" />
@@ -17,7 +22,8 @@
 <script>
 import {
   IonPage,
-  IonContent
+  IonContent,
+  IonButton
 } from "@ionic/vue";
 
 import { defineComponent } from 'vue';
@@ -35,12 +41,13 @@ export default defineComponent({
   components: {
     IonContent,
     IonPage,
+    IonButton,
     SpeakerList,
     SkeletonText,
     Fab,
   },
   computed: {
-    ...mapGetters(['speakers']),
+    ...mapGetters(['speakers', 'loginToken']),
   },
   data() {
     return {
@@ -59,6 +66,9 @@ export default defineComponent({
         // eslint-disable-next-line
         console.log(error);
       });
+    },
+    speakerReg() {
+      this.$router.push("/register?src=speakerReg");
     },
     seedSpeakers() {
       const list = [
@@ -100,12 +110,9 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-// ion-content {
-//   z-index: -99999;
-// }
-  .activeTip {
-    color: green;
-  }
+.activeTip {
+  color: green;
+}
 
 .heading-h2 {
   font-size: 20px;
@@ -172,5 +179,9 @@ export default defineComponent({
   border-radius: 30px;
   border: 1px #0e0e0e solid;
   text-align: center;
+}
+
+ion-button {
+  --background: #144d75;
 }
 </style>
