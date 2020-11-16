@@ -1,5 +1,5 @@
 <template>
-  <ion-grid>
+  <ion-grid :class="home ? 'bigSearchFilter' : null">
     <ion-row>
       <ion-col>
         <ion-input v-model="searchString" placeholder="Search" @keyup="searchStringFn"></ion-input>
@@ -57,6 +57,7 @@ export default {
   },
   data() {
     return {
+      home: this.$route.name === "conferences" ? true : false,
       searchString: "",
       searchProvince: "- Province -",
       searchVenue: "- Venue -",
@@ -113,3 +114,12 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+.bigSearchFilter {
+  font-weight: 500;
+  margin: 0 -36% 5px -36%;
+  padding: 5px 36%;
+  background: #fff;
+}
+</style>

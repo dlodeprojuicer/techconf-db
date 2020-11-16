@@ -10,7 +10,6 @@
         <SkeletonText v-if="loading" />
         <ConfList :data="filteredEvents" v-if="filteredEvents.length > 0" />
         <h2 v-if="filteredEvents.length < 1">No search results</h2>
-
       </div>
     </ion-content>
     <Fab />

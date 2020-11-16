@@ -1,17 +1,11 @@
 <template>
   <ion-grid>
     <ion-row>
-      <ion-col size="auto" class="card-column" v-for="(item, index) in data" :key="index">
-        <!-- <ion-avatar>
-          <img
-            :src="item.image"
-          />
-        </ion-avatar> -->
+      <ion-col class="card-column" v-for="(item, index) in data" :key="index">
         <ion-label>{{ item.eventName }}</ion-label>
         <br />
-        <ion-label>{{ item.venue }}, {{ item.town }}</ion-label>
+        <ion-label>{{ item.venue }}</ion-label>
 
-        <br />
         <p v-if="item.start && item.end">
           {{ `${item.startFormatted} - ${item.endFormatted}` }}
         </p>
@@ -82,7 +76,7 @@ export default {
 ion-grid {
   text-align: center;
   margin: auto;
-  width: 50%;
+  width: 30%;
 }
 
 ion-avatar {
@@ -94,6 +88,7 @@ ion-col.card-column {
   border: 1px solid #efefef;
   margin: 0 5px;
   border-radius: 5px;
+  width: 400px;
 }
 
 ion-label {
