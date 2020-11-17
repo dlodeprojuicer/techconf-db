@@ -118,7 +118,7 @@ export default {
 <style lang="scss" scoped>
 .bigSearchFilter {
   font-weight: 500;
-  margin: 0 -36% 5px -36%;
+  margin: -30px -36% 5px -36%;
   padding: 5px 36%;
   background: #fff;
 }

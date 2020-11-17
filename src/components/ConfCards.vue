@@ -76,7 +76,7 @@ export default {
 ion-grid {
   text-align: center;
   margin: auto;
-  width: 30%;
+  width: 35%;
 }
 
 ion-avatar {
@@ -88,7 +88,7 @@ ion-col.card-column {
   border: 1px solid #efefef;
   margin: 0 5px;
   border-radius: 5px;
-  width: 400px;
+  // width: 300px;
 }
 
 ion-label {
