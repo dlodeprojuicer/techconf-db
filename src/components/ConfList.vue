@@ -20,8 +20,8 @@
             </a
           ></p> -->
         </ion-col>
-        <ion-col offset="2" class="desktop-only">
-        </ion-col>
+        <!-- <ion-col offset="2" class="desktop-only">
+        </ion-col> -->
         <ion-col offset="2">
           <p>
             <a :href="item.website" target="_blank">
@@ -53,8 +53,8 @@
             </a
           ></p> -->
         </ion-col>
-        <ion-col offset="2" class="desktop-only">
-        </ion-col>
+        <!-- <ion-col offset="2" class="desktop-only">
+        </ion-col> -->
         <ion-col offset="2">
           <p>
             <a :href="item.website" target="_blank">

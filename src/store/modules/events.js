@@ -83,20 +83,30 @@ const actions = {
             });
           }
 
-          // Ad
-          // const ad = {
-          //   "website": "https://example.com",
-          //   "province": "",
-          //   "createdBy": "JE3Bh37hpOch095fAEAcNbwrQWI3",
-          //   "name": "Your Project Name",
-          //   "ad": true,
-          //   "desc": "Short project description of no more than twenty (20) words. Short project description of no more than twenty words."
-          // };
+          // Ads
+          const ad1 = {
+            "website": "https://www.pixeltrue.com/?via=simo",
+            "province": "",
+            "createdBy": "JE3Bh37hpOch095fAEAcNbwrQWI3",
+            "name": "Pixeltrue",
+            "ad": true,
+            "desc": "Convert your visitors to customers with high quality illustrations that will help you build breath-taking websites."
+          };
+
+          const ad2 = {
+            "website": "https://www.pixeltrue.com/?via=simo",
+            "province": "",
+            "createdBy": "JE3Bh37hpOch095fAEAcNbwrQWI3",
+            "name": "Getrewardful",
+            "ad": true,
+            "desc": "A simple way for SaaS companies to setup affiliate and referral programs with Stripe."
+          };
           
           // Insert ad {ad}
           // anywhere between 0 and the number of total number of events {Math.random()}
           // without deleting items {0}
-          // eventData.splice(Math.floor(Math.random() * docs.length), 0, ad);
+          eventData.splice(Math.floor(Math.random() * docs.length), 0, ad1);
+          eventData.splice(Math.floor(Math.random() * docs.length), 0, ad2);
 
           context.commit("events", eventData);
           resolve(eventData);
