@@ -43,10 +43,11 @@ const getters = {
   monthEventCount({ events = [] }) {
     const date = new Date();
     const month = date.getMonth();
+    const year = date.getFullYear();
     const monthPlus = month + 1;
     return events.filter(event => {
       if(event.startFormatted) {
-        return event.startFormatted.split("/")[1] == monthPlus
+        return event.startFormatted.split("/")[1] == monthPlus && event.startFormatted.split("/")[2] == year;
       }
     });
   },
