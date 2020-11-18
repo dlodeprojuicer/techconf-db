@@ -11,7 +11,7 @@ const getters = {
     return venues || JSON.parse(localStorage.getItem("tcdbVenues"));
   },
   filteredVenues({ venues = [], updateVenueSearchObject }) {
-    if (!updateVenueSearchObject.field || updateVenueSearchObject.field === "") {
+    if (!updateVenueSearchObject.value || updateVenueSearchObject.value === "") {
       return venues;
     } else {
       return venues.filter(venue => venue[updateVenueSearchObject.field].toLowerCase().includes(updateVenueSearchObject.value.toLowerCase()));
