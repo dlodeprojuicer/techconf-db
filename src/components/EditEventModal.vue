@@ -23,20 +23,38 @@
         <ion-input v-model="form.venue"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label>Street</ion-label>
-        <ion-input v-model="form.address.street"></ion-input>
-      </ion-item>
-      <ion-item>
         <ion-label>Area / Suburb</ion-label>
-        <ion-input v-model="form.address.area"></ion-input>
+        <ion-input v-model="form.area"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label>Town</ion-label>
-        <ion-input v-model="form.address.town"></ion-input>
+        <ion-input v-model="form.town"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label>Province</ion-label>
-        <ion-input v-model="form.address.province"></ion-input>
+        <ion-input v-model="form.province"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Start</ion-label>
+        <ion-datetime 
+          display-format="DD-MMM-YYYY" 
+          picker-format="DD-MMM-YYYY" 
+          :value="form.start" 
+          @ionChange="startChange($event)"
+          min="2015-01-01"
+          max="2022-01-02"
+        ></ion-datetime>
+      </ion-item>
+      <ion-item>
+        <ion-label>End</ion-label>
+        <ion-datetime 
+          display-format="DD-MMM-YYYY" 
+          picker-format="DD-MMM-YYYY" 
+          :value="form.end" 
+          @ionChange="endChange($event)"
+          min="2015-01-01"
+          max="2022-01-02"
+        ></ion-datetime>
       </ion-item>
       <div class="form-buttons">
         <ion-button size="small" color="danger" @click="closeModal"
@@ -58,8 +76,10 @@ import {
   IonToolbar,
   IonItem,
   IonLabel,
+  IonIcon,
   IonInput,
   IonButton,
+  IonDatetime,
   IonProgressBar,
   modalController,
 } from "@ionic/vue";
@@ -87,12 +107,20 @@ export default defineComponent({
     IonTitle,
     IonToolbar,
     IonItem,
+    IonIcon,
     IonLabel,
     IonProgressBar,
     IonInput,
+    IonDatetime,
     IonButton,
   },
   methods: {
+    startChange({ detail }) {
+      this.form.start = detail.value;
+    },
+    endChange({ detail }) {
+      this.form.end = detail.value;
+    },
     closeModal() {
       modalController.dismiss();
     },
@@ -116,7 +144,7 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 ion-content {
-  height: 100vh;
+  height: 600px;
 }
 
 ion-item > ion-label {

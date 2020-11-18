@@ -35,6 +35,12 @@
             <ion-icon :icon="heartOutline"></ion-icon> Spread love
           </p> -->
         </ion-col>
+        <ion-text class="actions" size="small" v-if="profilePage">
+          <ion-button color="dark" @click="editEvent(item)"> Edit </ion-button>
+          <ion-button color="dark" @click="deleteEvent(item.id)">
+            Delete
+        </ion-button>
+        </ion-text>
       </ion-row>
 
       <ion-row v-if="item.ad">
@@ -75,6 +81,8 @@ import {
   IonIcon,
   IonGrid,
   IonRow,
+  IonText,
+  IonButton,
   IonCol,
   modalController
 } from "@ionic/vue";
@@ -100,6 +108,8 @@ export default {
     IonGrid,
     IonRow,
     IonCol,
+    IonText,
+    IonButton,
     IonIcon,
   },
   setup() {
