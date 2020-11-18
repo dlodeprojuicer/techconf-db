@@ -37,11 +37,6 @@ export default {
   },
   computed: {
     ...mapGetters(['monthEventCount']),
-  },
-  methods: {
-    ionViewDidEnter() {
-      console.log("YEP",this.monthEventCount)
-    }
   }
 };
 </script>
