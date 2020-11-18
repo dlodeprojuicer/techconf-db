@@ -62,7 +62,6 @@ const mutations = {
     localStorage.setItem("tcdbUserEvents", JSON.stringify(data));
   },
   updateSearch(state, data) {
-    console.log(data);
     state[data.stateObject] = data;
   }
 }
