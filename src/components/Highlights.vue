@@ -1,6 +1,6 @@
 <template>
   <div class="highlights">		
-    <h1>
+    <h1 class="hero-text">
 			A concise list of tech conferences in ZA
 		</h1>
 
@@ -8,13 +8,9 @@
 			This month
 		</h3>
 
-		<div class="wrapper-div" v-if="data.length > 0">
+		<div v-if="data.length > 0">
 			<ConfCards :data="data" />
 		</div>
-		
-		<h4>
-			<a href="/register">Register</a> to add a conference or to be enlisted as a speaker.
-		</h4>
   </div>
 </template>
 
@@ -49,6 +45,13 @@ h1, h3, h4 {
 	text-align: center;
 }
 
+.hero-text {
+  text-align: left;
+  width: 340px;
+  font-size: 40px;
+  margin-top: 70px;
+}
+
 .highlights {
   background: var(--ion-color-primary);
   height: 45vh;
@@ -58,13 +61,21 @@ h1, h3, h4 {
   position: relative;
 }
 
-a {
-	color: #fff;
+.highlights::before {    
+  content: "";
+  background-image: url("../../public/assets/img/tech-conference-colored.svg");
+  background-size: 700px;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  opacity: 0.75;
 }
 
-.wrapper-div {
-// margin-left: 250px;
-  // margin: auto;
-  // width: 30%;
+a {
+	color: #fff;
 }
 </style>
