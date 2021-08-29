@@ -3,16 +3,20 @@
     <ion-content class="ion-padding">
       <h1 class="heading-h2">
         Speakers you can reach out to if you are planning a conference
-        <span v-if="!loginToken">
+        <!-- <span v-if="!loginToken">
           <br /><br />
           <ion-button size="medium" @click="speakerReg">Register as a speaker</ion-button>
-        </span>
+        </span> -->
       </h1>
       
       <br />
       <div class="lg-content-center">
         <SkeletonText v-if="loading" />
         <SpeakerList :data="speakers" />
+
+        <div style="text-aling: center; padding: 30px 0;">
+          If you wish to be added as a speaker please email simodms@gmail.com
+        </div>
       </div>
     </ion-content>
     <Fab />
@@ -23,7 +27,7 @@
 import {
   IonPage,
   IonContent,
-  IonButton
+  // IonButton
 } from "@ionic/vue";
 
 import { defineComponent } from 'vue';
@@ -41,7 +45,7 @@ export default defineComponent({
   components: {
     IonContent,
     IonPage,
-    IonButton,
+    // IonButton,
     SpeakerList,
     SkeletonText,
     Fab,

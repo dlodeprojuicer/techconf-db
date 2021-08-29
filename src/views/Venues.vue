@@ -9,8 +9,10 @@
         <SkeletonText v-if="loading" />
         <VenueList :data="filteredVenues" v-if="filteredVenues.length > 0" />
         <h1 v-if="filteredVenues.length < 1">No search results</h1>
-        <br /><br />
-        If you wish to add a venue please email simodms@gmail.com
+  
+        <div style="width: 50%; margin:0 auto; padding: 30px 0;">
+          If you wish to add a venue please email simodms@gmail.com
+        </div>
       </div>
     </ion-content>
     <Fab />

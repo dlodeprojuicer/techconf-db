@@ -27,13 +27,13 @@
               <ion-col>
                 <h5>Size</h5>
                 <p>
-                  <b>Area:</b> {{ item.squareMeter }} m²
+                  <span v-if="item.squareMeter"><b>Area:</b> {{ item.squareMeter }} m²</span>
                   <br />
-                  <b>Length:</b> {{ item.length }} m
+                  <span v-if="item.length"><b>Length:</b> {{ item.length }} m</span>
                   <br />
-                  <b>Width:</b> {{ item.width }} m
+                  <span v-if="item.width"><b>Width:</b> {{ item.width }} m</span>
                   <br />
-                  <b>Height:</b> {{ item.height }} m
+                  <span v-if="item.height"><b>Height:</b> {{ item.height }} m</span>
                 </p>
               </ion-col>
               <ion-col>

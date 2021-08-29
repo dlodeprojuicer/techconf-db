@@ -305,13 +305,13 @@ export default defineComponent({
     };
   },
   methods: {
-    ionViewDidEnter() {
-      if (this.$route.query.src === "speakerReg") {
-        this.form.isSpeaker = true;
-      } else {
-        this.form.isSpeaker = false;
-      }
-    },
+    // ionViewDidEnter() {
+    //   if (this.$route.query.src === "speakerReg") {
+    //     this.form.isSpeaker = true;
+    //   } else {
+    //     this.form.isSpeaker = false;
+    //   }
+    // },
     goHome() {
       this.$router.push("/");
     },
