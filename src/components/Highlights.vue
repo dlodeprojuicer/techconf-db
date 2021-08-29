@@ -1,7 +1,7 @@
 <template>
   <div class="highlights">		
     <h1 class="hero-text">
-			A concise list of tech conferences in ZA
+			A concise list of tech conferences in S.A
 		</h1>
 
     <h3 v-if="data.length > 0">
