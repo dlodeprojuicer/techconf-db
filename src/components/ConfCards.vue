@@ -1,7 +1,7 @@
 <template>
   <ion-grid>
     <ion-row>
-      <ion-col class="card-column" v-for="(item, index) in data" :key="index">
+      <ion-col class="card-column" v-for="(item, index) in data" :key="index" @click="goto(item.website)">
         <ion-label>{{ item.eventName }}</ion-label>
         <br />
         <ion-label>{{ item.venue }}</ion-label>
@@ -17,11 +17,9 @@
 <script>
 import {
   IonLabel,
-  // IonTabButton,
   IonGrid,
   IonCol,
   IonRow,
-  // IonAvatar,
 } from "@ionic/vue";
 import {
   chevronForward,
@@ -45,8 +43,6 @@ export default {
   },
   components: {
     IonLabel,
-    // IonAvatar,
-    // IonTabButton,
     IonGrid,
     IonCol,
     IonRow,
@@ -68,6 +64,10 @@ export default {
     };
   },
   methods: {
+    goto(link) {
+      console.log(link)
+      window.open(link)
+    }
   },
 };
 </script>
@@ -89,6 +89,10 @@ ion-col.card-column {
   margin: 0 5px;
   border-radius: 5px;
   // width: 300px;
+
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 ion-label {

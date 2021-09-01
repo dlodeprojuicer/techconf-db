@@ -4,11 +4,8 @@
 			A concise list of tech conferences in S.A
 		</h1>
 
-    <h3 v-if="data.length > 0">
-			This month
-		</h3>
-
 		<div v-if="data.length > 0">
+     <h3>This month</h3>
 			<ConfCards :data="data" />
 		</div>
   </div>
@@ -40,16 +37,15 @@ export default {
 <style lang="scss" scoped>
 h1, h3, h4 {
 	color: #fff;
-	// width: 50%;
-	// margin: 0 auto;
 	text-align: center;
 }
 
 .hero-text {
   text-align: left;
-  width: 340px;
-  font-size: 40px;
-  margin-top: 70px;
+  // width: 340px;
+  font-size: 35px;
+  margin: 30px 0 60px 0;
+  text-align: center;
 }
 
 .highlights {
@@ -63,7 +59,7 @@ h1, h3, h4 {
 
 .highlights::before {    
   content: "";
-  background-image: url("../../public/assets/img/tech-conference-colored.svg");
+  // background-image: url("../../public/assets/img/tech-conference-colored.svg");
   background-size: 700px;
   background-position: center;
   background-repeat: no-repeat;
