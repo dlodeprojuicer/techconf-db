@@ -3,10 +3,8 @@
     <ion-content class="ion-padding">
       <div class="lg-content-center">
         <ion-progress-bar type="indeterminate" color="dark" v-if="loading"></ion-progress-bar>
-        <ion-title class="form-title">
-          <ion-icon class="left-icons" :icon="personOutline"></ion-icon> 
-          Register
-        </ion-title>
+        <AuthFormHeading data="Register" />
+
         <ion-item v-for="(f, i) in formFields" :key="i">
           <ion-label position="stacked">{{ f.label }}</ion-label>
           <ion-input
@@ -57,18 +55,11 @@
           </ion-item>
         </div>
 
-        <p class="error-message">
-          {{ endpointError.message }}
-        </p>
-
-        <div class="form-buttons">
-          <p @click="gotoLoginPage">Have an account? <u>Login</u></p>
-          <br /><br />
-          <ion-button size="small" color="danger" @click="goHome">Cancel</ion-button>
-          <ion-button size="small" color="success" @click="submit"
-            >Signup</ion-button
-          >
-        </div>
+        <AuthFormFooter 
+          loginRegText="Have an account?"
+          :err="endpointError.message"
+          @submit="submit"
+        />
       </div>
     </ion-content>
   </ion-page>
@@ -78,17 +69,16 @@
 import {
   IonPage,
   IonContent,
-  IonTitle,
   IonItem,
   IonProgressBar,
   IonLabel,
   IonInput,
-  IonIcon,
-  IonToggle,
-  IonButton
+  IonToggle
 } from "@ionic/vue";
 import { defineComponent } from "vue";
 import { personOutline } from "ionicons/icons";
+import AuthFormHeading from "../components/AuthFormHeading.vue";
+import AuthFormFooter from "../components/AuthFormFooter.vue";
 
 export default defineComponent({
   name: "Modal",
@@ -96,14 +86,13 @@ export default defineComponent({
   components: {
     IonPage,
     IonContent,
-    IonTitle,
     IonProgressBar,
     IonItem,
     IonLabel,
     IonInput,
     IonToggle,
-    IonIcon,
-    IonButton
+    AuthFormHeading,
+    AuthFormFooter
   },
   data() {
     return {
@@ -372,17 +361,30 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+.lg-content-center {
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 6px;
+}
+
+
 ion-content {
   height: 100vh;
 }
 
-ion-item > ion-label {
-  font-weight: bold;
-  font-size: 20px;
+ion-item {
+  margin: 10px;
+  border-radius: 6px;
+  --border: none;
+  ion-label {
+    font-weight: bold;
+    font-size: 20px;
+  }
 }
 
 .form-title {
-  margin-top: 60px;
+  text-align: center;
+  margin-bottom: 30px;
 }
 
 .error-message {

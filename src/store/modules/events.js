@@ -1,5 +1,10 @@
 import firebase from "../../firebase";
 import moment from "moment";
+// import redis from "redis";
+
+const REDIS_PORT = process.env.PORT || 6379;
+console.log(REDIS_PORT);
+// const redisClient = redis.createClient(REDIS_PORT);
 
 // const eventFormater = (docs) => {
 //   const eventData = [];
@@ -112,6 +117,8 @@ const actions = {
           // without deleting items {0}
           eventData.splice(Math.floor(Math.random() * docs.length), 0, ad1);
           eventData.splice(Math.floor(Math.random() * docs.length), 0, ad2);
+
+          // redisClient.set("events", eventData);
 
           context.commit("events", eventData);
           resolve(eventData);

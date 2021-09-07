@@ -1,11 +1,12 @@
 {
-  "name": "ionic-vue-mobile-template-01",
+  "name": "techconf-db",
   "description": "Hybrid app template built with vue, ionic and capacitor",
   "author": "Simo Mafuxwana - @dlodeprojuicer",
   "version": "0.2.0",
   "private": true,
   "scripts": {
     "dev": "vue-cli-service serve",
+    "start": "nodemon server",
     "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",
     "test:e2e": "vue-cli-service test:e2e",
@@ -19,12 +20,16 @@
     "@ionic/vue-router": "5.6.7",
     "@johmun/vue-tags-input": "2.1.0",
     "@mailchimp/mailchimp_marketing": "3.0.22",
+    "axios": "^0.21.4",
     "chart.js": "2.9.3",
     "core-js": "3.6.5",
+    "express": "^4.17.1",
     "firebase": "7.22.0",
     "ionic-vue-form": "1.2.2",
     "moment": "2.29.0",
+    "node-fetch": "^3.0.0",
     "node-sass": "4.14.1",
+    "redis": "^3.1.2",
     "sass-loader": "10.0.2",
     "vee-validate": "4.0.0-beta.1",
     "vue": "3.0.0",
@@ -41,6 +46,7 @@
     "@vue/cli-service": "4.5.4",
     "@vue/compiler-sfc": "3.0.0-rc.10",
     "eslint": "6.8.0",
-    "eslint-plugin-vue": "7.0.0-beta.3"
+    "eslint-plugin-vue": "7.0.0-beta.3",
+    "nodemon": "^2.0.12"
   }
 }

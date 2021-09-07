@@ -3,10 +3,7 @@
     <ion-content class="ion-padding">
       <div class="lg-content-center">
         <ion-progress-bar type="indeterminate" color="dark" v-if="loading"></ion-progress-bar>
-        <ion-title class="form-title">
-          <ion-icon class="left-icons" :icon="personOutline"></ion-icon> 
-          Login
-        </ion-title>
+        <AuthFormHeading data="Login" />
         <ion-item>
           <ion-label>Email</ion-label>
           <ion-input v-model="form.email"></ion-input>
@@ -16,15 +13,11 @@
           <ion-input v-model="form.password" type="password"></ion-input>
         </ion-item>
 
-        <p class="error-message">
-          {{ endpointError.message }}
-        </p>
-
-        <div class="form-buttons">
-          <p @click="register">Don't have an account? <u>Register</u></p>
-          <ion-button size="small" color="danger" @click="goHome">Cancel</ion-button>
-          <ion-button size="small" color="success" @click="submit">Login</ion-button>
-        </div>
+        <AuthFormFooter 
+          loginRegText="Don't have an account?"
+          :err="endpointError.message"
+          @submit="submit"
+        />
       </div>
     </ion-content>
   </ion-page>
@@ -33,33 +26,30 @@
 <script>
 import {
   IonContent,
-  IonTitle,
   IonItem,
   IonLabel,
   IonPage,
   IonInput,
-  IonButton,
-  IonIcon,
   IonProgressBar,
 } from "@ionic/vue";
 import { defineComponent } from "vue";
-import { personOutline } from "ionicons/icons";
 
 import authStore from "../store";
+import AuthFormHeading from "../components/AuthFormHeading.vue";
+import AuthFormFooter from "../components/AuthFormFooter.vue";
 
 export default defineComponent({
   name: "Modal",
   props: ["store","content", "title"],
   components: {
 		IonContent,
-    IonTitle,
     IonProgressBar,
     IonItem,
     IonLabel,
     IonPage,
-    IonIcon,
     IonInput,
-    IonButton,
+    AuthFormHeading,
+    AuthFormFooter
   },
   data() {
     return {
@@ -71,17 +61,9 @@ export default defineComponent({
       },
     };
 	},
-  setup() {
-    return {
-      personOutline
-    }
-  },
   methods: {
     register() {
       this.$router.push("/register");
-    },    
-    goHome() {
-      this.$router.push("/");
     },
     submit() {
       this.loading = true;
@@ -120,20 +102,17 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+.lg-content-center {
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 6px;
+}
+
 ion-content {
 	height: 100vh;
 }
 
-.form-title {
-  margin-top: 60px;
-}
-
 ion-item > ion-label {
   font-weight: bold;
-}
-
-.error-message {
-  color: #ff0000;
-  text-align: center;
 }
 </style>

@@ -76,6 +76,7 @@ const mutations = {
 const actions = {
   login(context, request) {
     return new Promise((resolve, reject) => {
+      console.log("login...");
       firebase.auth().signInWithEmailAndPassword(request.email, request.password)
         .then(({ user }) => {
           context.dispatch("getUserProfile", user.uid).then(() => {
@@ -89,6 +90,7 @@ const actions = {
   },
   signUp(context, request) {
     return new Promise((resolve, reject) => {
+      console.log("reg...");
       firebase.auth().createUserWithEmailAndPassword(request.email, request.password)
         .then(({ user }) => {
           context.commit("loginToken", user.uid);
