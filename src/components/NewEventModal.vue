@@ -54,8 +54,8 @@
         picker-format="DD-MMM-YYYY" 
         :value="form.start" 
         @ionChange="startChange($event)"
-        min="2015-01-01"
-        max="2022-01-02"
+        min="2022-01-01"
+        max="2023-12-31"
       ></ion-datetime>
     </ion-item>
     <ion-item>
@@ -65,8 +65,8 @@
         picker-format="DD-MMM-YYYY" 
         :value="form.end" 
         @ionChange="endChange($event)"
-        min="2015-01-01"
-        max="2022-01-02"
+        min="2022-01-01"
+        max="2023-12-31"
       ></ion-datetime>
     </ion-item>
     <div class="form-buttons">
