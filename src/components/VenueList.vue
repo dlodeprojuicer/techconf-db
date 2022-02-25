@@ -165,63 +165,47 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 h2 {
   font-weight: 600;
-  color: #000000;
-}
+  color: #000000; }
 
 ion-item {
   --background: #ffffff;
   margin: 5px 0 0 -15px;
   line-height: 50px;
-  border-radius: 5px;
-}
+  border-radius: 5px; }
 
 ion-item.dates {
   --background: #ffffff;
   margin: -5px 0 0 auto;
   border-radius: 0 0 5px 5px;
   line-height: 20px;
-  padding: 0 0 0 44px;
-}
+  padding: 0 0 0 44px; }
 
 .no-date {
-  font-style: italic;
-}
+  font-style: italic; }
 
 ion-text.left {
   padding: 15px 10px 0px 10px;
   color: #000;
   border-radius: 5px 0 0 5px;
-  margin: 0 15px 0 -2px;
-  // background: #36AEEA;
-
-  &:nth-of-type(odd) {
-    background: #226391;
-  }
-
-  :nth-of-type(even) {
-    background: #36aeea;
-  }
-
-  ion-icon.left-icons {
+  margin: 0 15px 0 -2px; }
+  ion-text.left:nth-of-type(odd) {
+    background: #226391; }
+  ion-text.left :nth-of-type(even) {
+    background: #36aeea; }
+  ion-text.left ion-icon.left-icons {
     color: #ffffff;
-    font-size: 25px;
-  }
-}
+    font-size: 25px; }
 
 ion-text.visit-website {
-  // font-size: 13px;
-  color: #626262;
-
-  a {
-    text-decoration: none;
-  }
-}
+  color: #626262; }
+  ion-text.visit-website a {
+    text-decoration: none; }
 
 ion-icon.right-icons {
   color: #36aeea;
-  margin-left: 5px;
-}
+  margin-left: 5px; }
+
 </style>

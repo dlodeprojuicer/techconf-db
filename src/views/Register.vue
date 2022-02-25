@@ -360,7 +360,7 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss" scoped>
+<style lang="css" scoped>
 .lg-content-center {
   background: #ffffff;
   padding: 20px;

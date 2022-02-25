@@ -29,7 +29,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="css" scoped>
 .form-title {
   text-align: center;
   margin-bottom: 30px;

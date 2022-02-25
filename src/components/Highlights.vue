@@ -34,7 +34,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="css" scoped>
 h1, h3, h4 {
 	color: #fff;
 	text-align: center;
@@ -42,7 +42,6 @@ h1, h3, h4 {
 
 .hero-text {
   text-align: left;
-  // width: 340px;
   font-size: 35px;
   margin: 30px 0 60px 0;
   text-align: center;
@@ -59,7 +58,7 @@ h1, h3, h4 {
 
 .highlights::before {    
   content: "";
-  // background-image: url("../../public/assets/img/tech-conference-colored.svg");
+  /* background-image: url("../../public/assets/img/tech-conference-colored.svg"); */
   background-size: 700px;
   background-position: center;
   background-repeat: no-repeat;

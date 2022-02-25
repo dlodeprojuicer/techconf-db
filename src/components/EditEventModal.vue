@@ -142,7 +142,7 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss" scoped>
+<style lang="css" scoped>
 ion-content {
   height: 600px;
 }

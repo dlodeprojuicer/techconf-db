@@ -136,7 +136,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="css" scoped>
 h2 {
   font-weight: 600;
   color: #000000;

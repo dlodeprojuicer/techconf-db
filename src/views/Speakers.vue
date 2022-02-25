@@ -113,7 +113,7 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss" scoped>
+<style lang="css" scoped>
 .activeTip {
   color: green;
 }

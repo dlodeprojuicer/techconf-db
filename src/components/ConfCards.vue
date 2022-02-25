@@ -72,7 +72,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="css" scoped>
 ion-grid {
   text-align: center;
   margin: auto;
@@ -88,11 +88,10 @@ ion-col.card-column {
   border: 1px solid #efefef;
   margin: 0 5px;
   border-radius: 5px;
-  // width: 300px;
+}
 
-  &:hover {
-    cursor: pointer;
-  }
+ion-col.card-column:hover {
+  cursor: pointer;
 }
 
 ion-label {
@@ -118,15 +117,15 @@ a {
 .social {
   margin: 8px;
 }
-// ion-tab-button {
+/* // ion-tab-button {
 //   display: inline-block;
-// }
+// } */
 
 
-// .dates {
+/* // .dates {
 //   padding: 0 0 0 44px;
 //   text-align: center;
 //   align-items: center;
-// }
+// } */
 
 </style>

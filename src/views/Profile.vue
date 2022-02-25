@@ -89,7 +89,7 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss" scoped>
+<style lang="css" scoped>
 .person {
   width: 50%;
   margin: auto 25%;

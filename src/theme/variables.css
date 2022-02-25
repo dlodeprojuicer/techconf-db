@@ -1,12 +1,10 @@
 /* Ionic Variables and Theming. For more info, please see:
 http://ionicframework.com/docs/theming/ */
 
-@import "./media-queries.scss";
+@import "./media-queries.css";
 
-$baseColor: #181819;
-$primaryColor: #144d75;
-
-// $colors: (success, #000);
+/* $baseColor: #181819;
+$primaryColor: #144d75; */
 
 :root {
   --ion-color-primary: #144d75;
@@ -32,11 +30,11 @@ p , a , ul li , strong , label {
 }
 
 ion-toolbar.modal-header {
-  --background: #144d75;
+  --background: #144d75; 
+}
 
-  ion-title {
-    color: #fff;
-  }
+ion-toolbar.modal-header ion-title {
+  color: #fff;
 }
 
 

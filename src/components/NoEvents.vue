@@ -42,17 +42,17 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-// .no-events-img {
-//   width: 25%;
-//   margin: 3% 39%;
-//   text-align: center;
-//   img {
-//     filter: grayscale(20%);
-//     opacity: 0.7;
-//   }
-//   ion-button {
-//     opacity: 0.9;
-//   }
-// }
+<style lang="css" scoped>
+/* .no-events-img {
+  width: 25%;
+  margin: 3% 39%;
+  text-align: center;
+  img {
+    filter: grayscale(20%);
+    opacity: 0.7;
+  }
+  ion-button {
+    opacity: 0.9;
+  }
+} */
 </style>

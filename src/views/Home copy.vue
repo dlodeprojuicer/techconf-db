@@ -85,7 +85,7 @@ export default defineComponent({
 </script>
 
 
-<style lang="scss">
+<style lang="css">
 .heading-h2 {
   font-size: 20px;
   text-align: center;

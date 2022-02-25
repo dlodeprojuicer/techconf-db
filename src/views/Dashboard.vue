@@ -68,7 +68,7 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss">
+<style lang="css">
   ion-item.list-header > ion-label {
     font-weight: bold;
   }

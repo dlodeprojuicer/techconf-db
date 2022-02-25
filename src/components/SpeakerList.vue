@@ -135,7 +135,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="css" scoped>
 ion-grid {
   text-align: center;
 }
@@ -171,15 +171,4 @@ a {
 .social {
   margin: 8px;
 }
-// ion-tab-button {
-//   display: inline-block;
-// }
-
-
-// .dates {
-//   padding: 0 0 0 44px;
-//   text-align: center;
-//   align-items: center;
-// }
-
 </style>

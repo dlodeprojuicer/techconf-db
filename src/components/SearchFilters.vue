@@ -115,7 +115,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="css" scoped>
 .bigSearchFilter {
   font-weight: 500;
   margin: -30px -36% 5px -36%;

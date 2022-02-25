@@ -120,7 +120,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="css" scoped>
 ion-fab-button[data-desc]::after {
   position: fixed;
   content: attr(data-desc);

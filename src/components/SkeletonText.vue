@@ -80,7 +80,7 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss">
+<style lang="css">
   ion-skeleton-text.event-list-skeleton {
     line-height: 20px;
   }
