@@ -2,8 +2,8 @@ import firebase from "../../firebase";
 import moment from "moment";
 // import redis from "redis";
 
-const REDIS_PORT = process.env.PORT || 6379;
-console.log(REDIS_PORT);
+// const REDIS_PORT = process.env.PORT || 6379;
+// console.log(REDIS_PORT);
 // const redisClient = redis.createClient(REDIS_PORT);
 
 // const eventFormater = (docs) => {
@@ -22,24 +22,69 @@ console.log(REDIS_PORT);
 
 const state = {
   events: [],
-  filteredEvents: [],
+  // filteredEvents: [],
   updateEventSearchObject: {},
   monthEventCount: 0,
+  future: [],
+  past: [],
+  previous: []
 }
 
 const getters = {
   events({ events = [] }) {
     return events || JSON.parse(localStorage.getItem("tcdbEvents"));
   },
-  filteredEvents({ events = [], updateEventSearchObject }) {
+  filteredEvents({ events = [], updateEventSearchObject, future, past, previous }) {
+    future = []
+    past = []
+    previous = []
     if (!updateEventSearchObject?.value || updateEventSearchObject?.value === "") {
-      return events;
+      events.map(e => {
+        if (moment(e.startFormatted).isSame(moment(), 'year')) {
+          future.push(e);
+          return e;
+        } else if (moment(e.startFormatted).isSame(moment(), 'year') && moment(e.startFormatted).isBefore(moment(), 'month')) {
+          past.push(e)
+        } else {
+          previous.push(e);
+        }
+      })
+
+      // ascending order
+      future.sort((a, b) => moment(a).diff(b));
+      future.reverse();
+      return {
+        future, 
+        past, 
+        previous 
+      }
     } else {
-      return events.filter(event => {
+      future = []
+      past = []
+      previous = []
+      const filtered = events.filter(event => {
         if (!event.ad) {
           return event[updateEventSearchObject.field].toLowerCase().includes(updateEventSearchObject.value.toLowerCase())
         }
       });
+
+      filtered.map(e => {
+        if (moment(e.startFormatted).isSame(moment(), 'year')) {
+          future.push(e);
+          return e;
+        } else if (moment(e.startFormatted).isSame(moment(), 'year') && moment(e.startFormatted).isBefore(moment(), 'month')) {
+          past.push(e)
+        } else {
+          previous.push(e);
+        }
+        // moment(e.startFormatted).isAfter('01/01/2022')
+      })
+
+      return {
+        future, 
+        past, 
+        previous 
+      };
     }
   },
   userEvents({ userEvents }) {

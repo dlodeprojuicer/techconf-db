@@ -8,6 +8,9 @@
      <h3>This month</h3>
 			<ConfCards :data="data" />
 		</div>
+    <div v-else>
+      <h3>No conferences this month 🤷‍♂</h3>
+    </div>
   </div>
 </template>
 

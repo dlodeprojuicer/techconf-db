@@ -8,8 +8,21 @@
       <div class="lg-content-center">
         <SearchFilters :venue="true" />
         <SkeletonText v-if="loading" />
-        <ConfList :data="filteredEvents" v-if="filteredEvents.length > 0" />
-        <h2 v-if="filteredEvents.length < 1">No search results</h2>
+        <!-- <ConfList :data="filteredEvents" v-if="filteredEvents.length > 0" /> -->
+        <div>
+          <h1>Future Events ({{ filteredEvents.future.length }})</h1>
+          <ConfList :data="filteredEvents.future" v-if="filteredEvents.future.length > 0" />
+        </div>
+
+        <div v-if="filteredEvents.past.length > 0">
+          <h1>Past Events ({{ filteredEvents.future.length }})</h1>
+          <ConfList :data="filteredEvents.past" v-if="filteredEvents.past.length > 0" />
+        </div>
+
+        <div>
+          <h1>Previous Events ({{ filteredEvents.previous.length }})</h1>
+          <ConfList :data="filteredEvents.previous" v-if="filteredEvents.previous.length > 0" />
+        </div>
       </div>
     </ion-content>
     <Fab />
@@ -46,7 +59,7 @@ export default defineComponent({
     Fab,
   },
   computed: {
-    ...mapGetters(['events', 'filteredEvents', 'monthEventCount']),
+    ...mapGetters(['filteredEvents', 'monthEventCount']),
   },
   data() {
     return {
