@@ -3,7 +3,7 @@
     <ion-content class="ion-padding">
       <Highlights :data="monthEventCount" class="desktop-only"/>
       <div class="lg-content-center">
-        <SearchFilters :venue="true" />
+        <!-- <SearchFilters :venue="true" /> -->
         <SkeletonText v-if="loading" />
 
         <div>
@@ -22,7 +22,7 @@
         </div>
       </div>
     </ion-content>
-    <Fab />
+    <!-- <Fab /> -->
   </ion-page>
 </template>
 
@@ -35,9 +35,9 @@ import {
 } from "@ionic/vue";
 
 import ConfList from "../components/ConfList";
-import Fab from "../components/Fab";
+// import Fab from "../components/Fab";
 import SkeletonText from "../components/SkeletonText";
-import SearchFilters from "../components/SearchFilters";
+// import SearchFilters from "../components/SearchFilters";
 import Highlights from "../components/Highlights";
 
 import { mapGetters } from 'vuex';
@@ -52,8 +52,8 @@ export default defineComponent({
     ConfList,
     SkeletonText,
     Highlights,
-    SearchFilters,
-    Fab,
+    // SearchFilters,
+    // Fab,
   },
   computed: {
     ...mapGetters(['filteredEvents', 'monthEventCount']),

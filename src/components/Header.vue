@@ -8,7 +8,7 @@
         <ion-button @click="gotoSpeakers">Speakers</ion-button>
         <ion-button @click="gotoProfile" v-if="loginToken">Profile</ion-button>
         <!-- <ion-button @click="subscribe">Subscribe</ion-button> -->
-        <ion-button @click="register">Register</ion-button>
+        <!-- <ion-button @click="register">Register</ion-button> -->
         <ion-button @click="logout" v-if="loginToken">Logout</ion-button> 
       </ion-buttons>
       <ion-buttons>

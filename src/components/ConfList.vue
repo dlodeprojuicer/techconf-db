@@ -28,9 +28,9 @@
               <ion-icon :icon="openOutline"></ion-icon> Website
             </a>
           </p>
-          <p @click="addToCalendar(item)" v-if="item.start && item.end" class="desktop-only">
+          <!-- <p @click="addToCalendar(item)" v-if="item.start && item.end" class="desktop-only">
             <ion-icon :icon="calendarClearOutline"></ion-icon> Add to Calendar
-          </p>
+          </p> -->
           <!-- <p>
             <ion-icon :icon="heartOutline"></ion-icon> Spread love
           </p> -->
