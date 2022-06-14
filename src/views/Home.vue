@@ -7,17 +7,17 @@
         <SkeletonText v-if="loading" />
 
         <div>
-          <h1>Future Events ({{ filteredEvents.future.length - 1 }})</h1>
+          <h1>Upcoming ({{ filteredEvents.future.length - 1 }})</h1>
           <ConfList :data="filteredEvents.future" v-if="filteredEvents.future.length > 0" />
         </div>
 
         <div v-if="filteredEvents.past.length > 0">
-          <h1>Previous Events ({{ filteredEvents.past.length }})</h1>
+          <h1>Previous ({{ filteredEvents.past.length }})</h1>
           <ConfList :data="filteredEvents.past" v-if="filteredEvents.past.length > 0" />
         </div>
 
         <div>
-          <h1>Past Events ({{ filteredEvents.previous.length - 1 }})</h1>
+          <h1>Past ({{ filteredEvents.previous.length - 1 }})</h1>
           <ConfList :data="filteredEvents.previous" v-if="filteredEvents.previous.length > 0" />
         </div>
       </div>
