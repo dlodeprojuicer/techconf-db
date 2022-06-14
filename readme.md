@@ -1,11 +1,6 @@
-## Ionic Vue Mobile Template 04 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/61a3f498-564f-4f61-a0b3-2ed99c9ab102/deploy-status)](https://app.netlify.com/sites/ionic-vue-mobile-template-04/deploys)
+## TechConf-db
 
-Hybrid mobile template built with ([latest](https://ionicframework.com/blog/announcing-the-new-ionic-vue-beta/)) vue-ionic and using capacitor for native builds - These templates are from app design inspiration pages on Instagram or Dribble.
-
-Template is inspired by the new Capitec Bank app. Capitec is one of the largest banks in South Africa. It provides personal banking services through its 1000-plus branches across the country. For this template the focus is on the general look and feel.
-
-[Demo](https://ionic-vue-mobile-template-04.netlify.app)
+Building a concise list of technology conferences and conference venues in South Africa
 
 ## Project setup
 ```
@@ -18,7 +13,7 @@ npm run serve
 ```
 
 ## Design
-![alt text](/design.png "Logo Title Text 1")
+![alt text](/screenshot2.png "TechConf-db Screenshot")
 
 ## Native
 
@@ -44,9 +39,6 @@ Using [Capacitor](https://capacitorjs.com/docs/getting-started) for native build
 3. `npx cap copy`
 4. `npx cap open android` Android Studio takes a few minutes to index the files, keep an eye at the bottom of Android Studio for progress.
 5. Testing - When indexing is complete, look for a green play button. Click the play button and it will launch the app in an emulator ([See here to setup Emulator](https://developer.android.com/studio/run/managing-avds)) or on the phone if a phone is connected via USB.
-
-## Disclaimer
-Ionic Vue is still in beta; I am using this setup in production but please use with caution. Keep an eye on [Ionic Twitter account](https://twitter.com/Ionicframework), [forum](https://forum.ionicframework.com/) and [slack group](https://ionic-worldwide.slack.com) for updates, RCs and production release expected towards the end of the year.
 
 ## Contact
 - [@dlodeprojuicer](https://twitter.com/dlodeprojuicer) on Twitter
