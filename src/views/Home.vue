@@ -2,15 +2,12 @@
   <ion-page>
     <ion-content class="ion-padding">
       <Highlights :data="monthEventCount" class="desktop-only"/>
-      <!-- <h1 class="heading-h2">
-        A concise list of tech conferences in ZA
-      </h1> -->
       <div class="lg-content-center">
         <SearchFilters :venue="true" />
         <SkeletonText v-if="loading" />
-        <!-- <ConfList :data="filteredEvents" v-if="filteredEvents.length > 0" /> -->
+
         <div>
-          <h1>Future Events ({{ filteredEvents.future.length }})</h1>
+          <h1>Future Events ({{ filteredEvents.future.length - 1 }})</h1>
           <ConfList :data="filteredEvents.future" v-if="filteredEvents.future.length > 0" />
         </div>
 
@@ -20,7 +17,7 @@
         </div>
 
         <div>
-          <h1>Past Events ({{ filteredEvents.previous.length }})</h1>
+          <h1>Past Events ({{ filteredEvents.previous.length - 1 }})</h1>
           <ConfList :data="filteredEvents.previous" v-if="filteredEvents.previous.length > 0" />
         </div>
       </div>

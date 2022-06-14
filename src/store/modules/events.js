@@ -25,9 +25,27 @@ const state = {
   // filteredEvents: [],
   updateEventSearchObject: {},
   monthEventCount: 0,
-  future: [],
+  future: [
+    {
+      "website": "https://www.pixeltrue.com/?via=simo",
+      "province": "",
+      "createdBy": "JE3Bh37hpOch095fAEAcNbwrQWI3",
+      "name": "Getrewardful",
+      "ad": true,
+      "desc": "A simple way for SaaS companies to setup affiliate and referral programs with Stripe."
+    }
+  ],
   past: [],
-  previous: []
+  previous: [
+    {
+      "website": "https://www.pixeltrue.com/?via=simo",
+      "province": "",
+      "createdBy": "JE3Bh37hpOch095fAEAcNbwrQWI3",
+      "name": "Pixeltrue",
+      "ad": true,
+      "desc": "Convert your visitors to customers with high quality illustrations that will help you build breath-taking websites."
+    }
+  ],
 }
 
 const getters = {
@@ -37,10 +55,10 @@ const getters = {
   filteredEvents({ events = [], updateEventSearchObject, future = [], past = [], previous = [] }) {
     if (!updateEventSearchObject?.value || updateEventSearchObject?.value === "") {
       events.map(e => {
-        if (e.start && moment(e.start).isSame(new Date(), 'year') && moment(e.start).isSameOrAfter(new Date(), 'month')) {
+        if (e.start && moment(e.start).isSame(new Date(), 'year') && moment(e.start).isSameOrAfter(new Date(), 'month') && moment(e.start).isAfter(new Date(), 'day')) {
           future.push(e);
           return e;
-        } else if (moment(e.start).isSame(moment(), 'year') && moment(e.start).isBefore(moment(), 'month')) {
+        } else if (moment(e.start).isSame(moment(), 'year') && moment(e.start).isSameOrBefore(moment(), 'month') && moment(e.start).isBefore(new Date(), 'day')) {
           past.push(e)
         } else {
           previous.push(e);
@@ -50,6 +68,13 @@ const getters = {
       // ascending order
       future.sort((a, b) => moment(a).diff(b));
       future.reverse();
+
+      // Insert ad {ad}
+      // anywhere between 0 and the number of total number of events {Math.random()}
+      // without deleting items {0}
+      // future.push(ad2);
+      // future.splice(Math.floor(Math.random() * future.length), 0, ad1);
+      // previous.splice(Math.floor(Math.random() * previous.length), 0, ad2);
       return {
         future, 
         past, 
@@ -71,9 +96,7 @@ const getters = {
         } else {
           previous.push(e);
         }
-        // moment(e.startFormatted).isAfter('01/01/2022')
       })
-
       return {
         future, 
         past, 
@@ -112,7 +135,6 @@ const mutations = {
 }
 
 const actions = {
-  // Events
   getEvents(context) {
     return new Promise((resolve, reject) => {
       firebase.firestore().collection("events")
@@ -131,32 +153,6 @@ const actions = {
               endFormatted: docData.end ? moment(docData.end).format("DD/MM/YYYY") : null,
             });
           }
-
-          // Ads
-          const ad1 = {
-            "website": "https://www.pixeltrue.com/?via=simo",
-            "province": "",
-            "createdBy": "JE3Bh37hpOch095fAEAcNbwrQWI3",
-            "name": "Pixeltrue",
-            "ad": true,
-            "desc": "Convert your visitors to customers with high quality illustrations that will help you build breath-taking websites."
-          };
-
-          const ad2 = {
-            "website": "https://www.pixeltrue.com/?via=simo",
-            "province": "",
-            "createdBy": "JE3Bh37hpOch095fAEAcNbwrQWI3",
-            "name": "Getrewardful",
-            "ad": true,
-            "desc": "A simple way for SaaS companies to setup affiliate and referral programs with Stripe."
-          };
-          
-          // Insert ad {ad}
-          // anywhere between 0 and the number of total number of events {Math.random()}
-          // without deleting items {0}
-          eventData.splice(Math.floor(Math.random() * docs.length), 0, ad1);
-          eventData.splice(Math.floor(Math.random() * docs.length), 0, ad2);
-
           // redisClient.set("events", eventData);
 
           context.commit("events", eventData);
