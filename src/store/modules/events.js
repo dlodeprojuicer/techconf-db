@@ -34,16 +34,13 @@ const getters = {
   events({ events = [] }) {
     return events || JSON.parse(localStorage.getItem("tcdbEvents"));
   },
-  filteredEvents({ events = [], updateEventSearchObject, future, past, previous }) {
-    future = []
-    past = []
-    previous = []
+  filteredEvents({ events = [], updateEventSearchObject, future = [], past = [], previous = [] }) {
     if (!updateEventSearchObject?.value || updateEventSearchObject?.value === "") {
       events.map(e => {
-        if (moment(e.startFormatted).isSame(moment(), 'year')) {
+        if (e.start && moment(e.start).isSame(new Date(), 'year') && moment(e.start).isSameOrAfter(new Date(), 'month')) {
           future.push(e);
           return e;
-        } else if (moment(e.startFormatted).isSame(moment(), 'year') && moment(e.startFormatted).isBefore(moment(), 'month')) {
+        } else if (moment(e.start).isSame(moment(), 'year') && moment(e.start).isBefore(moment(), 'month')) {
           past.push(e)
         } else {
           previous.push(e);
@@ -59,9 +56,6 @@ const getters = {
         previous 
       }
     } else {
-      future = []
-      past = []
-      previous = []
       const filtered = events.filter(event => {
         if (!event.ad) {
           return event[updateEventSearchObject.field].toLowerCase().includes(updateEventSearchObject.value.toLowerCase())

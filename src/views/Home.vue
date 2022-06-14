@@ -15,12 +15,12 @@
         </div>
 
         <div v-if="filteredEvents.past.length > 0">
-          <h1>Past Events ({{ filteredEvents.future.length }})</h1>
+          <h1>Previous Events ({{ filteredEvents.past.length }})</h1>
           <ConfList :data="filteredEvents.past" v-if="filteredEvents.past.length > 0" />
         </div>
 
         <div>
-          <h1>Previous Events ({{ filteredEvents.previous.length }})</h1>
+          <h1>Past Events ({{ filteredEvents.previous.length }})</h1>
           <ConfList :data="filteredEvents.previous" v-if="filteredEvents.previous.length > 0" />
         </div>
       </div>
