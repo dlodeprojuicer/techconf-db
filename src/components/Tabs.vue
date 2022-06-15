@@ -3,7 +3,7 @@
     <ion-tabs>
       <ion-tab-bar slot="bottom">
         made with <ion-icon :icon="logoIonic" /> + <ion-icon :icon="logoVue" /> & <ion-icon :icon="logoFirebase" /> by <a href="https://twitter.com/dlodeprojuicer">@dlodeprojuicer</a> 
-        | I am are looking for <a href="https://github.com/dlodeprojuicer/techconf-db/issues" target="_blank">contributors.</a>
+        | <a href="https://github.com/dlodeprojuicer/techconf-db#contributors" target="_blank">Contributors</a> welcome!
       </ion-tab-bar>
     </ion-tabs>
   </ion-page>

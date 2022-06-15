@@ -2,6 +2,9 @@
 
 Building a concise list of technology conferences and conference venues in South Africa
 
+## Contributors
+Looking for a new open source project to work on? Well, I am looking for you!! I am looking for contributors to help maintain and build new features; source events, venues, and speakers. Anyone is welcome whether you are a developer, designer, project manager, or tester. I have a growing [list](https://github.com/dlodeprojuicer/techconf-db/issues) of exciting (NOT!) features and bugs you can help me with.
+
 ## Project setup
 ```
 npm install
