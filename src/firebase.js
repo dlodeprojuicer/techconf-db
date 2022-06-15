@@ -9,7 +9,6 @@ import "firebase/firestore";
 import "firebase/database";
 import "firebase/analytics";
 
-console.log(process.env)
 var firebaseConfig = {
   apiKey: process.env.VUE_APP_FIREBASE_API_KEY,
   authDomain: "techconf-db.firebaseapp.com",
