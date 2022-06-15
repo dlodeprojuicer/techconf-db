@@ -21,7 +21,7 @@
     "@johmun/vue-tags-input": "2.1.0",
     "@mailchimp/mailchimp_marketing": "3.0.22",
     "axios": "^0.21.4",
-    "chart.js": "2.9.3",
+    "chart.js": "2.9.4",
     "core-js": "3.6.5",
     "express": "^4.17.1",
     "firebase": "7.22.0",
