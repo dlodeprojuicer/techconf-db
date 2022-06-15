@@ -25,34 +25,35 @@ const state = {
   // filteredEvents: [],
   updateEventSearchObject: {},
   monthEventCount: 0,
-  future: [
-    {
-      "website": "https://www.pixeltrue.com/?via=simo",
-      "province": "",
-      "createdBy": "JE3Bh37hpOch095fAEAcNbwrQWI3",
-      "name": "Getrewardful",
-      "ad": true,
-      "desc": "A simple way for SaaS companies to setup affiliate and referral programs with Stripe."
-    }
-  ],
-  past: [],
-  previous: [
-    {
-      "website": "https://www.pixeltrue.com/?via=simo",
-      "province": "",
-      "createdBy": "JE3Bh37hpOch095fAEAcNbwrQWI3",
-      "name": "Pixeltrue",
-      "ad": true,
-      "desc": "Convert your visitors to customers with high quality illustrations that will help you build breath-taking websites."
-    }
-  ],
 }
 
 const getters = {
   events({ events = [] }) {
     return events || JSON.parse(localStorage.getItem("tcdbEvents"));
   },
-  filteredEvents({ events = [], updateEventSearchObject, future = [], past = [], previous = [] }) {
+  filteredEvents({ events = [], updateEventSearchObject }) {
+    let future = [
+      {
+        "website": "https://www.pixeltrue.com/?via=simo",
+        "province": "",
+        "createdBy": "JE3Bh37hpOch095fAEAcNbwrQWI3",
+        "name": "Getrewardful",
+        "ad": true,
+        "desc": "A simple way for SaaS companies to setup affiliate and referral programs with Stripe."
+      }
+    ];
+    let past = [];
+    let previous = [
+      {
+        "website": "https://www.pixeltrue.com/?via=simo",
+        "province": "",
+        "createdBy": "JE3Bh37hpOch095fAEAcNbwrQWI3",
+        "name": "Pixeltrue",
+        "ad": true,
+        "desc": "Convert your visitors to customers with high quality illustrations that will help you build breath-taking websites."
+      }
+    ];
+ 
     if (!updateEventSearchObject?.value || updateEventSearchObject?.value === "") {
       events.map(e => {
         if (e.start && moment(e.start).isSame(new Date(), 'year') && moment(e.start).isSameOrAfter(new Date(), 'month') && moment(e.start).isAfter(new Date(), 'day')) {

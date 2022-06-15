@@ -5,6 +5,7 @@ android
 ios
 dist
 .gradle
+.env
 
 # local env files
 .env.local

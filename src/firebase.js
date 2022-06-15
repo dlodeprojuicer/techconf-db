@@ -9,16 +9,16 @@ import "firebase/firestore";
 import "firebase/database";
 import "firebase/analytics";
 
-
+console.log(process.env)
 var firebaseConfig = {
-  apiKey: "AIzaSyA3LPByxDChFePmbkhK7EUIVr8o4b37U3s",
+  apiKey: process.env.VUE_APP_FIREBASE_API_KEY,
   authDomain: "techconf-db.firebaseapp.com",
   databaseURL: "https://techconf-db.firebaseio.com",
   projectId: "techconf-db",
   storageBucket: "techconf-db.appspot.com",
-  messagingSenderId: "85418644814",
-  appId: "1:85418644814:web:d135328d7a9dd4e1f67a1f",
-  measurementId: "G-P8TJKFVZF8"
+  messagingSenderId: process.env.VUE_APP_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.VUE_APP_FIREBASE_APP_ID,
+  measurementId: process.env.VUE_APP_FIREBASE_MEASUREMENT_ID
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
