@@ -76,11 +76,11 @@ const mutations = {
 const actions = {
   login(context, request) {
     return new Promise((resolve, reject) => {
-      console.log("login...");
       firebase.auth().signInWithEmailAndPassword(request.email, request.password)
         .then(({ user }) => {
           context.dispatch("getUserProfile", user.uid).then(() => {
             context.commit("loginToken", user.uid);
+            context.dispatch("getEvents");
             resolve(user.uid);
           });
         }).catch(function(error) {
@@ -90,7 +90,6 @@ const actions = {
   },
   signUp(context, request) {
     return new Promise((resolve, reject) => {
-      console.log("reg...");
       firebase.auth().createUserWithEmailAndPassword(request.email, request.password)
         .then(({ user }) => {
           context.commit("loginToken", user.uid);
@@ -143,7 +142,47 @@ const actions = {
         }
       });
     });
-  }
+  },
+  oAuth(context, request) {
+    return new Promise((resolve, reject) => {
+      let provider = null;
+      switch(request) {
+        case "google":
+          provider = new firebase.auth.GoogleAuthProvider();
+        break;
+        case "github":
+          provider = new firebase.auth.GithubAuthProvider();
+        break;
+        case "facebook":
+          provider = new firebase.auth.FacebookAuthProvider();
+        break;
+        default:
+          console.log("oAuth service not found");
+      }
+
+      firebase.auth().signInWithPopup(provider)
+        .then(({ user }) => {
+          console.log("user", user);
+          context.dispatch("createUser", {
+            uid: user.uid,
+            name: user.displayName,
+            email: user.email
+          }).then(() => {
+            context.dispatch("getUserProfile", user.uid).then(() => {
+              context.commit("loginToken", user.uid);
+  
+              resolve(user.uid);
+            })
+          }).catch(er => {
+            console.log("er", er);
+            reject(er)
+          });
+        }).catch(function(error) {
+          console.log("errrr", error)
+          reject(error);
+      });
+    })
+  },
   // subscribe(context, request) {
   //   return new Promise((resolve, reject) => {
   //     mailchimp.post(`lists/c72f027b89/members`, {

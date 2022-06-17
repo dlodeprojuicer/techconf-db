@@ -155,7 +155,6 @@ const actions = {
             });
           }
           // redisClient.set("events", eventData);
-
           context.commit("events", eventData);
           resolve(eventData);
         }).catch( error => {

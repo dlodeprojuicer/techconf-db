@@ -4,20 +4,34 @@
   </p>
 
   <div class="form-buttons">
-    <p>{{ loginRegText }} <a :href="loginRegLink"><u>Register</u></a></p>
-    <ion-button size="small" color="danger" @click="goHome">Cancel</ion-button>
-    <ion-button size="small" color="success" @click="submit">Login</ion-button>
+    <p>{{ loginRegText }} <a :href="loginRegLink"><u>{{ loginRegLink }}</u></a></p>
+    <ion-button size="small" @click="goHome">Cancel</ion-button>
+    <ion-button size="small" color="success" @click="submit">{{ loginRegBtn }}</ion-button>
+    <br /><br />
+    <ion-button size="small" @click="oAuth('google')" v-if="loginRegLink === 'register'">
+      <ion-icon size="large" :icon="logoGoogle"></ion-icon> 
+      Google Login
+    </ion-button>
+    <ion-button size="small" @click="oAuth('github')" v-if="loginRegLink === 'register'">
+      <ion-icon size="large" :icon="logoGithub"></ion-icon> 
+      Github Login
+    </ion-button>
+    <ion-button size="small" @click="oAuth('facebook')" v-if="loginRegLink === 'register'">
+      <ion-icon size="large" :icon="logoFacebook"></ion-icon> 
+      Facebook Login
+    </ion-button>
   </div>
 </template>
 
 <script>
 import { 
-  IonButton 
+  IonButton,
+  IonIcon
 } from "@ionic/vue";
-import { personOutline } from "ionicons/icons";
+import { logoGoogle, logoGithub,logoFacebook } from "ionicons/icons";
 
 export default {
-  name: "stats",
+  name: "AuthFormFooter",
   emits: ["submit"],
   props: {
     err: {
@@ -32,30 +46,66 @@ export default {
     }
   },
   components: { 
-    IonButton
+    IonButton,
+    IonIcon
   },
   setup() {
-    const loginRegLink = window.location.pathname === "/login" ? "/register" : "/login";
-    const loginRegBtn= window.location.pathname === "/login" ? "Register" : "Login";
-    
     return {
-      personOutline,
-      loginRegLink,
-      loginRegBtn
-    };
+      logoGoogle,
+      logoFacebook,
+      logoGithub
+    }
   },
+  data() {
+      let loginRegLink = null; 
+      let loginRegBtn = null;
+      if (window.location.pathname === "/login") {
+        loginRegLink = "register";
+        loginRegBtn = "Login";
+      } else {
+        loginRegLink = "login";
+        loginRegBtn = "Register";
+      }
+    return {
+      loginRegLink,
+      loginRegBtn,
+    }
+  }, 
   methods: {
     goHome() {
       this.$router.push("/");
     },
     submit() {
       this.$emit("submit");
-    }
+    },
+    oAuth(service) {
+      this.$store.dispatch("oAuth", service)
+        .then(() => {
+          this.$router.push("/profile");
+        })
+        .catch(error => {
+          this.loading = false;
+          this.endpointError = error;
+          switch(error.code) {
+            case "auth/invalid-email":
+            case "auth/wrong-password":
+              error.message = "Invalid email or password.";
+            break;
+            case "auth/user-not-found":
+              error.message = "No user with corresponding login credentials";
+            break;
+          }
+        });
+    },
   }
 };
 </script>
 
 <style lang="css" scoped>
+ion-icon {
+  padding-right: 10px;
+  /* font-size: 164px; */
+}
 .form-title {
   text-align: center;
   margin-bottom: 30px;
@@ -69,5 +119,10 @@ export default {
 .form-buttons {
   margin: 20px auto;
   text-align: center;
+}
+
+ion-button {
+  width: 200px;
+  height: 40px;
 }
 </style>

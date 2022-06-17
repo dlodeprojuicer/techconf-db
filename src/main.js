@@ -1,5 +1,4 @@
 import { createApp } from 'vue';
-// import { createStore } from 'vuex';
 import App from './App.vue';
 import router from './router';
 import store from './store';
@@ -25,28 +24,6 @@ import '@ionic/vue/css/display.css';
 /* Theme variables */
 import './theme/variables.css';
 
-// import auth from "./store/modules/auth";
-// const store = createStore({
-//   modules: {
-//     auth,
-//     // events,
-//     // userProfile,
-//   },
-//   state: {
-//     httpLoader: false,
-//   },
-//   getters: {
-//     httpLoader({ httpLoader }) {
-//       return httpLoader;
-//     }
-//   },
-//   mutations: {
-//   },
-//   actions: {
-//   }
-// });
-
-
 const app = createApp(App)
   .use(IonicVue)
   .use(router)
@@ -60,14 +37,6 @@ const app = createApp(App)
     } else {
       next();
     }
-    
-    // firebase.auth().onAuthStateChanged(function(user) {
-    //   if (user) {
-    //     // User is signed in.
-    //   } else {
-    //     // No user is signed in.
-    //   }
-    // });
   })
 router.isReady().then(() => {
   app.mount('#app');
