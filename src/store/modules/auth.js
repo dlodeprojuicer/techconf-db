@@ -163,6 +163,29 @@ const actions = {
       });
     })
   },
+  googleLogin(context) {
+    return new Promise((resolve, reject) => {
+      const provider = new firebase.auth.GoogleAuthProvider();
+      firebase.auth().signInWithPopup(provider)
+        .then(({ user }) => {
+          context.dispatch("createUser", {
+            uid: user.uid,
+            name: user.displayName,
+            email: user.email
+          }).then(() => {
+            context.dispatch("getUserProfile", user.uid).then(() => {
+              context.commit("loginToken", user.uid);
+  
+              resolve(user.uid);
+            })
+          }).catch(er => {
+            console.log("er", er);
+          });
+        }).catch(function(error) {
+          reject(error);
+      });
+    })
+  },
   // subscribe(context, request) {
   //   return new Promise((resolve, reject) => {
   //     mailchimp.post(`lists/c72f027b89/members`, {
