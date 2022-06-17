@@ -8,11 +8,11 @@
     <ion-button size="small" @click="goHome">Cancel</ion-button>
     <ion-button size="small" color="success" @click="submit">{{ loginRegBtn }}</ion-button>
     <br /><br />
-    <ion-button size="small" @click="googleLogin" v-if="loginRegLink === 'register'">
+    <ion-button size="small" @click="oAuth('google')" v-if="loginRegLink === 'register'">
       <ion-icon size="large" :icon="logoGoogle"></ion-icon> 
       Google Login
     </ion-button>
-    <ion-button size="small" @click="facebookLogin" v-if="loginRegLink === 'register'">
+    <ion-button size="small" @click="oAuth('facebook')" v-if="loginRegLink === 'register'">
       <ion-icon size="large" :icon="logoFacebook"></ion-icon> 
       Facebook Login
     </ion-button>
@@ -73,27 +73,8 @@ export default {
     submit() {
       this.$emit("submit");
     },
-    facebookLogin() {
-      this.$store.dispatch("facebookLogin", this.form)
-        .then(() => {
-          this.$router.push("/profile");
-        })
-        .catch(error => {
-          this.loading = false;
-          this.endpointError = error;
-          switch(error.code) {
-            case "auth/invalid-email":
-            case "auth/wrong-password":
-              error.message = "Invalid email or password.";
-            break;
-            case "auth/user-not-found":
-              error.message = "No user with corresponding login credentials";
-            break;
-          }
-        });
-    },
-    googleLogin() {
-      this.$store.dispatch("googleLogin", this.form)
+    oAuth(service) {
+      this.$store.dispatch("oAuth", service)
         .then(() => {
           this.$router.push("/profile");
         })

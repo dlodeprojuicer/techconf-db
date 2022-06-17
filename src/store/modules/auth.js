@@ -143,29 +143,18 @@ const actions = {
       });
     });
   },
-  facebookLogin(context) {
+  oAuth(context, request) {
     return new Promise((resolve, reject) => {
-      const provider = new firebase.auth.FacebookAuthProvider();
-      firebase.auth().signInWithPopup(provider)
-        .then(({ user }) => {
-          context.dispatch("getUserProfile", user.uid).then(() => {
-            context.commit("loginToken", user.uid);
-              context.dispatch("createUser", {
-                uid: user.uid,
-                name: user.displayName,
-              }).catch(er => {
-                console.log("er", er);
-              });
-            resolve(user.uid);
-          });
-        }).catch(function(error) {
-          reject(error);
-      });
-    })
-  },
-  googleLogin(context) {
-    return new Promise((resolve, reject) => {
-      const provider = new firebase.auth.GoogleAuthProvider();
+      let provider = null;
+      switch(request) {
+        case "google":
+          provider = new firebase.auth.GoogleAuthProvider();
+        break;
+        case "facebook":
+          provider = new firebase.auth.FacebookAuthProvider();
+        break;
+      }
+
       firebase.auth().signInWithPopup(provider)
         .then(({ user }) => {
           context.dispatch("createUser", {
