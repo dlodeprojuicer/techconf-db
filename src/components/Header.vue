@@ -8,7 +8,8 @@
         <ion-button @click="gotoSpeakers">Speakers</ion-button>
         <ion-button @click="gotoProfile" v-if="loginToken">Profile</ion-button>
         <!-- <ion-button @click="subscribe">Subscribe</ion-button> -->
-        <!-- <ion-button @click="register">Register</ion-button> -->
+        <ion-button @click="login" v-if="!loginToken">Login</ion-button>
+        <ion-button @click="register" v-if="!loginToken">Register</ion-button>
         <ion-button @click="logout" v-if="loginToken">Logout</ion-button> 
       </ion-buttons>
       <ion-buttons>
@@ -131,6 +132,9 @@ export default {
     },
     async register() {
       this.$router.push("/register");
+    },
+    async login() {
+      this.$router.push("/login");
     },
     logout() {
       this.$store.dispatch("logout").then(() => {
