@@ -12,6 +12,10 @@
       <ion-icon size="large" :icon="logoGoogle"></ion-icon> 
       Google Login
     </ion-button>
+    <ion-button size="small" @click="oAuth('github')" v-if="loginRegLink === 'register'">
+      <ion-icon size="large" :icon="logoGithub"></ion-icon> 
+      Github Login
+    </ion-button>
     <ion-button size="small" @click="oAuth('facebook')" v-if="loginRegLink === 'register'">
       <ion-icon size="large" :icon="logoFacebook"></ion-icon> 
       Facebook Login
@@ -24,7 +28,7 @@ import {
   IonButton,
   IonIcon
 } from "@ionic/vue";
-import { logoGoogle, logoFacebook } from "ionicons/icons";
+import { logoGoogle, logoGithub,logoFacebook } from "ionicons/icons";
 
 export default {
   name: "AuthFormFooter",
@@ -48,7 +52,8 @@ export default {
   setup() {
     return {
       logoGoogle,
-      logoFacebook
+      logoFacebook,
+      logoGithub
     }
   },
   data() {

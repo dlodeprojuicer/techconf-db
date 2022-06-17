@@ -150,13 +150,19 @@ const actions = {
         case "google":
           provider = new firebase.auth.GoogleAuthProvider();
         break;
+        case "github":
+          provider = new firebase.auth.GithubAuthProvider();
+        break;
         case "facebook":
           provider = new firebase.auth.FacebookAuthProvider();
         break;
+        default:
+          console.log("oAuth service not found");
       }
 
       firebase.auth().signInWithPopup(provider)
         .then(({ user }) => {
+          console.log("user", user);
           context.dispatch("createUser", {
             uid: user.uid,
             name: user.displayName,
@@ -169,8 +175,10 @@ const actions = {
             })
           }).catch(er => {
             console.log("er", er);
+            reject(er)
           });
         }).catch(function(error) {
+          console.log("errrr", error)
           reject(error);
       });
     })

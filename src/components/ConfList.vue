@@ -90,7 +90,7 @@ import { chevronForward, micOutline, heartOutline, openOutline, calendarClearOut
 import EditEventModal from "./EditEventModal";
 
 const gapi = window.gapi;
-const CLIENT_ID = process.env.VUE_APP_GOOGLE_CLINT_ID;
+const CLIENT_ID = process.env.VUE_APP_GOOGLE_CLIENT_ID;
 const API_KEY = process.env.VUE_APP_API_KEY;
 const DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"];
 const SCOPES = "https://www.googleapis.com/auth/calendar";
