@@ -63,6 +63,12 @@ export default defineComponent({
       },
     };
 	},
+  mounted() {
+    window.FB.getLoginStatus(function(response) {
+      console.log(response)
+      // this.statusChangeCallback(response);
+    });
+  },
   methods: {
     register() {
       this.$router.push("/register");

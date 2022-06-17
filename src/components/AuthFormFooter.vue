@@ -7,6 +7,16 @@
     <p>{{ loginRegText }} <a :href="loginRegLink"><u>{{ loginRegLink }}</u></a></p>
     <ion-button size="small" @click="goHome">Cancel</ion-button>
     <ion-button size="small" color="success" @click="submit">{{ loginRegBtn }}</ion-button>
+    <br /><br />
+    <div 
+      class="fb-login-button" 
+      data-width="200" 
+      data-size="large" 
+      data-button-type="login_with" 
+      data-layout="default" 
+      data-auto-logout-link="false" 
+      data-use-continue-as="false"
+    />
   </div>
 </template>
 
