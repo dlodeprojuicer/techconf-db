@@ -36,7 +36,6 @@ import {
 } from "@ionic/vue";
 import { defineComponent } from "vue";
 
-import authStore from "../store";
 import AuthFormHeading from "../components/AuthFormHeading.vue";
 import AuthFormFooter from "../components/AuthFormFooter.vue";
 
@@ -63,22 +62,16 @@ export default defineComponent({
       },
     };
 	},
-  mounted() {
-    window.FB.getLoginStatus(function(response) {
-      console.log(response)
-      // this.statusChangeCallback(response);
-    });
-  },
   methods: {
     register() {
       this.$router.push("/register");
     },
     submit() {
       this.loading = true;
-      authStore.dispatch("login", this.form)
+      this.$store.dispatch("login", this.form)
         .then(() => {
           this.loading = false;
-          this.fetchEvents();
+          this.$router.push("/profile");
         })
         .catch(error => {
           this.loading = false;
@@ -93,18 +86,7 @@ export default defineComponent({
             break;
           }
         });
-    },
-    fetchEvents() {
-      this.$store.dispatch("getEvents").then(() => {
-        // this.filteredEvents = data;
-        this.loading = false;
-        this.$router.push("/");
-      }).catch(error => {
-          this.loading = false;
-        // eslint-disable-next-line
-        console.log(error);
-      });
-    },
+    }
   }
 });
 </script>

@@ -8,23 +8,19 @@
     <ion-button size="small" @click="goHome">Cancel</ion-button>
     <ion-button size="small" color="success" @click="submit">{{ loginRegBtn }}</ion-button>
     <br /><br />
-    <div 
-      class="fb-login-button" 
-      data-width="200" 
-      data-size="large" 
-      data-button-type="login_with" 
-      data-layout="default" 
-      data-auto-logout-link="false" 
-      data-use-continue-as="false"
-    />
+    <ion-button size="small" @click="facebookLogin" v-if="loginRegLink === 'register'">
+      <ion-icon size="large" :icon="logoFacebook"></ion-icon> 
+      Facebook Login
+    </ion-button>
   </div>
 </template>
 
 <script>
 import { 
-  IonButton 
+  IonButton,
+  IonIcon
 } from "@ionic/vue";
-import { personOutline } from "ionicons/icons";
+import { logoFacebook } from "ionicons/icons";
 
 export default {
   name: "AuthFormFooter",
@@ -42,12 +38,13 @@ export default {
     }
   },
   components: { 
-    IonButton
+    IonButton,
+    IonIcon
   },
   setup() {
     return {
-      personOutline,
-    };
+      logoFacebook
+    }
   },
   data() {
       let loginRegLink = null; 
@@ -70,12 +67,35 @@ export default {
     },
     submit() {
       this.$emit("submit");
-    }
+    },
+    facebookLogin() {
+      this.$store.dispatch("facebookLogin", this.form)
+        .then(() => {
+          this.$router.push("/profile");
+        })
+        .catch(error => {
+          this.loading = false;
+          this.endpointError = error;
+          switch(error.code) {
+            case "auth/invalid-email":
+            case "auth/wrong-password":
+              error.message = "Invalid email or password.";
+            break;
+            case "auth/user-not-found":
+              error.message = "No user with corresponding login credentials";
+            break;
+          }
+        });
+    },
   }
 };
 </script>
 
 <style lang="css" scoped>
+ion-icon {
+  padding-right: 10px;
+  /* font-size: 164px; */
+}
 .form-title {
   text-align: center;
   margin-bottom: 30px;

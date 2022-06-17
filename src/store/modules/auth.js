@@ -76,11 +76,11 @@ const mutations = {
 const actions = {
   login(context, request) {
     return new Promise((resolve, reject) => {
-      console.log("login...");
       firebase.auth().signInWithEmailAndPassword(request.email, request.password)
         .then(({ user }) => {
           context.dispatch("getUserProfile", user.uid).then(() => {
             context.commit("loginToken", user.uid);
+            context.dispatch("getEvents");
             resolve(user.uid);
           });
         }).catch(function(error) {
@@ -90,7 +90,6 @@ const actions = {
   },
   signUp(context, request) {
     return new Promise((resolve, reject) => {
-      console.log("reg...");
       firebase.auth().createUserWithEmailAndPassword(request.email, request.password)
         .then(({ user }) => {
           context.commit("loginToken", user.uid);
@@ -143,7 +142,27 @@ const actions = {
         }
       });
     });
-  }
+  },
+  facebookLogin(context) {
+    return new Promise((resolve, reject) => {
+      const provider = new firebase.auth.FacebookAuthProvider();
+      firebase.auth().signInWithPopup(provider)
+        .then(({ user }) => {
+          context.dispatch("getUserProfile", user.uid).then(() => {
+            context.commit("loginToken", user.uid);
+              context.dispatch("createUser", {
+                uid: user.uid,
+                name: user.displayName,
+              }).catch(er => {
+                console.log("er", er);
+              });
+            resolve(user.uid);
+          });
+        }).catch(function(error) {
+          reject(error);
+      });
+    })
+  },
   // subscribe(context, request) {
   //   return new Promise((resolve, reject) => {
   //     mailchimp.post(`lists/c72f027b89/members`, {
