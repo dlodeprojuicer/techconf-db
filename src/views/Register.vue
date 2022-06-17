@@ -6,7 +6,7 @@
         <AuthFormHeading data="Register" />
 
         <ion-item v-for="(f, i) in formFields" :key="i">
-          <ion-label position="stacked">{{ f.label }}</ion-label>
+          <ion-label>{{ f.label }}</ion-label>
           <ion-input
             v-model="form[f.key]"
             :type="f.type"
@@ -16,17 +16,17 @@
           <p v-if="i.error">{{ f.errMsg }}</p>
         </ion-item>
         <ion-item>
-          <ion-label position="stacked">Province</ion-label>
-          <select v-model="form.province" placeholder="Select One">
-            <option :value="item" v-for="(item, index) in provinces" :key="index">
+          <ion-label>Province</ion-label>
+          <ion-select v-model="form.province" placeholder="Select One">
+            <ion-select-option :value="item" v-for="(item, index) in provinces" :key="index">
               {{ item }}
-            </option>
-          </select>
+            </ion-select-option>
+          </ion-select>
         </ion-item>
         <ion-item>
-          <ion-label position="stacked">Would you like to be added to the list of Speakers?</ion-label>
+          <ion-label>Would you like to be added to the list of Speakers?</ion-label>
           <ion-toggle
-            @ionChange="isSpeaker()"
+            @ionChange="isSpeaker($event.detail)"
             v-model="form.isSpeaker"
             :checked="form.isSpeaker">
           </ion-toggle>
@@ -34,7 +34,7 @@
 
         <div v-if="form.isSpeaker">
           <ion-item v-for="(f, i) in speakerFormFields" :key="i">
-            <ion-label position="stacked">{{ f.label }}</ion-label>
+            <ion-label>{{ f.label }}</ion-label>
             <ion-input
               v-model="form.speaker[f.key]"
               :type="f.type"
@@ -46,7 +46,7 @@
           </ion-item>
 
           <ion-item>
-            <ion-label position="stacked">Is it okay if we display your contact details (email/number) on Speaker list?</ion-label>
+            <ion-label>Is it okay if we display your contact details (email/number) on Speaker list?</ion-label>
             <ion-toggle
               @ionChange="contactInfoConsent()"
               v-model="form.contactInfoConsent"
@@ -73,7 +73,9 @@ import {
   IonProgressBar,
   IonLabel,
   IonInput,
-  IonToggle
+  IonToggle,
+  IonSelect,
+  IonSelectOption
 } from "@ionic/vue";
 import { defineComponent } from "vue";
 import { personOutline } from "ionicons/icons";
@@ -91,6 +93,8 @@ export default defineComponent({
     IonLabel,
     IonInput,
     IonToggle,
+    IonSelect,
+    IonSelectOption,
     AuthFormHeading,
     AuthFormFooter
   },
@@ -317,8 +321,8 @@ export default defineComponent({
         this.speakerFormFields[index].error = true;
       }
     },
-    isSpeaker() {
-      this.form.isSpeaker = !this.form.isSpeaker;
+    isSpeaker(value) {
+      this.form.isSpeaker = value.checked;
     },
     contactInfoConsent() {
       this.form.speaker.contactInfoConsent = !this.form.speaker.contactInfoConsent;
@@ -331,7 +335,6 @@ export default defineComponent({
       //   }
       // }
       this.loading = true;
-      // console.log(this.form);
       if (!this.form.isSpeaker) {
         delete this.form.speaker;
       }
@@ -363,7 +366,8 @@ export default defineComponent({
 <style lang="css" scoped>
 .lg-content-center {
   background: #ffffff;
-  padding: 20px;
+  margin-top: 40px;
+  padding: 90px;
   border-radius: 6px;
 }
 
@@ -373,12 +377,9 @@ ion-content {
 }
 
 ion-item {
-  margin: 10px;
-  border-radius: 6px;
-  --border: none;
+    --background: #fff;
   ion-label {
     font-weight: bold;
-    font-size: 20px;
   }
 }
 

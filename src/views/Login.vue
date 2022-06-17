@@ -3,21 +3,23 @@
     <ion-content class="ion-padding">
       <div class="lg-content-center">
         <ion-progress-bar type="indeterminate" color="dark" v-if="loading"></ion-progress-bar>
-        <AuthFormHeading data="Login" />
-        <ion-item>
-          <ion-label>Email</ion-label>
-          <ion-input v-model="form.email"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label>Password</ion-label>
-          <ion-input v-model="form.password" type="password"></ion-input>
-        </ion-item>
+        <div class="form">
+          <AuthFormHeading data="Login" />
+          <ion-item>
+            <ion-label>Email</ion-label>
+            <ion-input v-model="form.email"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label>Password</ion-label>
+            <ion-input v-model="form.password" type="password"></ion-input>
+          </ion-item>
 
-        <AuthFormFooter 
-          loginRegText="Don't have an account?"
-          :err="endpointError.message"
-          @submit="submit"
-        />
+          <AuthFormFooter 
+            loginRegText="Don't have an account?"
+            :err="endpointError.message"
+            @submit="submit"
+          />
+        </div>
       </div>
     </ion-content>
   </ion-page>
@@ -39,7 +41,7 @@ import AuthFormHeading from "../components/AuthFormHeading.vue";
 import AuthFormFooter from "../components/AuthFormFooter.vue";
 
 export default defineComponent({
-  name: "Modal",
+  name: "Login",
   props: ["store","content", "title"],
   components: {
 		IonContent,
@@ -104,7 +106,8 @@ export default defineComponent({
 <style lang="css" scoped>
 .lg-content-center {
   background: #ffffff;
-  padding: 20px;
+  margin-top: 80px;
+  padding: 150px;
   border-radius: 6px;
 }
 
@@ -112,7 +115,11 @@ ion-content {
 	height: 100vh;
 }
 
-ion-item > ion-label {
-  font-weight: bold;
+ion-item {
+    --background: #fff;
+  ion-label {
+    font-weight: bold;
+  }
 }
+
 </style>

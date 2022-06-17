@@ -4,9 +4,9 @@
   </p>
 
   <div class="form-buttons">
-    <p>{{ loginRegText }} <a :href="loginRegLink"><u>Register</u></a></p>
-    <ion-button size="small" color="danger" @click="goHome">Cancel</ion-button>
-    <ion-button size="small" color="success" @click="submit">Login</ion-button>
+    <p>{{ loginRegText }} <a :href="loginRegLink"><u>{{ loginRegLink }}</u></a></p>
+    <ion-button size="small" @click="goHome">Cancel</ion-button>
+    <ion-button size="small" color="success" @click="submit">{{ loginRegBtn }}</ion-button>
   </div>
 </template>
 
@@ -17,7 +17,7 @@ import {
 import { personOutline } from "ionicons/icons";
 
 export default {
-  name: "stats",
+  name: "AuthFormFooter",
   emits: ["submit"],
   props: {
     err: {
@@ -35,15 +35,25 @@ export default {
     IonButton
   },
   setup() {
-    const loginRegLink = window.location.pathname === "/login" ? "/register" : "/login";
-    const loginRegBtn= window.location.pathname === "/login" ? "Register" : "Login";
-    
     return {
       personOutline,
-      loginRegLink,
-      loginRegBtn
     };
   },
+  data() {
+      let loginRegLink = null; 
+      let loginRegBtn = null;
+      if (window.location.pathname === "/login") {
+        loginRegLink = "register";
+        loginRegBtn = "Login";
+      } else {
+        loginRegLink = "login";
+        loginRegBtn = "Register";
+      }
+    return {
+      loginRegLink,
+      loginRegBtn,
+    }
+  }, 
   methods: {
     goHome() {
       this.$router.push("/");
@@ -69,5 +79,10 @@ export default {
 .form-buttons {
   margin: 20px auto;
   text-align: center;
+}
+
+ion-button {
+  width: 200px;
+  height: 40px;
 }
 </style>
