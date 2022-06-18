@@ -7,7 +7,7 @@
     <p>{{ loginRegText }} <a :href="loginRegLink"><u>{{ loginRegLink }}</u></a></p>
     <ion-button size="small" @click="goHome">Cancel</ion-button>
     <ion-button size="small" color="success" @click="submit">{{ loginRegBtn }}</ion-button>
-    <br /><br />
+    <h4>- OR -</h4>
     <ion-button size="small" @click="oAuth('google')" v-if="loginRegLink === 'register'">
       <ion-icon size="large" :icon="logoGoogle"></ion-icon> 
       Google Login
@@ -16,8 +16,9 @@
       <ion-icon size="large" :icon="logoGithub"></ion-icon> 
       Github Login
     </ion-button>
+    <br />
     <ion-button size="small" @click="oAuth('twitter')" v-if="loginRegLink === 'register'">
-      <ion-icon size="large" :icon="logoFacebook"></ion-icon> 
+      <ion-icon size="large" :icon="logoTwitter"></ion-icon> 
       Twitter Login
     </ion-button>
     <ion-button size="small" @click="oAuth('facebook')" v-if="loginRegLink === 'register'">
@@ -32,7 +33,7 @@ import {
   IonButton,
   IonIcon
 } from "@ionic/vue";
-import { logoGoogle, logoGithub,logoFacebook } from "ionicons/icons";
+import { logoGoogle, logoGithub,logoFacebook, logoTwitter } from "ionicons/icons";
 
 export default {
   name: "AuthFormFooter",
@@ -57,7 +58,8 @@ export default {
     return {
       logoGoogle,
       logoFacebook,
-      logoGithub
+      logoGithub,
+      logoTwitter
     }
   },
   data() {
