@@ -156,6 +156,9 @@ const actions = {
         case "facebook":
           provider = new firebase.auth.FacebookAuthProvider();
         break;
+        case "twitter":
+          provider = new firebase.auth.TwitterAuthProvider();
+        break;
         default:
           console.log("oAuth service not found");
       }

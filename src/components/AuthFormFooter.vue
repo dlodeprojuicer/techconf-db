@@ -16,6 +16,10 @@
       <ion-icon size="large" :icon="logoGithub"></ion-icon> 
       Github Login
     </ion-button>
+    <ion-button size="small" @click="oAuth('twitter')" v-if="loginRegLink === 'register'">
+      <ion-icon size="large" :icon="logoFacebook"></ion-icon> 
+      Twitter Login
+    </ion-button>
     <ion-button size="small" @click="oAuth('facebook')" v-if="loginRegLink === 'register'">
       <ion-icon size="large" :icon="logoFacebook"></ion-icon> 
       Facebook Login
