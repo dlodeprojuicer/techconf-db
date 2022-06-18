@@ -3,7 +3,7 @@
     <ion-content class="ion-padding">
       <Highlights :data="monthEventCount" class="desktop-only"/>
       <div class="lg-content-center">
-        <!-- <SearchFilters :venue="true" /> -->
+        <SearchFilters :venue="true" />
         <SkeletonText v-if="loading" />
 
         <div>
@@ -11,7 +11,7 @@
           <ConfList :data="filteredEvents.future" v-if="filteredEvents.future.length > 0" />
         </div>
 
-        <div v-if="filteredEvents.past.length > 0">
+        <div>
           <h1>Previous ({{ filteredEvents.past.length }})</h1>
           <ConfList :data="filteredEvents.past" v-if="filteredEvents.past.length > 0" />
         </div>
@@ -37,7 +37,7 @@ import {
 import ConfList from "../components/ConfList";
 // import Fab from "../components/Fab";
 import SkeletonText from "../components/SkeletonText";
-// import SearchFilters from "../components/SearchFilters";
+import SearchFilters from "../components/SearchFilters";
 import Highlights from "../components/Highlights";
 
 import { mapGetters } from 'vuex';
@@ -52,7 +52,7 @@ export default defineComponent({
     ConfList,
     SkeletonText,
     Highlights,
-    // SearchFilters,
+    SearchFilters,
     // Fab,
   },
   computed: {

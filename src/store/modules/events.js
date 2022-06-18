@@ -6,20 +6,6 @@ import moment from "moment";
 // console.log(REDIS_PORT);
 // const redisClient = redis.createClient(REDIS_PORT);
 
-// const eventFormater = (docs) => {
-//   const eventData = [];
-//   for (let x =0; docs.length > x; x++) {
-//     const docData = docs[x].data();
-//     eventData.push({
-//       id: docs[x].id,
-//       ...docData,
-//       startFormatted: docData.start ? moment(docData.start).format("DD/MM/YYYY") : null,
-//       endFormatted: docData.end ? moment(docData.end).format("DD/MM/YYYY") : null,
-//     });
-//   }
-//   return eventData;
-// }
-
 const state = {
   events: [],
   // filteredEvents: [],
@@ -34,20 +20,18 @@ const getters = {
   filteredEvents({ events = [], updateEventSearchObject }) {
     let future = [
       {
-        "website": "https://www.pixeltrue.com/?via=simo",
+        "website": "https://namecheap.pxf.io/mgBr4e",
         "province": "",
-        "createdBy": "JE3Bh37hpOch095fAEAcNbwrQWI3",
-        "name": "Getrewardful",
+        "name": "Namecheap",
         "ad": true,
-        "desc": "A simple way for SaaS companies to setup affiliate and referral programs with Stripe."
+        "desc": "Powering Internet freedom through domains, hosting, security, and more — everything you need to make more online, for less."
       }
     ];
     let past = [];
     let previous = [
       {
-        "website": "https://www.pixeltrue.com/?via=simo",
+        "website": "https://www.pixeltrue.com/?via=techconfdb",
         "province": "",
-        "createdBy": "JE3Bh37hpOch095fAEAcNbwrQWI3",
         "name": "Pixeltrue",
         "ad": true,
         "desc": "Convert your visitors to customers with high quality illustrations that will help you build breath-taking websites."
@@ -70,12 +54,6 @@ const getters = {
       future.sort((a, b) => moment(a).diff(b));
       future.reverse();
 
-      // Insert ad {ad}
-      // anywhere between 0 and the number of total number of events {Math.random()}
-      // without deleting items {0}
-      // future.push(ad2);
-      // future.splice(Math.floor(Math.random() * future.length), 0, ad1);
-      // previous.splice(Math.floor(Math.random() * previous.length), 0, ad2);
       return {
         future, 
         past, 
@@ -89,10 +67,10 @@ const getters = {
       });
 
       filtered.map(e => {
-        if (moment(e.startFormatted).isSame(moment(), 'year')) {
+        if (e.start && moment(e.start).isSame(new Date(), 'year') && moment(e.start).isSameOrAfter(new Date(), 'month') && moment(e.start).isAfter(new Date(), 'day')) {
           future.push(e);
           return e;
-        } else if (moment(e.startFormatted).isSame(moment(), 'year') && moment(e.startFormatted).isBefore(moment(), 'month')) {
+        } else if (moment(e.start).isSame(moment(), 'year') && moment(e.start).isSameOrBefore(moment(), 'month') && moment(e.start).isBefore(new Date(), 'day')) {
           past.push(e)
         } else {
           previous.push(e);
