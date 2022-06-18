@@ -1,11 +1,12 @@
 <template>
   <ion-page>
     <ion-content class="ion-padding">
-      <h1 class="heading-h2">
-        A  concise list of tech conference venues in ZA
-      </h1>
+      <Highlights 
+        text="A  concise list of tech conference venues in S.A" 
+        class="desktop-only"
+      />
       <div class="lg-content-center">
-        <!-- <SearchFilters /> -->
+        <SearchFilters />
         <SkeletonText v-if="loading" />
         <VenueList :data="filteredVenues" v-if="filteredVenues.length > 0" />
         <h1 v-if="filteredVenues.length < 1">No search results</h1>
@@ -30,7 +31,8 @@ import { defineComponent } from 'vue';
 import VenueList from "../components/VenueList";
 import Fab from "../components/Fab";
 import SkeletonText from "../components/SkeletonText";
-// import SearchFilters from "../components/SearchFilters";
+import SearchFilters from "../components/SearchFilters";
+import Highlights from "../components/Highlights";
 
 import { mapGetters } from 'vuex';
 
@@ -43,8 +45,9 @@ export default defineComponent({
     IonPage,
     VenueList,
     SkeletonText,
-    // SearchFilters,
+    SearchFilters,
     Fab,
+    Highlights
   },
   computed: {
     ...mapGetters(['venues', 'filteredVenues', 'searchString']),
