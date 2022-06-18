@@ -19,7 +19,6 @@
         </div>
       </div>
     </ion-content>
-    <Fab />
   </ion-page>
 </template>
 
@@ -33,7 +32,6 @@ import {
 import { defineComponent } from 'vue';
 
 import SpeakerList from "../components/SpeakerList";
-import Fab from "../components/Fab";
 import SkeletonText from "../components/SkeletonText";
 
 import { mapGetters } from 'vuex';
@@ -47,8 +45,7 @@ export default defineComponent({
     IonPage,
     // IonButton,
     SpeakerList,
-    SkeletonText,
-    Fab,
+    SkeletonText
   },
   computed: {
     ...mapGetters(['speakers', 'loginToken']),

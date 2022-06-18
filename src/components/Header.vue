@@ -65,14 +65,7 @@ import { mapGetters } from 'vuex';
 import Subscription from "./Subscription";
 
 export default {
-  name: "recent-list",
-  props: {
-    data: {
-      type: Array,
-      required: true,
-      default: () => [],
-    },
-  },
+  name: "Header",
   components: { IonIcon, IonMenuButton, IonList, IonLabel, IonItem, IonContent, IonMenu, IonToolbar, IonHeader, IonTitle, IonButtons, IonButton },
   computed: {
     ...mapGetters(['loginToken', 'userProfile']),
