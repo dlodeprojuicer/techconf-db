@@ -10,7 +10,7 @@
   </ion-page>
 </template>
 
-<script lang="ts">
+<script>
 import { IonTabBar, IonTabs, IonIcon, IonPage, IonRouterOutlet } from "@ionic/vue";
 import { logoIonic, logoVue, logoFirebase } from "ionicons/icons";
 
