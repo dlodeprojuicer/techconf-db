@@ -96,7 +96,7 @@ const DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/calendar/v
 const SCOPES = "https://www.googleapis.com/auth/calendar";
 
 export default {
-  name: "recent-list",
+  name: "ConfList",
   props: {
     data: {
       type: Array,

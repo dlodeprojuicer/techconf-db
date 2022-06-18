@@ -6,7 +6,7 @@
         class="desktop-only"
       />
       <div class="lg-content-center">
-        <SearchFilters />
+        <SearchFilters :venue="false" />
         <SkeletonText v-if="loading" />
         <VenueList :data="filteredVenues" v-if="filteredVenues.length > 0" />
         <h1 v-if="filteredVenues.length < 1">No search results</h1>
@@ -16,7 +16,6 @@
         </div>
       </div>
     </ion-content>
-    <Fab />
   </ion-page>
 </template>
 
@@ -29,7 +28,6 @@ import {
 import { defineComponent } from 'vue';
 
 import VenueList from "../components/VenueList";
-import Fab from "../components/Fab";
 import SkeletonText from "../components/SkeletonText";
 import SearchFilters from "../components/SearchFilters";
 import Highlights from "../components/Highlights";
@@ -46,7 +44,6 @@ export default defineComponent({
     VenueList,
     SkeletonText,
     SearchFilters,
-    Fab,
     Highlights
   },
   computed: {
