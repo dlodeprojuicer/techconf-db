@@ -1,15 +1,17 @@
 <template>
   <div class="highlights">		
     <h1 class="hero-text">
-			A concise list of tech conferences in S.A
+			{{ text }}
 		</h1>
 
-		<div v-if="data.length > 0">
-     <h3>This month</h3>
-			<ConfCards :data="data" />
-		</div>
-    <div v-else>
-      <h3>No conferences this month 🤷‍♂</h3>
+    <div v-if="home">
+      <div v-if="data.length > 0">
+      <h3>This month</h3>
+        <ConfCards :data="data" />
+      </div>
+      <div v-else>
+        <h3>No conferences this month 🤷‍♂</h3>
+      </div>
     </div>
   </div>
 </template>
@@ -24,8 +26,12 @@ export default {
   props: {
     data: {
 			type: Array,
-			required: true,
+			required: false,
 			default: ()=> []
+    },
+    text: {
+      type: String,
+      required: false,
     }
   },
   components: {
@@ -33,6 +39,11 @@ export default {
   },
   computed: {
     ...mapGetters(['monthEventCount']),
+  },
+  data() {
+    return {
+      home: this.$route.name === "conferences" ? true : false,
+    }
   }
 };
 </script>
@@ -52,7 +63,6 @@ h1, h3, h4 {
 
 .highlights {
   background: var(--ion-color-primary);
-  height: 45vh;
   padding: 50px;
   margin: -20px;
   top: -30px;

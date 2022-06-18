@@ -1,7 +1,11 @@
 <template>
   <ion-page>
     <ion-content class="ion-padding">
-      <Highlights :data="monthEventCount" class="desktop-only"/>
+      <Highlights 
+        :data="monthEventCount"
+        text="A concise list of tech conferences in S.A" 
+        class="desktop-only"
+      />
       <div class="lg-content-center">
         <SearchFilters :venue="true" />
         <SkeletonText v-if="loading" />
