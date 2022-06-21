@@ -74,6 +74,18 @@ const mutations = {
 }
 
 const actions = {
+  sayHello() {
+    return new Promise((resolve, reject) => {
+      console.log("hello....2");
+      const sayHello = firebase.functions().httpsCallable('sayHello');
+      sayHello().then(res => {
+        console.log("res", res.data);
+        resolve(res.data);
+      }).catch(err => {
+        reject (err);
+      });
+    });
+  },
   login(context, request) {
     return new Promise((resolve, reject) => {
       firebase.auth().signInWithEmailAndPassword(request.email, request.password)

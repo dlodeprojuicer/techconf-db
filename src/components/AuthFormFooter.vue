@@ -25,6 +25,9 @@
       <ion-icon size="large" :icon="logoFacebook"></ion-icon> 
       Facebook Login
     </ion-button>
+    <ion-button size="small" @click="hello()">
+      Say Hello
+    </ion-button>
   </div>
 </template>
 
@@ -78,6 +81,14 @@ export default {
     }
   }, 
   methods: {
+    hello() {
+      console.log("hello....1");
+      this.$store.dispatch("sayHello")
+        .catch(err => {
+          console.log("eee", err);
+        });
+      // get function reference
+    },
     goHome() {
       this.$router.push("/");
     },

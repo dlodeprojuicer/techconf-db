@@ -8,6 +8,7 @@ import "firebase/storage";
 import "firebase/firestore";
 import "firebase/database";
 import "firebase/analytics";
+import "firebase/functions";
 
 var firebaseConfig = {
   apiKey: process.env.VUE_APP_FIREBASE_API_KEY,
