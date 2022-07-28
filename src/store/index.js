@@ -3,7 +3,6 @@ import auth from "./modules/auth";
 import events from "./modules/events";
 import venues from "./modules/venues";
 import speakers from "./modules/speakers";
-// import userProfile from "./modules/userProfile";
 import firebase from "../firebase";
 
 const store = createStore({
@@ -12,7 +11,6 @@ const store = createStore({
     events,
     venues,
     speakers,
-    // userProfile
   },
   state: {
     httpLoader: false,
@@ -35,10 +33,6 @@ const store = createStore({
       state.events = data;
       localStorage.setItem("tcdbUserProfile", JSON.stringify(data));
     },
-    // updateSearch(state, data) {
-    //   console.log("M", data);
-    //   state[data.stateObject] = data;
-    // }
   },
   actions: {
     createUser(context, request) {

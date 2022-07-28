@@ -2,19 +2,6 @@ import { createRouter, createWebHistory } from '@ionic/vue-router';
 import Tabs from '../components/Tabs.vue'
 
 const routes = [
-  // {
-  //   path: '/',
-  //   component: () => import('@/views/Home.vue')
-  // },
-  // {
-  //   path: '/profile',
-  //   component: () => import('@/views/Profile.vue')
-  // },
-  // {
-  //   path: '/list',
-  //   component: () => import('@/views/List.vue')
-  // },
-
   // add /privacy-policy route for google calendar api
   // add /terms-of-service route for google calendar api
   {

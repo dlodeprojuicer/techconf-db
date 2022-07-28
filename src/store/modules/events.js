@@ -1,14 +1,8 @@
 import firebase from "../../firebase";
 import moment from "moment";
-// import redis from "redis";
-
-// const REDIS_PORT = process.env.PORT || 6379;
-// console.log(REDIS_PORT);
-// const redisClient = redis.createClient(REDIS_PORT);
 
 const state = {
   events: JSON.parse(localStorage.getItem("tcdbEvents")) ?? [],
-  // filteredEvents: [],
   updateEventSearchObject: {},
   monthEventCount: 0,
 }
@@ -122,7 +116,6 @@ const actions = {
         .where("verified", "==", true)
         .get()
         .then(({ docs }) => {
-          // const events = eventFormater(docs);
           const eventData = [];
           for (let x =0; docs.length > x; x++) {
             const docData = docs[x].data();
@@ -148,7 +141,6 @@ const actions = {
         .where("createdBy", "==", context.getters.loginToken)
         .get()
         .then(({ docs }) => {
-          // const events = eventFormater(docs);
           const eventData = [];
           for (let x =0; docs.length > x; x++) {
             const docData = docs[x].data();
@@ -212,64 +204,7 @@ const actions = {
         .doc(request)
         .delete();
     })
-  },
-  // Will be used once I figure out why gapi is undefined when used in this module
-  // gcEvent(context,request) {
-  //   gapi.load("client:auth2", () => {
-  //     gapi.client.init({
-  //       apiKey: API_KEY,
-  //       clientId: CLIENT_ID,
-  //       discoveryDocs: DISCOVERY_DOCS,
-  //       scope: SCOPES
-  //     }).then(() => {
-  //       if (gapi.auth2.getAuthInstance().isSignedIn.get()) {
-  //         context.dispatch("gcCreateEvent", request);
-  //       } else {
-  //         gapi.auth2.getAuthInstance().signIn().then(() => {
-  //           context.dispatch("gcCreateEvent", request);
-  //         })
-  //         .catch(() => {
-  //           alert(`You need to signin to your Google account before you can add event to your calendar`);
-  //         });
-  //       }
-  //     })
-  //     .catch(err => {
-  //       alert(err.details);
-  //     })
-  //   })
-  // },
-  // gcCreateEvent(event) {
-  //   const gcEvent = {
-  //     "summary": event.eventName,
-  //     "location": event.venue,
-  //     "start": {
-  //       "dateTime": moment(event.start).utc().format("YYYY-MM-DDTHH:mm:ss.SSS[Z]"),
-  //       "timeZone": "Africa/Johannesburg"
-  //     },
-  //     "end": {
-  //       "dateTime": moment(event.end).utc().format("YYYY-MM-DDTHH:mm:ss.SSS[Z]"),
-  //       "timeZone": "Africa/Johannesburg"
-  //     },
-  //     "reminders": {
-  //       "useDefault": false,
-  //       "overrides": [
-  //         {"method": "email", "minutes": 24 * 60},
-  //         {"method": "popup", "minutes": 10}
-  //       ]
-  //     }
-  //   };
-
-  //   var request = gapi.client.calendar.events.insert({
-  //     'calendarId': 'primary',
-  //     'resource': gcEvent,
-  //   });
-
-  //   const rootWindow = window;
-
-  //   request.execute(gcEvent => {
-  //     rootWindow.open(gcEvent.htmlLink);
-  //   })
-  // }
+  }
 }
 
 export default { state, getters, mutations, actions }

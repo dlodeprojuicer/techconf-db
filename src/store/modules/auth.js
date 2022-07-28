@@ -1,10 +1,4 @@
-// import mailchimp from "@mailchimp/mailchimp_marketing";
 import firebase from "./../../firebase";
-
-// mailchimp.setConfig({
-//   apiKey: "bfe135ec5d510567a5e6e2be6557849c-us2",
-//   server: "us2",
-// });
 
 const addToSpeakers = (speaker) => {
   let speakerObj = {
@@ -185,21 +179,7 @@ const actions = {
           reject(error);
       });
     })
-  },
-  // subscribe(context, request) {
-  //   return new Promise((resolve, reject) => {
-  //     mailchimp.post(`lists/c72f027b89/members`, {
-  //       ...request,
-  //       status: "subscribed"
-  //     })
-  //     .then(() => resolve())
-  //     .catch(err => reject(err))
-  //   })
-  // },
-  // async mailchimpTest() {
-  //   const response = await mailchimp.ping.get();
-  //   console.log(response);
-  // }
+  }
 }
 
 export default { state, getters, mutations, actions }

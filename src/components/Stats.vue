@@ -6,15 +6,6 @@
 </template>
 
 <script>
-// import { IonIcon, IonFabButton, IonFabList, IonFab } from "@ionic/vue";
-// import {
-//   add,
-//   logInOutline,
-//   lockOpenOutline,
-//   informationCircleOutline,
-// } from "ionicons/icons";
-// import { mapGetters } from "vuex";
-
 export default {
   name: "stats",
   props: {
@@ -23,21 +14,6 @@ export default {
       required: true,
       default: 0
     }
-  },
-  // components: { IonIcon, IonFabButton, IonFabList, IonFab },
-  // setup() {
-  //   return {
-  //     add,
-  //     logInOutline,
-  //     lockOpenOutline,
-  //     informationCircleOutline,
-  //   };
-  // },
-  mounted() {
-    // this.addEventModal();
-  },
-  methods: {
-
   }
 };
 </script>
