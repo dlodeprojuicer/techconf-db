@@ -5,7 +5,7 @@
         Speakers you can reach out to if you are planning a conference
         <!-- <span v-if="!loginToken">
           <br /><br />
-          <ion-button size="medium" @click="speakerReg">Register as a speaker</ion-button>
+          <ion-button size="medium" @click="speakerReg" aria-label="Register as a speaker">Register as a speaker</ion-button>
         </span> -->
       </h1>
       

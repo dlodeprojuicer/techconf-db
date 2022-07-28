@@ -1,7 +1,7 @@
 <template>
   <div class="no-events-img">
     <img src="/assets/img/no-events.png" />
-    <ion-button expand="block" color="dark" @click="addEventModal" v-if="loginToken">Add conference</ion-button>
+    <ion-button expand="block" color="dark" @click="addEventModal" v-if="loginToken" aria-label="Add conference">Add conference</ion-button>
   </div>
 </template>
 

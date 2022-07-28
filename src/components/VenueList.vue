@@ -57,8 +57,8 @@
 
         </ion-label>
         <ion-text class="actions" v-if="profilePage">
-          <ion-button color="dark" @click="editEvent(item)"> Edit </ion-button>
-          <ion-button color="dark" @click="deleteEvent(item.id)">
+          <ion-button color="dark" @click="editEvent(item)" aria-label="Edit">Edit</ion-button>
+          <ion-button color="dark" @click="deleteEvent(item.id)" aria-label="Delete">
             Delete
           </ion-button>
         </ion-text>

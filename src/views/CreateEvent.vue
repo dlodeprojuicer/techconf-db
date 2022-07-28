@@ -68,8 +68,8 @@
           ></ion-datetime>
         </ion-item>
         <div class="form-buttons">
-          <ion-button size="small" color="danger" @click="goHome">Cancel</ion-button>
-          <ion-button size="small" color="success" @click="submit">Submit</ion-button>
+          <ion-button size="small" color="danger" @click="goHome" aria-label="Cancel">Cancel</ion-button>
+          <ion-button size="small" color="success" @click="submit" aria-label="Submit">Submit</ion-button>
         </div>
       </div>
     </ion-content>

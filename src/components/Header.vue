@@ -3,14 +3,14 @@
     <ion-toolbar class="desktop-nav">
       <ion-buttons slot="secondary">
         <!-- <ion-button v-if="userProfile.admin" @click="gotoDashboard">Dashboard</ion-button> -->
-        <ion-button @click="gotoHome">Conferences</ion-button>
-        <ion-button @click="gotoVenues">Venues</ion-button>
-        <ion-button @click="gotoSpeakers">Speakers</ion-button>
-        <ion-button @click="gotoProfile" v-if="loginToken">Profile</ion-button>
+        <ion-button @click="gotoHome" aria-label="Conferences">Conferences</ion-button>
+        <ion-button @click="gotoVenues" aria-label="Venues">Venues</ion-button>
+        <ion-button @click="gotoSpeakers" aria-label="Speakers">Speakers</ion-button>
+        <ion-button @click="gotoProfile" v-if="loginToken" aria-label="Profile">Profile</ion-button>
         <!-- <ion-button @click="subscribe">Subscribe</ion-button> -->
-        <ion-button @click="login" v-if="!loginToken">Login</ion-button>
-        <ion-button @click="register" v-if="!loginToken">Register</ion-button>
-        <ion-button @click="logout" v-if="loginToken">Logout</ion-button> 
+        <ion-button @click="login" v-if="!loginToken" aria-label="Login">Login</ion-button>
+        <ion-button @click="register" v-if="!loginToken" aria-label="Register">Register</ion-button>
+        <ion-button @click="logout" v-if="loginToken" aria-label="Logout">Logout</ion-button> 
       </ion-buttons>
       <ion-buttons>
       </ion-buttons>
@@ -22,7 +22,7 @@
         <ion-menu-button auto-hide="false" @click="openMenu"></ion-menu-button>
       </ion-buttons>
       <ion-buttons slot="primary">
-        <ion-button>
+        <ion-button aria-label="Profile">
           <ion-icon slot="icon-only" ios="ellipsis-horizontal" md="ellipsis-vertical"></ion-icon>
         </ion-button>
       </ion-buttons>

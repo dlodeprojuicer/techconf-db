@@ -5,23 +5,23 @@
 
   <div class="form-buttons">
     <p>{{ loginRegText }} <a :href="loginRegLink"><u>{{ loginRegLink }}</u></a></p>
-    <ion-button size="small" @click="goHome">Cancel</ion-button>
-    <ion-button size="small" color="success" @click="submit">{{ loginRegBtn }}</ion-button>
+    <ion-button size="small" @click="goHome" aria-label="Cancel">Cancel</ion-button>
+    <ion-button size="small" color="success" @click="submit" :aria-label="loginRegBtn">{{ loginRegBtn }}</ion-button>
     <h4>- OR -</h4>
-    <ion-button size="small" @click="oAuth('google')" v-if="loginRegLink === 'register'">
+    <ion-button size="small" @click="oAuth('google')" v-if="loginRegLink === 'register'" aria-label="Google Login">
       <ion-icon size="large" :icon="logoGoogle"></ion-icon> 
       Google Login
     </ion-button>
-    <ion-button size="small" @click="oAuth('github')" v-if="loginRegLink === 'register'">
+    <ion-button size="small" @click="oAuth('github')" v-if="loginRegLink === 'register'" aria-label="Github Login">
       <ion-icon size="large" :icon="logoGithub"></ion-icon> 
       Github Login
     </ion-button>
     <br />
-    <ion-button size="small" @click="oAuth('twitter')" v-if="loginRegLink === 'register'">
+    <ion-button size="small" @click="oAuth('twitter')" v-if="loginRegLink === 'register'" aria-label="Twitter Login">
       <ion-icon size="large" :icon="logoTwitter"></ion-icon> 
       Twitter Login
     </ion-button>
-    <ion-button size="small" @click="oAuth('facebook')" v-if="loginRegLink === 'register'">
+    <ion-button size="small" @click="oAuth('facebook')" v-if="loginRegLink === 'register'" aria-label="Facebook Login">
       <ion-icon size="large" :icon="logoFacebook"></ion-icon> 
       Facebook Login
     </ion-button>

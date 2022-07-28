@@ -24,7 +24,7 @@
           {{ endpointError.message }}
         </p>
         <div class="form-buttons">
-          <ion-button size="small" color="success" @click="submit">Subscribe</ion-button>
+          <ion-button size="small" color="success" @click="submit" aria-label="Subscribe">Subscribe</ion-button>
         </div>
       </div>
     </ion-content>

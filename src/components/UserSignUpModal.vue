@@ -32,10 +32,8 @@
     </p>
 
     <div class="form-buttons">
-      <ion-button size="small" color="danger" @click="closeModal">Cancel</ion-button>
-      <ion-button size="small" color="success" @click="submit"
-        >Signup</ion-button
-      >
+      <ion-button size="small" color="danger" @click="closeModal" aria-label="Cancel">Cancel</ion-button>
+      <ion-button size="small" color="success" @click="submit" aria-label="Signup">Signup</ion-button>
     </div>
   </ion-content>
 </template>
