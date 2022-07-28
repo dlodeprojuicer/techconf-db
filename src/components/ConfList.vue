@@ -28,6 +28,15 @@
               <ion-icon :icon="openOutline"></ion-icon> Website
             </a>
           </p>
+          <p style="cursor: pointer;" @click="share('facebook')">
+            <ion-icon :icon="logoFacebook"></ion-icon> Share on Facebook
+          </p>
+          <p style="cursor: pointer;" @click="share('twitter')">
+            <ion-icon :icon="logoTwitter"></ion-icon> Share on Twitter
+          </p>
+          <p style="cursor: pointer;" @click="share('linkedin')">
+            <ion-icon :icon="logoLinkedin"></ion-icon> Share on LinkedIn
+          </p>
           <!-- <p @click="addToCalendar(item)" v-if="item.start && item.end" class="desktop-only">
             <ion-icon :icon="calendarClearOutline"></ion-icon> Add to Calendar
           </p> -->
@@ -86,8 +95,9 @@ import {
   IonCol,
   modalController
 } from "@ionic/vue";
-import { chevronForward, micOutline, heartOutline, openOutline, calendarClearOutline } from "ionicons/icons";
+import { chevronForward, micOutline, heartOutline, openOutline, calendarClearOutline, logoFacebook, logoTwitter, logoLinkedin } from "ionicons/icons";
 import EditEventModal from "./EditEventModal";
+import SocialMediaSharing from "../mixins/socialMediaSharing";
 
 const gapi = window.gapi;
 const CLIENT_ID = process.env.VUE_APP_GOOGLE_CLIENT_ID;
@@ -97,6 +107,7 @@ const SCOPES = "https://www.googleapis.com/auth/calendar";
 
 export default {
   name: "ConfList",
+  mixins: [SocialMediaSharing],
   props: {
     data: {
       type: Array,
@@ -118,12 +129,11 @@ export default {
       micOutline,
       openOutline,
       calendarClearOutline,
-      heartOutline
+      heartOutline,
+      logoFacebook, 
+      logoTwitter, 
+      logoLinkedin
     };
-  },
-  mounted() {
-  },
-  beforeMount() {
   },
   data() {
     return {
