@@ -238,6 +238,11 @@ export default {
 .conf-name {
   color: #000;
 }
+
+p, a {
+  color: rgb(23, 21, 21);
+}
+
 ion-row {
   background: #ffffff;
   margin-bottom: 10px;

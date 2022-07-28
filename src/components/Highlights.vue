@@ -6,11 +6,11 @@
 
     <div v-if="home">
       <div v-if="data.length > 0">
-      <h3>This month</h3>
+      <h2>This month</h2>
         <ConfCards :data="data" />
       </div>
       <div v-else>
-        <h3>No conferences this month 🤷‍♂</h3>
+        <h2>No conferences this month 🤷‍♂</h2>
       </div>
     </div>
   </div>
@@ -49,7 +49,7 @@ export default {
 </script>
 
 <style lang="css" scoped>
-h1, h3, h4 {
+h1, h2, h3, h4 {
 	color: #fff;
 	text-align: center;
 }
