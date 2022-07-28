@@ -60,15 +60,18 @@ export default defineComponent({
     // Fab,
   },
   computed: {
-    ...mapGetters(['filteredEvents', 'monthEventCount']),
+    ...mapGetters(['events','filteredEvents', 'monthEventCount']),
   },
   data() {
     return {
-      loading: true
+      loading: true,
     }
   },
   methods: {
     ionViewDidEnter() {
+      // display localstorage events while fetchEvents is running
+      this.loading = this.events.length < 0;
+
       this.fetchEvents();
     },
     fetchEvents() {

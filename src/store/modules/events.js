@@ -7,17 +7,17 @@ import moment from "moment";
 // const redisClient = redis.createClient(REDIS_PORT);
 
 const state = {
-  events: [],
+  events: JSON.parse(localStorage.getItem("tcdbEvents")) ?? [],
   // filteredEvents: [],
   updateEventSearchObject: {},
   monthEventCount: 0,
 }
 
 const getters = {
-  events({ events = [] }) {
-    return events || JSON.parse(localStorage.getItem("tcdbEvents"));
+  events({ events }) {
+    return events;
   },
-  filteredEvents({ events = [], updateEventSearchObject }) {
+  filteredEvents({ events, updateEventSearchObject }) {
     let future = [
       {
         "website": "https://namecheap.pxf.io/mgBr4e",
@@ -37,6 +37,7 @@ const getters = {
         "desc": "Convert your visitors to customers with high quality illustrations that will help you build breath-taking websites."
       }
     ];
+
  
     if (!updateEventSearchObject?.value || updateEventSearchObject?.value === "") {
       events.map(e => {
@@ -86,7 +87,7 @@ const getters = {
   userEvents({ userEvents }) {
     return userEvents || JSON.parse(localStorage.getItem("tcdbUserEvents"));
   },
-  monthEventCount({ events = [] }) {
+  monthEventCount({ events }) {
     const date = new Date();
     const month = date.getMonth();
     const year = date.getFullYear();
