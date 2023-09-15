@@ -11,9 +11,7 @@
         <VenueList :data="filteredVenues" v-if="filteredVenues.length > 0" />
         <h1 v-if="filteredVenues.length < 1">No search results</h1>
   
-        <div style="width: 50%; margin:0 auto; padding: 30px 0;">
-          If you wish to add a venue please email simodms@gmail.com
-        </div>
+        <BeAdded msg="If you wish to add a venue please email simo@controln.co.za"/>
       </div>
     </ion-content>
   </ion-page>
@@ -31,6 +29,7 @@ import VenueList from "../components/VenueList";
 import SkeletonText from "../components/SkeletonText";
 import SearchFilters from "../components/SearchFilters";
 import Highlights from "../components/Highlights";
+import BeAdded from "../components/BeAdded";
 
 import { mapGetters } from 'vuex';
 
@@ -44,7 +43,8 @@ export default defineComponent({
     VenueList,
     SkeletonText,
     SearchFilters,
-    Highlights
+    Highlights,
+    BeAdded
   },
   computed: {
     ...mapGetters(['venues', 'filteredVenues', 'searchString']),

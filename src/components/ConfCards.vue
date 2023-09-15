@@ -1,7 +1,7 @@
 <template>
   <ion-grid>
     <ion-row>
-      <ion-col class="card-column" v-for="(item, index) in data" :key="index" @click="goto(item.website)">
+      <ion-col size="3" class="card-column" v-for="(item, index) in data" :key="index" @click="goto(item.website)">
         <ion-label>{{ item.eventName }}</ion-label>
         <br />
         <ion-label>{{ item.venue }}</ion-label>
@@ -65,7 +65,6 @@ export default {
   },
   methods: {
     goto(link) {
-      console.log(link)
       window.open(link)
     }
   },
@@ -75,8 +74,8 @@ export default {
 <style lang="css" scoped>
 ion-grid {
   text-align: center;
-  margin: auto;
-  width: 35%;
+  margin: 0 auto;
+  width: 95%;
 }
 
 ion-avatar {
@@ -85,9 +84,7 @@ ion-avatar {
 
 ion-col.card-column {
   background: #fff;
-  border: 1px solid #efefef;
-  margin: 0 5px;
-  border-radius: 5px;
+  margin: 2px;
 }
 
 ion-col.card-column:hover {

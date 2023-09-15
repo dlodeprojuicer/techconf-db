@@ -1,6 +1,7 @@
 .DS_Store
 *.DS_Store
 node_modules
+scraper/node_modules
 android
 ios
 dist

@@ -1,11 +1,16 @@
 import firebase from "../../firebase";
 import moment from "moment";
+// import data from "./data.json"
+// import springCleaning from "../../utils/springCleaner"; 
+
+// springCleaning(data);
 
 const state = {
   events: JSON.parse(localStorage.getItem("tcdbEvents")) ?? [],
   updateEventSearchObject: {},
   monthEventCount: 0,
 }
+
 
 const getters = {
   events({ events }) {

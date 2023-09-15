@@ -8,8 +8,8 @@
         <ion-button @click="gotoSpeakers" aria-label="Speakers">Speakers</ion-button>
         <ion-button @click="gotoProfile" v-if="loginToken" aria-label="Profile">Profile</ion-button>
         <!-- <ion-button @click="subscribe">Subscribe</ion-button> -->
-        <ion-button @click="login" v-if="!loginToken" aria-label="Login">Login</ion-button>
-        <ion-button @click="register" v-if="!loginToken" aria-label="Register">Register</ion-button>
+        <!-- <ion-button @click="login" v-if="!loginToken" aria-label="Login">Login</ion-button>
+        <ion-button @click="register" v-if="!loginToken" aria-label="Register">Register</ion-button> -->
         <ion-button @click="logout" v-if="loginToken" aria-label="Logout">Logout</ion-button> 
       </ion-buttons>
       <ion-buttons>

@@ -14,9 +14,7 @@
         <SkeletonText v-if="loading" />
         <SpeakerList :data="speakers" />
 
-        <div style="text-aling: center; padding: 30px 0;">
-          If you wish to be added as a speaker please email simodms@gmail.com
-        </div>
+        <BeAdded msg=" If you wish to be added as a speaker please email simo@controln.co.za" />
       </div>
     </ion-content>
   </ion-page>
@@ -33,6 +31,7 @@ import { defineComponent } from 'vue';
 
 import SpeakerList from "../components/SpeakerList";
 import SkeletonText from "../components/SkeletonText";
+import BeAdded from "../components/BeAdded";
 
 import { mapGetters } from 'vuex';
 
@@ -45,7 +44,8 @@ export default defineComponent({
     IonPage,
     // IonButton,
     SpeakerList,
-    SkeletonText
+    SkeletonText,
+    BeAdded
   },
   computed: {
     ...mapGetters(['speakers', 'loginToken']),
