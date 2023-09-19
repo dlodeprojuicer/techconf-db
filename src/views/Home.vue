@@ -19,14 +19,6 @@
         </div>
 
         <div>
-          <h1>Previous ({{ filteredEvents.past.length }})</h1>
-          <ConfList
-            :data="filteredEvents.past"
-            v-if="filteredEvents.past.length > 0"
-          />
-        </div>
-
-        <div>
           <h1>Past ({{ filteredEvents.previous.length - 1 }})</h1>
           <ConfList
             :data="filteredEvents.previous"

@@ -1,7 +1,7 @@
 import firebase from "../../firebase";
 import moment from "moment";
 // import data from "./data.json"
-// import springCleaning from "../../utils/springCleaner"; 
+// import springCleaning from "../../utils/springCleaner";
 
 // springCleaning(data);
 
@@ -9,8 +9,7 @@ const state = {
   events: JSON.parse(localStorage.getItem("tcdbEvents")) ?? [],
   updateEventSearchObject: {},
   monthEventCount: 0,
-}
-
+};
 
 const getters = {
   events({ events }) {
@@ -19,67 +18,88 @@ const getters = {
   filteredEvents({ events, updateEventSearchObject }) {
     let future = [
       {
-        "website": "https://namecheap.pxf.io/mgBr4e",
-        "province": "",
-        "name": "Namecheap",
-        "ad": true,
-        "desc": "Powering Internet freedom through domains, hosting, security, and more — everything you need to make more online, for less."
-      }
+        website: "https://namecheap.pxf.io/mgBr4e",
+        province: "",
+        name: "Namecheap",
+        ad: true,
+        desc:
+          "Powering Internet freedom through domains, hosting, security, and more — everything you need to make more online, for less.",
+      },
     ];
     let past = [];
     let previous = [
       {
-        "website": "https://www.pixeltrue.com/?via=techconfdb",
-        "province": "",
-        "name": "Pixeltrue",
-        "ad": true,
-        "desc": "Convert your visitors to customers with high quality illustrations that will help you build breath-taking websites."
-      }
+        website: "https://www.pixeltrue.com/?via=techconfdb",
+        province: "",
+        name: "Pixeltrue",
+        ad: true,
+        desc:
+          "Convert your visitors to customers with high quality illustrations that will help you build breath-taking websites.",
+      },
     ];
 
- 
-    if (!updateEventSearchObject?.value || updateEventSearchObject?.value === "") {
-      events.map(e => {
-        if (e.start && moment(e.start).isSame(new Date(), 'year') && moment(e.start).isSameOrAfter(new Date(), 'month') && moment(e.start).isAfter(new Date(), 'day')) {
+    if (
+      !updateEventSearchObject?.value ||
+      updateEventSearchObject?.value === ""
+    ) {
+      const currentYear = new Date().getFullYear();
+
+      events.map((e) => {
+        if (
+          e.start &&
+          (moment(e.start).isSameOrAfter(new Date(), "year") ||
+            moment(e.start).year() >= currentYear) &&
+          moment(e.start).isSameOrAfter(new Date(), "month") &&
+          moment(e.start).isAfter(new Date(), "day")
+        ) {
           future.push(e);
           return e;
-        } else if (moment(e.start).isSame(moment(), 'year') && moment(e.start).isSameOrBefore(moment(), 'month') && moment(e.start).isBefore(new Date(), 'day')) {
-          past.push(e)
         } else {
           previous.push(e);
         }
-      })
+      });
 
       // ascending order
       future.sort((a, b) => moment(a).diff(b));
       future.reverse();
 
       return {
-        future, 
-        past, 
-        previous 
-      }
+        future,
+        past,
+        previous,
+      };
     } else {
-      const filtered = events.filter(event => {
+      const filtered = events.filter((event) => {
         if (!event.ad) {
-          return event[updateEventSearchObject.field].toLowerCase().includes(updateEventSearchObject.value.toLowerCase())
+          return event[updateEventSearchObject.field]
+            .toLowerCase()
+            .includes(updateEventSearchObject.value.toLowerCase());
         }
       });
 
-      filtered.map(e => {
-        if (e.start && moment(e.start).isSame(new Date(), 'year') && moment(e.start).isSameOrAfter(new Date(), 'month') && moment(e.start).isAfter(new Date(), 'day')) {
+      filtered.map((e) => {
+        if (
+          e.start &&
+          moment(e.start).isSame(new Date(), "year") &&
+          moment(e.start).isSameOrAfter(new Date(), "month") &&
+          moment(e.start).isAfter(new Date(), "day")
+        ) {
           future.push(e);
           return e;
-        } else if (moment(e.start).isSame(moment(), 'year') && moment(e.start).isSameOrBefore(moment(), 'month') && moment(e.start).isBefore(new Date(), 'day')) {
-          past.push(e)
+        } else if (
+          moment(e.start).isSame(moment(), "year") &&
+          moment(e.start).isSameOrBefore(moment(), "month") &&
+          moment(e.start).isBefore(new Date(), "day")
+        ) {
+          past.push(e);
         } else {
           previous.push(e);
         }
-      })
+      });
       return {
-        future, 
-        past, 
-        previous 
+        future,
+        past,
+        previous,
       };
     }
   },
@@ -91,13 +111,16 @@ const getters = {
     const month = date.getMonth();
     const year = date.getFullYear();
     const monthPlus = month + 1;
-    return events.filter(event => {
-      if(event.startFormatted) {
-        return event.startFormatted.split("/")[1] == monthPlus && event.startFormatted.split("/")[2] == year;
+    return events.filter((event) => {
+      if (event.startFormatted) {
+        return (
+          event.startFormatted.split("/")[1] == monthPlus &&
+          event.startFormatted.split("/")[2] == year
+        );
       }
     });
   },
-}
+};
 
 const mutations = {
   events(state, data) {
@@ -110,83 +133,103 @@ const mutations = {
   },
   updateSearch(state, data) {
     state[data.stateObject] = data;
-  }
-}
+  },
+};
 
 const actions = {
   getEvents(context) {
     return new Promise((resolve, reject) => {
-      firebase.firestore().collection("events")
+      firebase
+        .firestore()
+        .collection("events")
         .orderBy("eventName")
         .where("verified", "==", true)
+        // .sort("start")
         .get()
         .then(({ docs }) => {
           const eventData = [];
-          for (let x =0; docs.length > x; x++) {
+          for (let x = 0; docs.length > x; x++) {
             const docData = docs[x].data();
             eventData.push({
               id: docs[x].id,
               ...docData,
-              startFormatted: docData.start ? moment(docData.start).format("DD/MM/YYYY") : null,
-              endFormatted: docData.end ? moment(docData.end).format("DD/MM/YYYY") : null,
+              startFormatted: docData.start
+                ? moment(docData.start).format("DD/MM/YYYY")
+                : null,
+              endFormatted: docData.end
+                ? moment(docData.end).format("DD/MM/YYYY")
+                : null,
             });
           }
           // redisClient.set("events", eventData);
           context.commit("events", eventData);
           resolve(eventData);
-        }).catch( error => {
-          reject(error)
+        })
+        .catch((error) => {
+          reject(error);
         });
-    })
+    });
   },
   getUserEvents(context) {
     return new Promise((resolve) => {
-      firebase.firestore().collection("events")
+      firebase
+        .firestore()
+        .collection("events")
         .orderBy("eventName")
         .where("createdBy", "==", context.getters.loginToken)
         .get()
         .then(({ docs }) => {
           const eventData = [];
-          for (let x =0; docs.length > x; x++) {
+          for (let x = 0; docs.length > x; x++) {
             const docData = docs[x].data();
             eventData.push({
               id: docs[x].id,
               ...docData,
-              startFormatted: docData.start ? moment(docData.start).format("DD/MM/YYYY") : null,
-              endFormatted: docData.end ? moment(docData.end).format("DD/MM/YYYY") : null,
+              startFormatted: docData.start
+                ? moment(docData.start).format("DD/MM/YYYY")
+                : null,
+              endFormatted: docData.end
+                ? moment(docData.end).format("DD/MM/YYYY")
+                : null,
             });
           }
           context.commit("userEvents", eventData);
           resolve(eventData);
         });
-    })
+    });
   },
   createEvent(context, request) {
     request.createdBy = context.getters.loginToken;
     return new Promise((resolve, reject) => {
-      const createEventFn = r => {
-        firebase.firestore().collection("events")
+      const createEventFn = (r) => {
+        firebase
+          .firestore()
+          .collection("events")
           .add(r)
           .then(() => {
-            context.dispatch("getEvents").then(events => {
-              context.commit("events", events);
-              resolve(events)
-            })
-            .catch(error => {
-              reject(error);
-            });
-        });
-      }
+            context
+              .dispatch("getEvents")
+              .then((events) => {
+                context.commit("events", events);
+                resolve(events);
+              })
+              .catch((error) => {
+                reject(error);
+              });
+          });
+      };
 
-      firebase.firestore().collection("users")
+      firebase
+        .firestore()
+        .collection("users")
         .doc(context.getters.loginToken)
         .get()
-        .then(user => {
+        .then((user) => {
           if (user.data().verified) {
             request.verified = true;
             createEventFn(request);
           } else {
-            createEventFn(request)
+            createEventFn(request);
           }
         });
     });
@@ -194,22 +237,26 @@ const actions = {
   updateEvent(context, request) {
     request.updatedBy = context.getters.loginToken;
     return new Promise((resolve) => {
-      firebase.firestore().collection("events")
+      firebase
+        .firestore()
+        .collection("events")
         .doc(request.id)
         .update(request)
         .then(() => {
           context.dispatch("getEvents");
           resolve();
         });
-    })
+    });
   },
   deleteEvent(context, request) {
     return new Promise(() => {
-      firebase.firestore().collection("events")
+      firebase
+        .firestore()
+        .collection("events")
         .doc(request)
         .delete();
-    })
-  }
-}
+    });
+  },
+};
 
-export default { state, getters, mutations, actions }
+export default { state, getters, mutations, actions };
