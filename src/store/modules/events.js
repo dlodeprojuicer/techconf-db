@@ -121,141 +121,99 @@ const getters = {
     });
   },
 };
-
 const mutations = {
-  events(state, data) {
+  SET_EVENTS(state, data) {
     state.events = data;
     localStorage.setItem("tcdbEvents", JSON.stringify(data));
   },
-  userEvents(state, data) {
-    state.events = data;
+  SET_USER_EVENTS(state, data) {
+    state.userEvents = data; // Fixed potential bug
     localStorage.setItem("tcdbUserEvents", JSON.stringify(data));
   },
-  updateSearch(state, data) {
+  UPDATE_SEARCH(state, data) {
     state[data.stateObject] = data;
   },
 };
 
 const actions = {
-  getEvents(context) {
-    return new Promise((resolve, reject) => {
-      firebase
-        .firestore()
-        .collection("events")
-        .orderBy("eventName")
-        .where("verified", "==", true)
-        // .sort("start")
-        .get()
-        .then(({ docs }) => {
-          const eventData = [];
-          for (let x = 0; docs.length > x; x++) {
-            const docData = docs[x].data();
-            eventData.push({
-              id: docs[x].id,
-              ...docData,
-              startFormatted: docData.start
-                ? moment(docData.start).format("DD/MM/YYYY")
-                : null,
-              endFormatted: docData.end
-                ? moment(docData.end).format("DD/MM/YYYY")
-                : null,
-            });
-          }
-          // redisClient.set("events", eventData);
-          context.commit("events", eventData);
-          resolve(eventData);
-        })
-        .catch((error) => {
-          reject(error);
-        });
-    });
-  },
-  getUserEvents(context) {
-    return new Promise((resolve) => {
-      firebase
-        .firestore()
-        .collection("events")
-        .orderBy("eventName")
-        .where("createdBy", "==", context.getters.loginToken)
-        .get()
-        .then(({ docs }) => {
-          const eventData = [];
-          for (let x = 0; docs.length > x; x++) {
-            const docData = docs[x].data();
-            eventData.push({
-              id: docs[x].id,
-              ...docData,
-              startFormatted: docData.start
-                ? moment(docData.start).format("DD/MM/YYYY")
-                : null,
-              endFormatted: docData.end
-                ? moment(docData.end).format("DD/MM/YYYY")
-                : null,
-            });
-          }
-          context.commit("userEvents", eventData);
-          resolve(eventData);
-        });
-    });
-  },
-  createEvent(context, request) {
-    request.createdBy = context.getters.loginToken;
-    return new Promise((resolve, reject) => {
-      const createEventFn = (r) => {
-        firebase
-          .firestore()
-          .collection("events")
-          .add(r)
-          .then(() => {
-            context
-              .dispatch("getEvents")
-              .then((events) => {
-                context.commit("events", events);
-                resolve(events);
-              })
-              .catch((error) => {
-                reject(error);
-              });
-          });
-      };
+  async getEvents({ commit }) {
+    const querySnapshot = await firebase
+      .firestore()
+      .collection("events")
+      .orderBy("eventName")
+      .where("verified", "==", true)
+      .get();
 
-      firebase
-        .firestore()
-        .collection("users")
-        .doc(context.getters.loginToken)
-        .get()
-        .then((user) => {
-          if (user.data().verified) {
-            request.verified = true;
-            createEventFn(request);
-          } else {
-            createEventFn(request);
-          }
-        });
-    });
+    const eventData = querySnapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+      startFormatted: doc.data().start
+        ? moment(doc.data().start).format("DD/MM/YYYY")
+        : null,
+      endFormatted: doc.data().end
+        ? moment(doc.data().end).format("DD/MM/YYYY")
+        : null,
+    }));
+
+    commit("SET_EVENTS", eventData);
+    return eventData;
   },
-  updateEvent(context, request) {
-    request.updatedBy = context.getters.loginToken;
-    return new Promise((resolve) => {
-      firebase
-        .firestore()
-        .collection("events")
-        .doc(request.id)
-        .update(request)
-        .then(() => {
-          context.dispatch("getEvents");
-          resolve();
-        });
-    });
+  async getUserEvents({ commit, getters }) {
+    const querySnapshot = await firebase
+      .firestore()
+      .collection("events")
+      .orderBy("eventName")
+      .where("createdBy", "==", getters.loginToken)
+      .get();
+
+    const eventData = querySnapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+      startFormatted: doc.data().start
+        ? moment(doc.data().start).format("DD/MM/YYYY")
+        : null,
+      endFormatted: doc.data().end
+        ? moment(doc.data().end).format("DD/MM/YYYY")
+        : null,
+    }));
+
+    commit("SET_USER_EVENTS", eventData);
+    return eventData;
   },
-  deleteEvent(context, request) {
-    return new Promise(() => {
-      firebase
-        .firestore()
-        .collection("events")
-        .doc(request)
-        .delete();
-    });
+  async createEvent({ commit, dispatch, getters }, request) {
+    request.createdBy = getters.loginToken;
+    const user = await firebase
+      .firestore()
+      .collection("users")
+      .doc(getters.loginToken)
+      .get();
+    if (user.data().verified) {
+      request.verified = true;
+    }
+    await firebase
+      .firestore()
+      .collection("events")
+      .add(request);
+    const events = await dispatch("getEvents");
+    commit("SET_EVENTS", events);
+    return events;
+  },
+  async updateEvent({ dispatch, getters }, request) {
+    request.updatedBy = getters.loginToken;
+    await firebase
+      .firestore()
+      .collection("events")
+      .doc(request.id)
+      .update(request);
+    await dispatch("getEvents");
+  },
+  async deleteEvent({ dispatch }, requestId) {
+    await firebase
+      .firestore()
+      .collection("events")
+      .doc(requestId)
+      .delete();
+    await dispatch("getEvents");
   },
 };
 

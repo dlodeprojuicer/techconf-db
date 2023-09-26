@@ -1,185 +1,103 @@
 import firebase from "./../../firebase";
 
 const addToSpeakers = (speaker) => {
-  let speakerObj = {
+  return {
     name: speaker.name,
     lastname: speaker.lastname,
     position: speaker.role,
     contact: speaker.contactInfoConsent ? speaker.contact : "",
     image: "",
     social: [
-      {
-        link: speaker.twitter,
-        label: "Twitter"
-      },
-      {
-        link: speaker.linkedin,
-        label: "LinkedIn"
-      },
-      {
-        link: speaker.website,
-        label: "Website"
-      }
+      { link: speaker.twitter, label: "Twitter" },
+      { link: speaker.linkedin, label: "LinkedIn" },
+      { link: speaker.website, label: "Website" }
     ],
     highlights: [
-      {
-        name: speaker.highlight1name,
-        year: speaker.highlight1year
-      }, 
-      {
-        name: speaker.highlight2name,
-        year: speaker.highlight2year
-      }, 
-      {
-        name: speaker.highlight3name,
-        year: speaker.highlight3year
-      }, 
+      { name: speaker.highlight1name, year: speaker.highlight1year },
+      { name: speaker.highlight2name, year: speaker.highlight2year },
+      { name: speaker.highlight3name, year: speaker.highlight3year },
     ],
   };
-  return speakerObj;
 };
 
 const state = {
-  loginToken: false,
-}
+  loginToken: localStorage.getItem("tcdbLoginToken") || false,
+  authError: null,
+};
 
 const getters = {
-  loginToken({ loginToken }) {
-    return loginToken || localStorage.getItem("tcdbLoginToken");
-  },
-  authError(state) {
-    return state.authError;
-  },
-}
+  loginToken: (state) => state.loginToken,
+  authError: (state) => state.authError,
+};
 
 const mutations = {
-  loginToken(state, token) {
-    if(token) {
-      state.loginToken = token;
+  SET_LOGIN_TOKEN(state, token) {
+    state.loginToken = token;
+    if (token) {
       localStorage.setItem("tcdbLoginToken", token);
     } else {
-      state.loginToken = null;
       localStorage.clear();
     }
   },
-  authError(state, data) {
-    state.authError = data;
-  }
-}
+  SET_AUTH_ERROR(state, error) {
+    state.authError = error;
+  },
+};
 
 const actions = {
-  login(context, request) {
-    return new Promise((resolve, reject) => {
-      firebase.auth().signInWithEmailAndPassword(request.email, request.password)
-        .then(({ user }) => {
-          context.dispatch("getUserProfile", user.uid).then(() => {
-            context.commit("loginToken", user.uid);
-            context.dispatch("getEvents");
-            resolve(user.uid);
-          });
-        }).catch(function(error) {
-        reject(error)
-      });
-    })
+  async login({ dispatch, commit }, request) {
+      const { user } = await firebase.auth().signInWithEmailAndPassword(request.email, request.password);
+      await dispatch("getUserProfile", user.uid);
+      commit("SET_LOGIN_TOKEN", user.uid);
+      await dispatch("getEvents");
+      return user.uid;
   },
-  signUp(context, request) {
-    return new Promise((resolve, reject) => {
-      firebase.auth().createUserWithEmailAndPassword(request.email, request.password)
-        .then(({ user }) => {
-          context.commit("loginToken", user.uid);
-          request.uid = user.uid;
-          request.verified = true;
-          delete request.password;
-          context.dispatch("createUser", request).then(() => {
-            if (request.isSpeaker) {
-              let obj = {
-                ...request.speaker,
-                name: request.name,
-                lastname: request.lastname,
-                contact: request.email
-              }
-              context.dispatch("createSpeaker", addToSpeakers(obj)).then(() => {
-                resolve(user.uid);
-              }).catch(e => {
-                reject(e);
-              });
-            } else {
-              resolve(user.uid);
-            }
-          }).catch(err => {
-            reject(err);
-          });
-        }).catch(error => {
-          reject(error)
-        });
-    })
+  async signUp({ dispatch, commit }, request) {
+      const { user } = await firebase.auth().createUserWithEmailAndPassword(request.email, request.password);
+      commit("SET_LOGIN_TOKEN", user.uid);
+      const newUser = { ...request, uid: user.uid, verified: true };
+      delete newUser.password;
+      await dispatch("createUser", newUser);
+      if (request.isSpeaker) {
+        const speaker = addToSpeakers({ ...request.speaker, name: request.name, lastname: request.lastname, contact: request.email });
+        await dispatch("createSpeaker", speaker);
+      }
+      return user.uid;
   },
-  logout(context) {
-    return new Promise((resolve, reject) => {
-      firebase.auth().signOut()
-        .then(() => {
-          context.commit("loginToken", false);
-          resolve();
-        }).catch(error => {
-        reject(error)
-      });
-    })
+  async logout({ commit }) {
+      await firebase.auth().signOut();
+      commit("SET_LOGIN_TOKEN", false);
   },
-  loginStatus(context) {
-    return new Promise(() => {
-      firebase.auth().onAuthStateChanged(user => {
-        if (user) {
-          // User is signed in.
-          context.commit("loginToken", user.uid);
-        } else {
-          context.commit("loginToken", false);
-        }
-      });
+  loginStatus({ commit }) {
+    firebase.auth().onAuthStateChanged(user => {
+      commit("SET_LOGIN_TOKEN", user ? user.uid : false);
     });
   },
-  oAuth(context, request) {
-    return new Promise((resolve, reject) => {
-      let provider = null;
-      switch(request) {
-        case "google":
-          provider = new firebase.auth.GoogleAuthProvider();
+  async oAuth({ dispatch, commit }, providerName) {
+    let provider;
+    switch(providerName) {
+      case "google":
+        provider = new firebase.auth.GoogleAuthProvider();
         break;
-        case "github":
-          provider = new firebase.auth.GithubAuthProvider();
+      case "github":
+        provider = new firebase.auth.GithubAuthProvider();
         break;
-        case "facebook":
-          provider = new firebase.auth.FacebookAuthProvider();
+      case "facebook":
+        provider = new firebase.auth.FacebookAuthProvider();
         break;
-        case "twitter":
-          provider = new firebase.auth.TwitterAuthProvider();
+      case "twitter":
+        provider = new firebase.auth.TwitterAuthProvider();
         break;
-        default:
-          console.log("oAuth service not found");
-      }
+      default:
+        throw new Error("OAuth provider not found");
+    }
 
-      firebase.auth().signInWithPopup(provider)
-        .then(({ user }) => {
-          console.log("user", user);
-          context.dispatch("createUser", {
-            uid: user.uid,
-            name: user.displayName,
-            email: user.email
-          }).then(() => {
-            context.dispatch("getUserProfile", user.uid).then(() => {
-              context.commit("loginToken", user.uid);
-  
-              resolve(user.uid);
-            })
-          }).catch(er => {
-            console.log("er", er);
-            reject(er)
-          });
-        }).catch(function(error) {
-          console.log("errrr", error)
-          reject(error);
-      });
-    })
-  }
-}
+      const { user } = await firebase.auth().signInWithPopup(provider);
+      await dispatch("createUser", { uid: user.uid, name: user.displayName, email: user.email });
+      await dispatch("getUserProfile", user.uid);
+      commit("SET_LOGIN_TOKEN", user.uid);
+      return user.uid;
+  },
+};
 
-export default { state, getters, mutations, actions }
+export default { state, getters, mutations, actions };

@@ -15,100 +15,44 @@ const store = createStore({
   state: {
     httpLoader: false,
     searchString: null,
-    userProfile: {},
+    userProfile: JSON.parse(localStorage.getItem("tcdbUserProfile")) || {},
   },
   getters: {
-    httpLoader({ httpLoader }) {
-      return httpLoader;
-    },
-    searchString({ searchString }) {
-      return searchString;
-    },
-    userProfile({ userProfile }) {
-      return userProfile || JSON.parse(localStorage.getItem("tcdbUserProfile"));
-    },
+    httpLoader: (state) => state.httpLoader,
+    searchString: (state) => state.searchString,
+    userProfile: (state) => state.userProfile,
   },
   mutations: {
-    userProfile(state, data) {
-      state.events = data;
+    SET_USER_PROFILE(state, data) {
+      state.userProfile = data;
       localStorage.setItem("tcdbUserProfile", JSON.stringify(data));
     },
   },
   actions: {
-    createUser(context, request) {
-      return new Promise((resolve, reject) => {
-        firebase.firestore().collection("users")
-          .doc(request.uid)
-          .set({...request})
-          .then(() => {
-            resolve();
-          })
-          .catch(err => {
-            reject(err);
-          });
-      })
+    async createUser(_, request) {
+        await firebase.firestore().collection("users").doc(request.uid).set({ ...request });
     },
-    getUserProfile(context, request) {
-      return new Promise((resolve, reject) => {
-        firebase.firestore().collection("users")
-          .doc(request)
-          .get()
-          .then(doc => {
-            context.commit("userProfile", doc.data());
-            resolve(doc.data());
-          }).catch(error => {
-            reject(error);
-          });
-      })
+    async getUserProfile({ commit }, userId) {
+        const doc = await firebase.firestore().collection("users").doc(userId).get();
+        const userData = doc.data();
+        commit("SET_USER_PROFILE", userData);
+        return userData;
     },
-    getUsers() {
-      return new Promise((resolve) => {
-        firebase.firestore().collection("users")
-          .get()
-          .then(({ docs }) => {
-            resolve(docs.map(a => a.data()));
-          });
-      })
+    async getUsers() {
+        const { docs } = await firebase.firestore().collection("users").get();
+        return docs.map(doc => doc.data());
     },
-    updateUser(context, request) {
-      request.updatedBy = context.getters.loginToken;
-      return new Promise((resolve) => {
-        firebase.firestore().collection("users")
-          .doc(request.uid)
-          .update(request)
-          .then(() => {
-            resolve();
-          });
-      })
+    async updateUser({ getters }, request) {
+        request.updatedBy = getters.loginToken;
+        await firebase.firestore().collection("users").doc(request.uid).update(request);
     },
-    refTracker(context, request) {
-      return new Promise((resolve, reject) => {
-        firebase.database().ref("refTracker")
-          .once("value")
-          .then((snapshot) => {
-            let tracker = snapshot.val();
-            context.dispatch("refTrackerUpdate", {[request]: ++tracker[request]})
-            .then(res => {
-              resolve("test", res);
-            })
-            .catch(err => {
-              reject(err);
-            });
-          }).catch(error => {
-            reject(error);
-          });
-      })
+    async updateRefTracker({ dispatch }, request) {
+        const snapshot = await firebase.database().ref("refTracker").once("value");
+        let tracker = snapshot.val();
+        await dispatch("updateRefTrackerValue", { [request]: ++tracker[request] });
     },
-    refTrackerUpdate(context, request) {
-      return new Promise((resolve, reject) => {
-        firebase.database().ref("refTracker").update(request)
-          .then(data => {
-            resolve(data);
-          })
-          .catch(err => {
-            reject(err);
-          })
-      })
+    async updateRefTrackerValue(_, request) {
+        await firebase.database().ref("refTracker").update(request);
     }
   }
 });

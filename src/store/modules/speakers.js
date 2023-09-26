@@ -1,69 +1,50 @@
 import firebase from "../../firebase";
 
 const state = {
-  speakers: [],
-}
+  speakers: JSON.parse(localStorage.getItem("tcdbSpeakers")) || [],
+};
 
 const getters = {
-  speakers({ speakers = [] }) {
-    return speakers || JSON.parse(localStorage.getItem("tcdbSpeakers"));
-  },
-}
+  speakers: (state) => state.speakers,
+};
 
 const mutations = {
-  speakers(state, data) {
-    state.speakers = data;
-    localStorage.setItem("tcdbSpeakers", JSON.stringify(data));
+  SET_SPEAKERS(state, speakers) {
+    state.speakers = speakers;
+    localStorage.setItem("tcdbSpeakers", JSON.stringify(speakers));
   },
-}
+};
 
 const actions = {
-  createSpeaker(context, request) {
-    request.createdBy = context.getters.loginToken;
-    return new Promise((resolve, reject) => {
-      const createVenueFn = r => {
-        firebase.firestore().collection("speakers")
-          .add(r)
-          .then(() => {
-            context.dispatch("getSpeakers").then(speakers => {
-              context.commit("speakers", speakers);
-              resolve(speakers)
-            })
-            .catch(error => {
-              reject(error);
-            });
-        });
+  async createSpeaker({ commit, dispatch, getters }, request) {
+    request.createdBy = getters.loginToken;
+
+    const createSpeakerFn = async (r) => {
+      await firebase.firestore().collection("speakers").add(r);
+      const speakers = await dispatch("getSpeakers");
+      commit("SET_SPEAKERS", speakers);
+      return speakers;
+    };
+
+      const userDoc = await firebase.firestore().collection("users").doc(getters.loginToken).get();
+      const userData = userDoc.data();
+
+      if (userData && userData.verified) {
+        request.verified = true;
       }
 
-      firebase.firestore().collection("users")
-        .doc(context.getters.loginToken)
-        .get()
-        .then(user => {
-          if (user.data().verified) {
-            request.verified = true;
-            createVenueFn(request);
-          } else {
-            createVenueFn(request)
-          }
-        }).catch(err => {
-          reject(err);
-        });
-    });
+      return await createSpeakerFn(request);
   },
-  getSpeakers(context) {
-    return new Promise((resolve, reject) => {
-      firebase.firestore().collection("speakers")
+  async getSpeakers({ commit }) {
+      const querySnapshot = await firebase.firestore().collection("speakers")
         .orderBy("name")
         .where("verified", "==", true)
-        .get()
-        .then(({ docs }) => {
-          context.commit("speakers", docs.map(a => a.data()));
-          resolve(docs.map(a => a.data()));
-        }).catch( error => {
-          reject(error)
-        });
-    })
-  },
-}
+        .get();
 
-export default { state, getters, mutations, actions }
+      const speakers = querySnapshot.docs.map(doc => doc.data());
+      commit("SET_SPEAKERS", speakers);
+      return speakers;
+  },
+};
+
+export default { state, getters, mutations, actions };

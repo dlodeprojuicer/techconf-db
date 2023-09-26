@@ -1,66 +1,59 @@
 import firebase from "../../firebase";
 
 const state = {
-	userProfile: {},
-}
+	userProfile: JSON.parse(localStorage.getItem("tcdbUserProfile")) || {},
+};
 
 const getters = {
-	userProfile({ userProfile }) {
-		return userProfile || JSON.parse(localStorage.getItem("tcdbUserProfile"));
-	},
-}
+	userProfile: (state) => state.userProfile,
+};
 
 const mutations = {
-	userProfile(state, data) {
-		state.events = data;
+	SET_USER_PROFILE(state, data) {
+		state.userProfile = data;
 		localStorage.setItem("tcdbUserProfile", JSON.stringify(data));
 	},
-}
+};
 
 const actions = {
-	createUser(request) {
-		return new Promise((resolve) => {
-			firebase.firestore().collection("users")
-				.doc(request.uid)
-				.set({...request})
-				.then(() => {
-					resolve();
-				});
-		})
+	async createUser(_, request) {
+		try {
+			await firebase.firestore().collection("users").doc(request.uid).set({ ...request });
+		} catch (error) {
+			throw error;
+		}
 	},
-	getUserProfile(context, request) {
-		return new Promise((resolve, reject) => {
-			firebase.firestore().collection("users")
-				.doc(request)
-				.get()
-				.then(doc => {
-					context.commit("userProfile", doc.data());
-					resolve(doc.data());
-				}).catch(error => {
-					reject(error);
-				});
-		})
+	async getUserProfile({ commit }, uid) {
+		try {
+			const doc = await firebase.firestore().collection("users").doc(uid).get();
+			const userProfile = doc.data();
+			commit("SET_USER_PROFILE", userProfile);
+			return userProfile;
+		} catch (error) {
+			throw error;
+		}
 	},
-	getUsers() {
-		return new Promise((resolve) => {
-			firebase.firestore().collection("users")
-				.get()
-				.then(({ docs }) => {
-					resolve(docs.map(a => a.data()));
-				});
-		})
+	async getUsers() {
+		try {
+			const { docs } = await firebase.firestore().collection("users").get();
+			return docs.map(doc => doc.data());
+		} catch (error) {
+			throw error;
+		}
 	},
-	updateUser(context, request) {
-		request.updatedBy = context.getters.loginToken;
-		return new Promise((resolve) => {
-			firebase.firestore().collection("users")
-				.doc(request.uid)
-				.update(request)
-				.then(() => {
-					resolve();
-				});
-		})
-	}
-}
+	async updateUser({ getters }, request) {
+		request.updatedBy = getters.loginToken;
+		try {
+			await firebase.firestore().collection("users").doc(request.uid).update(request);
+		} catch (error) {
+			throw error;
+		}
+	},
+};
 
-export { state, getters, mutations, actions }
+export default {
+	state,
+	getters,
+	mutations,
+	actions,
+};
