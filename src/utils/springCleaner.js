@@ -1,17 +1,17 @@
 import firebase from "../firebase";
 
-function springCleaning(sourceData) {
-  const newEventList = sourceData.map((event) => ({
-    verified: true,
-    createdBy: "JE3Bh37hpOch095fAEAcNbwrQWI3",
-    eventName: event["Event Name"],
-    website: event["Event Link"],
-    logo: event.Logo,
-    venue: event.Place.split(",")[0] ? event.Place.split(",")[0].trim() : event.Place.split(",")[0],
-    town: event.Place.split(",")[1] ? event.Place.split(",")[1].trim() : event.Place.split(",")[1],
-    start: event.Date.split("-")[1] ? `${event.Date.split("-")[0].trim()} ${event.Date.split("-")[1].trim().split(" ")[2]} 2023` : event.Date.split("-")[0],
-    end: event.Date.split("-")[1] ? `${event.Date.split("-")[1].trim()}` : null,
-  }));
+function springCleaning(newEventList) {
+  // const newEventList = sourceData.map((event) => ({
+  //   verified: true,
+    // createdBy: "JE3Bh37hpOch095fAEAcNbwrQWI3",
+    // eventName: event["Event Name"],
+    // website: event["Event Link"],
+    // logo: event.Logo,
+    // venue: event.Place.split(",")[0] ? event.Place.split(",")[0].trim() : event.Place.split(",")[0],
+    // town: event.Place.split(",")[1] ? event.Place.split(",")[1].trim() : event.Place.split(",")[1],
+    // start: event.Date.split("-")[1] ? `${event.Date.split("-")[0].trim()} ${event.Date.split("-")[1].trim().split(" ")[2]} 2023` : event.Date.split("-")[0],
+    // end: event.Date.split("-")[1] ? `${event.Date.split("-")[1].trim()}` : null,
+  // }));
 
   newEventList.forEach((event) => {
     event.start = convertToISO(event.start);

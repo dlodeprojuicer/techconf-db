@@ -18,23 +18,21 @@ const getters = {
   filteredEvents({ events, updateEventSearchObject }) {
     let future = [
       {
-        website: "https://namecheap.pxf.io/mgBr4e",
+        website: "https://vue-migration-service.com/",
         province: "",
-        name: "Namecheap",
+        name: "Vue Migration Service",
         ad: true,
-        desc:
-          "Powering Internet freedom through domains, hosting, security, and more — everything you need to make more online, for less.",
+        desc: "Vue Migration Service offers streamlined migration services from Vue 2 to Vue 3",
       },
     ];
     let past = [];
     let previous = [
       {
-        website: "https://www.pixeltrue.com/?via=techconfdb",
+        website: "https://www.youtube.com/watch?v=f1Nhswi9rAc&list=PLpq570-kMchbxk1W0G_00Zdkv11_KsMQn",
         province: "",
-        name: "Pixeltrue",
+        name: "People of Interest Podcast",
         ad: true,
-        desc:
-          "Convert your visitors to customers with high quality illustrations that will help you build breath-taking websites.",
+        desc: "Intersection of technology and entrepreneurship, featuring insights from industry leaders",
       },
     ];
 
