@@ -11,7 +11,7 @@ const routes = [
     children: [
       {
         path: '/',
-        name: "",
+        name: "conferences",
         component: () => import('@/views/Home.vue'),
         meta: {
           requiresAuth: false,
